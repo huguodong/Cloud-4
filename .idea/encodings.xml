@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/TomcatMag" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudbusinessservice_amqp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudbusinessservice_database" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudbusinessservice_datasyn" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudbusinessservice_device" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudbusinessservice_mobile" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudbusinessservice_node" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudbusinessservice_nodemonitor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudbusinessservice_reminder" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudbusinessservice_statistics" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudbusinessservice_task" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clouddbservice_devicemonitor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clouddbservice_libraryinfo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clouddbservice_statistics" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudviewservice_database" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudviewservice_device" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudviewservice_devicemonitor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudviewservice_navigation" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudviewservice_node" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudviewservice_nodemonitor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudviewservice_register" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloudviewservice_statistics" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/navigationservice" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/orderbookmanageservice" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ssitserver_appauthenticate" charset="UTF-8" />
+  </component>
+</project>

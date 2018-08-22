@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cloudbusinessservice_amqp" />
+        <module name="cloudbusinessservice_authentication" />
+        <module name="cloudbusinessservice_database" />
+        <module name="cloudbusinessservice_datasyn" />
+        <module name="cloudbusinessservice_device" />
+        <module name="cloudbusinessservice_mobile" />
+        <module name="cloudbusinessservice_node" />
+        <module name="cloudbusinessservice_nodemonitor" />
+        <module name="cloudbusinessservice_reminder" />
+        <module name="cloudbusinessservice_statistics" />
+        <module name="cloudbusinessservice_task" />
+        <module name="clouddbservice_authentication" />
+        <module name="clouddbservice_device" />
+        <module name="clouddbservice_devicemonitor" />
+        <module name="clouddbservice_libraryinfo" />
+        <module name="clouddbservice_statics" />
+        <module name="cloudviewservice_database" />
+        <module name="cloudviewservice_device" />
+        <module name="cloudviewservice_devicemonitor" />
+        <module name="cloudviewservice_graphshow" />
+        <module name="cloudviewservice_graphshow_temp" />
+        <module name="cloudviewservice_jobmanage" />
+        <module name="cloudviewservice_navigation" />
+        <module name="cloudviewservice_node" />
+        <module name="cloudviewservice_nodemonitor" />
+        <module name="cloudviewservice_register" />
+        <module name="cloudviewservice_statistics" />
+        <module name="common" />
+        <module name="mobileserver" />
+        <module name="navigationservice" />
+        <module name="orderbookmanageservice" />
+        <module name="ssitserver_appauthenticate" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="tomcatMag" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
