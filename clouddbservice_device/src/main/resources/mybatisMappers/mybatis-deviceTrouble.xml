@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="device_trouble">
+
+	<insert id="insertDeviceTrouble" parameterType="com.ssitcloud.entity.DeviceTroubleEntity" useGeneratedKeys="true" keyProperty="trouble_idx">
+		insert into device_trouble
+		(		
+            lib_idx,device_idx,trouble_info,trouble_name,create_time
+		)
+		values
+		(
+             #{lib_idx},#{device_idx},#{trouble_info},#{trouble_name},NOW()
+		)
+	</insert>
+	
+	<update id="updateDeviceTrouble" parameterType="com.ssitcloud.entity.DeviceTroubleEntity">
+		update device_trouble
+		<set>
+			<if test="lib_idx!=null">
+				lib_idx=#{lib_idx},
+			</if>
+			<if test="device_idx!=null">
+				device_idx=#{device_idx},
+			</if>
+			<if test="trouble_info!=null">
+				trouble_info=#{trouble_info},
+			</if>
+			<if test="trouble_name!=null">
+				trouble_name=#{trouble_name},
+			</if>
+			<if test="trouble_idx!=null">
+				create_time=(select create_time from (SELECT create_time FROM device_trouble where trouble_idx=#{trouble_idx}) as dt),
+			</if>
+			control_time=NOW()
+		</set>
+		   WHERE 1=1 
+	   <if test="trouble_idx!=null">
+			and trouble_idx=#{trouble_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteDeviceTrouble" parameterType="com.ssitcloud.entity.DeviceTroubleEntity">
+		delete from device_trouble where trouble_idx=#{trouble_idx}
+	</delete>
+	
+	<select id="selectDeviceTrouble" parameterType="com.ssitcloud.entity.DeviceTroubleEntity" resultType="com.ssitcloud.entity.DeviceTroubleEntity">
+		SELECT trouble_idx,lib_idx,device_idx,trouble_info,trouble_name,create_time,control_time FROM device_trouble 
+	    where 1=1
+		<if test="trouble_idx!=null">
+			AND trouble_idx=#{trouble_idx}
+		</if>
+	</select>
+	<select id="selectDeviceTroubles" parameterType="com.ssitcloud.entity.DeviceTroubleEntity" resultType="com.ssitcloud.entity.DeviceTroubleEntity">
+		SELECT trouble_idx,lib_idx,device_idx,trouble_info,trouble_name,create_time,control_time FROM device_trouble 
+	    where 1=1 and control_time IS NULL
+	    <if test="lib_idx!=null">
+			and lib_idx=#{lib_idx}
+		</if>
+	</select>
+	
+	<select id="selectDeviceTroublesByLibIdxs" resultType="java.util.Map">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+			SELECT trouble_idx,lib_idx,device_idx,trouble_info,trouble_name,create_time,control_time FROM device_trouble 
+		    where 1=1 and control_time IS NULL
+		    <if test="libIdxs !=null and libIdxs.size() > 0 ">
+				and lib_idx in
+		        <foreach collection="libIdxs" index="index" item="libIdx" open="(" separator="," close=")">
+		                #{libIdx}       
+		        </foreach>
+			</if>
+			ORDER BY create_time desc
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	<update id="updateDeviceTroubles" parameterType="Map">
+		update device_trouble
+		<set>
+			<!-- <if test="trouble_idx!=null">
+				create_time=(select create_time from (SELECT create_time FROM device_trouble where trouble_idx=#{trouble_idx}) as dt),
+			</if> -->
+			control_time=NOW()
+		</set>
+		   WHERE 1=1 and control_time IS NULL
+	    <if test="troubleIdxs != null and troubleIdxs.size() > 0">
+			and trouble_idx in
+		        <foreach collection="troubleIdxs" index="index" item="troubleIdx" open="(" separator="," close=")">
+		                #{troubleIdx}       
+		        </foreach>
+		</if>
+	</update>
+	
+	
+</mapper>

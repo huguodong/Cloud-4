@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bookshelfinfo">
+
+	<insert id="add" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfinfoEntity">
+		INSERT INTO `bookshelfinfo` (
+			`lib_id`,
+			`shelf_id`,
+			`info_type`,
+			`info_value`,
+			`updatetime`
+		) VALUES (
+			#{lib_id},
+			#{shelf_id},
+			#{info_type},
+			#{info_value},
+			NOW()
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfinfoEntity">
+			DELETE FROM `bookshelfinfo`
+			 <where>
+				<if test="lib_id !=null and lib_id !='' ">
+					and `lib_id` = #{lib_id} 
+				</if>
+				and `shelf_id` = #{shelf_id}
+			</where>
+	  
+	</delete>
+	
+	<select id="select" resultType="com.ssitcloud.shelfmgmt.entity.BookshelfinfoEntity">
+		SELECT * FROM `bookshelfinfo`
+	</select>
+
+	<select id="selectById" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfinfoEntity" resultType="com.ssitcloud.shelfmgmt.entity.BookshelfinfoEntity">
+		SELECT * FROM `bookshelfinfo`
+		 <where>
+			<if test="lib_id !=null and lib_id !='' ">
+				and `lib_id` = #{lib_id} 
+			</if>
+				and `shelf_id` = #{shelf_id}
+		</where>
+	</select>
+	
+	<update id="update" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfinfoEntity">
+		UPDATE `bookshelfinfo` SET 
+			`info_value` = #{info_value},
+			`updatetime` = NOW()
+			<where>
+				<if test="lib_id !=null and lib_id !='' ">
+					and `lib_id` = #{lib_id} 
+				</if>
+				and `shelf_id` = #{shelf_id} and `info_type` = #{info_type}
+			</where>
+	</update>
+</mapper>

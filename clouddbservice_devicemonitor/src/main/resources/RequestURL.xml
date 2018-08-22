@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="http://www.example.org/RequestURLConfSchema">
+	<!-- 心跳数据 -->
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/hearbeat/saveData" id="HEARBEAT_URL" />
+		<RequestUrl requestMapping="/interfaceRequest/updateRequest" id="updateRequest"/>
+		<RequestUrl requestMapping="/interfaceRequest/deleteRequest" id="deleteRequest"/>
+	</project>
+	<project projectName="clouddbservice_libraryinfo" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/bookitem/updateState" id="UPDATEBOOKITEM_STATE" />
+	</project>
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/library/selLibraryByIdxOrId" id="selLibraryByIdxOrId"/>
+	</project>
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/mainfield/additionalMainfieldList" id="additionalMainfieldList"/>
+	</project>
+	<project projectName="clouddbservice_libraryinfo" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/devicereader/saveDeviceReaderInfo" id="saveDeviceReaderInfo"/>
+		<RequestUrl requestMapping="/electronicCertificate/addElectronicCertificateWithoutSame" id="addElectronicCertificateWithoutSame" />
+	</project>
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/device/queryDevStatusCode" id="queryDevStatusCode" />
+	</project>
+
+</RequestUrlList>

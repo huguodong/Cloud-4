@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--基础url-->
+    <!--<string name="baseUrl">http://218.17.192.253:8019/cloudbusinessservice_mobile</string>-->
+    <string name="baseUrl">http://89.133.12.6:9011</string>
+
+    <string name="register_url">/readerInfo/register</string>
+    <string name="register_mail_code_url">/readerInfo/sendRegisterEmailCode</string>
+    <string name="register_mobile_code_url">/readerInfo/sendRegisterMobileCode</string>
+    <string name="reader_update">/readerInfo/update</string>
+    <string name="login_url">/readerInfo/login</string>
+    <string name="obtain_reader_url">/readerInfo/obtainReader</string>
+    <string name="reader_cards_url">/library/readerLib</string>
+    <string name="reader_card_url">/readerCard/cardInfo</string>
+    <string name="reader_card_unbain_url">/readerCard/unbind</string>
+    <string name="reader_card_bind_url">/readerCard/bind</string>
+    <string name="library_list_url">/library/getLibList</string>
+    <string name="app_setting_list_url">/appSetting/queryAppSettings</string>
+    <string name="renew_book_list_url">/readerCard/queryReardCardBook</string>
+    <string name="renew_book_url">/book/renew</string>
+    <string name="forget_pwd_url">/readerInfo/foundPwd</string>
+    <string name="change_pwd_url">/readerInfo/changePwd</string>
+    <string name="elec_url">/electronicCertificate/selectByReaderIdx</string>
+    <string name="update_elec_url">/electronicCertificate/setRead</string>
+    <string name="device_url">/borrow/opacDevice</string>
+    <string name="self_lib_url">/borrow/opacSelfHelpLib</string>
+    <string name="search_device_url">/borrow/searchDevice</string>
+    <string name="get_new_version_device_url">/borrow/getNewVersionDevice</string>
+    <string name="book_item_url">/borrow/bookList</string>
+    <string name="book_info_url">/borrow/bookInfo</string>
+    <string name="update_puk_url">/publicKey/lastestKey</string>
+    <string name="feedback_url">/feedback/readerFeedback</string>
+    <string name="reservation_url">/book/reservation</string>
+    <string name="inReservation_url">/book/inReservation</string>
+    <string name="selectBookState_url">/borrow/selectBookState</string>
+    <string name="region_url">/region/selRegionsOnRegionCode</string>
+    <string name="device_region_url">/borrow/libDeviceRegions</string>
+    <string name="bookclassify_url">/borrow/bookClassIfy</string>
+    <string name="reservationState_list_url">/book/reservationList</string>
+    <string name="reader_auth_url">/library/sendBarcode</string>
+
+    <string name="web_setting_url">/readerSetting/index</string>
+
+    <string name="getRecommendList_url">/recommend/getRecommendList</string>
+</resources>

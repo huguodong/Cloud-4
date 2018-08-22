@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="size"
+            type="String" />
+
+        <variable
+            name="amount"
+            type="String" />
+
+        <variable
+            name="state"
+            type="Boolean" />
+
+        <import type="android.graphics.Color" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp">
+
+            <TextView
+                android:id="@+id/money_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{size != null?@string/moneySizeTitle+`:`+size:@string/moneySizeTitle+`:0`}'
+                android:textColor="@{state?@color/title:Color.parseColor(`#FFF85B5B`)}"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/money_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text='@{amount != null?amount+@string/moneySize:`0`+@string/moneySize}'
+                android:textColor="@{state?@color/title:Color.parseColor(`#FFF85B5B`)}"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

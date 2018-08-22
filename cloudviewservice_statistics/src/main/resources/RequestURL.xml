@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+	<!-- 验证 -->
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/clouddbservice_authentication/operator/loginCheck" id="loginCheck"/>
+		<!-- 系统日志信息 -->
+		<RequestUrl id="AddOperationLog" requestMapping="/clouddbservice_authentication/systemlog/AddOperationLog"/>
+		<RequestUrl id="selectBySql" 	 requestMapping="/clouddbservice_authentication/dynamicsql/selectBySql"/>
+		<RequestUrl id="selectAutBySql"  requestMapping="/clouddbservice_authentication/dynamicsql/selectBySql"/>
+		 <RequestUrl id="selectRelLibsByid" requestMapping="/clouddbservice_authentication/rellibs/selectByIdx"/>
+	</project>
+	
+	<project projectName="cloudbusinessservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl id="changePassword" requestMapping="/cloudbusinessservice_authentication/operator/changePassword"></RequestUrl>
+        <RequestUrl requestMapping="/cloudbusinessservice_authentication/library/querylibInfoByCurUserEXT1" id="querylibInfoByCurUserEXT1"></RequestUrl>
+	</project>
+	
+	<project projectName="cloudbusinessservice_datasyn" baseURL="http://127.0.0.1:8080">
+	
+	</project>
+	
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/cloudbusinessservice_node/hearbeat/saveData" id="HEARBEAT_URL" />
+	</project>
+	
+	<project projectName="cloudbusinessservice_statistics" baseURL="http://127.0.0.1:8080">
+		<!-- 查询出统计类型的子类型 -->
+		<RequestUrl id="selectStaticsType" requestMapping="/cloudbusinessservice_statistics/statistics/selectStaticsType"/>
+		<RequestUrl id="queryStatisticsMaintypeList" requestMapping="/cloudbusinessservice_statistics/statistics/queryStatisticsMaintypeList"/>
+		<RequestUrl id="queryReltype" requestMapping="/cloudbusinessservice_statistics/statistics/queryReltype"/>
+		<RequestUrl id="queryReltypeList" requestMapping="/cloudbusinessservice_statistics/statistics/queryReltypeList"/>
+		
+		<!--Elasticsearch查询 -->
+		<RequestUrl id="statisticselasticsearch" requestMapping="/cloudbusinessservice_statistics/elasticsearchstatistics/statisticselasticsearch"/>
+		<RequestUrl id="queryelasticsearch" requestMapping="/cloudbusinessservice_statistics/elasticsearchstatistics/queryelasticsearch"/>
+		<RequestUrl id="getpackettree" requestMapping="/cloudbusinessservice_statistics/elasticsearchstatistics/gtree"/>
+		<RequestUrl id="exportSelect" requestMapping="/cloudbusinessservice_statistics/elasticsearchstatistics/exportSelect"/>
+
+        <RequestUrl id="selectByMfid" requestMapping="/cloudbusinessservice_statistics/mfextend/selectByMfid"/>
+        
+		<RequestUrl id="libArr" requestMapping="/cloudbusinessservice_statistics/elasticsearchstatistics/libArr"/>
+		<RequestUrl id="devArr" requestMapping="/cloudbusinessservice_statistics/elasticsearchstatistics/devArr"/>
+		
+		<!-- 基础统计项 -->
+		<RequestUrl id="countCardissueLog" requestMapping="/cloudbusinessservice_statistics/mainPage/countCardissueLog"/>
+		<RequestUrl id="countLoanLog" requestMapping="/cloudbusinessservice_statistics/mainPage/countLoanLog"/>
+		<RequestUrl id="countFinanceLog" requestMapping="/cloudbusinessservice_statistics/mainPage/countFinanceLog"/>
+		<RequestUrl id="countVisitorLog" requestMapping="/cloudbusinessservice_statistics/mainPage/countVisitorLog"/>
+	</project>
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl id="updateStatisticsTemplate"       requestMapping="/clouddbservice_device/statisticsTemplate/updateStatisticsTemplate"/>
+		<!-- 查询出统计相关的数据源 -->
+		<RequestUrl id="takeDataSource" 				requestMapping="/clouddbservice_device/mainfield/getMainfieldCollection"/>
+		<!-- 根据登录用户获取模板 -->
+        <RequestUrl id="selectTemplateMenuByOperidx" 	requestMapping="/clouddbservice_device/statisticsTemplate/selectTemplateMenuByOperidx"/>
+        <!-- 统计查询模板配置StatisticsTemplateEntity分页查询 -->
+		<RequestUrl id="selectStatisticsTemplatePage" 	requestMapping="/clouddbservice_device/statisticsTemplate/selectStatisticsTemplatePage"/>
+		<RequestUrl id="selectStatisticsTemplate" 		requestMapping="/clouddbservice_device/statisticsTemplate/selectStatisticsTemplate"/>
+		<RequestUrl id="selectFunSubdatas"				requestMapping="/clouddbservice_device/funSubdata/selectFunSubdatas" />
+		<!-- 主函数/主函数 -->
+		<RequestUrl id="selectFunMaindatas"				requestMapping="/clouddbservice_device/funMaindata/selectFunMaindatas"/>
+		<RequestUrl id="selectReadertype"				requestMapping="/clouddbservice_device/readertype/selectByLibIdx"/>
+		<RequestUrl id="selectBookMediatypes"			requestMapping="/clouddbservice_device/bookMediatype/selectBookMediatypes" />
+		<RequestUrl id="selectBookLocations"			requestMapping="/clouddbservice_device/bookLocation/selectBookLocations" />
+		<RequestUrl id="selectBookCirtypes"				requestMapping="/clouddbservice_device/bookCirtype/selectBookCirtypes" />
+		<RequestUrl id="deleteStatisticsTemplate" 		requestMapping="/clouddbservice_device/statisticsTemplate/deleteStatisticsTemplate"/>
+		<RequestUrl id="insertStatisticsTemplate" 		requestMapping="/clouddbservice_device/statisticsTemplate/addStatisticsTemplate"/>
+		<RequestUrl id="removeStatisticsGroup" 			requestMapping="/clouddbservice_device/statisticsGroup/removeStatisticsGroup"/>
+		<RequestUrl id="querysGroupByPageParam" 		requestMapping="/clouddbservice_device/statisticsGroup/querysGroupByPageParam"/>
+		<RequestUrl id="modifyStatisticsGroup" 			requestMapping="/clouddbservice_device/statisticsGroup/modifyStatisticsGroup"/>
+		<RequestUrl id="increaseStatisticsGroup" 		requestMapping="/clouddbservice_device/statisticsGroup/increaseStatisticsGroup"/>
+		<RequestUrl id="updateStatisticsConfig" 		requestMapping="/clouddbservice_device/statisticsConfig/updateStatisticsConfig"/>
+		<RequestUrl id="selectStatisticsConfigs" 		requestMapping="/clouddbservice_device/statisticsConfig/selectStatisticsConfigs"/>
+		<RequestUrl id="selectStatisticsConfig" 		requestMapping="/clouddbservice_device/statisticsConfig/selectStatisticsConfig"/>
+		<RequestUrl id="deleteStatisticsConfig" 		requestMapping="/clouddbservice_device/statisticsConfig/deleteStatisticsConfig"/>
+		<RequestUrl id="insertStatisticsConfig" 		requestMapping="/clouddbservice_device/statisticsConfig/addStatisticsConfig"/>
+		<RequestUrl id="selRegionsByLibidx" 			requestMapping="/clouddbservice_device/region/selRegionsByLibidx"/>
+		<RequestUrl id="updatePersonalSetting" 			requestMapping="/clouddbservice_device/personalsetting/updPersonalSetting"/>
+		<RequestUrl id="selectPersonalSetting" 			requestMapping="/clouddbservice_device/personalsetting/selPersonalSettingByIdx"/>
+		<!-- 根据oper_idx查询操作员 -->
+		<RequestUrl id="selOperatorByOperIdOrIdx" 		requestMapping="/clouddbservice_device/personalsetting/selPersonalSettingList"/>
+		<!-- 个人功能配置 查询模板 -->
+		<RequestUrl id="selectStatisticsTemplates" 		requestMapping="/clouddbservice_device/statisticsTemplate/selectStatisticsTemplates"/>
+		<!-- 分页查询多条个人设置记录 -->
+		<RequestUrl id="selectPersonalSettingByPage" 	requestMapping="/clouddbservice_device/personalsetting/selectPersonalSettingByPage"/>
+		<!-- 删除个人设置 -->
+		<RequestUrl id="deletePersonalSetting" 			requestMapping="/clouddbservice_device/personalsetting/delPersonalSetting"/>
+		<!-- 新增个人设置 -->
+		<RequestUrl id="insertPersonalSetting" 			requestMapping="/clouddbservice_device/personalsetting/addPersonalSetting"/>
+		<!-- 云平台管理员获取所有权限 -->
+		<RequestUrl id="SelPermissionBySsitCloudAdmin"	requestMapping="/clouddbservice_device/metaopercmd/SelPermissionBySsitCloudAdmin" />
+		<!-- 复合查询  登陆者所拥有权限 -->
+	    <RequestUrl id="SelPermissionByOperIdx"			requestMapping="/clouddbservice_device/metaopercmd/SelUserCmdsByIdx"/>
+		<!-- 云平台管理员获取所有菜单 -->
+		<RequestUrl id="SelMenuBySsitCloudAdmin"		requestMapping="/clouddbservice_device/metamenu/SelMenuBySsitCloudAdmin" />
+		<!-- 查询根据用户权限查询其菜单 -->
+		<RequestUrl id="SelMenuByOperIdx"				requestMapping="/clouddbservice_device/metamenu/SelMenuByOperIdx" />
+		<RequestUrl id="SelectMetaOperCmd" 				requestMapping="/clouddbservice_device/metaopercmd/SelectMetaOperCmd"/>
+		<!-- 修改信息主字段表 -->
+		<RequestUrl id="updateMainField" 				requestMapping="/clouddbservice_device/mainfield/updMainField"/>
+		<!-- 查询全部信息主字段表 -->
+		<RequestUrl id="selectMainFieldList" 			requestMapping="/clouddbservice_device/mainfield/selectMainFieldList"/>
+		<!-- 查询一条信息主字段表 -->
+		<RequestUrl id="selectMainField" 				requestMapping="/clouddbservice_device/mainfield/selectMainfieldByIdx"/>
+		<!-- 删除信息主字段表 -->
+		<RequestUrl id="deleteMainField" 				requestMapping="/clouddbservice_device/mainfield/delMainField"/>
+		<!-- 新增信息主字段表 -->
+		<RequestUrl id="insertMainField" 				requestMapping="/clouddbservice_device/mainfield/addMainField"/>
+		<!-- 获取所有的设备类型 -->
+		<RequestUrl id="selectDeviceByCondition" 		requestMapping="/clouddbservice_device/device/SelectDevice"/>
+		<!-- 获取所有的设备类型 -->
+		<RequestUrl id="selectAllDeviceType" 		    requestMapping="/clouddbservice_device/metadevicetype/SelAllMetadataDeviceType"/>
+	</project>
+</RequestUrlList>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+	<!--  设备数据层一-->
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		<!-- 查询权限 -->
+<!-- 		<RequestUrl requestMapping="/clouddbservice_device/permission/SelPermissionbyOperIdx" id="SelPermissionByOperIdx"/> -->
+		<RequestUrl requestMapping="/clouddbservice_device/deviceTrouble/selectDeviceTroubles" id="selectDeviceTroubles"/>
+		<RequestUrl requestMapping="/clouddbservice_device/deviceTrouble/updateDeviceTrouble" id="updateDeviceTrouble"/>
+		<RequestUrl requestMapping="/clouddbservice_device/emailParam/selectEmailParams" id="selectEmailParams"/>
+		<RequestUrl requestMapping="/clouddbservice_device/device/SelectDevice" id="selectDevice"/>
+	</project>
+	
+	<!-- clouddbservice_libraryinfo -->
+	<project projectName="clouddbservice_libraryinfo" baseURL="http://127.0.0.1:8080">
+<!-- 		<RequestUrl requestMapping="/clouddbservice_libraryinfo/biblios/insert" id="insertBiblios"/> -->
+	</project>
+	
+	<!-- 对于链接mongodb的操作直接连数据层devicemonitor -->
+	<project projectName="clouddbservice_devicemonitor" baseURL="http://127.0.0.1:8080">
+		<!--获取机器状态 -->
+<!-- 		<RequestUrl id="sayhello" requestMapping="/clouddbservice_devicemonitor/devicelog/selectDeviceState"/> -->
+	</project>
+	
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+<!-- 		<RequestUrl requestMapping="/cloudbusinessservice_node/hearbeat/saveData" id="HEARBEAT_URL" /> -->
+	</project>
+	
+	
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/clouddbservice_authentication/library/selLibraryByIdxOrId" id="selLibraryByIdxOrId"/>
+		<RequestUrl requestMapping="/clouddbservice_authentication/operator/selectOperatorInfos" id="selectOperatorInfos"/>
+	</project>
+</RequestUrlList>

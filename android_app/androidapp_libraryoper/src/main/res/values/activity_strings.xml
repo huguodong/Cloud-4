@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--公共-->
+    <string name="submit">提  交</string>
+    <string name="save_button">保  存</string>
+    <string name="logout_button">退出账户</string>
+
+    <!--主界面 start-->
+    <string name="B_login">登录</string>
+    <string name="B_forget_pwd">忘记密码</string>
+    <string name="B_set_new_pwd">设置新密码</string>
+    <string name="B_set_new_pwd_success">设置新密码成功</string>
+    <string name="B_change_pwd">修改密码</string>
+    <string name="B_update_operator_info">个人资料</string>
+    <!--主界面 end-->
+
+
+
+    <!--登录 start-->
+    <string name="login_user_tip">手机号 / 邮箱 / 用户名</string>
+    <string name="login_user_empty_tip">请输入正确的手机号 / 邮箱 / 用户名</string>
+    <string name="login_pwd_tip">请输入密码</string>
+    <string name="login_submit">登  录</string>
+    <string name="login_forget_pwd">忘记密码？</string>
+    <string name="login_operation_name">馆员登录</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_get_menu_fail">获取菜单失败</string>
+    <!--登录 end-->
+
+    <!--找回密码 start-->
+    <string name="forget_pwd">找回密码</string>
+    <string name="forget_mobile">预留手机号</string>
+    <string name="forget_mobile_tip">输入您预留的手机号</string>
+    <string name="forget_email">预留邮箱</string>
+    <string name="forget_email_tip">输入您的预留的邮箱</string>
+    <string name="forget_id_card">预留身份证号</string>
+    <string name="forget_id_card_tip">请输入您的预留身份证号</string>
+    <string name="forget_error_tip">没有找到这个邮箱，请重新输入！</string>
+    <!--找回密码 end-->
+
+    <!--手机号、邮箱和身份证号格式验证 提示 start-->
+    <string name="mobile_format">请输入正确格式的手机号</string>
+    <string name="email_format">请输入正确格式的邮箱</string>
+    <string name="id_card_format">请输入正确格式的身份证号</string>
+    <!--手机号、邮箱和身份证号格式验证 提示 end-->
+    
+    <!--设置新密码 密码找回 start-->
+    <string name="set_new_pwd">设置密码</string>
+    <string name="set_new_pwd_title">设置新密码</string>
+    <string name="set_new_pwd_new_pwd">输入密码</string>
+    <string name="set_new_pwd_new_pwd_tip">输入您的新密码</string>
+    <string name="set_new_pwd_confirm_pwd">确认密码</string>
+    <string name="set_new_pwd_confirm_pwd_tip">再次输入密码</string>
+
+    <string name="set_new_pwd_empty_pwd_tip">密码不能为空</string>
+    <string name="set_new_pwd_empty_confirm_pwd_tip">确认密码不能为空</string>
+    <string name="set_new_pwd_empty_pwd_not_same_tip">两次密码不相同</string>
+    <!--设置新密码 密码找回 end-->
+    
+    <!--设置新密码成功 start-->
+    <string name="set_new_pwd_success_tip">您的新密码已经设置成功</string>
+    <string name="set_new_pwd_button_text">返回登录</string>
+    <!--设置新密码成功 end-->
+
+    <!--修改密码 start-->
+    <string name="change_pwd_title">修改密码</string>
+    <string name="change_pwd_old_pwd">旧密码</string>
+    <string name="change_pwd_old_pwd_tip">输入您的旧密码</string>
+    <string name="change_pwd_new_pwd">输入密码</string>
+    <string name="change_pwd_new_pwd_tip">输入您的新密码</string>
+    <string name="change_pwd_confirm_pwd">确认密码</string>
+    <string name="change_pwd_confirm_pwd_tip">再次输入新密码</string>
+
+    <string name="change_pwd_empty_old_pwd_tip">旧密码不能为空</string>
+    <string name="change_pwd_empty_pwd_tip">密码长度需大于9</string>
+    <string name="change_pwd_empty_confirm_pwd_tip">确认密码不能为空</string>
+    <string name="change_pwd_empty_pwd_not_same_tip">两次密码不相同</string>
+    <!--修改密码 end-->
+
+    <!--个人资料 start-->
+    <string name="update_operator_info_title">个人资料</string>
+    <string name="update_operator_info_operator_name">姓名</string>
+    <string name="update_operator_info_operator_sex">性别</string>
+    <string name="update_operator_info_id_card">身份证</string>
+    <string name="update_operator_info_mobile">手机号</string>
+    <string name="update_operator_info_email">邮箱</string>
+
+    <string name="update_operator_info_id_card_tip">输入您的身份证号</string>
+    <string name="update_operator_info_mobile_tip">输入您的手机号</string>
+    <string name="update_operator_info_email_tip">输入您的邮箱</string>
+
+    <!--个人资料 end-->
+
+
+    <!--首页 start-->
+    <string name="index_title">某某图书馆</string>
+    <string name="index_device_monitor">设备监控</string>
+    <string name="index_environment_monitor">环境监控</string>
+    <string name="index_feedback">使用意见</string>
+    <!--首页 end-->
+    
+    <!--使用意见 start-->
+    <string name="feedback_title">使用意见</string>
+    <string name="feedback_type">请选择问题类型</string>
+    <string name="feedback_problem_title">问题标题</string>
+    <string name="feedback_problem_title_tip">请输入您的标题</string>
+    <string name="feedback_problem_desc">问题描述</string>
+    <string name="feedback_problem_desc_tip">请输入您的问题详情</string>
+    <!--使用意见 end-->
+
+    <!--设备监控 start-->
+    <string name="device_monitor_title">设备监控</string>
+    <string name="device_monitor_lib">查询全部</string>
+    <string name="device_monitor_region">选择区域</string>
+    <string name="device_monitor_condition">输入设备号或者设备名</string>
+    <string name="device_monitor_plc_state">PLC状态</string>
+    <string name="device_monitor_ext_state">外设状态</string>
+    <string name="device_monitor_soft_state">功能状态</string>
+    <!--设备监控 end-->
+
+    <!--设备维护 start-->
+    <string name="device_maintain_title">设备维护</string>
+    <string name="device_maintain_send_order">发送指令</string>
+    <string name="device_maintain_cancel_order">取消指令</string>
+    <string name="device_maintain_shutdown">关机</string>
+    <string name="device_maintain_restart">重启</string>
+    <string name="device_maintain_device_id">设备ID：</string>
+    <!--设备维护 end-->
+
+    <!--消息提醒 start-->
+    <string name="message_remind_title">消息</string>
+    <string name="message_remind_no_message">您还没收到信息通知</string>
+    <!--消息提醒 end-->
+
+    <!--区域 start-->
+    <string name="region_title">选择区域</string>
+    <!--区域 end-->
+
+    <string name="moneySizeTitle">面值</string>
+    <string name="moneySize">张</string>
+</resources>

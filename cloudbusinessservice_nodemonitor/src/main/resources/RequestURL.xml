@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="http://www.example.org/RequestURLConfSchema">
+	<!-- 心跳数据 -->
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/hearbeat/saveData" id="HEARBEAT_URL" />
+		<RequestUrl requestMapping="/switch/switch" id="cloudbusinessservice_node_switch" />
+	</project>
+	
+	<!-- <project projectName="clouddbservice_nodemonitor" baseURL="http://127.0.0.1:8080">-->
+		
+		<!-- 心跳数据 -->
+		<!--<RequestUrl requestMapping="/switchLog/addLog" id="switch_addLog" />-->
+		<!--<RequestUrl requestMapping="/switch/switch" id="clouddbservice_node_switch" />-->
+		<!--<RequestUrl requestMapping="/hearbeat/saveData" id="hearbeat_saveData" />-->
+		<!-- NodeMonitor管理 -->
+		<!--<RequestUrl requestMapping="/nodeMonitor/queryByPage" id="queryNodeMonitorByPage" />-->
+		<!--<RequestUrl requestMapping="/nodeMonitor/queryByParam" id="queryNodeMonitorByParam" />-->
+		<!--<RequestUrl requestMapping="/nodeMonitor/queryById" id="queryNodeMonitorById" />-->
+		<!--<RequestUrl requestMapping="/nodeMonitor/getTypeList" id="getTypeList" />-->
+	<!--</project>-->
+
+</RequestUrlList>

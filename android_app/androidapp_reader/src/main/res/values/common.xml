@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--微小字体-->
+    <dimen name="tiny_text">10sp</dimen>
+    <!--小号字体-->
+    <dimen name="small_text">12sp</dimen>
+    <!--中号字体-->
+    <dimen name="medium_text">14sp</dimen>
+    <!--标准字体-->
+    <dimen name="standard_text">@dimen/large_text</dimen>
+    <!--大号字体-->
+    <dimen name="large_text">16sp</dimen>
+    <!--超号字体-->
+    <dimen name="super_text">18sp</dimen>
+
+    <dimen name="title_bar_hight">44dp</dimen>
+    <dimen name="title_bar_left_button_width">44dp</dimen>
+    <dimen name="title_bar_right_button_width">44dp</dimen>
+
+</resources>

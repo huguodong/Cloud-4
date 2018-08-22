@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="readersubInfo">
+
+	<insert id="insertReaderSubInfo" parameterType="com.ssitcloud.dblib.entity.ReaderSubInfoEntity">
+		insert into readersubInfo
+		(		
+            reader_idx,infotype_idx,infotype_value
+		)
+		values
+		(
+             #{reader_idx},#{infotype_idx},#{infotype_value}
+		)
+	</insert>
+	
+	<update id="updateReaderSubInfo" parameterType="com.ssitcloud.dblib.entity.ReaderSubInfoEntity">
+		update readersubInfo
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<!-- 不更新信息id，只更新值
+			<if test="infotype_idx!=null">
+				infotype_idx=#{infotype_idx},
+			</if>-->
+			<if test="infotype_value!=null">
+				infotype_value=#{infotype_value},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="reader_idx!=null">
+			and reader_idx=#{reader_idx} 
+		</if>
+		<if test="infotype_idx != null">
+			AND infotype_idx = #{infotype_idx} 
+		</if>
+		<if test="infotype_value != null">
+			AND infotype_value=#{infotype_value} 
+		</if>
+	</update>
+	
+	<!-- 添加infotype_idx功能可以根据需求删除单一数据  -->
+    <delete id="deleteReaderSubInfo" parameterType="com.ssitcloud.dblib.entity.ReaderSubInfoEntity">
+		delete from readersubInfo where reader_idx=#{reader_idx} 
+		<if test="infotype_idx != null">
+			AND infotype_idx = #{infotype_idx} 
+		</if>
+		<if test="infotype_value != null">
+			AND infotype_value = #{infotype_value}
+		</if>
+	</delete>
+	
+	<!-- 查询单个读者信息，因为是一对多关系，必须同时reader_idx和infortype_idx -->
+	<select id="selectReaderSubInfo" parameterType="com.ssitcloud.dblib.entity.ReaderSubInfoEntity" resultType="com.ssitcloud.dblib.entity.ReaderSubInfoEntity">
+		SELECT reader_idx,infotype_idx,infotype_value FROM readersubInfo 
+	    where 1=1
+		<if test="reader_idx!=null">
+			AND reader_idx=#{reader_idx} 
+		</if>
+		<if test="infotype_idx != null">
+			AND infotype_idx = #{infotype_idx} 
+		</if>
+	</select>
+	
+	<!-- 查询读者所有的readSubinfo信息，只需要单独提供reader_idx -->
+	<select id="selectReaderSubInfos" parameterType="com.ssitcloud.dblib.entity.ReaderSubInfoEntity" resultType="com.ssitcloud.dblib.entity.ReaderSubInfoEntity">
+		SELECT reader_idx,infotype_idx,infotype_value FROM readersubInfo 
+	    where 1=1 
+	    <if test="reader_idx!=null">
+			AND reader_idx=#{reader_idx} 
+		</if>
+		<if test="infotype_idx != null">
+			AND infotype_idx = #{infotype_idx} 
+		</if>
+	</select>
+	
+	
+	
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recommend">
+
+	<insert id="addRankRole" parameterType="com.ssitcloud.statistics.entity.BookRankRoleEntity"
+		useGeneratedKeys="true" keyProperty="role_idx">
+		INSERT INTO `book_rank_role`
+		(
+		`library_idx`,
+		`role_content`,
+		`remark`
+		)
+		VALUES
+		(
+		#{library_idx},
+		#{role_content},
+		#{remark}
+		)
+	</insert>
+
+	<update id="updateRankRole" parameterType="com.ssitcloud.statistics.entity.BookRankRoleEntity">
+		UPDATE `book_rank_role`
+		<set>
+			<if test="library_idx !=null and library_idx !='' ">
+				`library_idx` = #{library_idx},
+			</if>
+			<if test="role_content !=null and role_content !=''">
+				`role_content` = #{role_content},
+			</if>
+			<if test="remark !=null and remark !=''">
+				`remark` = #{remark},
+			</if>
+		</set>
+		WHERE `role_idx` = #{role_idx}
+	</update>
+
+	<delete id="deleteRankRole" parameterType = "java.util.List">
+		DELETE FROM `book_rank_role` WHERE `role_idx` in
+		<foreach item="role_idx" collection="list" open="("
+			separator="," close=")">
+			#{role_idx}
+		</foreach>
+	</delete>
+
+	<select id="findRankRoleByIdx" parameterType="com.ssitcloud.statistics.entity.BookRankRoleEntity"
+		resultType="com.ssitcloud.statistics.entity.BookRankRoleEntity">
+		SELECT * FROM `book_rank_role`
+		<where>
+			<if test="role_idx !=null and role_idx !='' ">
+				and `role_idx` = #{role_idx}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findRankRoleByParam" parameterType="com.ssitcloud.statistics.entity.BookRankRoleEntity"
+		resultType="com.ssitcloud.statistics.entity.BookRankRoleEntity">
+		SELECT * FROM `book_rank_role`
+		<where>
+			<if test="role_idx !=null and role_idx !='' ">
+				and `role_idx` = #{role_idx}
+			</if>
+			<if test="library_idx !=null and library_idx !='' ">
+				and `library_idx` = #{library_idx}
+			</if>
+			<if test="role_content !=null and role_content !=''">
+				and `role_content` = #{role_content}
+			</if>
+		</where>
+		limit 1
+	</select>
+
+	<select id="findRankRoleList" parameterType="com.ssitcloud.dbstatistics.entity.BookRankRolePageEntity" resultType="com.ssitcloud.dbstatistics.entity.BookRankRolePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT * FROM `book_rank_role`
+		<where>
+			<if test="role_idx !=null and role_idx !='' ">
+				and `role_idx` = #{role_idx}
+			</if>
+			<if test="library_idx !=null and library_idx !='' ">
+				and `library_idx` = #{library_idx}
+			</if>
+			<if test="role_content !=null and role_content !=''">
+				and `role_content` = #{role_content}
+			</if>
+		</where>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+
+</mapper>

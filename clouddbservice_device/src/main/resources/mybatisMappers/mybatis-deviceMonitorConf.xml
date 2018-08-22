@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deviceMonConf">
+		<!-- 
+			device_ext_type	int(11) NOT NULL模板状态标识 0模板 1数据
+			device_mon_tpl_idx	int(11) NOT NULL显示模板ID或设备ID
+			logic_obj_idx	int(11) NOT NULL逻辑对象ID
+			library_idx	int(11) NOT NULL馆ID
+			visiable	int(11) NOT NULL是否可见
+			alert	int(11) NOT NULL是否告警
+			color	int(11) NOT NULL显示颜色
+			threshold	int(11) NOT NULL阈值
+		 -->
+	
+	<select id="selectmon_logicobj" resultType="java.util.Map" >
+		SELECT * FROM device_monitor_config dmc,metadata_logic_obj mlo
+		WHERE dmc.logic_obj_idx = mlo.meta_log_obj_idx
+		AND dmc.device_mon_tpl_idx = #{monitorId}
+		AND dmc.`table_name` ='metadata_logic_obj'
+	</select>
+	<select id="selectmon_monitorobj" resultType="java.util.Map" >
+		SELECT * FROM device_monitor_config dmc,monitor_logic_obj monlo
+		WHERE dmc.logic_obj_idx = monlo.monitor_logic_obj_idx
+		AND dmc.device_mon_tpl_idx = #{monitorId}
+		AND dmc.`table_name` ='monitor_logic_obj'
+	</select>
+	<select id="selectmon_plcobj" resultType="java.util.Map" >
+		SELECT * FROM device_monitor_config dmc,plc_logic_obj plo
+		WHERE dmc.logic_obj_idx = plo.plc_logic_obj_idx
+		AND dmc.device_mon_tpl_idx = #{monitorId}
+		AND dmc.`table_name` ='plc_logic_obj'
+	</select>
+	<!-- 模板超时设置 -->
+	<select id="selectmon_timeout" resultType="java.util.Map" >
+		SELECT * FROM device_monitor_config dmc
+		WHERE 1=1
+		AND dmc.device_mon_tpl_idx = #{monitorId}
+		AND dmc.`table_name` ='time_out'
+		AND dmc.device_ext_type=0
+	</select>
+	 <select id="selectDeviceMonConf" parameterType="com.ssitcloud.entity.DeviceMonConfigEntity" resultType="com.ssitcloud.entity.DeviceMonConfigEntity">
+		SELECT * FROM device_monitor_config
+		WHERE 1=1
+		<if test="device_ext_type!=null">
+			AND device_ext_type=#{device_ext_type}
+		</if>
+		<if test="device_mon_tpl_idx!=null">
+			AND device_mon_tpl_idx=#{device_mon_tpl_idx}
+		</if>
+		<if test="logic_obj_idx!=null">
+			AND logic_obj_idx=#{logic_obj_idx}
+		</if>
+		<if test="library_idx!=null">
+			AND library_idx=#{library_idx}
+		</if>
+		<if test="visiable!=null">
+			AND visiable=#{visiable}
+		</if>
+		<if test="alert!=null">
+			AND alert=#{alert}
+		</if>
+		<if test="color!=null">
+			AND color=#{color}
+		</if>
+		<if test="threshold!=null">
+			AND threshold=#{threshold}
+		</if>
+		<if test="table_name!=null">
+			AND table_name=#{table_name}
+		</if>
+	</select>
+	<insert id="insertDeviceMonConf" parameterType="com.ssitcloud.entity.DeviceMonConfigEntity">
+		INSERT INTO device_monitor_config 
+		(
+			device_ext_type,
+			device_mon_tpl_idx,
+			logic_obj_idx,
+			library_idx,
+			visiable,alert,color,threshold,table_name,meta_log_obj_idx
+		) 
+		VALUES 
+		(
+			#{device_ext_type},#{device_mon_tpl_idx},#{logic_obj_idx},
+			#{library_idx},#{visiable},#{alert},#{color},#{threshold},#{table_name},#{meta_log_obj_idx}
+		)
+	</insert>
+	<update id="updateDeviceMonConf" parameterType="com.ssitcloud.entity.DeviceMonConfigEntity">
+		UPDATE device_monitor_config
+		<set>
+		<!-- <if test="device_ext_type!=null">device_ext_type=#{device_ext_type},</if>
+			<if test="logic_obj_idx!=null">logic_obj_idx=#{logic_obj_idx},</if> -->
+			<if test="visiable!=null">visiable=#{visiable},</if>
+			<if test="alert!=null">alert=#{alert},</if>
+			<if test="color!=null">color=#{color},</if>
+			<if test="threshold!=null">threshold=#{threshold},</if>
+			<if test="library_idx!=null">library_idx=#{library_idx}</if>
+		</set>
+		WHERE 1=1
+		AND device_mon_tpl_idx=#{device_mon_tpl_idx}
+		AND device_ext_type=#{device_ext_type}
+		AND logic_obj_idx=#{logic_obj_idx}
+		AND table_name=#{table_name}
+		AND meta_log_obj_idx=#{meta_log_obj_idx}
+	</update>
+	
+	<delete id="deleteDeviceMonConf" parameterType="com.ssitcloud.entity.DeviceMonConfigEntity">
+		DELETE FROM device_monitor_config
+		WHERE 1=1
+		AND device_mon_tpl_idx=#{device_mon_tpl_idx}
+		AND device_ext_type=#{device_ext_type}
+		<if test="library_idx!=null and library_idx!=''">
+			AND library_idx=#{library_idx}
+		</if>
+		<!-- <if test="device_ext_type!=null and device_ext_type!=''">
+			AND device_ext_type=#{device_ext_type}
+		</if> -->
+		<if test="logic_obj_idx!=null and logic_obj_idx!=''">
+			AND logic_obj_idx=#{logic_obj_idx}
+		</if>
+	</delete>
+
+	
+	<!-- 
+		device_mon_tpl_idx	int(11) NOT NULL
+		device_mon_tpl_id	varchar(10) NOT NULL显示模板ID
+		device_mon_tpl_desc	varchar(500) NOT NULL显示模板描述
+		device_mon_type_idx	int(11) NOT NULL设备类型
+	 -->
+	 <select id="queryDeviceMonTempEntity" parameterType="com.ssitcloud.entity.DeviceMonTempEntity" resultType="com.ssitcloud.entity.DeviceMonTempEntity">
+	 	SELECT * FROM device_monitor_template
+	 	WHERE 1=1
+	 	<if test="device_mon_tpl_idx!=null">AND device_mon_tpl_idx=#{device_mon_tpl_idx}</if>
+	 	<if test="device_mon_tpl_id!=null">AND device_mon_tpl_id=#{device_mon_tpl_id}</if>
+	 	<if test="device_mon_tpl_desc!=null">AND device_mon_tpl_desc=#{device_mon_tpl_desc}</if>
+	 	<if test="device_mon_type_idx!=null">AND device_mon_type_idx=#{device_mon_type_idx}</if>
+	 </select>
+	  <select id="queryDeviceMonTempBytype" parameterType="com.ssitcloud.entity.DeviceMonTempEntity" resultType="com.ssitcloud.entity.DeviceMonTempEntity">
+	 	SELECT * FROM device_monitor_template
+	 	WHERE 1=1
+	 	<if test="device_mon_type_idx!=null">AND device_mon_type_idx=#{device_mon_type_idx}</if>
+	 </select>
+	 
+	<insert id="insertDeviceMonTempEntity" useGeneratedKeys="true" keyProperty="device_mon_tpl_idx" parameterType="com.ssitcloud.entity.DeviceMonTempEntity">
+		INSERT INTO device_monitor_template
+		(
+			device_mon_tpl_id,device_mon_tpl_desc,device_mon_type_idx
+		)
+		VALUES
+		(
+			#{device_mon_tpl_id},#{device_mon_tpl_desc},#{device_mon_type_idx}
+		)
+	</insert>
+	<insert id="insertDeviceMonTempWithIdx" parameterType="com.ssitcloud.entity.DeviceMonTempEntity" useGeneratedKeys="false">
+		INSERT INTO device_monitor_template
+		(
+			device_mon_tpl_idx,device_mon_tpl_id,device_mon_tpl_desc,device_mon_type_idx
+		)
+		VALUES
+		(
+			#{device_mon_tpl_idx},#{device_mon_tpl_id},#{device_mon_tpl_desc},#{device_mon_type_idx}
+		)
+	</insert>
+	
+	<update id="updateDeviceMonTempEntity" parameterType="Integer">
+		UPDATE device_monitor_template
+		<set>
+			<if test="device_mon_tpl_id!=null">device_mon_tpl_id=#{device_mon_tpl_id},</if>
+			<if test="device_mon_tpl_desc!=null">device_mon_tpl_desc=#{device_mon_tpl_desc},</if>
+			<if test="device_mon_type_idx!=null">device_mon_type_idx=#{device_mon_type_idx},</if>
+		</set>
+		WHERE device_mon_tpl_idx=#{device_mon_tpl_idx}
+	</update>
+	<delete id="deleteDeviceMonTempEntity" parameterType="Integer">
+		DELETE FROM device_monitor_template
+		WHERE device_mon_tpl_idx=#{device_mon_tpl_idx}
+	</delete>
+	<!-- 带参数 分页查询 监控配置模板 2016年5月16日16:35:04-->
+	<select id="queryDeviceMonitorByParam" parameterType="com.ssitcloud.entity.page.DeviceMonTempPageEntity" resultType="com.ssitcloud.entity.page.DeviceMonTempPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT 
+			dmt.*,
+			md.`meta_devicetype_idx`,
+			md.device_type,
+			md.device_type_desc,
+			(SELECT GROUP_CONCAT(DISTINCT mlo.logic_obj_desc) 
+		FROM device_monitor_config
+	 	INNER JOIN metadata_logic_obj mlo ON device_monitor_config.meta_log_obj_idx = mlo.meta_log_obj_idx
+	 	WHERE device_monitor_config.device_mon_tpl_idx=dmt.device_mon_tpl_idx AND device_ext_type=0
+	 	GROUP BY  device_mon_tpl_idx)AS temp_content FROM device_monitor_template dmt 
+	    LEFT JOIN metadata_devicetype md ON dmt.device_mon_type_idx=md.meta_devicetype_idx
+		WHERE 1=1
+		<if test="device_type!=null and device_type!=''"> 
+	 		AND md.meta_devicetype_idx=#{device_type}
+	 	</if>
+	 	<if test="device_mon_tpl_desc!=null and device_mon_tpl_desc!=''">
+	 		AND dmt.device_mon_tpl_desc LIKE CONCAT("%","${device_mon_tpl_desc}","%")
+	 	</if>
+		<if test="whetherPaging==false">
+			limit 50
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	<!-- 带参数 分页查询 监控配置模板 2016年5月16日16:35:04-->
+	<!-- <select id="queryDeviceMonitorByParam" parameterType="com.ssitcloud.entity.page.DeviceMonConfigPageEntity" resultType="com.ssitcloud.entity.page.DeviceMonConfigPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		  SELECT 
+		  md.device_type,
+		  md.meta_devicetype_idx,
+		  dmc.device_mon_tpl_idx,
+		  dmt.device_mon_tpl_id,
+		  dmt.device_mon_tpl_desc,
+		  md.device_type_desc,
+		  mlo.meta_log_obj_idx,
+		  mlo.logic_obj,
+		  mlo.logic_obj_desc,
+		  dmc.threshold,
+		  dmc.color,
+		  dmc.alert 
+		  FROM device_monitor_config dmc 
+		  INNER JOIN device_monitor_template dmt ON dmc.device_mon_tpl_idx=dmt.device_mon_tpl_idx
+		  INNER JOIN metadata_devicetype md ON md.meta_devicetype_idx=dmt.device_mon_type_idx
+		  INNER JOIN metadata_logic_obj mlo ON dmc.logic_obj_idx=mlo.meta_log_obj_idx
+		  WHERE 1=1
+		  AND dmc.device_ext_type=0
+	 	<if test="device_type!=null and device_type!=''"> 
+	 		AND md.device_type=#{device_type}
+	 	</if>
+	 	<if test="device_name!=null and device_name!=''">
+	 		AND d.device_name LIKE CONCAT("%","${device_name}","%")
+	 	</if>
+		<if test="whetherPaging==false">
+			limit 50
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select> -->
+	<!--设备监控配置页面  点击 编辑按钮  -->
+	<select id="SelDevMonConfMetaLogObjByDeviceMonTplIdx" parameterType="com.ssitcloud.entity.DevMonConfMetadataLogObjEntity" resultType="com.ssitcloud.entity.DevMonConfMetadataLogObjEntity">
+		  SELECT * FROM device_monitor_config dmc LEFT JOIN 
+		  metadata_logic_obj mlo ON mlo.meta_log_obj_idx=dmc.meta_log_obj_idx
+		  WHERE 1=1
+		  AND dmc.device_ext_type=0
+		  AND dmc.device_mon_tpl_idx=#{device_mon_tpl_idx}
+	</select>
+	
+	<!-- 精确查找  某项配置 ，条件为全部字段，查询出多个代表数据重复 -->
+	<select id="setDeviceMonConfigExactly" parameterType="com.ssitcloud.entity.DeviceMonConfigEntity" resultType="com.ssitcloud.entity.DeviceMonConfigEntity">
+		SELECT * FROM device_monitor_config
+		WHERE 1=1
+			AND device_ext_type=#{device_ext_type}
+			AND device_mon_tpl_idx=#{device_mon_tpl_idx}
+			AND logic_obj_idx=#{logic_obj_idx}
+			AND library_idx=#{library_idx}
+			AND visiable=#{visiable}
+			AND alert=#{alert}
+			AND color=#{color}
+			AND threshold=#{threshold}
+			AND table_name=#{table_name}
+			AND meta_log_obj_idx=#{meta_log_obj_idx}
+	</select>
+	<select id="selectDataTypeCount" parameterType="com.ssitcloud.entity.DeviceMonConfigEntity" resultType="Integer">
+		SELECT COUNT(*) FROM device_monitor_config
+		where device_ext_type=#{device_ext_type}
+		and device_mon_tpl_idx=#{device_mon_tpl_idx}
+		and library_idx=#{library_idx}
+	</select>
+	<select id="selectForMonitor" parameterType="com.ssitcloud.entity.DeviceMonConfigEntity" resultType="com.ssitcloud.entity.DeviceMonitorEntity">
+			SELECT dmc.*,plo.`plc_logic_obj`,plo.`plc_logic_obj_desc`,plo.`plc_logic_obj_idx`,mlo.`logic_obj`,mlo.`logic_obj_desc` 
+			FROM device_monitor_config dmc 
+			LEFT JOIN plc_logic_obj plo ON plo.`plc_logic_obj_idx`=dmc.`logic_obj_idx`
+			LEFT JOIN metadata_logic_obj mlo ON mlo.`meta_log_obj_idx`=dmc.`meta_log_obj_idx`
+			WHERE 1=1
+		<if test="device_ext_type!=null">
+			AND device_ext_type=#{device_ext_type}
+		</if>
+		<if test="device_mon_tpl_idx!=null">
+			AND device_mon_tpl_idx=#{device_mon_tpl_idx}
+		</if>
+		<if test="logic_obj_idx!=null">
+			AND logic_obj_idx=#{logic_obj_idx}
+		</if>
+		<if test="library_idx!=null">
+			AND library_idx=#{library_idx}
+		</if>
+		<if test="visiable!=null">
+			AND visiable=#{visiable}
+		</if>
+		<if test="alert!=null">
+			AND alert=#{alert}
+		</if>
+		<if test="color!=null">
+			AND color=#{color}
+		</if>
+		<if test="threshold!=null">
+			AND threshold=#{threshold}
+		</if>
+		<if test="table_name!=null">
+			AND table_name=#{table_name}
+		</if>
+	</select>
+	
+	
+	<update id="updateDeviceMonLibrary">
+		UPDATE 
+		  device_monitor_config de 
+		SET
+		  de.`library_idx` = #{newLibIdx}
+		WHERE de.`device_ext_type` = 1 
+		  AND de.`device_mon_tpl_idx` IN 
+		  <foreach collection="deviceList" item="deviceIdx" open="(" close=")" separator=",">
+			#{deviceIdx}
+		</foreach>
+	</update>
+	
+	<select id="selectDeviceMonModalByLibraryIdx" parameterType="Map" resultType="com.ssitcloud.entity.DeviceMonConfigEntity">
+		SELECT * FROM device_monitor_config dmc WHERE  dmc.`device_mon_tpl_idx` IN 
+		(
+			SELECT dc.`device_monitor_tpl_idx` FROM device_config dc WHERE dc.`library_idx`=#{library_idx}
+		)
+		AND dmc.`device_ext_type`=0;
+	</select>
+	<select id="selectDeviceMonTempModalByLibraryIdx" parameterType="Map" resultType="com.ssitcloud.entity.DeviceMonTempEntity">
+		SELECT * FROM device_monitor_template dmt WHERE dmt.`device_mon_tpl_idx` IN 
+		 (
+			SELECT dc.`device_monitor_tpl_idx` FROM device_config dc WHERE dc.`library_idx`=#{library_idx}
+		 )
+	</select>
+</mapper>

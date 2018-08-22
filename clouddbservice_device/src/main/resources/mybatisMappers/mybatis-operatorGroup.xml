@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="operatorgroup">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.OperatorGroupEntity"
+		useGeneratedKeys="true" keyProperty="operator_group_idx">
+		INSERT INTO operator_group
+		(library_idx, operator_group_id,operator_group_name,operator_group_desc,operator_idx)
+		VALUES
+		(#{library_idx},#{operator_group_id},#{operator_group_name},#{operator_group_desc},#{operator_idx})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.OperatorGroupEntity">
+		UPDATE operator_group
+		<set>
+			<if test="operator_group_desc !=null">
+				operator_group_desc = #{operator_group_desc},
+			</if>
+			<if test="operator_group_name !=null and operator_group_name !=''">
+				operator_group_name = #{operator_group_name},
+			</if>
+			<if test="operator_group_id!=null and operator_group_id!=''">
+				operator_group_id=#{operator_group_id},
+			</if>
+			<if test="library_idx!=null">
+				library_idx = #{library_idx},
+			</if>
+			version_stamp = version_stamp+1
+		</set>
+		WHERE operator_group_idx = #{operator_group_idx} 
+		<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+		</if>
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.OperatorGroupEntity">
+		DELETE FROM operator_group
+		WHERE  operator_group_idx = #{operator_group_idx}
+		<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+		</if>
+	</delete>
+
+	<select id="selectByidx" parameterType="com.ssitcloud.entity.OperatorGroupEntity"
+		resultType="com.ssitcloud.entity.OperatorGroupEntity">
+		SELECT * FROM operator_group
+		<where>
+			<if test="operator_group_idx !=null and operator_group_idx !=''">
+				and operator_group_idx = #{operator_group_idx}
+			</if>
+			<if test="operator_group_desc !=null and operator_group_desc !=''">
+				and operator_group_desc = #{operator_group_desc}
+			</if>
+			<if test="operator_group_name !=null and operator_group_name !=''">
+				and operator_group_name = #{operator_group_name}
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectAll" resultType="com.ssitcloud.entity.OperatorGroupEntity">
+		SELECT * FROM operator_group
+	</select>
+	<!-- 带参数分页查询 -->
+	<select id="queryOperGroupByparam" resultType="com.ssitcloud.entity.page.OperGroupMgmtPageEntity" parameterType="com.ssitcloud.entity.page.OperGroupMgmtPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT 
+		o.`operator_group_idx`,
+		o.`operator_group_id`,
+		o.`operator_group_name`,
+		o.`library_idx`,
+		o.`operator_idx`,
+		o.`operator_group_desc`,
+		GROUP_CONCAT(DISTINCT dg.`device_group_idx`) AS device_group_idx_str,
+		GROUP_CONCAT(DISTINCT dg.`device_group_name`) AS device_group_name_str,
+		GROUP_CONCAT(DISTINCT sg.`service_group_idx`) AS service_group_idx_str,
+		GROUP_CONCAT(DISTINCT sg.`service_group_name`) AS service_group_name_str,
+		GROUP_CONCAT(DISTINCT rosg.`statistics_group_idx`) AS statistics_group_idx_str,
+		o.`version_stamp`
+		 FROM operator_group  o 
+		LEFT JOIN rel_operator_device_group r ON o.`operator_group_idx`=r.`operator_group_idx` 
+		LEFT JOIN device_group dg ON dg.`device_group_idx`=r.`device_group_idx`
+		LEFT JOIN rel_operator_service_group rsg ON rsg.`operator_group_idx`=o.`operator_group_idx`
+		LEFT JOIN service_group sg ON sg.`service_group_idx`=rsg.`service_group_idx`
+		LEFT JOIN rel_operator_statistics_group rosg ON rosg.`operator_group_idx`=o.`operator_group_idx`
+		
+		GROUP BY o.`operator_group_idx`,o.`operator_group_name`,o.`operator_group_id`,o.`library_idx`,o.`operator_idx`,o.`operator_group_desc`
+		HAVING 1=1
+		 <!--1代表的是系统管理员-->
+		 <if test="operator_type!=1">
+		 	 <!-- 
+				不能查看 和 修改 自己属于的用户组
+			 -->
+			<!-- 			 
+				AND o.`operator_group_idx`!=(SELECT rog.`operator_group_idx` FROM rel_operator_group rog WHERE rog.`operator_idx`=#{operator_idx})
+			 -->			
+ 			<if test="library_idx!=null and library_idx!=''">
+			  AND library_idx=#{library_idx}
+			</if>
+		 </if>
+		
+		<if test="operator_group_name!=null and operator_group_name!=''">
+		  AND operator_group_name like CONCAT('%','${operator_group_name}','%')
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+
+</mapper>

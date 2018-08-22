@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="readerinfo">
+
+<insert id="insertReaderInfo" parameterType="com.ssitcloud.dblib.entity.ReaderInfoEntity"
+ useGeneratedKeys="true" keyProperty="reader_idx">
+	INSERT INTO readerinfo (
+	  `reader_name`,
+	  `login_name`,
+	  `reader_sex`,
+	  `id_card`,
+	  `reader_birthday`,
+	  `sox_tpl_id`,
+	  `reader_pwd`,
+	  `isLock`,
+	  `isLogged`,
+	  `last_login_ip`,
+	  `last_login_time`,
+	  `last_lock_time`,
+	  `login_fail_times`,
+	  `mobile`,
+	  `email`,
+	  `createTime`,
+	  `updateTime`
+	) 
+	VALUES (
+		#{reader_name},
+		#{login_name},
+		#{reader_sex},	
+		#{id_card},	
+		#{reader_birthday},	
+		#{sox_tpl_id},
+		#{reader_pwd},
+		#{isLock},
+		#{isLogged},
+		#{last_login_ip},
+		#{last_login_time},
+		#{last_lock_time},
+		#{login_fail_times},
+		#{mobile},
+		#{email},
+		NOW(),
+		NOW()
+	)
+</insert>
+
+<delete id="deleteReaderInfo" parameterType="com.ssitcloud.dblib.entity.ReaderInfoEntity">
+	DELETE FROM readerinfo WHERE `reader_idx` = #{reader_idx} 
+</delete>
+
+<update id="updateReaderInfo" parameterType="com.ssitcloud.dblib.entity.ReaderInfoEntity">
+	UPDATE readerinfo 
+	<set>
+		<if test="reader_name != null and reader_name !=''">
+		  `reader_name` = #{reader_name},
+		</if>
+		<if test="reader_sex !=null ">
+		  `reader_sex` = #{reader_sex},
+		</if>
+		<if test="id_card !=null ">
+		  `id_card` = #{id_card},
+		</if>
+		<if test="reader_birthday !=null ">
+		  `reader_birthday` = #{reader_birthday},
+		</if>
+		<if test="sox_tpl_id !=null and sox_tpl_id !=''">
+		  `sox_tpl_id` = #{sox_tpl_id},
+		</if>
+		<if test="reader_pwd !=null ">
+		  `reader_pwd` = #{reader_pwd},
+		</if>
+		<if test="isLock !=null ">
+		  `isLock` = #{isLock},
+		</if>
+		<if test="isLogged !=null ">
+		  `isLogged` = #{isLogged},
+		</if>
+		<if test="last_login_ip !=null ">
+		  `last_login_ip` = #{last_login_ip},
+		</if>
+		<if test="last_login_time !=null ">
+		  `last_login_time` = #{last_login_time},
+		</if>
+		<if test="last_lock_time !=null ">
+		  `last_lock_time` = #{last_lock_time},
+		</if>
+		<if test="login_fail_times !=null ">
+		  `login_fail_times` = #{login_fail_times},
+		</if>
+		<if test="mobile != null">
+			`mobile` = #{mobile},
+		</if>
+		<if test="email != null">
+			`email` = #{email},
+		</if>
+		<if test="updateTime != null">
+			`updateTime` = NOW() 
+		</if>
+	</set>
+	<where>
+		`reader_idx` = #{reader_idx}
+	</where>
+</update>
+
+<select id="queryReaderInfo" resultType="com.ssitcloud.dblib.entity.ReaderInfoEntity" parameterType="com.ssitcloud.dblib.entity.ReaderInfoEntity">
+	SELECT * FROM readerinfo WHERE `reader_idx` = #{reader_idx}
+</select>
+
+<select id="queryReaderInfoList" resultType="com.ssitcloud.dblib.entity.ReaderInfoEntity" parameterType="com.ssitcloud.dblib.entity.ReaderInfoEntity">
+	SELECT * FROM readerinfo 
+	where 1=1 
+	<if test="reader_name != null">
+		and binary reader_name = #{reader_name} 
+	</if>
+	<if test="reader_sex != null">
+		and reader_sex = #{reader_sex} 
+	</if>
+	<if test="isLock != null">
+		and isLock = #{isLock} 
+	</if>
+	<if test="isLogged != null">
+		and isLogged = #{isLogged} 
+	</if>
+	<if test="id_card != null">
+		and id_card = #{id_card} 
+	</if>
+	<if test="mobile != null">
+		and mobile = #{mobile} 
+	</if>
+	<if test="email != null">
+		and binary email = #{email} 
+	</if>
+	<if test="login_name != null">
+		and binary login_name = #{login_name} 
+	</if>
+	<if test="sox_tpl_id != null">
+		and sox_tpl_id = #{sox_tpl_id} 
+	</if>
+</select>
+
+
+
+</mapper>

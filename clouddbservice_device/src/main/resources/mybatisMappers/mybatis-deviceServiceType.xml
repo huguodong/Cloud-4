@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deviceServiceType">
+
+	<select id="queryDeviceServceTypeByParams" parameterType="map" resultType="com.ssitcloud.devmgmt.entity.DeviceServiceTypeEntity">
+		SELECT * FROM device_service_type where 1=1
+		<if test="service_type_idx != null and service_type_idx != ''">
+			and service_type_idx = #{service_type_idx}
+		</if>
+	</select>
+	
+	<select id="queryDeviceServiceTypeByPage" parameterType="com.ssitcloud.devmgmt.entity.DeviceServiceTypePageEntity" resultType="com.ssitcloud.devmgmt.entity.DeviceServiceTypePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT * FROM device_service_type  where 1=1 
+		<if test="service_type_name != null and service_type_name != ''">
+			and service_type_name like concat('%','${service_type_name}','%')
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<insert id="addDeviceServiceType" parameterType="com.ssitcloud.devmgmt.entity.DeviceServiceTypeEntity"
+	useGeneratedKeys="true" keyProperty="service_type_idx">
+		insert into device_service_type(service_type_id,service_type_name,service_type_db)
+		values(#{service_type_id},#{service_type_name},#{service_type_db})
+	</insert>
+	
+	<delete id="deleteDeviceServiceType" parameterType="map">
+		delete from device_service_type where service_type_idx = #{service_type_idx}
+	</delete>
+	
+	<update id="editDeviceServiceType" parameterType="com.ssitcloud.devmgmt.entity.DeviceServiceTypeEntity">
+		update device_service_type set service_type_id = #{service_type_id},
+		service_type_name =#{service_type_name},service_type_db = #{service_type_db} where service_type_idx = #{service_type_idx}
+	</update>
+</mapper>

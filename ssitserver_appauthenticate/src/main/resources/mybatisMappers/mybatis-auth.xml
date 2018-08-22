@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="auth">
+
+	<insert id="addAuth" parameterType="com.ssitcloud.auth.entity.AuthEntity">
+		INSERT INTO `app_auth` (
+			`random_code`,
+			`device_id`,
+			`reader_code`,
+			`reader_passwd`,
+			`scan_date`,
+			`state`
+		) VALUES (
+			#{random_code},
+			#{device_id},
+			#{reader_code},
+			#{reader_passwd},
+			#{scan_date},
+			#{state}
+		)
+	</insert>
+
+	<select id="queryAllAuth" resultType="com.ssitcloud.auth.entity.AuthEntity">
+		SELECT * FROM `app_auth`
+	</select>
+
+	<select id="queryAuthByParam" parameterType="com.ssitcloud.auth.entity.page.AuthPageEntity"  resultType="com.ssitcloud.auth.entity.page.AuthPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT o.* FROM `app_auth` o 
+		<where>
+			<if test="random_code != null and random_code != ''">
+				o.`random_code` LIKE  CONCAT('%', #{random_code}, '%')
+			</if>
+		</where>
+		ORDER BY o.`scan_date` desc
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+
+	<select id="queryAuthByRandomCode" resultType="com.ssitcloud.auth.entity.AuthEntity">
+		SELECT * FROM `app_auth`
+		<where>
+			<choose>
+				<when test="_parameter!=null">
+					AND `random_code` = #{random_code}
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="queryAuthByEntity" parameterType="com.ssitcloud.auth.entity.AuthEntity"  resultType="com.ssitcloud.auth.entity.AuthEntity">
+		SELECT o.* FROM `app_auth` o 
+		<where>
+			<if test="random_code != null and random_code != ''">
+				o.`random_code` = #{random_code}
+			</if>
+			<if test="device_id != null and device_id != ''">
+				AND o.`device_id` = #{device_id}
+			</if>
+		</where>
+		LIMIT 1
+	</select>
+
+	<update id="updateAuth" parameterType="com.ssitcloud.auth.entity.AuthEntity">
+		UPDATE `app_auth`
+		<set>
+			<if test="device_id !=null ">
+			`device_id` = #{device_id},
+			</if>
+			<if test="state !=null ">
+			`reader_code` = #{reader_code},
+			</if>
+			<if test="reader_passwd !=null ">
+			`reader_passwd` = #{reader_passwd},
+			</if>
+			<if test="scan_date !=null ">
+			`scan_date` = #{scan_date},
+			</if>
+			<if test="state !=null ">
+			`state` = #{state},
+			</if>
+		</set>
+		WHERE random_code = #{random_code}
+	</update>
+	
+	<insert id="addAuthAcs" parameterType="com.ssitcloud.auth.entity.AuthAcsEntity" useGeneratedKeys="true" keyProperty="idx">
+		INSERT INTO `app_auth_acs` (
+			`type`,
+			`device_id`,
+			`reader_code`,
+			`md5`,
+			`receive_date`,
+			`state`
+		) VALUES (
+			#{type},
+			#{device_id},
+			#{reader_code},
+			#{md5},
+			UNIX_TIMESTAMP(NOW()),
+			#{state}
+		)
+	</insert>
+	
+	<select id="queryAuthAcsByEntity" parameterType="com.ssitcloud.auth.entity.AuthAcsEntity"  resultType="com.ssitcloud.auth.entity.AuthAcsEntity">
+		SELECT o.* FROM `app_auth_acs` o 
+		<where>
+			<if test="type != null and type != ''">
+				o.`type` = #{type}
+			</if>
+			<if test="reader_code != null and reader_code != ''">
+				AND o.`reader_code` = #{reader_code}
+			</if>
+			AND UNIX_TIMESTAMP(NOW()) - o.`receive_date`  &lt; 10
+			AND o.state = '000'
+		</where>
+		LIMIT 1
+	</select>
+	
+	<insert id="addAuthPay" parameterType="com.ssitcloud.auth.entity.AuthPayEntity">
+		INSERT INTO `app_auth_pay` (
+			`random_code`,
+			`scan_date`,
+			`device_id`,
+			`reader_code`,
+			`reader_passwd`,
+			`md5`,
+			`state`,
+			`receive_date`
+		) VALUES (
+			#{random_code},
+			#{scan_date},
+			#{device_id},
+			#{reader_code},
+			#{reader_passwd},
+			#{md5},
+			#{state},
+			UNIX_TIMESTAMP(NOW())
+		)
+	</insert>
+	
+	<select id="queryAuthPayByEntity" parameterType="com.ssitcloud.auth.entity.AuthPayEntity"  resultType="com.ssitcloud.auth.entity.AuthPayEntity">
+		SELECT o.* FROM `app_auth_pay` o 
+		<where>
+			<if test="random_code != null and random_code != ''">
+				o.`random_code` = #{random_code}
+			</if>
+			<if test="device_id != null and device_id != ''">
+				AND o.`device_id` = #{device_id}
+			</if>
+			AND UNIX_TIMESTAMP(NOW()) - o.`receive_date`  &lt; 10
+			AND o.state = '000'
+		</where>
+		LIMIT 1
+	</select>
+
+</mapper>

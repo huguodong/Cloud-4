@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="registerIdentifiedcode">
+	<insert id="insert" parameterType="com.ssitcloud.dblib.entity.RegisterIdentifiedcodeEntity">
+		replace into
+		register_identifiedcode(`email_address`,`identifying_code`,`createtime`)
+		values(#{email_address},#{identifying_code},now())
+	</insert>
+	<select id="selectCode" 
+		parameterType="java.lang.String" 
+		resultType="com.ssitcloud.dblib.entity.RegisterIdentifiedcodeEntity">
+		SELECT
+			rc.email_address,
+			rc.identifying_code,
+			rc.createtime
+		FROM
+			register_identifiedcode AS rc
+		WHERE
+			rc.email_address = #{0}
+	</select>
+	<delete id="deleteByPk" parameterType="java.lang.String" >
+		delete from register_identifiedcode
+		where email_address = #{0}
+	</delete>
+</mapper>

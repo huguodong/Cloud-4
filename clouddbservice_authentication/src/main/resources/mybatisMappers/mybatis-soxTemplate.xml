@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="soxTemplate">
+
+<sql id="soxCloumn">
+	 `sox_tpl_id`,
+	 `sox_tpl_name`,
+	 `password_length`,
+	 `password_charset`,
+	 `login_fail_times`,
+	 `lock_time`,
+	 `first_login_chgpwd`,
+	 `count_history_password`,
+	 `password_validdays`,
+	 `password_remind`,
+	 `vaild_time`
+</sql>
+
+<sql id="soxCloumn1">
+	 `sox_tpl_name`,
+	 `password_length`,
+	 `password_charset`,
+	 `login_fail_times`,
+	 `lock_time`,
+	 `first_login_chgpwd`,
+	 `count_history_password`,
+	 `password_validdays`,
+	 `password_remind`,
+	 `vaild_time`
+</sql>
+
+<sql id="soxInsertParam">
+	 #{sox_tpl_name},
+	 #{password_length},
+	 #{password_charset},
+	 #{login_fail_times},
+	 #{lock_time},
+	 #{first_login_chgpwd},
+	 #{count_history_password},
+	 #{password_validdays},
+	 #{password_remind},
+	 #{vaild_time}
+</sql>
+<sql id="soxInsertParam0">
+	 #{sox_tpl_id},
+	 #{sox_tpl_name},
+	 #{password_length},
+	 #{password_charset},
+	 #{login_fail_times},
+	 #{lock_time},
+	 #{first_login_chgpwd},
+	 #{count_history_password},
+	 #{password_validdays},
+	 #{password_remind},
+	 #{vaild_time}
+</sql>
+<insert id="addSoxTemplateEntity" parameterType="com.ssitcloud.dbauth.entity.SoxTemplateEntity" useGeneratedKeys="true" keyProperty="sox_tpl_id">
+	INSERT INTO sox_template (
+	<include refid="soxCloumn1"></include>
+	) VALUES (
+	<include refid="soxInsertParam"></include> 
+	)
+	
+</insert>
+<insert id="addSoxTemplateEntityFully" parameterType="com.ssitcloud.dbauth.entity.SoxTemplateEntity" useGeneratedKeys="true" keyProperty="sox_tpl_id">
+	INSERT INTO sox_template (
+	<include refid="soxCloumn"></include>
+	) VALUES (
+	<include refid="soxInsertParam0"></include> 
+	)
+</insert>
+<update id="updSoxTemplateEntityById" parameterType="com.ssitcloud.dbauth.entity.SoxTemplateEntity" >
+	UPDATE sox_template st 
+	SET st.`sox_tpl_name` = #{sox_tpl_name},
+		st.`password_length` = #{password_length},
+		st.`password_charset` = #{password_charset},
+		st.`login_fail_times` = #{login_fail_times},
+		st.`lock_time` = #{lock_time},
+		st.`first_login_chgpwd` = #{first_login_chgpwd},
+		st.`count_history_password` = #{count_history_password},
+		st.`password_validdays` = #{password_validdays},
+		st.`password_remind` = #{password_remind},
+		st.`vaild_time` = #{vaild_time},
+		st.`version_stamp` = version_stamp+1
+	WHERE st.`sox_tpl_id` = #{sox_tpl_id}
+	<if test="version_stamp !=null and version_stamp !=''" >
+			AND st.`version_stamp` = #{version_stamp}
+	</if>
+</update>
+
+
+<select id="getSoxTemplateEntity" resultType="com.ssitcloud.dbauth.entity.SoxTemplateEntity">
+	SELECT <include refid="soxCloumn"/>  FROM sox_template st
+	<where>
+		st.sox_tpl_id = #{sox_tpl_id}
+	</where>
+</select>
+
+<delete id="delSoxTemplateById">
+	DELETE FROM sox_template WHERE sox_tpl_id = #{sox_tpl_id} 
+	<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+	</if>
+	
+</delete>
+
+<select id="queryAllSoxTemp" resultType="com.ssitcloud.dbauth.entity.SoxTemplateEntity">
+	SELECT `sox_tpl_id`,`sox_tpl_name` FROM sox_template ORDER BY `sox_tpl_name`
+</select>
+
+<select id="getSoxTempListByParam" resultType="com.ssitcloud.dbauth.entity.page.SoxTempPageEntity">
+	<if test="whetherPaging==true">
+		<include refid="paging.head"/>
+	</if>
+		SELECT 
+			 `sox_tpl_id`,
+			 `sox_tpl_name`,
+			 `password_length`,
+			 `password_charset`,
+			 `login_fail_times`,
+			 `lock_time`,
+			 `first_login_chgpwd`,
+			 `count_history_password`,
+			 `password_validdays`,
+			 `password_remind`,
+			 `vaild_time`,
+			 `version_stamp`
+		FROM `sox_template` st 
+		<where>
+			<if test="sox_tpl_name!=null">
+				st.`sox_tpl_name` LIKE CONCAT('%','${sox_tpl_name}','%')
+			</if>
+			<if test="operType!=1">
+				AND st.`sox_tpl_id` != '1'
+				AND st.`sox_tpl_id` != '2'
+			</if>
+		</where>
+	<if test="whetherPaging==true">
+		<include refid="paging.tail"/>
+	</if>
+</select>
+<select id="selectOneByMap" parameterType="Map" resultType="com.ssitcloud.dbauth.entity.SoxTemplateEntity">
+	select * from sox_template where sox_tpl_id=#{sox_tpl_id}
+</select>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="ipwhite">
+
+
+
+<insert id="addIpWhite" parameterType="com.ssitcloud.dbauth.entity.IpWhiteEntity" 
+useGeneratedKeys="true" keyProperty="password_idx">
+	INSERT INTO `ip_white` ( 
+		`operator_idx`,
+		`ipaddr`
+	) VALUES (
+		#{operator_idx},
+		#{ipaddr}
+	)
+</insert>
+
+
+<delete id="delIpWhiteByOperIdx">
+	DELETE FROM `ip_white` where `operator_idx` = #{operator_idx}
+</delete>
+
+<select id="selIpWhiteEntity" resultType="com.ssitcloud.dbauth.entity.IpWhiteEntity">
+	SELECT 
+	  iw.`operator_idx`,
+	  iw.`ipaddr` ,o.*
+	FROM
+	  `ip_white` iw,
+	  `operator` o
+	WHERE o.`operator_idx` = iw.`operator_idx` 
+	  AND o.`operator_id` = #{operator_id}
+</select>
+
+<select id="selIpWhiteByIdx" resultType="com.ssitcloud.dbauth.entity.IpWhiteEntity">
+	SELECT 
+	  iw.`operator_idx`,
+	  iw.`ipaddr` 
+	FROM
+	  `ip_white` iw
+	WHERE `operator_idx` = #{operator_idx}
+</select>
+
+
+
+<update id="updIpWhite" parameterType="com.ssitcloud.dbauth.entity.IpWhiteEntity" >
+	UPDATE ip_white SET `ipaddr` = #{ipaddr} WHERE `operator_idx` = #{operator_idx}
+</update>
+
+<select id="selIpWhiteByOperatorId" resultType="com.ssitcloud.dbauth.entity.IpWhiteEntity">
+	SELECT 
+	  * 
+	FROM
+	  ip_white ip 
+	WHERE ip.`operator_idx` = 
+	  (SELECT 
+	    o.operator_idx 
+	  FROM
+	    operator o 
+	  WHERE o.operator_id = #{operator_id})
+</select>
+
+
+</mapper>

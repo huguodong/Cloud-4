@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/cloudbusinessservice_node/hearbeat/saveData" id="HEARBEAT_URL" />
+	</project>
+	
+	<project projectName="cloudbusinessservice_datasyn" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/cloudbusinessservice_datasyn/sync/transferToBusinessDatasync" id="transferToBusinessDatasync" />
+		<RequestUrl requestMapping="/cloudbusinessservice_datasyn/sync/notifyLibraryInfo" id="notifyLibraryInfo" />
+	</project>
+	
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/clouddbservice_authentication/library/selLibraryByIdxOrId" id="selLibraryByIdxOrId"/>
+	</project>
+</RequestUrlList>

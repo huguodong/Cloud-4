@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+	<!--  设备数据层一-->
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		<!-- 查询权限 -->
+<!-- 		<RequestUrl requestMapping="/clouddbservice_device/permission/SelPermissionbyOperIdx" id="SelPermissionByOperIdx"/> -->
+		<RequestUrl id="findDeviceByLibId" requestMapping="/clouddbservice_device/device/SelectDevice" />
+		
+		<!-- 插入MyFeedBackReplyEntity的db层接口  -->
+		<RequestUrl id="addFeedBackReply" requestMapping="/clouddbservice_device/feedbackReply/addFeedbackReply" />
+		<!-- 更新MyFeedBackReplyEntity的db层接口  -->
+		<RequestUrl id="updateFeedBackReply" requestMapping="/clouddbservice_device/feedbackReply/updateFeedbackReply" />
+		<!-- 删除MyFeedBackReplyEntity的db层接口  -->
+		<RequestUrl id="deleteFeedBackReply" requestMapping="/clouddbservice_device/feedbackReply/deleteFeedbackReply" />
+		<!-- 从主键查询MyFeedBackReplyEntity的db层接口  -->
+		<RequestUrl id="selectFeedBackReply" requestMapping="/clouddbservice_device/feedbackReply/selectFeedbackReply" />
+		<!-- 模糊查询MyFeedBackReplyEntity的db层接口  -->
+		<RequestUrl id="selectFeedBackReplys" requestMapping="/clouddbservice_device/feedbackReply/selectFeedbackReplys" />
+	
+		<!-- 插入MyFeedBackEntity的db层接口  -->
+		<RequestUrl id="addFeedBack" requestMapping="/clouddbservice_device/feedback/addFeedback" />
+		<!-- 更新feedBackEntity的db层接口  -->
+		<RequestUrl id="updateFeedBack" requestMapping="/clouddbservice_device/feedback/updateFeedback" />
+		<!-- 删除feedBackEntity的db层接口  -->
+		<RequestUrl id="deleteFeedBack" requestMapping="/clouddbservice_device/feedback/deleteFeedback" />
+		<!-- 从主键查询feedBackEntity的db层接口  -->
+		<RequestUrl id="selectFeedBack" requestMapping="/clouddbservice_device/feedback/selectFeedback" />
+		<!-- 模糊查询feedBackEntity的db层接口  -->
+		<RequestUrl id="selectFeedBacks" requestMapping="/clouddbservice_device/feedback/selectFeedbacks" />
+		
+		<!-- 分页查询设备 -->
+		<RequestUrl id="selectDeviceByPage" requestMapping="/clouddbservice_device/device/SelectDeviceByPage" />
+		<!-- 带参数查询设备 -->
+		<RequestUrl id="queryDeviceByParam" requestMapping="/clouddbservice_device/device/queryDeviceByParam" />
+		<!-- 获取设备对应的外设信息 -->
+		<RequestUrl id="getDevExtModel" requestMapping="/clouddbservice_device/extconf/GetDevExtModel" />
+		<!-- 根据device_id 查出设备类型 -->
+		<RequestUrl id="selectDevicTypeByDeviceId" requestMapping="/clouddbservice_device/device/selectDevicTypeByDeviceId" />
+		<!-- 根据device_idx 查出device -->
+		<RequestUrl id="selectDevIdByIdx" requestMapping="/clouddbservice_device/device/selectDevIdByIdx"/>
+		<!-- 根据device_type 查出device -->
+		<RequestUrl id="selectByDevTypeNameList" requestMapping="/clouddbservice_device/device/selectByDevTypeNameList"/>
+		
+		<!-- 根据device_type 查出meta_devicetype_idx -->
+		<RequestUrl id="selectMetaDevTypeIdxByType" requestMapping="/clouddbservice_device/metadevicetype/selectMetaDevTypeIdxByType"/>
+		
+		<!-- 根据device_idx 查出功能名 -->
+		<RequestUrl id="selFunctionByDeviceIdx" requestMapping="/clouddbservice_device/runconf/SelFunctionByDeviceIdx"/>
+		
+		<!-- 查询设备操作命令码 -->
+		<RequestUrl id="selectMetaOperCmd" requestMapping="/clouddbservice_device/metaopercmd/SelectMetaOperCmd" />
+		<!-- 查询公钥 -->
+		<RequestUrl id="getAllUsefulAppVersionInfo" requestMapping="/clouddbservice_device/appinfo/getAllUsefulAppVersionInfo" />
+		
+		<!--add by shuangjunjie  -->
+		<!-- 分页查询设备信息（云平台管理员） -->
+		<RequestUrl id="SelectDeviceMgmt" requestMapping="/clouddbservice_device/device/SelectDeviceMgmt"/>
+		<!-- 分页查询设备信息 -->
+		<RequestUrl id="SelectDeviceMgmtByLibraryIdxs" requestMapping="/clouddbservice_device/device/SelectDeviceMgmtByLibraryIdxs"/>
+		<!-- 消息提醒（设备故障） -->
+		<RequestUrl id="selectDeviceTroublesByLibIdxs" requestMapping="/clouddbservice_device/deviceTrouble/selectDeviceTroublesByLibIdxs"/>
+		<!-- 更新消息提醒（设备故障） -->
+		<RequestUrl id="updateDeviceTroubles" requestMapping="/clouddbservice_device/deviceTrouble/updateDeviceTroubles"/>
+		
+		<!-- 查询馆下属设备的idx和地区码 -->
+		<RequestUrl id="selectDeviceIdxAndRegion" requestMapping="/clouddbservice_device/device/selectDeviceRegionByLibidx"/>
+
+        <!--查询图书馆web_service设置-->
+        <RequestUrl id="web_service_setting" requestMapping="/clouddbservice_device/appconnSetting/lib_settings" />
+	</project>
+	
+	<!-- 对于链接mongodb的操作直接连数据层devicemonitor -->
+	<project projectName="clouddbservice_devicemonitor" baseURL="http://127.0.0.1:8080">
+		<!--获取机器状态 -->
+<!-- 		<RequestUrl id="sayhello" requestMapping="/clouddbservice_devicemonitor/devicelog/selectDeviceState"/> -->
+		<!--获取机器状态 -->
+		
+		<RequestUrl id="selectDeviceState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectDeviceState"/>
+		<!-- 书架信息 -->
+		<RequestUrl id="selectBookrackState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectBookrackState"/>
+		<!-- 箱子信息 -->
+		<RequestUrl id="selectBinState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectBinState"/>
+		<!--  外设信息 SSL信息-->
+		<RequestUrl id="selectDeviceExtState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectDeviceExtState"/>
+		<!--  获取功能状态信息-->
+		<RequestUrl id="selectSoftState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectSoftState"/>
+		<!-- 查询所有设备的设备状态 -->
+		<RequestUrl id="queryDeviceIdByState" requestMapping="/clouddbservice_devicemonitor/devicelog/queryDeviceIdByState"/>
+
+	
+	</project>
+	
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 获取节点地址数据 -->
+		<RequestUrl id="findAddressByNodeName" requestMapping="/cloudbusinessservice_node/node/findAddressByNodeName" />
+		<!-- 心跳数据 -->
+<!-- 		<RequestUrl requestMapping="/cloudbusinessservice_node/hearbeat/saveData" id="HEARBEAT_URL" /> -->
+	</project>
+	
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		<!-- 插入AppSettingEntity的db层接口 -->
+		<RequestUrl id="addAppSetting" requestMapping="/clouddbservice_device/appSetting/addAppSetting"/>
+		<!-- 更新AppSettingEntity的db层接口 -->
+		<RequestUrl id="updateAppSetting" requestMapping="/clouddbservice_device/appSetting/updateAppSetting"/>
+		<!-- 删除AppSettingEntity的db层接口 -->
+		<RequestUrl id="deleteAppSetting" requestMapping="/clouddbservice_device/appSetting/deleteAppSetting"/>
+		<!-- 查询 单个  AppSettingEntity的db层接口 -->
+		<RequestUrl id="selectAppSetting" requestMapping="/clouddbservice_device/appSetting/selectAppSetting"/>
+		<!-- 查询 多个  AppSettingEntity的db层接口 -->
+		<RequestUrl id="selectAppSettings" requestMapping="/clouddbservice_device/appSetting/selectAppSettings"/>
+		<!-- 查询acs配置信息 -->
+		<RequestUrl id="selectLibraryAcsLogininfos" requestMapping="/clouddbservice_device/libraryAcsLogininfo/selectLibraryAcsLogininfos" />
+		
+		<!-- 查询多个	AppSettingEntity以及对应的菜单名 add by shuangjunjie 2017/3/28-->
+		<RequestUrl id="selectMenuNamesByServiceIds" requestMapping="/clouddbservice_device/appSetting/selectMenuNamesByServiceIds"/>
+		
+		<RequestUrl id="checkPermission" requestMapping="/clouddbservice_device/metaopercmd/checkPermission"/>
+		
+		<!-- 查询地区 -->
+		<RequestUrl id="selRegionByRegionIdx" requestMapping="/clouddbservice_device/region/selRegionByRegionIdx"/>
+		<RequestUrl id="selRegionsByRegionCode" requestMapping="/clouddbservice_device/region/selRegionsByRegionCode"/>
+		<RequestUrl id="selRegionsOnRegionCode" requestMapping="/clouddbservice_device/region/selRegionsOnRegionCode"/>
+		<RequestUrl id="selProCityAreaByRegionCode" requestMapping="/clouddbservice_device/region/selProCityAreaByRegionCode"/>
+		<RequestUrl id="selRegions" requestMapping="/clouddbservice_device/region/selRegions"/>
+		<RequestUrl id="selRegionsByRegionIdxs" requestMapping="/clouddbservice_device/region/selRegionsByRegionIdxs"/>
+		<RequestUrl id="selRegionsForNormal" requestMapping="/clouddbservice_device/region/selRegionsForNormal"/>
+		
+	</project>
+	
+	<project projectName="clouddbservice_libraryinfo" baseURL="http://127.0.0.1:8080">
+		<!-- 插入ReaderInfoEntity的db层接口 -->
+		<RequestUrl id="insertReaderInfoEntity" requestMapping="/clouddbservice_libraryinfo/readerinfo/insertReaderInfo"/>
+		<!-- 更新ReaderInfoEntity的db层接口 -->
+		<RequestUrl id="updateReaderInfoEntity" requestMapping="/clouddbservice_libraryinfo/readerinfo/updateReaderInfo"/>
+		<!-- 删除ReaderInfoEntity的db层接口 -->
+		<RequestUrl id="deleteReaderInfoEntity" requestMapping="/clouddbservice_libraryinfo/readerinfo/deleteReaderInfo"/>
+		<!-- 查询 单个 ReaderInfoEntity的db层接口 -->
+		<RequestUrl id="selectReaderInfoEntity" requestMapping="/clouddbservice_libraryinfo/readerinfo/queryReaderInfo"/>
+		<!-- 查询 多个  ReaderInfoEntity的db层接口 -->
+		<RequestUrl id="selectReaderInfoEntitys" requestMapping="/clouddbservice_libraryinfo/readerinfo/queryReaderInfoList"/>
+	
+		<!-- ReaderSbuInfoEntity删除插入接口 -->
+		<RequestUrl id="readerSbuInfoDeleteAndInsert" requestMapping="/clouddbservice_libraryinfo/readersubInfo/deleteAndInsert"/>
+		<RequestUrl id="selectReaderSubInfos" requestMapping="/clouddbservice_libraryinfo/readersubInfo/selectReaderSubInfos.do"/>
+	
+		<!-- ElectronicCertificate的查询接口 -->
+		<RequestUrl id="selectElectronicCertificates" requestMapping="/clouddbservice_libraryinfo/electronicCertificate/selectElectronicCertificates"/>
+		<!-- ElectronicCertificate的统计接口 -->
+		<RequestUrl id="countElectronicCertificate" requestMapping="/clouddbservice_libraryinfo/electronicCertificate/countElectronicCertificate"/>
+		<!-- 根据读者idx查询电子凭证 -->
+		<RequestUrl id="selectByReaderIdx" requestMapping="/clouddbservice_libraryinfo/electronicCertificate/selectByReaderIdx"/>
+		<!-- 更新电子凭证状态 -->
+		<RequestUrl id="updateState" requestMapping="/clouddbservice_libraryinfo/electronicCertificate/updateState"/>
+		
+		<!-- 查询bookitem -->
+		<RequestUrl id="queryBookItemListByPage" requestMapping="/clouddbservice_libraryinfo/bookitem/queryBookItemListByPage"/>
+		<!-- 查询bookitem和简易书目信息 -->
+		<RequestUrl id="queryBookitemAndBookInfo" requestMapping="/clouddbservice_libraryinfo/bookitem/queryBookitemAndBookInfo"/>
+		<!-- 根据bookitem_idx查询bookitem和简易书目信息 -->
+		<RequestUrl id="queryBookitemAndBookInfobyIdx" requestMapping="/clouddbservice_libraryinfo/bookitem/queryBookitemAndBookInfobyIdx"/>
+		<!-- 查询单个biblios -->
+		<RequestUrl id="queryBiblios" requestMapping="/clouddbservice_libraryinfo/biblios/queryBiblios" />
+		<RequestUrl id="queryBibliosForBCAndLib" requestMapping="/clouddbservice_libraryinfo/biblios/queryBibliosForBCAndLib"/>
+		
+		<!-- 查询读者绑定的证 -->
+		<RequestUrl id="selectReaderCards" requestMapping="/clouddbservice_libraryinfo/readercard/selectReaderCards"/>
+		<RequestUrl id="deleteReaderCard" requestMapping="/clouddbservice_libraryinfo/readercard/deleteReaderCard"/>
+		<RequestUrl id="insertReaderCard" requestMapping="/clouddbservice_libraryinfo/readercard/addReaderCard" />
+		<RequestUrl id="updateReaderCard" requestMapping="/clouddbservice_libraryinfo/readercard/updateReaderCard" />
+		
+		<!-- 插入找回密码验证码到数据库 -->
+		<RequestUrl id="passwordAddCode" requestMapping="/clouddbservice_libraryinfo/passwordCode/addCode" />
+		<!-- 查询找回密码验证码 -->
+		<RequestUrl id="passwordSelectCode" requestMapping="/clouddbservice_libraryinfo/passwordCode/selectCode" />
+		<!-- 销毁找回密码验证码 -->
+		<RequestUrl id="passwordDeleteCode" requestMapping="/clouddbservice_libraryinfo/passwordCode/deleteCodeByPk" />
+		
+		<!-- 插入注册验证码到数据库 -->
+		<RequestUrl id="registerAddCode" requestMapping="/clouddbservice_libraryinfo/registerCode/addCode" />
+		<!-- 查询注册验证码 -->
+		<RequestUrl id="registerSelectCode" requestMapping="/clouddbservice_libraryinfo/registerCode/selectCode" />
+		<!-- 销毁注册验证码 -->
+		<RequestUrl id="registerDeleteCode" requestMapping="/clouddbservice_libraryinfo/registerCode/deleteCodeByPk" />
+		
+	</project>
+	
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<!-- 查询单个模板 -->
+		<RequestUrl id="soxTemplateEntityById" requestMapping="/clouddbservice_authentication/operator/querySoxTempById" />
+		<!-- 加密 -->
+		<RequestUrl id="encryption" requestMapping="/clouddbservice_authentication/rsa/encryption" />
+		<!-- 解密 -->
+		<RequestUrl id="decrypt" requestMapping="/clouddbservice_authentication/rsa/decrypt" />
+		
+		<!-- 查询操作员信息 -->
+		<RequestUrl id="selectOperaotrByIdxOrId" requestMapping="/clouddbservice_authentication/operator/selectOperAppByIdOrIdx"/>
+		<!-- 修改操作员信息 -->
+		<RequestUrl id="updateOperAppByIdx" requestMapping="/clouddbservice_authentication/operator/updateOperAppByIdx"/>
+		<!-- 操作员修改密码 -->
+		<RequestUrl id="changePassword" requestMapping="/clouddbservice_authentication/operator/changePassword"/>
+		<!-- 登录验证 -->
+		<RequestUrl id="loginCheck" requestMapping="/clouddbservice_authentication/operator/loginCheck"/>
+		<!-- 检查密码格式-->
+		<RequestUrl id="checkPwdFormat" requestMapping="/clouddbservice_authentication/operator/checkPwdFormat"/>
+		<!-- 密码找回后，更新新密码-->
+		<RequestUrl id="updateOperAppPwdByIdx" requestMapping="/clouddbservice_authentication/operator/updateOperAppPwdByIdx"/>
+		<!-- 密码找回，验证身份-->
+		<RequestUrl id="retrievePassword" requestMapping="/clouddbservice_authentication/operator/retrievePassword"/>
+		<!-- 通过手机或者邮箱或者身份证号查出operator_id -->
+		<RequestUrl id="selectOperatorIdByParam" requestMapping="/clouddbservice_authentication/operator/selectOperatorIdByParam"/>
+		<!-- 根据父馆IDX查询下属馆的信息 -->
+		<RequestUrl id="querySlaveLibraryByMasterIdx" requestMapping="/clouddbservice_authentication/library/querySlaveLibraryByMasterIdx"/>
+		
+		<!--add by shuangjunjie  -->
+		<!-- 获取所有的不是slave的馆和其一级子馆 只有管理员可以使用 -->
+		<RequestUrl id="queryAllMasterLibAndSlaveLib" requestMapping="/clouddbservice_authentication/library/queryAllMasterLibAndSlaveLib"/>
+	
+		<!-- 根据主键查询图书馆信息 -->
+		<RequestUrl id="selLibraryByIdxOrId" requestMapping="/clouddbservice_authentication/library/selLibraryByIdxOrId"/>
+		<!-- 根据图书馆idx列表查询多个图书馆信息 -->
+		<RequestUrl id="selLibraryByIdxsOrIds" requestMapping="/clouddbservice_authentication/library/selLibraryByIdxsOrIds"/>
+		<!-- 查询主馆id查询子馆（自助图书馆）信息，不包含主馆信息 -->
+		<RequestUrl id="selectChildLibrary" requestMapping="/clouddbservice_authentication/library/selectChildLibrary"/>
+		<!-- 查询子馆idx和地区码 -->
+		<RequestUrl id="selectChildIdxAndRegionCode" requestMapping="/clouddbservice_authentication/library/selectChildLibraryRegionCode"/>
+		
+		<!-- 查询多个图书馆信息 -->
+		<RequestUrl id="sellibraryinfo" requestMapping="/clouddbservice_authentication/library/sellibraryinfo"/>
+			
+		<!-- 日志操作 -->
+		<RequestUrl id="AddOperationLog" requestMapping="/clouddbservice_authentication/systemlog/AddOperationLog"/>
+		<!-- 根据library_idx查出对应region_idx -->
+		<RequestUrl id="selRegionIdxByLibIdx" requestMapping="/clouddbservice_authentication/libraryExtendInfo/selRegionIdxByLibIdx"/>
+		
+		<!-- 根据library_idxs查出对应region_idxs -->
+		<RequestUrl id="selRegionIdxsByLibIdxs" requestMapping="/clouddbservice_authentication/libraryExtendInfo/selRegionIdxsByLibIdxs"/>
+		<!-- 根据参数查询操作员 -->
+		<RequestUrl id="selOperaotrByParam" requestMapping="/clouddbservice_authentication/operator/selectByParam"/>
+		<!--查询图书馆以及其他信息-->
+        <RequestUrl id="selectLibraryAndInfo" requestMapping="/clouddbservice_authentication/library/selectLibraryAndInfo"/>
+
+        <RequestUrl id="selectLibraryInfo" requestMapping="/clouddbservice_authentication/library/selectLibraryInfoByParam"/>
+
+	</project>
+	
+	<project projectName="cloudbusinessservice_datasyn" baseURL="http://127.0.0.1:8080">
+		<!-- 获取设备的最后心跳时间 -->
+		<RequestUrl id="GetLastHeatBeatTime" requestMapping="/cloudbusinessservice_datasyn/device/GetLastHeatBeatTime"></RequestUrl>
+		
+		<!-- 馆员APP端设备维护 发送指令 -->
+		<RequestUrl id="sendOrder" requestMapping="/cloudbusinessservice_datasyn/device/recevieOrder"></RequestUrl>
+		
+		<!-- 发送扫描二维码数据 -->
+		<RequestUrl id="recevieAppData" requestMapping="/cloudbusinessservice_datasyn/device/recevieAppData" />
+	</project>
+	
+	<project projectName="clouddbservice_statistics" baseURL="http://127.0.0.1:8080">
+		<!-- 查询图书分类 -->
+		<RequestUrl id="queryStaticsTypeList" requestMapping="/clouddbservice_statistics/stattype/queryStaticsTypeList" />
+	</project>
+
+</RequestUrlList>

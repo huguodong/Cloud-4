@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.ssitcloud.app_reader.myview.TagListView
+            android:id="@+id/tagListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/common_margin"
+            android:paddingLeft="@dimen/common_margin"
+            android:paddingRight="@dimen/common_margin"
+            android:paddingTop="@dimen/common_margin"
+            app:horizontalSpacing="@dimen/tag_horizontal_spacing"
+            app:orientation="horizontal"
+            app:verticalSpacing="@dimen/tag_vertical_spacing">
+
+        </com.ssitcloud.app_reader.myview.TagListView>
+    </ScrollView>
+
+    <include
+        android:id="@+id/messageView"
+        layout="@layout/sub_message_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/waitView"
+        layout="@layout/sub_wait_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</FrameLayout>

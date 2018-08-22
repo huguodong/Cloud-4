@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="dbIndex">
+	<select id="ext_state">
+	{
+	    createIndexes: "ext_state",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                opertime:-1,
+	            },
+	            name: "opertime"
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	            },
+	            name: "operator",
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	                opertime:-1
+	            },
+	            name: "operator_opertime",
+	        }    
+	    ]
+  	}
+	</select>
+	<select id="bin_state">
+	{
+	    createIndexes: "bin_state",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                opertime:-1,
+	            },
+	            name: "opertime"
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	            },
+	            name: "operator",
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	                opertime:-1
+	            },
+	            name: "operator_opertime",
+	        }    
+	    ]
+  	}
+	</select>
+	<select id="state_log">
+	{
+	    createIndexes: "state_log",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                opertime:-1,
+	            },
+	            name: "opertime"
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	            },
+	            name: "operator",
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	                opertime:-1
+	            },
+	            name: "operator_opertime",
+	        }    
+	    ]
+  	}
+	</select>
+	<select id="bookrack_state">
+	{
+	    createIndexes: "bookrack_state",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                opertime:-1,
+	            },
+	            name: "opertime"
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	            },
+	            name: "operator",
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	                opertime:-1
+	            },
+	            name: "operator_opertime",
+	        }    
+	    ]
+  	}
+	</select>
+	<select id="cardbox_log">
+	{
+	    createIndexes: "cardbox_log",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                opertime:-1,
+	            },
+	            name: "opertime"
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	            },
+	            name: "operator",
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	                opertime:-1
+	            },
+	            name: "operator_opertime",
+	        }    
+	    ]
+  	}
+	</select>
+	<select id="loan_log">
+	{
+	    createIndexes: "loan_log",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                opertime:-1,
+	            },
+	            name: "opertime"
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	            },
+	            name: "operator",
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	                opertime:-1
+	            },
+	            name: "operator_opertime",
+	        }    
+	    ]
+  	}
+	</select>
+	<select id="cardissue_log">
+	{
+	    createIndexes: "cardissue_log",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                opertime:-1,
+	            },
+	            name: "opertime"
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	            },
+	            name: "operator",
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	                opertime:-1
+	            },
+	            name: "operator_opertime",
+	        }    
+	    ]
+  	}
+	</select>
+	<select id="finance_log">
+	{
+	    createIndexes: "finance_log",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                opertime:-1,
+	            },
+	            name: "opertime"
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	            },
+	            name: "operator",
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	                opertime:-1
+	            },
+	            name: "operator_opertime",
+	        }    
+	    ]
+  	}
+	</select>
+	<select id="bookrack_log">
+	{
+	    createIndexes: "bookrack_log",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                opertime:-1,
+	            },
+	            name: "opertime"
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	            },
+	            name: "operator",
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	                opertime:-1
+	            },
+	            name: "operator_opertime",
+	        }    
+	    ]
+  	}
+	</select>
+	<select id="cashbox_log">
+	{
+	    createIndexes: "cashbox_log",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                opertime:-1,
+	            },
+	            name: "opertime"
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	            },
+	            name: "operator",
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	                opertime:-1
+	            },
+	            name: "operator_opertime",
+	        }    
+	    ]
+  	}
+	</select>
+	<select id="bookbox_log">
+	{
+	    createIndexes: "bookbox_log",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                opertime:-1,
+	            },
+	            name: "opertime"
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	            },
+	            name: "operator",
+	        },
+	        {
+	            key: {
+	                operator: 1,
+	                opertime:-1
+	            },
+	            name: "operator_opertime",
+	        }    
+	    ]
+  	}
+	</select>
+	<select id="soft_state">
+	{
+	    createIndexes: "soft_state",
+	    background:true,
+	    indexes: [
+	        {
+	            key: {
+	                startupTime :-1
+	            },
+	            name: "soft_state_startupTime",
+	        }    
+	    ]
+  	}
+	</select>
+</mapper>

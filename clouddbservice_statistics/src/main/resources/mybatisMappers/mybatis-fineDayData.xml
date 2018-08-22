@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="fineday">
+
+<insert id="insertFineDayData" parameterType="com.ssitcloud.dbstatistics.entity.FineDayDataEntity"
+useGeneratedKeys="true" keyProperty="fine_idx">
+	INSERT INTO finedaydata(
+	     `device_idx`,
+		 `lib_idx`,
+		 `fineCountType`,
+		 `finesubType`,
+		 `fineDayCount`,
+		 `fineDate`,
+		 `createDate`,
+		 `updateDate`,
+		 `fineWeek`
+		 
+	 )VALUES(
+	     #{device_idx},
+		 #{lib_idx},
+		 #{fineCountType},
+		 #{finesubType},
+		 #{fineDayCount},
+		 #{fineDate},
+		 #{createDate},
+		 #{updateDate},
+		 #{fineWeek}
+	 )
+	
+</insert>
+
+<delete id="deleteFineDayData">
+	delete from finedaydata where `fine_idx` = #{fine_idx}
+</delete>
+
+<update id="updateFineDayData" parameterType="com.ssitcloud.dbstatistics.entity.FineDayDataEntity">
+	UPDATE finedaydata 
+	<set>
+	   <if test="device_idx !=null and device_idx !=''">
+			`device_idx` = #{device_idx},
+		</if>
+		<if test="lib_idx !=null and lib_idx !=''">
+			`lib_idx` = #{lib_idx},
+		</if>
+		<if test="fineCountType !=null and fineCountType !=''">
+			`fineCountType` = #{fineCountType},
+		</if>
+		<if test="finesubType !=null and finesubType !=''">
+			`finesubType` = #{finesubType},
+		</if>
+		<if test="fineDayCount !=null and fineDayCount !=''">
+			`fineDayCount` = #{fineDayCount},
+		</if>
+		<if test="fineDate !=null and fineDate !=''">
+			`fineDate` = #{fineDate},
+		</if>
+		<if test="createDate !=null and createDate !=''">
+			`createDate` = #{createDate},
+		</if>
+		<if test="updateDate !=null and updateDate !=''">
+			`updateDate` = #{updateDate},
+		</if>
+		<if test="fineWeek !=null and fineWeek !=''">
+			`fineWeek` = #{fineWeek},
+		</if>
+	</set>
+	<where>
+		`fine_idx` = #{fine_idx}
+	</where>
+</update>
+
+<select id="queryFineDayData" parameterType="com.ssitcloud.dbstatistics.entity.FineDayDataEntity" resultType="com.ssitcloud.dbstatistics.entity.FineDayDataEntity">
+	select * from finedaydata where 1=1
+	<if test="fine_idx !=null and fine_idx !=''">
+		AND `fine_idx` = #{fine_idx}
+	</if>
+	<if test="lib_idx !=null and lib_idx !=''">
+		AND `lib_idx` = #{lib_idx}
+	</if>
+	<if test="device_idx !=null and device_idx !=''">
+		AND `device_idx` = #{device_idx}
+	</if>
+	<if test="fineCountType !=null and fineCountType !=''">
+		AND `fineCountType` = #{fineCountType}
+	</if>
+	<if test="finesubType !=null and finesubType !=''">
+		AND `finesubType` = #{finesubType}
+	</if>
+	<if test="fineDate !=null and fineDate !=''">
+		AND `fineDate` = #{fineDate}
+	</if>
+</select>
+<select id="queryFineDayDataList" parameterType="com.ssitcloud.dbstatistics.entity.FineDayDataEntity" resultType="com.ssitcloud.dbstatistics.entity.FineDayDataEntity">
+	select * from finedaydata 
+</select>
+
+<select id="getAllFinanceDay" parameterType="com.ssitcloud.dbstatistics.entity.FineDayDataEntity" resultType="com.ssitcloud.dbstatistics.entity.FineDayDataEntity">
+	select * from finedaydata 
+</select>
+
+<select id="countFinanceLog" parameterType="map" resultType="com.ssitcloud.statistics.entity.StatisticsEntity">
+	<choose>
+		<when test="chart_type=='pie'">
+			SELECT finesubType type,sum(fineDayCount) total from finedaydata ll
+		</when>
+		<otherwise>
+			SELECT 'day' type,sum(fineDayCount) total,ll.`fineDate` time from finedaydata ll
+		</otherwise>
+	</choose>
+	<where>
+		<if test="lib_idx != null and lib_idx.size() >0">
+				AND ll.`lib_idx` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+		<if test="device_idx!=null and device_idx!='' and device_idx!=0">
+			AND ll.`device_idx`=#{device_idx}
+		</if>
+		<if test="fineCountType!=null and fineCountType!=''">
+			AND ll.`fineCountType`=#{fineCountType}
+		</if>
+		<if test="finesubType!=null and finesubType!=''">
+			AND ll.`finesubType`=#{finesubType}
+		</if>
+		<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+			AND ll.`fineDate` BETWEEN #{startTime} AND #{endTime} 
+		</if>
+	</where>
+	<choose>
+		<when test="chart_type=='pie'">
+			GROUP BY finesubType
+		</when>
+		<otherwise>
+			GROUP BY TIME ORDER BY TIME
+		</otherwise>
+	</choose>
+</select>
+
+</mapper>

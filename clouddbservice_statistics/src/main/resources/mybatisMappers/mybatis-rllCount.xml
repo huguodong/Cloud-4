@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rllcount">
+
+	<insert id="insertVisitorsEveryDay" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity"
+		useGeneratedKeys="true" keyProperty="everyday_idx">
+		INSERT INTO `visitors_everyday`
+		(
+		`lib_idx`, `device_id`, `in_count`, `out_count`,
+		`update_time`,`lib_id`,`device_type`
+		)
+		VALUES
+		<foreach collection ="list" item="rllCountEntity" index= "index" separator =",">
+			(
+			#{rllCountEntity.lib_idx}, #{rllCountEntity.device_id},
+			#{rllCountEntity.in_count},
+			#{rllCountEntity.out_count},
+			#{rllCountEntity.update_time},
+			#{rllCountEntity.lib_id},
+			#{rllCountEntity.device_type}
+			)
+		</foreach >	
+	</insert>
+	<insert id="insertVisitorsEveryWeek" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity"
+		useGeneratedKeys="true" keyProperty="everyweek_idx">
+		INSERT INTO visitors_everyweek (
+				`in_count`,
+				`out_count`,
+				`lib_idx`,
+				`lib_id`,
+				`device_id`,
+				`start_time`,
+				`end_time`,
+				`update_time`,
+				`device_type`
+		) 
+		VALUES
+		<foreach collection ="list" item="rllCountEntity" index= "index" separator =",">
+			(
+			#{rllCountEntity.in_count}, 
+			#{rllCountEntity.out_count},
+			#{rllCountEntity.lib_idx},
+			#{rllCountEntity.lib_id},
+			#{rllCountEntity.device_id},
+			#{rllCountEntity.start_time},
+			#{rllCountEntity.end_time},
+			#{rllCountEntity.update_time},
+			#{rllCountEntity.device_type}
+			)
+		</foreach >	
+	</insert>
+	<insert id="insertVisitorsEveryMonth" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity"
+		useGeneratedKeys="true" keyProperty="everymonth_idx">
+		INSERT INTO visitors_everymonth (
+				`in_count`,
+				`out_count`,
+				`lib_idx`,
+				`lib_id`,
+				`device_id`,
+				`start_time`,
+				`end_time`,
+				`update_time`,
+				`device_type`
+		) 
+		VALUES
+		<foreach collection ="list" item="rllCountEntity" index= "index" separator =",">
+			(
+			#{rllCountEntity.in_count}, 
+			#{rllCountEntity.out_count},
+			#{rllCountEntity.lib_idx},
+			#{rllCountEntity.lib_id},
+			#{rllCountEntity.device_id},
+			#{rllCountEntity.start_time},
+			#{rllCountEntity.end_time},
+			#{rllCountEntity.update_time},
+			#{rllCountEntity.device_type}
+			)
+		</foreach >	
+	</insert>
+	<insert id="insertVisitorsEveryYear" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity"
+		useGeneratedKeys="true" keyProperty="everyyear_idx">
+		INSERT INTO visitors_everyyear (
+				`in_count`,
+				`out_count`,
+				`lib_idx`,
+				`lib_id`,
+				`device_id`,
+				`start_time`,
+				`end_time`,
+				`update_time`,
+				`device_type`
+		) 
+		VALUES
+		<foreach collection ="list" item="rllCountEntity" index= "index" separator =",">
+			(
+			#{rllCountEntity.in_count}, 
+			#{rllCountEntity.out_count},
+			#{rllCountEntity.lib_idx},
+			#{rllCountEntity.lib_id},
+			#{rllCountEntity.device_id},
+			#{rllCountEntity.start_time},
+			#{rllCountEntity.end_time},
+			#{rllCountEntity.update_time},
+			#{rllCountEntity.device_type}
+			)
+		</foreach >	
+	</insert>
+
+	<update id="updateVisitorsEveryDay" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		UPDATE `visitors_everyday`
+		<set>
+			<if test="lib_idx !=null and lib_idx !='' ">
+				`lib_idx` = #{lib_idx},
+			</if>
+			<if test="device_id !=null">
+				`device_id` =#{device_id},
+			</if>
+			<if test="in_count !=null">
+				`in_count` = #{in_count},
+			</if>
+			<if test="out_count !=null and out_count !=''">
+				`out_count` = #{out_count},
+			</if>
+			<if test="update_time !=null">
+				`update_time` = #{update_time},
+			</if>
+		</set>
+		WHERE `everyday_idx` = #{everyday_idx}
+	</update>
+	<update id="updateVisitorsEveryWeek" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		UPDATE `visitors_everyweek`
+		<set>
+			<if test="lib_idx !=null and lib_idx !='' ">
+				`lib_idx` = #{lib_idx},
+			</if>
+			<if test="device_id !=null">
+				`device_id` =#{device_id},
+			</if>
+			<if test="in_count !=null">
+				`in_count` = #{in_count},
+			</if>
+			<if test="out_count !=null and out_count !=''">
+				`out_count` = #{out_count},
+			</if>
+			<if test="start_time !=null ">
+				`start_time` = #{start_time},
+			</if>
+			<if test="end_time !=null ">
+				`end_time` = #{end_time},
+			</if>
+		</set>
+		WHERE `everyweek_idx` = #{everyweek_idx}
+	</update>
+	<update id="updateVisitorsEveryMonth" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		UPDATE `visitors_everymonth`
+		<set>
+			<if test="lib_idx !=null and lib_idx !='' ">
+				`lib_idx` = #{lib_idx},
+			</if>
+			<if test="device_id !=null">
+				`device_id` =#{device_id},
+			</if>
+			<if test="in_count !=null">
+				`in_count` = #{in_count},
+			</if>
+			<if test="out_count !=null and out_count !=''">
+				`out_count` = #{out_count},
+			</if>
+			<if test="start_time !=null">
+				`start_time` = #{start_time},
+			</if>
+			<if test="end_time !=null">
+				`end_time` = #{end_time},
+			</if>
+		</set>
+		WHERE `everymonth_idx` = #{everymonth_idx}
+	</update>
+	<update id="updateVisitorsEveryYear" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		UPDATE `visitors_everyyear`
+		<set>
+			<if test="lib_idx !=null and lib_idx !='' ">
+				`lib_idx` = #{lib_idx},
+			</if>
+			<if test="device_id !=null">
+				`device_id` =#{device_id},
+			</if>
+			<if test="in_count !=null">
+				`in_count` = #{in_count},
+			</if>
+			<if test="out_count !=null and out_count !=''">
+				`out_count` = #{out_count},
+			</if>
+			<if test="start_time !=null">
+				`start_time` = #{start_time},
+			</if>
+			<if test="end_time !=null">
+				`end_time` = #{end_time},
+			</if>
+		</set>
+		WHERE `everyyear_idx` = #{everyyear_idx}
+	</update>
+	<delete id="deleteVisitorsEveryDayByTime" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM
+		`visitors_everyday`
+		WHERE
+		<![CDATA[`update_time` <= #{start_time}]]>
+	</delete>
+	<delete id="deleteVisitorsEveryWeekByTime" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM
+		`visitors_everyweek`
+		WHERE
+		`start_time`  <![CDATA[ >= ]]> #{start_time}
+		`and end_time` <![CDATA[ <= ]]> #{end_time}
+	</delete>
+	<delete id="deleteVisitorsEveryMonthByTime" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM
+		`visitors_everymonth`
+		WHERE
+		`start_time`  <![CDATA[ >= ]]> #{start_time}
+		and `end_time` <![CDATA[ <= ]]> #{end_time}
+	</delete>
+	<delete id="deleteVisitorsEveryYearByTime" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM
+		`visitors_everyyear`
+		WHERE
+		`start_time`  <![CDATA[ >= ]]> #{start_time}
+		and `end_time` <![CDATA[ <= ]]> #{end_time}
+	</delete>
+	
+	<delete id="deleteVisitorsEveryDay" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM
+		`visitors_everyday`
+		WHERE
+		`everyday_idx` = #{everyday_idx}
+	</delete>
+	<delete id="deleteVisitorsEveryWeek" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM
+		visitors_everyweek
+		WHERE
+		everyweek_idx = #{everyweek_idx}
+	</delete>
+	<delete id="deleteVisitorsEveryMonth" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM
+		`visitors_everymonth`
+		WHERE
+		`everymonth_idx` = #{everymonth_idx}
+	</delete>
+	<delete id="deleteVisitorsEveryYear" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM
+		`visitors_everyyear`
+		WHERE
+		`everyyear_idx` = #{everyyear_idx}
+	</delete>
+	<delete id="deleteVisitorsEverydayByLibIdx" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM `visitors_everyday`
+		where `lib_idx`=#{lib_idx}
+	</delete>
+	<delete id="deleteVisitorsEveryWeekByLibIdx" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM `visitors_everyweek`
+		where `lib_idx`=#{lib_idx}
+	</delete>
+	<delete id="deleteVisitorsEveryMonthByLibIdx" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM `visitors_everymonth`
+		where `lib_idx`=#{lib_idx}
+	</delete>
+	<delete id="deleteVisitorsEveryYearByLibIdx" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM `visitors_everyyear`
+		where `lib_idx`=#{lib_idx}
+	</delete>
+	
+	<delete id="deleteVisitorsEveryWeekByUpdateTime" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM `visitors_everyweek`
+		where 
+			`update_time`  <![CDATA[ >= ]]> #{start_time}
+			and `update_time` <![CDATA[ <= ]]> #{end_time}
+	</delete>
+	<delete id="deleteVisitorsEveryMonthByUpdateTime" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM `visitors_everymonth`
+		where 
+			`update_time`  <![CDATA[ >= ]]> #{start_time}
+			and `update_time` <![CDATA[ <= ]]> #{end_time}
+	</delete>
+	<delete id="deleteVisitorsEveryYearByUpdateTime" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM `visitors_everyyear`
+		where 
+			`update_time`  <![CDATA[ >= ]]> #{start_time}
+			and `update_time` <![CDATA[ <= ]]> #{end_time}
+	</delete>
+	<select id="selectVisitorsEveryday" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity"
+		resultType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		SELECT * FROM `visitors_everyday`
+		<where>
+			<if test="everyday_idx !=null and everyday_idx !='' ">
+				and `everyday_idx` = #{everyday_idx}
+			</if>
+			<if test="lib_idx !=null and lib_idx !='' ">
+				and `lib_idx` = #{lib_idx}
+			</if>
+			<if test="device_id !=null and device_id !=''">
+				and `device_id` = #{device_id}
+			</if>
+			<if test="start_time !=null">
+				`update_time`  <![CDATA[ >= ]]> #{start_time}
+			</if>
+			<if test="end_time !=null ">
+				and `update_time`<![CDATA[ <= ]]> #{end_time}
+			
+			</if>
+		</where>
+	</select>
+	<select id="selectVisitorsEveryDay" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity"
+		resultType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		SELECT * FROM `visitors_everyday`
+		<where>
+			<if test="everyday_idx !=null and everyday_idx !='' ">
+				and `everyday_idx` = #{everyday_idx}
+			</if>
+			<if test="lib_idx !=null and lib_idx !='' ">
+				and `lib_idx` = #{lib_idx}
+			</if>
+			<if test="device_id !=null and device_id !=''">
+				and `device_id` = #{device_id}
+			</if>
+			<if test="start_time !=null">
+				`update_time`  <![CDATA[ >= ]]> #{start_time}
+			</if>
+			<if test="end_time !=null">
+				and `update_time` <![CDATA[ <= ]]> #{end_time}
+			
+			</if>
+		</where>
+	</select>
+	<select id="selectVisitorsEveryWeek" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity"
+		resultType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		SELECT * FROM `visitors_everyweek`
+		<where>
+			<if test="everyweek_idx !=null and everyweek_idx !='' ">
+				and `everyweek_idx` = #{everyweek_idx}
+			</if>
+			<if test="lib_idx !=null and lib_idx !='' ">
+				and `lib_idx` = #{lib_idx}
+			</if>
+			<if test="device_id !=null and device_id !=''">
+				and `device_id` = #{device_id}
+			</if>
+			<if test="start_time !=null">
+				`update_time`  <![CDATA[ >= ]]> #{start_time}
+			</if>
+			<if test="end_time !=null">
+				and `update_time` <![CDATA[ <= ]]> #{end_time}
+			
+			</if>
+		</where>
+	</select>
+	<select id="selectVisitorsEveryMonth" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity"
+		resultType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		SELECT * FROM `visitors_everymonth`
+		<where>
+			<if test="everymonth_idx !=null and everymonth_idx !='' ">
+				and everymonth_idx = #{everymonth_idx}
+			</if>
+			<if test="lib_idx !=null and lib_idx !='' ">
+				and `lib_idx` = #{lib_idx}
+			</if>
+			<if test="device_id !=null and device_id !=''">
+				and `device_id` = #{device_id}
+			</if>
+			<if test="start_time !=null">
+				`update_time`  <![CDATA[ >= ]]> #{start_time}
+			</if>
+			<if test="end_time !=null">
+				and `update_time` <![CDATA[ <= ]]> #{end_time}
+			
+			</if>
+		</where>
+	</select>
+	<select id="selectVisitorsEveryYear" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity"
+		resultType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		SELECT * FROM `visitors_everyyear`
+		<where>
+			<if test="everyyear_idx !=null and everyyear_idx !='' ">
+				and `everyyear_idx` = #{everyyear_idx}
+			</if>
+			<if test="lib_idx !=null and lib_idx !='' ">
+				and `lib_idx` = #{lib_idx}
+			</if>
+			<if test="device_id !=null and device_id !=''">
+				and `device_id = #{device_id}
+			</if>
+			<if test="start_time !=null ">
+				`update_time`  <![CDATA[ >= ]]> #{start_time}
+			</if>
+			<if test="end_time !=null ">
+				and `update_time` <![CDATA[ <= ]]> #{end_time}
+			
+			</if>
+		</where>
+	</select>
+	<select id="getLastUpdateTime" resultType="com.ssitcloud.devmgmt.entity.RllCountVO">
+		select
+		max(`update_time`) as lastUpdateTime,`lib_idx`,`device_id` from
+		`visitors_everyday` group by `lib_idx`,`device_id`
+	</select>
+	<delete id="deleteVisitorsEveryDayBatchById" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM `visitors_everyday`
+		where `everyday_idx` in 
+		<foreach collection ="list" item="rllCountEntity"  open="(" separator="," close=")">
+			#{rllCountEntity.everyday_idx}
+		</foreach >	
+	</delete>
+	<delete id="deleteVisitorsEveryWeekBatchById" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM `visitors_everyweek`
+		where `everyweek_idx` in 
+		<foreach collection ="list" item="rllCountEntity"  open="(" separator="," close=")">
+			#{rllCountEntity.everyweek_idx}
+		</foreach >	
+	</delete>
+	<delete id="deleteVisitorsEveryMonthBatchById" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM `visitors_everymonth`
+		where `everymonth_idx` in 
+		<foreach collection ="list" item="rllCountEntity"  open="(" separator="," close=")">
+			#{rllCountEntity.everymonth_idx}
+		</foreach >	
+	</delete>
+	<delete id="deleteVisitorsEveryYearBatchById" parameterType="com.ssitcloud.devmgmt.entity.RllCountEntity">
+		DELETE FROM `visitors_everyyear`
+		where `everyyear_idx` in 
+		<foreach collection ="list" item="rllCountEntity"  open="(" separator="," close=")">
+			#{rllCountEntity.everyyear_idx}
+		</foreach >	
+	</delete>
+	<!-- 统计开始 -->
+	<select id="countVisitorLogForDay" parameterType="map" resultType="com.ssitcloud.statistics.entity.StatisticsVisitorEntity">
+		SELECT 'day' TYPE,SUM(in_count) in_total,SUM(out_count) out_total,CONCAT(SUBSTRING(ll.`update_time`,12,2),'点') TIME FROM `visitors_everyday` ll 
+		<where>
+			<if test="lib_idx != null and lib_idx.size() >0">
+				AND ll.`lib_idx` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="device_id!=null and device_id!=''">
+				AND ll.`device_id`=#{device_id}
+			</if>
+			<if test="device_type!=null and device_type!=''">
+				AND ll.`device_type`=#{device_type}
+			</if>			
+			<!-- <if test="startTime !=null ">
+				and ll.`update_time`  <![CDATA[>=]]> CONCAT(#{startTime},' 00:00:00') 
+			</if>
+			<if test="endTime !=null ">
+				and ll.`update_time`   <![CDATA[<=]]>  CONCAT(#{endTime},' 23:59:59') 
+			</if> -->
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND ll.`update_time` BETWEEN #{startTime} AND #{endTime} 
+			</if> 
+		</where>
+		 GROUP BY TIME ORDER BY TIME
+	</select>
+	<!--新增！ 按周/月统计，需要按天展示 -->
+	<select id="countDayVisitorLogForWeekOrMonth" parameterType="map" resultType="com.ssitcloud.statistics.entity.StatisticsVisitorEntity">
+		SELECT 'day' TYPE,SUM(in_count) in_total,SUM(out_count) out_total,LEFT(ll.`update_time`,10) TIME FROM `visitors_everyday` ll 
+		<where>
+			<if test="lib_idx != null and lib_idx.size() >0">
+				AND ll.`lib_idx` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="device_id!=null and device_id!=''">
+				AND ll.`device_id`=#{device_id}
+			</if>
+			<if test="device_type!=null and device_type!=''">
+				AND ll.`device_type`=#{device_type}
+			</if>			
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND ll.`update_time` BETWEEN #{startTime} AND #{endTime} 
+			</if> 
+		</where>
+		 GROUP BY TIME ORDER BY TIME
+	</select>
+	<select id="countVisitorLogForWeek" parameterType="map" resultType="com.ssitcloud.statistics.entity.StatisticsVisitorEntity">
+		SELECT 'week' TYPE,SUM(in_count) in_total,SUM(out_count) out_total,LEFT(ll.`update_time`,10) TIME FROM `visitors_everyweek` ll 
+		<where>
+			<if test="lib_idx != null and lib_idx.size() >0">
+				AND ll.`lib_idx` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="device_id!=null and device_id!=''">
+				AND ll.`device_id`=#{device_id}
+			</if>
+			<if test="device_type!=null and device_type!=''">
+				AND ll.`device_type`=#{device_type}
+			</if>
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND ll.`update_time` BETWEEN #{startTime} AND #{endTime}
+			</if>
+		</where>
+		 GROUP BY TIME ORDER BY TIME
+	</select>
+	<select id="countVisitorLogForMonth" parameterType="map" resultType="com.ssitcloud.statistics.entity.StatisticsVisitorEntity">
+		SELECT 'month' TYPE,SUM(in_count) in_total,SUM(out_count) out_total,LEFT(ll.`update_time`,10) TIME FROM `visitors_everymonth` ll 
+		<where>
+			<if test="lib_idx != null and lib_idx.size() >0">
+				AND ll.`lib_idx` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="device_id!=null and device_id!=''">
+				AND ll.`device_id`=#{device_id}
+			</if>
+			<if test="device_type!=null and device_type!=''">
+				AND ll.`device_type`=#{device_type}
+			</if>
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND ll.`update_time` BETWEEN #{startTime} AND #{endTime}
+			</if>
+		</where>
+		 GROUP BY TIME ORDER BY TIME
+	</select>
+	<!--新增！ 按年统计，需要按月展示 -->
+	<select id="countMonthVisitorLogForYear" parameterType="map" resultType="com.ssitcloud.statistics.entity.StatisticsVisitorEntity">
+		SELECT 'year' TYPE,SUM(in_count) in_total,SUM(out_count) out_total,LEFT(ll.`update_time`,7) TIME FROM `visitors_everymonth` ll 
+		<where>
+			<if test="lib_idx != null and lib_idx.size() >0">
+				AND ll.`lib_idx` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="device_id!=null and device_id!=''">
+				AND ll.`device_id`=#{device_id}
+			</if>
+			<if test="device_type!=null and device_type!=''">
+				AND ll.`device_type`=#{device_type}
+			</if>
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND ll.`update_time` BETWEEN #{startTime} AND #{endTime}
+			</if>
+		</where>
+		 GROUP BY TIME ORDER BY TIME
+	</select>
+	<select id="countVisitorLogForYear" parameterType="map" resultType="com.ssitcloud.statistics.entity.StatisticsVisitorEntity">
+		SELECT 'year' TYPE,SUM(in_count) in_total,SUM(out_count) out_total,LEFT(ll.`update_time`,7) TIME FROM `visitors_everyyear` ll 
+		<where>
+			<if test="lib_idx != null and lib_idx.size() >0">
+				AND ll.`lib_idx` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="device_id!=null and device_id!=''">
+				AND ll.`device_id`=#{device_id}
+			</if>
+			<if test="device_type!=null and device_type!=''">
+				AND ll.`device_type`=#{device_type}
+			</if>
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND ll.`update_time` BETWEEN #{startTime} AND #{endTime}
+			</if>
+		</where>
+		 GROUP BY TIME ORDER BY TIME
+	</select>
+	<select id="countRealTimeVisitor" parameterType="map" resultType="com.ssitcloud.statistics.entity.StatisticsVisitorEntity">
+		SELECT SUM(ll.in_count)in_total,SUM(ll.out_count)out_total,CONCAT(DATE_FORMAT(update_time,'%H:'),LPAD(FLOOR(DATE_FORMAT(update_time,'%i')/5)*5,2,0)) TIME FROM `visitors_everyday` ll 
+		<where>
+			<if test="lib_idx != null and lib_idx.size() >0">
+				AND ll.`lib_idx` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="device_id!=null and device_id!=''">
+				AND ll.`device_id`=#{device_id}
+			</if>
+			<if test="device_type!=null and device_type!=''">
+				AND ll.`device_type`=#{device_type}
+			</if>
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND ll.`update_time` BETWEEN #{startTime} AND #{endTime}
+			</if>
+		</where>
+		 GROUP BY TIME ORDER BY TIME
+	</select>
+</mapper>

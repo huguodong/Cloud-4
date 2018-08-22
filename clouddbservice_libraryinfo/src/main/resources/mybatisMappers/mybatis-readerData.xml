@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="readerdata">
+
+<select id="queryReaderByCardnoAndLibIdx" resultType="com.ssitcloud.dblib.entity.ReaderDataEntity">
+	select * from readerdata where card_no = #{card_no} and lib_idx = #{lib_idx} limit 1
+</select>	
+	
+	
+<insert id="insertReaderData" parameterType="com.ssitcloud.dblib.entity.ReaderDataEntity" useGeneratedKeys="true" keyProperty="recno">
+	insert into readerdata (
+		lib_idx, 
+		card_no,
+		card_type,
+		valid,
+		expire_date,
+		privilege_fee,
+		name,
+		password,
+		id_card,
+		birth,
+		gender,
+		address,
+		age,
+		login_name,
+		allown_loancount,
+		surplus_count,
+		advance_charge,
+		deposit,
+		arrearage,
+		create_time,
+		update_time
+	) 
+	values (
+		#{lib_idx}, 
+		#{card_no},
+		#{card_type},
+		#{valid},
+		#{expire_date},
+		#{privilege_fee},
+		#{name},
+		#{password},
+		#{id_card},
+		#{birth},
+		#{gender},
+		#{address},
+		#{age},
+		#{login_name},
+		#{allown_loancount},
+		#{surplus_count},
+		#{advance_charge},
+		#{deposit},
+		#{arrearage},
+		NOW(),
+		NOW()
+	)
+</insert>
+
+<update id="updateReaderData" parameterType="com.ssitcloud.dblib.entity.ReaderDataEntity" >
+	update readerdata 
+		set lib_idx = #{lib_idx}, 
+			card_no = #{card_no},
+			card_type = #{card_type},
+			valid = #{valid},
+			expire_date = #{expire_date},
+			privilege_fee = #{privilege_fee},
+			name = #{name},
+			password = #{password},
+			id_card = #{id_card},
+			birth = #{birth},
+			gender = #{gender},
+			address = #{address},
+			age = #{age},
+			login_name = #{login_name},
+			allown_loancount = #{allown_loancount},
+			surplus_count = #{surplus_count},
+			advance_charge = #{advance_charge},
+			deposit = #{deposit},
+			arrearage = #{arrearage},
+			update_time = NOW()
+		where recno = #{recno}
+</update>
+	
+</mapper>

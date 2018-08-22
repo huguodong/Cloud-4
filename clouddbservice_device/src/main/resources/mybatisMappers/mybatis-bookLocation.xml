@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book_location">
+
+	<insert id="insertBookLocation" parameterType="com.ssitcloud.entity.BookLocationEntity" useGeneratedKeys="true" keyProperty="location_idx">
+		insert into book_location
+		(		
+            lib_idx,location_code,location_name,location_mark
+		)
+		values
+		(
+             #{lib_idx},#{location_code},#{location_name},#{location_mark}
+		)
+	</insert>
+	
+	<update id="updateBookLocation" parameterType="com.ssitcloud.entity.BookLocationEntity">
+		update book_location
+		<set>
+			<if test="lib_idx!=null">
+				lib_idx=#{lib_idx},
+			</if>
+			<if test="location_code!=null">
+				location_code=#{location_code},
+			</if>
+			<if test="location_name!=null">
+				location_name=#{location_name},
+			</if>
+			<if test="location_mark!=null">
+				location_mark=#{location_mark},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="location_idx!=null">
+			and location_idx=#{location_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteBookLocation" parameterType="com.ssitcloud.entity.BookLocationEntity">
+		delete from book_location where location_idx=#{location_idx}
+	</delete>
+	
+	<select id="selectBookLocation" parameterType="com.ssitcloud.entity.BookLocationEntity" resultType="com.ssitcloud.entity.BookLocationEntity">
+		SELECT location_idx,lib_idx,location_code,location_name,location_mark FROM book_location 
+	    where 1=1
+		<if test="location_idx!=null">
+			AND location_idx=#{location_idx}
+		</if>
+	</select>
+	<select id="selectBookLocations" parameterType="com.ssitcloud.entity.BookLocationEntity" resultType="com.ssitcloud.entity.BookLocationEntity">
+		SELECT location_idx,lib_idx,location_code,location_name,location_mark FROM book_location 
+	    where 1=1
+	</select>
+	
+	
+	
+	
+</mapper>

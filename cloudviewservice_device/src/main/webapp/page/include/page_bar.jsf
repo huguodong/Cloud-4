@@ -1,0 +1,26 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="sp" uri="http://www.springframework.org/tags" %>
+<%--
+	页码显示
+--%>
+	<div class="paging-bar">
+			<div class="left">
+				<span class="t fl"><sp:message code="page_bar.jsf.select"></sp:message></span>
+				<div class="btn g-chooseAll"><sp:message code="page_bar.jsf.checkall"></sp:message></div>
+				<div class="btn g-noChooseAll"><sp:message code="page_bar.jsf.checkallinvert"></sp:message></div>
+				<span class="t2 fl"><sp:message code="page_bar.jsf.show"></sp:message></span>
+				<div class="g-select refresh">
+					<select id="showSize">
+						<option value="10" selected>10</option>
+						<option value="30" >30</option>
+						<option value="60">60</option>
+					</select>
+					<span class="arr-icon"></span>
+				</div>
+				<span class="t2 fl " id="ChooseNum"><sp:message code="page_bar.jsf.alreadyselected"></sp:message><span class="total-choosen-num">0</span><sp:message code="page_bar.jsf.selectunit"></sp:message></span>
+			</div>
+			<div id="page" class="right">
+			</div>
+			<span class="total-page fr"></span>
+			<span class="total-num fr"></span>
+	</div>

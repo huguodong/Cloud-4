@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="metadevicetype">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.MetadataDeviceTypeEntity"
+	useGeneratedKeys="true" keyProperty="meta_devicetype_idx">
+		INSERT INTO metadata_devicetype
+		(device_type, device_type_desc,device_type_mark,device_logic_list,device_db_list,createTime,device_logic_other)
+		VALUES
+		(#{device_type},#{device_type_desc},#{device_type_mark},#{device_logic_list},#{device_db_list},NOW(),#{device_logic_other})
+	</insert>
+	<insert id="insertWithIdx" parameterType="com.ssitcloud.entity.MetadataDeviceTypeEntity"
+	 keyProperty="meta_devicetype_idx" useGeneratedKeys="false">
+		INSERT INTO metadata_devicetype
+		(meta_devicetype_idx,device_type, device_type_desc,device_type_mark,device_logic_list,device_db_list,createTime)
+		VALUES
+		(#{meta_devicetype_idx},#{device_type},#{device_type_desc},#{device_type_mark},#{device_logic_list},#{device_db_list},NOW())
+	</insert>
+	<update id="update" parameterType="com.ssitcloud.entity.MetadataDeviceTypeEntity">
+		UPDATE metadata_devicetype
+		<set>
+			<if test="device_type !=null and device_type !=''">
+				device_type = #{device_type},
+			</if>
+			<if test="device_type_desc !=null and device_type_desc !=''">
+				device_type_desc = #{device_type_desc},
+			</if>
+			<if test="device_type_mark!=null">
+				device_type_mark = #{device_type_mark},
+			</if>
+			<if test="device_logic_list!=null and device_logic_list!=''">
+				device_logic_list=#{device_logic_list},
+			</if>
+			<if test="device_logic_other!=null ">
+				device_logic_other = #{device_logic_other},
+			</if>
+			<if test="device_db_list!=null and device_db_list!=''">
+				device_db_list=#{device_db_list},
+			</if>
+			version_stamp=version_stamp+1
+		</set>
+		WHERE meta_devicetype_idx = #{meta_devicetype_idx} 
+		<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+	</if>
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.MetadataDeviceTypeEntity">
+		DELETE FROM
+		metadata_devicetype
+		WHERE meta_devicetype_idx = #{meta_devicetype_idx}
+	</delete>
+
+
+	<select id="selectByidx" parameterType="com.ssitcloud.entity.MetadataDeviceTypeEntity"
+		resultType="com.ssitcloud.entity.MetadataDeviceTypeEntity">
+		SELECT meta_devicetype_idx, device_type,device_type_desc,device_logic_list,device_db_list,device_type_mark,createTime
+		FROM metadata_devicetype
+		<where>
+			<if test="meta_devicetype_idx !=null and meta_devicetype_idx !=''">
+				and meta_devicetype_idx = #{meta_devicetype_idx}
+			</if>
+			<if test="device_type !=null and device_type !=''">
+				and device_type = #{device_type}
+			</if>
+			<if test="device_type_desc !=null and device_type_desc !=''">
+				and device_type_desc = #{device_type_desc}
+			</if>
+			<if test="device_type_mark !=null and device_type_mark !=''">
+				and device_type_mark = #{device_type_mark}
+			</if>
+		</where>
+		ORDER BY meta_devicetype_idx
+	</select>
+	<!-- 2016年12月27日 09:44:57 -->
+	<select id="selectListLike" parameterType="com.ssitcloud.entity.MetadataDeviceTypeEntity" resultType="com.ssitcloud.entity.MetadataDeviceTypeEntity">
+		SELECT meta_devicetype_idx, device_type,device_type_desc,device_logic_list,device_db_list,device_type_mark,createTime,version_stamp,device_logic_other
+		FROM metadata_devicetype
+		<where>
+			<if test="device_type !=null and device_type !=''">
+				and device_type like  CONCAT('${device_type}','%')
+			</if>
+			<if test="device_type_desc!=null">
+				and device_type_desc like CONCAT('%','${device_type_desc}','%')
+			</if>
+		</where>
+		ORDER BY device_type
+	</select>
+	
+	<select id="selOneByIdx" parameterType="com.ssitcloud.entity.MetadataDeviceTypeEntity"
+		resultType="com.ssitcloud.entity.MetadataDeviceTypeEntity">
+		SELECT meta_devicetype_idx, device_type,device_type_desc,device_logic_list,device_db_list,device_type_mark,createTime
+		FROM metadata_devicetype WHERE meta_devicetype_idx = #{meta_devicetype_idx}
+	</select>
+	
+	<!-- <select id="selectType" resultType="com.ssitcloud.entity.MetadataDeviceTypeEntity">
+		SELECT meta_devicetype_idx,device_type FROM `metadata_devicetype` 
+	</select> -->
+	
+	<select id="selAllMetadataDeviceType" resultType="com.ssitcloud.entity.MetadataDeviceTypeEntity">
+		SELECT * FROM `metadata_devicetype` ORDER BY `device_type`
+	</select>
+	<select id="selAllDeviceTypeGroupByType" resultType="com.ssitcloud.entity.MetadataDeviceTypeEntity">
+		SELECT * FROM `metadata_devicetype` GROUP BY device_type
+	</select>
+	<select id="Count" parameterType="com.ssitcloud.entity.MetadataDeviceTypeEntity"
+		resultType="int">
+		SELECT COUNT(meta_devicetype_idx) FROM metadata_devicetype
+		<where>
+			<if test="meta_devicetype_idx !=null and meta_devicetype_idx !=''">
+				and meta_devicetype_idx = #{meta_devicetype_idx}
+			</if>
+			<if test="device_type !=null and device_type !=''">
+				and device_type like  CONCAT('${device_type}','%')
+			</if>
+			<if test="device_type_desc !=null and device_type_desc !=''">
+				and device_type_desc like CONCAT('%','${device_type_desc}','%')
+			</if>
+			<if test="device_type_mark !=null and device_type_mark !=''">
+				and device_type_mark = #{device_type_mark}
+			</if>
+		</where>
+	</select>
+	<update id="updateByMap" parameterType="Map">
+		UPDATE metadata_devicetype
+		<set>
+			<if test="device_type !=null and device_type !=''">
+				device_type = #{device_type},
+			</if>
+			<if test="device_type_desc !=null and device_type_desc !=''">
+				device_type_desc = #{device_type_desc},
+			</if>
+			<if test="device_type_mark!=null">
+				device_type_mark = #{device_type_mark},
+			</if>
+			<if test="device_logic_list!=null and device_logic_list!=''">
+				device_logic_list=#{device_logic_list}
+			</if>
+			<if test="device_db_list and device_db_list''">
+				device_db_list=#{device_db_list}
+			</if>
+		</set>
+		WHERE meta_devicetype_idx = #{meta_devicetype_idx}
+	
+	</update>
+	
+	<!-- 通过device_type 查出meta_devicetype_idx add by shuangjunjie 2017年3月6日 下午5:47 -->
+	<select id="selectMetaDevTypeIdxByType" parameterType="com.ssitcloud.entity.MetadataDeviceTypeEntity" 
+	  resultType="java.lang.Integer" >
+		SELECT meta_devicetype_idx FROM `metadata_devicetype`
+		<where>
+			<if test="device_type !=null and device_type !=''">
+				and device_type like  CONCAT('${device_type}','%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectAllDeviceType" resultType="com.ssitcloud.entity.MetadataDeviceTypeEntity">
+		select * from metadata_devicetype
+	</select>
+
+</mapper>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="deviceAcsInfo">
+
+<insert id="insertAcsInfo" parameterType="com.ssitcloud.entity.DeviceAcsLoginInfoEntity" 
+ useGeneratedKeys="true" keyProperty="logininfo_idx">
+INSERT INTO device_acs_logininfo (
+  protocol_tpl_idx,
+  device_idx,
+  library_idx,
+  login_ip,
+  login_port,
+  login_username,
+  login_pwd,
+  login_type,
+  login_check,
+  login_count,
+  login_code,
+  acs_service_name
+) 
+VALUES
+  (
+    #{protocol_tpl_idx},
+    #{device_idx},
+    #{library_idx},
+    #{login_ip},
+    #{login_port},
+    #{login_username},
+    #{login_pwd},
+    #{login_type},
+	#{login_check},
+	#{login_count},
+	#{login_code},
+    #{acs_service_name}
+  )
+</insert>
+	<select id="queryAcsInfoByDeviceIdx" parameterType="Integer" resultType="com.ssitcloud.entity.DeviceAcsLoginInfoEntity">
+		SELECT * FROM device_acs_logininfo
+		WHERE device_idx=#{value}
+	</select>
+	<delete id="deleteAcsInfoByDeviceIdx" parameterType="Integer">
+		DELETE FROM device_acs_logininfo
+		WHERE device_idx=#{value}
+	</delete>
+	<delete id="deleteAcsInfoByDeviceIdxs" >
+		DELETE FROM device_acs_logininfo
+		WHERE device_idx IN 
+		<foreach collection="deviceList" item="deviceIdx" open="(" close=")" separator=",">
+			#{deviceIdx}
+		</foreach>
+	</delete>
+	<insert id="insertAcsInfoBatch" parameterType="List">
+		INSERT INTO device_acs_logininfo (
+		  protocol_tpl_idx,
+		  device_idx,
+		  library_idx,
+		  login_ip,
+		  login_port,
+		  login_username,
+		  login_pwd,
+		  login_type,
+		  login_check,
+		  login_count,
+		  login_code,
+		  acs_service_name
+		) 
+		VALUES
+		  <foreach collection="list" item="item" index="index" separator="," > 
+		  (
+		    #{item.protocol_tpl_idx},
+		    #{item.device_idx},
+		    #{item.library_idx},
+		    #{item.login_ip},
+		    #{item.login_port},
+		    #{item.login_username},
+		    #{item.login_pwd},
+		    #{item.login_type},
+		    #{item.login_check},
+		    #{item.login_count},
+		    #{item.login_code},
+		    #{item.acs_service_name}
+		  )
+		  </foreach>
+	</insert>
+	<select id="queryAcsInfoByDeviceId" parameterType="String" resultType="com.ssitcloud.system.entity.DeviceAcsLoginInfoRemoteEntity">
+			SELECT 
+			(SELECT  CASE 
+				WHEN pc.protocol_type=1 THEN "SIP2" 
+				WHEN pc.protocol_type=2 THEN "NCIP"
+				END
+			FROM protocol_config_template pc 
+			WHERE pc.protocol_tpl_idx=device_acs_logininfo.protocol_tpl_idx LIMIT 1) AS protocol,
+			login_ip AS ip,
+ 			login_port AS PORT,
+ 			login_username AS USER,
+			login_pwd AS pwd,
+ 			acs_service_name AS server_name
+ 			FROM device_acs_logininfo 
+			where device_idx=(select device_idx from device where device_id=#{device_id} limit 1)
+	</select>
+	<select id="loadAcsLogininfoByDeviceIdx" parameterType="Integer" resultType="com.ssitcloud.entity.DeviceAcsLoginInfoEntity">
+		SELECT * FROM device_acs_logininfo WHERE device_idx=#{value}
+	</select>
+	<select id="queryAcsInfoByProtocolTplIdx" parameterType="Integer" resultType="com.ssitcloud.entity.DeviceAcsLoginInfoEntity">
+		SELECT * FROM device_acs_logininfo WHERE protocol_tpl_idx=#{protocol_tpl_idx}
+	</select>
+	<select id="queryDeviceAcsModules" parameterType="Map" resultType="com.ssitcloud.datasync.entity.DeviceAcsModuleEntity">
+			SELECT
+				pct.protocol_tpl_desc,
+				pct.protocol_type,
+				dal.protocol_tpl_idx,
+				dal.device_idx,
+				dal.library_idx,
+				dal.login_ip,
+				dal.login_port,
+				dal.login_username,
+				dal.login_pwd,
+				dal.login_type,
+				dal.login_check,
+				dal.login_count,
+				dal.login_code,
+				dal.acs_service_name
+			FROM
+				device_acs_logininfo dal
+			LEFT JOIN protocol_config_template pct ON dal.protocol_tpl_idx = pct.protocol_tpl_idx
+			WHERE 1=1
+			<if test="device_id !=null and device_id !='' ">
+				and dal.device_idx = (SELECT DISTINCT d.`device_idx` FROM device d WHERE d.`device_id`=#{device_id})
+			</if>
+			<if test="library_idx !=null and library_idx !='' ">
+				and dal.library_idx = #{library_idx}
+			</if>
+	</select>
+	<select id="queryDeviceAcsDetailModules" parameterType="Map" resultType="com.ssitcloud.datasync.entity.ProtocolInfo">
+			SELECT
+				pd.*, 
+				mp.protocol_show,
+				mp.protocol_field_name
+			FROM
+				(
+					SELECT
+						pct.protocol_tpl_idx,
+						pct.protocol_type,
+						pct.protocol_tpl_desc,
+						pct.library_idx,
+						dspc.device_tpl_type,
+						dspc.protocol_library_idx,
+						dspc.protocol_description,
+						dspc.protocol_reqrule,
+						dspc.protocol_resprule,
+						dspc.operator_idx,
+						dspc.createtime,
+						dspc.updatetime
+					FROM
+						protocol_config_template pct
+					LEFT JOIN device_selfcheck_protocol_config dspc ON pct.protocol_tpl_idx = dspc.protocol_idx and pct.library_idx = dspc.library_idx 
+					WHERE 1=1
+					<if test="protocol_tpl_idx !=null and protocol_tpl_idx !='' ">
+						and pct.protocol_tpl_idx = #{protocol_tpl_idx}
+					</if>
+					<if test="library_idx !=null and library_idx !='' ">
+						and pct.library_idx = #{library_idx}
+					</if>
+				) pd
+			LEFT JOIN metadata_protocol mp ON pd.protocol_library_idx = mp.protocol_field_idx
+	</select>
+
+	
+</mapper>

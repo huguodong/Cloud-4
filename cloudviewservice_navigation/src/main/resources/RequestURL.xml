@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList xmlns="http://www.example.org/RequestURLConfSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	>
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/hearbeat/saveData" id="HEARBEAT_URL" />
+	</project>
+	
+	<!-- 验证 -->
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/operator/loginCheck" id="loginCheck"/>
+	</project>
+	
+	<!-- 查询图书馆-->
+	<project projectName="cloudbusinessservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/library/SelectLibraryInfo" id="SelectLibraryInfo"/>
+		<RequestUrl requestMapping="/library/SelectMasterLib" id="SelectMasterLib"/>
+		<RequestUrl requestMapping="/library/selLibraryByIdxOrId" id="selLibraryByIdxOrId" />
+	</project>
+	
+	<!-- 查询权限 -->
+	<project projectName="cloudbusinessservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/permission/SelPermissionbyOperIdx" id="SelPermissionByOperIdx"/>
+		<RequestUrl requestMapping="/metaopercmd/SelectMetaOperCmd" id="SelectMetaOperCmd"/>
+		
+		<!-- 云平台管理员获取所有权限 -->
+		<RequestUrl requestMapping="/permission/SelPermissionBySsitCloudAdmin" id="SelPermissionBySsitCloudAdmin"/>
+		
+		<RequestUrl requestMapping="/bookitem/queryAllBookitemAndBookInfoByCode" id="queryAllBookitemAndBookInfoByCode"/>
+		<RequestUrl requestMapping="/bookshelflayer/exportBookshelflayer" id="exportBookshelflayer"/>
+	</project>
+
+</RequestUrlList>

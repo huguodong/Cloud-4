@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="relLibs">
+
+<select id="selRelLibsByIdx" resultType="com.ssitcloud.dbauth.entity.RelLibsEntity">
+	SELECT master_lib_id,slave_lib_id,rel_type
+	FROM 
+		rel_libs 
+	WHERE master_lib_id = #{lib_idx}
+	OR  (slave_lib_id = #{lib_idx} and not EXISTS (select library_idx from library where master_lib_id = library_idx and lib_type = 1))
+</select>
+<insert id="addRelLibs" parameterType="com.ssitcloud.dbauth.entity.RelLibsEntity">
+	INSERT INTO rel_libs
+	(master_lib_id,slave_lib_id,rel_type)
+	VALUES
+	(#{master_lib_id},#{slave_lib_id},#{rel_type})
+</insert>
+
+<delete id="deleteByidx">
+	DELETE 
+	FROM rel_libs
+	WHERE 
+		master_lib_id = #{library_idx}
+	OR  slave_lib_id = #{library_idx}
+</delete>
+<select id="selslaveLibsByIdx" resultType="com.ssitcloud.dbauth.entity.RelLibsEntity">
+	SELECT master_lib_id,slave_lib_id,rel_type
+	FROM 
+		rel_libs 
+	WHERE 
+		slave_lib_id = #{lib_idx}
+</select>
+<update id="updrellibsBySlaveidx" parameterType="com.ssitcloud.dbauth.entity.RelLibsEntity">
+	UPDATE rel_libs
+	SET master_lib_id = #{master_lib_id},rel_type = #{rel_type}
+	WHERE 
+		slave_lib_id = #{slave_lib_id}
+</update>
+<delete id="deleteBySlaveidx">
+	DELETE 
+	FROM rel_libs
+	WHERE 
+	slave_lib_id = #{library_idx}
+</delete>
+<delete id="deleteByMasteridx">
+	DELETE 
+	FROM rel_libs
+	WHERE 
+	master_lib_id = #{library_idx}
+</delete>
+<select id="selectByIdx" parameterType="com.ssitcloud.dbauth.entity.RelLibsEntity" resultType="com.ssitcloud.dbauth.entity.RelLibsEntity">
+	select * from rel_libs
+	<where>
+		<if test="master_lib_id!=null">
+			master_lib_id=#{master_lib_id}
+		</if>
+		<if test="slave_lib_id!=null">
+			slave_lib_id=#{slave_lib_id}
+		</if>
+	</where>
+</select>
+<select id="selmasterLibsByIdx" resultType="com.ssitcloud.dbauth.entity.RelLibsEntity">
+	SELECT master_lib_id,slave_lib_id,rel_type
+	FROM 
+		rel_libs 
+	WHERE 
+		<if test="lib_idx != null and lib_idx.size() >0">
+				`master_lib_id` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+</select>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="rsakey">
+
+<select id="selRsaEntityByIdx" resultType="com.ssitcloud.dbauth.entity.RSAEntiy">
+	SELECT 
+		rsa_idx,
+		publicKey,
+		privateKey,
+		createtime
+	FROM 
+		rsa_key 
+	WHERE 
+		rsa_idx = #{rsa_idx}
+</select>
+
+
+<select id="selRsaEntityByPublicKey" resultType="com.ssitcloud.dbauth.entity.RSAEntiy">
+	SELECT 
+		rsa_idx,
+		publicKey,
+		privateKey,
+		createtime
+	FROM 
+		rsa_key 
+	WHERE 
+		publicKey = #{publicKey}
+</select>
+
+<select id="selRsaEntityTop" resultType="com.ssitcloud.dbauth.entity.RSAEntiy">
+	SELECT 
+		rsa_idx,
+		publicKey,
+		privateKey,
+		createtime
+	FROM 
+		rsa_key 
+	LIMIT 1
+</select>
+
+
+</mapper>

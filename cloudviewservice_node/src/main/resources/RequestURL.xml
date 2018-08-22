@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList xmlns="http://www.example.org/RequestURLConfSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	>
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 切换主备 -->
+		<RequestUrl requestMapping="/switchServer/switch" id="switch_switcher" />
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/hearbeat/saveData" id="HEARBEAT_URL" />
+		<!-- Node管理 -->
+		<RequestUrl requestMapping="/node/queryByPage" id="node_queryNodeByPage" />
+		<RequestUrl requestMapping="/node/queryByParam" id="node_queryNodeByParam" />
+		<RequestUrl requestMapping="/node/queryById" id="node_queryNodeById" />
+		<RequestUrl requestMapping="/node/delete" id="node_deleteNodeById" />
+		<RequestUrl requestMapping="/node/update" id="node_updateNode" />
+		<RequestUrl requestMapping="/node/add" id="node_addNode" />
+		<RequestUrl requestMapping="/node/queryNodeGroupByName" id="node_queryNodeGroupByName" />
+		
+		<!-- NodeType管理 -->
+		<RequestUrl requestMapping="/nodeType/queryByPage" id="nodeType_queryNodeTypeByPage" />
+		<RequestUrl requestMapping="/nodeType/queryByParam" id="nodeType_queryNodeTypeByParam" />
+		<RequestUrl requestMapping="/nodeType/queryById" id="nodeType_queryNodeTypeById" />
+		<RequestUrl requestMapping="/nodeType/delete" id="nodeType_deleteNodeTypeById" />
+		<RequestUrl requestMapping="/nodeType/update" id="nodeType_updateNodeType" />
+		<RequestUrl requestMapping="/nodeType/add" id="nodeType_addNodeType" />
+		<!-- Container管理 -->
+		<RequestUrl requestMapping="/container/queryByPage" id="container_queryContainerByPage" />
+		<RequestUrl requestMapping="/container/queryByParam" id="container_queryContainerByParam" />
+		<RequestUrl requestMapping="/container/queryById" id="container_queryContainerById" />
+		<RequestUrl requestMapping="/container/delete" id="container_deleteContainerById" />
+		<RequestUrl requestMapping="/container/update" id="container_updateContainer" />
+		<RequestUrl requestMapping="/container/add" id="container_addContainer" />
+		<RequestUrl requestMapping="/container/start" id="container_start" />
+		<RequestUrl requestMapping="/container/stop" id="container_stop" />
+		<!-- Host管理 -->
+		<RequestUrl requestMapping="/host/queryByPage" id="host_queryHostByPage" />
+		<RequestUrl requestMapping="/host/queryByParam" id="host_queryHostByParam" />
+		<RequestUrl requestMapping="/host/queryById" id="host_queryHostById" />
+		<RequestUrl requestMapping="/host/delete" id="host_deleteHostById" />
+		<RequestUrl requestMapping="/host/update" id="host_updateHost" />
+		<RequestUrl requestMapping="/host/add" id="host_addHost" />
+		<!-- 接口管理 -->
+		
+		<RequestUrl requestMapping="/nodeInterface/addNodeInterface" id="nodeInterface_addNodeInterface" />
+		<RequestUrl requestMapping="/nodeInterface/queryNodeInterfaceByPage" id="nodeInterface_queryNodeInterfaceByPage" />
+		<RequestUrl requestMapping="/nodeInterface/deleteNodeInterface" id="nodeInterface_deleteNodeInterface" />
+		<RequestUrl requestMapping="/nodeInterface/queryInterfaceByNodeName" id="nodeInterface_queryInterfaceByNodeName" />
+		<RequestUrl requestMapping="/nodeInterface/editNodeInterface" id="nodeInterface_editNodeInterface" />
+		<RequestUrl requestMapping="/nodeInterface/clearNodeCache" id="nodeInterface_clearNodeCache" />
+		<RequestUrl requestMapping="/nodeInterface/queryPreNodesByPage" id="nodeInterface_queryPreNodesByPage" />
+	</project>
+	
+	<!-- 验证 -->
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/operator/loginCheck" id="loginCheck"/>
+	</project>
+	
+	<!-- 查询图书馆-->
+	<project projectName="cloudbusinessservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/library/SelectLibraryInfo" id="SelectLibraryInfo"/>
+		<RequestUrl requestMapping="/library/SelectMasterLib" id="SelectMasterLib"/>
+	</project>
+	
+	<!-- 查询权限 -->
+	<project projectName="cloudbusinessservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/permission/SelPermissionbyOperIdx" id="SelPermissionByOperIdx"/>
+		<RequestUrl requestMapping="/metaopercmd/SelectMetaOperCmd" id="SelectMetaOperCmd"/>
+		<!-- 云平台管理员获取所有权限 -->
+		<RequestUrl requestMapping="/permission/SelPermissionBySsitCloudAdmin" id="SelPermissionBySsitCloudAdmin"/>
+		<!-- 云平台管理员获取所有菜单 -->
+		<RequestUrl requestMapping="/permission/SelMenuBySsitCloudAdmin" id="SelMenuBySsitCloudAdmin"/>
+	</project>
+
+</RequestUrlList>

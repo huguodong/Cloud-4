@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="patchinfo">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.PatchInfoEntity"
+		useGeneratedKeys="true" keyProperty="patch_idx">
+		INSERT INTO patch_info
+		(patch_version, patch_desc,patch_type,restrict_info,patch_directory,create_time)
+		VALUES
+		(#{patch_version},#{patch_desc},#{patch_type},#{restrict_info},#{patch_directory},NOW())
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.PatchInfoEntity">
+		UPDATE patch_info
+		<set>
+			<if test="patch_version !=null and patch_version !=''">
+				patch_version = #{patch_version},
+			</if>
+			<if test="patch_desc !=null and patch_desc !=''">
+				patch_desc = #{patch_desc},
+			</if>
+			<if test="patch_type !=null and patch_type !=''">
+				patch_type = #{patch_type},
+			</if>
+			<if test="restrict_info !=null and restrict_info !=''">
+				restrict_info = #{restrict_info},
+			</if>
+			<if test="patch_directory !=null and patch_directory !=''">
+				patch_directory = #{patch_directory},
+			</if>
+			version_stamp=version_stamp+1
+		</set>
+		WHERE patch_idx = #{patch_idx} 
+		<if test="version_stamp !=null and version_stamp !=''">
+				and version_stamp = #{version_stamp}
+			</if>
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.PatchInfoEntity">
+		DELETE FROM patch_info
+		WHERE  patch_idx = #{patch_idx}
+	</delete>
+	<select id="count" parameterType="com.ssitcloud.entity.PatchInfoEntity"
+		resultType="int">
+		SELECT COUNT(d.patch_idx)
+		FROM `patch_info` d 
+		<where>
+			<if test="patch_idx !=null and patch_idx !=''">
+				and patch_idx = #{patch_idx}
+			</if>
+			<if test="patch_version !=null and patch_version !=''">
+				and patch_version = #{patch_version}
+			</if>
+			<if test="patch_desc !=null and patch_desc !=''">
+				and patch_desc = #{patch_desc}
+			</if>
+			<if test="restrict_info !=null and restrict_info !=''">
+				and restrict_info = #{restrict_info}
+			</if>
+			<if test="patch_type !=null and patch_type !=''">
+				and patch_type = #{patch_type}
+			</if>
+			<if test="patch_directory !=null and patch_directory !=''">
+				and patch_directory = #{patch_directory}
+			</if>
+		</where>
+	</select>
+	<select id="selectPage" parameterType="Map"	resultType="com.ssitcloud.entity.PatchInfoEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT * FROM patch_info
+		<where>
+			<if test="patch_idx !=null and patch_idx !=''">
+				and patch_idx = #{patch_idx}
+			</if>
+			<if test="patch_version !=null and patch_version !=''">
+				and patch_version = #{patch_version}
+			</if>
+			<if test="patch_desc !=null and patch_desc !=''">
+				and patch_desc = #{patch_desc}
+			</if>
+			<if test="restrict_info !=null and restrict_info !=''">
+				and restrict_info = #{restrict_info}
+			</if>
+			<if test="patch_type !=null and patch_type !=''">
+				and patch_type = #{patch_type}
+			</if>
+			<if test="patch_directory !=null and patch_directory !=''">
+				and patch_directory = #{patch_directory}
+			</if>
+			<if test="whetherPaging==false">
+				limit 50
+			</if>
+		</where>
+		<if test="whetherPaging==true">
+				<include refid="paging.tail"/>
+		</if>
+	</select>
+	<select id="selectListByVersions" parameterType="List" resultType="com.ssitcloud.entity.PatchInfoEntity">
+		SELECT * FROM patch_info
+		where 1=1
+		and patch_version in 
+		<foreach collection="list" item="version" open="(" separator="," close=")">
+			#{version}
+		</foreach>
+	</select>
+	<select id="selectByIdx" parameterType="Integer" resultType="com.ssitcloud.entity.PatchInfoEntity">
+		select * from patch_info where patch_idx=#{value}
+	</select>
+	<select id="selectPatchInfoCountByVersion" parameterType="com.ssitcloud.entity.PatchInfoEntity"  resultType="Integer">
+		select count(*) from patch_info 
+		where patch_version=#{patch_version}
+		<if test="patch_idx!=null">
+			and patch_idx!=#{patch_idx}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="statistics_group_template">
+
+
+
+	<select id="selectStatisticsGroupTemplate" parameterType="com.ssitcloud.entity.StatisticsGroupTemplateEntity"
+		resultType="com.ssitcloud.entity.StatisticsGroupTemplateEntity">
+		SELECT
+		sg.statistics_group_idx,
+		sg.statistics_group_id,
+		sg.statistics_group_name,
+		sg.statistics_group_desc,
+		st.statistics_tpl_idx,
+		st.statistics_tpl_desc
+		FROM
+		statistics_group sg,
+		statistics_template st,
+		rel_statistics_group rsg
+		WHERE
+		sg.statistics_group_idx = rsg.statistics_group_idx
+		AND rsg.statistics_idx = st.statistics_tpl_idx
+		<if test="statistics_group_idx!=null">
+			AND sg.statistics_group_idx =#{statistics_group_idx}
+		</if>
+	</select>
+	<select id="selectStatisticsGroupTemplates" parameterType="com.ssitcloud.entity.StatisticsGroupTemplateEntity"
+		resultType="com.ssitcloud.entity.StatisticsGroupTemplateEntity">
+		SELECT
+		sg.statistics_group_idx,
+		sg.statistics_group_id,
+		sg.statistics_group_name,
+		sg.statistics_group_desc,
+		st.statistics_tpl_idx,
+		st.statistics_tpl_desc
+		FROM
+		statistics_group sg,
+		statistics_template st,
+		rel_statistics_group rsg
+		WHERE
+		sg.statistics_group_idx = rsg.statistics_group_idx
+		AND rsg.statistics_idx = st.statistics_tpl_idx
+	</select>
+
+
+
+</mapper>

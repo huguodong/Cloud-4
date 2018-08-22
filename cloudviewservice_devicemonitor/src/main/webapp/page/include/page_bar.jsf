@@ -1,0 +1,25 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%--
+	页码显示
+--%>
+	<div class="paging-bar">
+			<div class="left">
+				<span class="t fl">选择</span>
+				<div class="btn g-chooseAll machine">全选</div>
+				<div class="btn g-noChooseAll machine">反选</div>
+				<span class="t2 fl">切屏频率</span>
+				<div class="g-select refresh">
+					<select>
+						<option value="-1" selected>不切换</option>
+						<option value="30000" selected>30秒</option>
+						<option value="60000">60秒</option>
+					</select>
+					<span class="arr-icon"></span>
+				</div>
+				<span class="t2 fl " id="ChooseNum">已选中<span class="total-choosen-num">0</span>个</span>
+			</div>
+			<div id="page" class="right">
+			</div>
+			<span class="total-page fr"></span>
+			<span class="total-num fr"></span>
+	</div>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="operatorservicegroup">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.RelOperatorServiceGroupEntity"
+		useGeneratedKeys="true" keyProperty="rel_oper_serv_idx">
+		INSERT INTO
+		rel_operator_service_group (operator_group_idx,
+		service_group_idx,library_idx)
+		VALUES
+		(#{operator_group_idx},#{service_group_idx},#{library_idx})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.RelOperatorServiceGroupEntity">
+		UPDATE rel_operator_service_group
+		<set>
+			<if test="operator_group_idx !=null and operator_group_idx !=''">
+				operator_group_idx = #{operator_group_idx},
+			</if>
+			<if test="service_group_idx !=null and service_group_idx !=''">
+				service_group_idx = #{service_group_idx},
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				library_idx = #{library_idx}
+			</if>
+		</set>
+		WHERE rel_oper_serv_idx = #{rel_oper_serv_idx}
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.RelOperatorServiceGroupEntity">
+		DELETE FROM rel_operator_service_group
+		WHERE rel_oper_serv_idx = #{rel_oper_serv_idx}
+		
+	</delete>
+	<delete id="deleteByOperGroupIdx" parameterType="com.ssitcloud.entity.RelOperatorServiceGroupEntity">
+		DELETE FROM rel_operator_service_group
+		WHERE operator_group_idx=#{operator_group_idx}
+	</delete>
+	<select id="selectByidx" parameterType="com.ssitcloud.entity.RelOperatorServiceGroupEntity"
+		resultType="com.ssitcloud.entity.RelOperatorServiceGroupEntity">
+		SELECT * FROM rel_operator_service_group
+		<where>
+			<if test="rel_oper_serv_idx !=null and rel_oper_serv_idx !=''">
+				and rel_oper_serv_idx = #{rel_oper_serv_idx}
+			</if>
+			<if test="operator_group_idx !=null and operator_group_idx !=''">
+				and operator_group_idx = #{operator_group_idx}
+			</if>
+			<if test="service_group_idx !=null and service_group_idx !=''">
+				and service_group_idx = #{service_group_idx}
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectAll" resultType="com.ssitcloud.entity.RelOperatorServiceGroupEntity">
+		SELECT * FROM
+		rel_operator_service_group
+	</select>
+	
+	
+	<select id="selectByServGroupByLibraryIdx" parameterType="Map" resultType="com.ssitcloud.entity.RelOperatorServiceGroupEntity">
+		SELECT rosg.* FROM rel_operator_service_group rosg 
+		INNER JOIN service_group sg ON sg.`service_group_idx`=rosg.`service_group_idx`		
+		WHERE sg.`library_idx`=#{library_idx}
+	</select>
+	<select id="selectByOperGroupByLibraryIdx" parameterType="Map" resultType="com.ssitcloud.entity.RelOperatorServiceGroupEntity">
+		SELECT rosg.* FROM rel_operator_service_group rosg 
+		INNER JOIN operator_group og ON og.`operator_group_idx`=rosg.`operator_group_idx`
+		WHERE og.`library_idx`=#{library_idx}
+	</select>
+</mapper>

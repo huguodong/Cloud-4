@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="metadataorder">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.MetadataOrderEntity"
+		useGeneratedKeys="true" keyProperty="order_idx">
+		INSERT INTO metadata_order
+		(order_desc, order_cmd,order_os)
+		VALUES
+		(#{order_desc},#{order_cmd},#{order_os})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.MetadataOrderEntity">
+		UPDATE metadata_order
+		<set>
+			<if test="order_desc !=null and order_desc !=''">
+				order_desc = #{order_desc},
+			</if>
+			<if test="order_cmd !=null and order_cmd !=''">
+				order_cmd = #{order_cmd},
+			</if>
+			<if test="order_os !=null and order_os !=''">
+				order_os = #{order_os}
+			</if>
+		</set>
+		WHERE order_idx = #{order_idx}
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM metadata_order
+		WHERE  order_idx = #{order_idx}
+	</delete>
+
+	<select id="select" parameterType="com.ssitcloud.entity.MetadataOrderEntity"
+		resultType="com.ssitcloud.entity.MetadataOrderEntity">
+		SELECT * FROM metadata_order
+		<where>
+			<if test="order_desc !=null and order_desc !=''">
+				and order_desc = #{order_desc}
+			</if>
+			<if test="order_cmd !=null and order_cmd !=''">
+				and order_cmd = #{order_cmd}
+			</if>
+			<if test="order_os !=null and order_os !=''">
+				and order_os = #{order_os}
+			</if>
+			<if test="order_idx !=null and order_idx !=''">
+				and order_idx = #{order_idx}
+			</if>
+		</where>
+	</select>
+	<!-- 设备端下载数据用 -->
+	<select id="selectByDown" parameterType="com.ssitcloud.entity.MetadataOrderEntity" resultType="com.ssitcloud.system.entity.MetadataOrderRemoteEntity">
+		SELECT order_idx as order_id,order_desc,order_cmd  FROM metadata_order
+		<where>
+			<if test="order_desc !=null and order_desc !=''">
+				and order_desc = #{order_desc}
+			</if>
+			<if test="order_cmd !=null and order_cmd !=''">
+				and order_cmd = #{order_cmd}
+			</if>
+			<if test="order_os !=null and order_os !=''">
+				and order_os = #{order_os}
+			</if>
+			<if test="order_idx !=null and order_idx !=''">
+				and order_idx = #{order_idx}
+			</if>
+		</where>
+	</select>
+
+</mapper>

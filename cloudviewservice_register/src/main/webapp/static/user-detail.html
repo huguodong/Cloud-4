@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8 oldie"><![endif]-->
+<!--[if IE 9]><html class="ie9 oldie"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<title>新增用户</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/common.js" ></script>
+<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+<![endif]-->
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="js/html5.js" ></script>
+	<script type="text/javascript" src="js/ie.js" ></script>
+<![endif]-->
+
+</head>
+<body style="background:#FFF;">
+<div class="user-detail">
+	<div class="head">
+		新增用户
+	</div>
+	<div class="main">
+		<div class="item">
+			<ul>
+				<li>
+					<div class="left"><span class="g-mustIn">登录名</span></div>
+					<div class="right"><input type="text" placeholder="请输入" class="g-input"></div>
+				</li>
+				<li>
+					<div class="left"><span class="g-mustIn">密码</span></div>
+					<div class="right"><input type="password" placeholder="请输入" class="g-input"></div>
+				</li>
+				<li>
+					<div class="left"><span class="g-mustIn">确认密码</span></div>
+					<div class="right"><input type="password" placeholder="请输入" class="g-input"></div>
+				</li>
+				<li>
+					<div class="left">密码配置模板</div>
+					<div class="right">
+						<div class="g-select">
+							<select>
+								<option value="" selected>方案1</option>
+								<option value="">方案2</option>
+							</select>
+							<span class="arr-icon"></span>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="item">
+			<ul>
+				<li>
+					<div class="left">姓名</div>
+					<div class="right"><input type="text" placeholder="请输入" class="g-input"></div>
+				</li>
+				<li>
+					<div class="left">生日</div>
+					<div class="right">
+						<div class="g-inputdate"><input type="text" placeholder="请输入" class="g-input timepicker"><span class="icon"></span></div> 
+					</div>
+				</li>
+				<li>
+					<div class="left">手机</div>
+					<div class="right"><input type="text" placeholder="请输入" class="g-input"></div>
+				</li>
+				<li>
+					<div class="left">办公室名</div>
+					<div class="right"><input type="text" placeholder="请输入" class="g-input"></div>
+				</li>
+				<li>
+					<div class="left">部门</div>
+					<div class="right"><input type="text" placeholder="请输入" class="g-input"></div>
+				</li>
+				<li>
+					<div class="left">&nbsp;</div>
+					<div class="right">
+						<div class="add-li">
+							<div class="li-list">
+								<div class="add-phone li">电话</div>
+								<div class="add-email li">邮箱</div>
+								<div class="add-address li">地址</div>
+							</div>
+						</div>
+						添加更多项
+					</div>
+				</li>
+				<li>
+					<div class="left">是否可用</div>
+					<div class="right">
+						<div class="g-radio"><input type="radio" name="useable"></div>是
+						<div class="g-radio"><input type="radio" name="useable"></div>否
+					</div>
+				</li>
+				
+				<!-- <li>
+					<div class="left">Email</div>
+					<div class="right"><input type="text" placeholder="请输入" class="g-input"></div>
+				</li>
+				
+				<li>
+					<div class="left">身份证</div>
+					<div class="right"><input type="text" placeholder="请输入" class="g-input"></div>
+				</li>
+				<li>
+					<div class="left">家庭住址</div>
+					<div class="right"><input type="text" placeholder="请输入" class="g-input"></div>
+				</li>
+				<li>
+					<div class="left">办公地址</div>
+					<div class="right"><input type="text" placeholder="请输入" class="g-input"></div>
+				</li> -->
+				<!-- <li>
+					<div class="left">备注</div>
+					<div class="right"><textarea class="g-textarea" placeholder="请输入"></textarea></div>
+				</li> -->
+			</ul>
+		</div>
+		<input type="submit" value="新增" class="g-submit">
+	</div>
+</div>
+<link rel="stylesheet" href="css/jqueryui.css">
+<link rel="stylesheet" href="css/theme.css">
+<script src="js/jqueryui.js"></script>
+<script src="js/datepicker.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+
+	$( ".timepicker" ).datepicker({
+		numberOfMonths:1,//显示几个月  
+		showButtonPanel:false,//是否显示按钮面板  
+		dateFormat: 'yy-mm-dd',//日期格式  
+		clearText:"清除",//清除日期的按钮名称  
+		closeText:"关闭",//关闭选择框的按钮名称  
+		yearSuffix: '', //年的后缀  
+		showMonthAfterYear:true,//是否把月放在年的后面  
+		defaultDate:'2016-04-19',//默认日期  
+		//minDate:'2011-03-05',//最小日期  
+		//maxDate:'2011-03-20',//最大日期  
+		monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],  
+		dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],  
+		dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],  
+		dayNamesMin: ['日','一','二','三','四','五','六'],  
+		onSelect: function(selectedDate) {//选择日期后执行的操作  
+	
+		}  
+	});
+
+	$(".add-li").on("click",function(){
+		$(".li-list").toggle();
+	});
+
+	$(".add-phone").on("click",function(){
+		var html = '<li><div class="left">手机</div><div class="right"><input type="text" placeholder="请输入" class="g-input"></div></li>';
+		$(this).parents("li").prepend(html);
+	});
+	$(".add-email").on("click",function(){
+		var html = ' <li><div class="left">Email</div><div class="right"><input type="text" placeholder="请输入" class="g-input"></div></li>';
+		$(this).parents("li").prepend(html);
+	});
+	$(".add-address").on("click",function(){
+		var html = '<li><div class="left">家庭住址</div><div class="right"><input type="text" placeholder="请输入" class="g-input"></div></li>';
+		$(this).parents("li").prepend(html);
+	});
+});
+</script>
+</body>
+</html>
+
+

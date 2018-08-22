@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="metamenu">
+
+<select id="queryall" resultType="com.ssitcloud.entity.MetadataMenuEntity">
+	SELECT 
+	  m1.`meta_menu_idx`,
+	  m1.`main_menu_code`,
+	  m1.`main_menu_name`,
+	  m1.`menu_mark`,
+	  m1.`menu_sort`,
+	  m2.`sub_menu_code`,
+	  m2.`sub_menu_name`,
+	  m2.`sub_menu_mark`,
+	  m2.`sub_menu_sort` 
+	FROM
+	  metadata_menu m1,
+	  metadata_menu_sub m2 
+	WHERE m1.`meta_menu_idx` = m2.`main_menu_idx` 
+	  AND m1.`menu_flag` != '0' 
+	  <if test="flags!=null">
+		  AND m1.`menu_flag` IN 
+		  	<foreach collection="flags" item="flag" open="(" close=")" separator=",">
+		  		#{flag}
+		  	</foreach>
+	  </if>
+	ORDER BY m1.`menu_sort`,
+	  m2.`sub_menu_sort` 
+</select>
+
+
+<select id="SelMenuByOperIdx" resultType="com.ssitcloud.entity.MetadataMenuEntity">
+	SELECT 
+	  m1.`meta_menu_idx`,
+	  m1.`main_menu_code`,
+	  m1.`main_menu_name`,
+	  m1.`menu_mark`,
+	  m1.`menu_sort`,
+	  m2.`sub_menu_code`,
+	  m2.`sub_menu_name`,
+	  m2.`sub_menu_mark`,
+	  m2.`sub_menu_sort` 
+	FROM
+	  metadata_menu m1,
+	  metadata_menu_sub m2 
+	WHERE m1.`meta_menu_idx` = m2.`main_menu_idx` 
+	  AND m1.`menu_flag` != '0' 
+	  <if test="flags!=null">
+		  AND m1.`menu_flag` IN 
+		  	<foreach collection="flags" item="flag" open="(" close=")" separator=",">
+		  		#{flag}
+		  	</foreach>
+	  </if>
+	  AND m2.`sub_menu_code` IN 
+	  (SELECT 
+	    LEFT(mo.`opercmd`, 8) 
+	  FROM
+	    rel_operator_group rog 
+	    INNER JOIN rel_operator_service_group rosg 
+	      ON rosg.`operator_group_idx` = rog.`operator_group_idx` 
+	    INNER JOIN service_group sg 
+	      ON sg.`service_group_idx` = rosg.`service_group_idx` 
+	    INNER JOIN rel_service_group rsg 
+	      ON rsg.`service_group_idx` = rosg.`service_group_idx` 
+	    INNER JOIN metadata_opercmd mo 
+	      ON mo.`meta_opercmd_idx` = rsg.`meta_opercmd_idx` 
+	  WHERE 1 = 1 
+	    AND rog.`operator_idx` = #{operator_idx} 
+	    AND mo.`opercmd_typeinfo` = '1') 
+	ORDER BY m1.`menu_sort`,
+	  m2.`sub_menu_sort` 
+</select>
+
+<select id="selectByCode" resultType="com.ssitcloud.entity.MetadataMenuEntity">
+	SELECT
+		mm.meta_menu_idx,
+		mm.main_menu_code,
+		mm.main_menu_name,
+		mms.sub_menu_code,
+		mms.sub_menu_name
+	FROM
+		metadata_menu mm,
+		metadata_menu_sub mms
+	WHERE
+		mm.meta_menu_idx = mms.main_menu_idx
+	<if test="main_menu_code!=null">
+		 AND mm.main_menu_code = #{main_menu_code}
+	</if>
+</select>
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="log">
+
+	<insert id="addLog" parameterType="com.ssitcloud.node.entity.SwitchLogEntity" useGeneratedKeys="true" keyProperty="log_idx">
+		INSERT INTO `switch_log` (
+			`current_node`,
+			`target_node`,
+			`switch_type`,
+			`result`,
+			`remark`
+		) VALUES (
+			#{current_node},
+			#{target_node},
+			#{switch_type},
+			#{result},
+			#{remark}
+		)
+	</insert>
+</mapper>

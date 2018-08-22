@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="relservicegroup">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.RelServiceGroupEntity"
+		useGeneratedKeys="true" keyProperty="rel_service_idx">
+		INSERT INTO rel_service_group
+		(service_group_idx, meta_opercmd_idx,library_idx)
+		VALUES
+		(#{service_group_idx},#{meta_opercmd_idx},#{library_idx})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.RelServiceGroupEntity">
+		UPDATE rel_service_group
+		<set>
+			<if test="service_group_idx !=null and service_group_idx !=''">
+				service_group_idx = #{service_group_idx},
+			</if>
+			<if test="meta_opercmd_idx !=null and meta_opercmd_idx !=''">
+				meta_opercmd_idx = #{meta_opercmd_idx},
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				library_idx = #{library_idx}
+			</if>
+		</set>
+		WHERE rel_service_idx = #{rel_service_idx}
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.RelServiceGroupEntity">
+		DELETE FROM rel_service_group
+		WHERE
+		rel_service_idx = #{rel_service_idx}
+
+	</delete>
+	<!-- 权限分组页面的单个删除 -->
+	<delete id="deleteByServiceGroupIdxAndLibIdx" parameterType="com.ssitcloud.entity.RelServiceGroupEntity">
+		DELETE FROM rel_service_group
+		WHERE 1=1
+		AND service_group_idx = #{service_group_idx}
+		<if test="library_idx!=null">
+			AND library_idx=#{library_idx} 
+		</if>
+	</delete>
+	<select id="selectNumByServiceGroupIdxAndLibIdx" parameterType="com.ssitcloud.entity.RelServiceGroupEntity" resultType="Integer">
+		SELECT COUNT(*) FROM rel_service_group
+		WHERE 1=1
+		AND service_group_idx = #{service_group_idx}
+		<if test="library_idx!=null">
+			AND library_idx=#{library_idx} 
+		</if>
+	</select>
+	<select id="selectByidx" parameterType="com.ssitcloud.entity.RelServiceGroupEntity"
+		resultType="com.ssitcloud.entity.RelServiceGroupEntity">
+		SELECT * FROM rel_service_group
+		<where>
+			<if test="rel_service_idx !=null and rel_service_idx !=''">
+				and rel_service_idx = #{rel_service_idx}
+			</if>
+			<if test="service_group_idx !=null and service_group_idx !=''">
+				and service_group_idx = #{service_group_idx}
+			</if>
+			<if test="meta_opercmd_idx !=null and meta_opercmd_idx !=''">
+				and meta_opercmd_idx = #{meta_opercmd_idx}
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectAll" resultType="com.ssitcloud.entity.RelServiceGroupEntity">
+		SELECT * FROM
+		rel_service_group
+	</select>
+
+</mapper>

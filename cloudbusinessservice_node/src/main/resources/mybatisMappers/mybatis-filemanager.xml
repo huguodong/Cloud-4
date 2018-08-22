@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fileManager">
+
+    <insert id="insertFileManager" parameterType="com.ssitcloud.node.entity.FileManagerEntity" useGeneratedKeys="true" keyProperty="file_idx">
+		INSERT INTO `file_manager` (
+			`file_idx`,
+			`device_id`,
+			`device_idx`,
+			`library_id`,
+			`library_idx`,
+			`file_name`,
+			`file_path`,
+			`file_size`,
+			`file_localpath`,
+			`file_version`,
+			`create_time`
+		) VALUES (
+			#{file_idx},
+			#{device_id},
+			#{device_idx},
+			#{library_id},
+			#{library_idx},
+			#{file_name},
+			#{file_path},
+			#{file_size},
+			#{file_localPath},
+			#{file_version},
+			NOW()
+		)
+	</insert>
+
+    <select id="queryFileManagerByEntity"  parameterType="com.ssitcloud.node.entity.FileManagerEntity"  resultType="com.ssitcloud.node.entity.FileManagerEntity">
+        SELECT * FROM `file_manager`
+        <where>
+            <if test="file_idx !=null and file_idx != ''">
+                `file_idx` = #{file_idx}
+            </if>
+			<if test="file_path !=null and file_path != ''">
+				and `file_path` = #{file_path}
+			</if>
+        </where>
+    </select>
+
+	<delete id="deleteFileManagerByEntity" parameterType="com.ssitcloud.node.entity.FileManagerEntity" >
+	    DELETE FROM  `file_manager`
+		<where>
+			<if test="file_idx !=null and file_idx != ''">
+				`file_idx` = #{file_idx}
+			</if>
+			<if test="file_path !=null and file_path != ''">
+				and `file_path` = #{file_path}
+			</if>
+		</where>
+	</delete>
+
+</mapper>

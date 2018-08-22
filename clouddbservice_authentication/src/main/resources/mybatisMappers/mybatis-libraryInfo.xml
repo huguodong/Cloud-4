@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="libraryInfo">
+
+
+
+<insert id="addLibraryInfo" parameterType="com.ssitcloud.dbauth.entity.LibraryInfoEntity" >
+	INSERT INTO `library_info` ( 
+		`library_idx`,
+		`infotype_idx`,
+		`info_value`
+	) VALUES (
+		#{library_idx},
+		#{infotype_idx},
+		#{info_value}
+	)
+</insert>
+<select id="selectLibraryInfoByidx" resultType="com.ssitcloud.dbauth.entity.LibraryMetatypeInfoEntity">
+	SELECT DISTINCT li.`library_idx`,li.`infotype_idx`,li.`info_value`,mi.`info_type`,mi.`info_type_desc`  
+	FROM library_info li,metadata_infotype mi
+	WHERE  li.infotype_idx = mi.infotype_idx
+	AND li.`library_idx`=#{library_idx}
+	ORDER BY li.infotype_idx
+</select>
+
+<delete id="deleteByidx" >
+	DELETE 
+	FROM  library_info
+	WHERE library_idx = #{library_idx}
+</delete>
+
+    <select id="selectByParam"
+            parameterType="com.ssitcloud.dbauth.entity.LibraryInfoEntity"
+            resultType="com.ssitcloud.dbauth.entity.LibraryInfoEntity">
+        SELECT
+            library_idx,
+            infotype_idx,
+            info_value
+        FROM
+            library_info
+        <where>
+            <if test="library_idx != null">
+                library_idx = #{library_idx}
+            </if>
+            <if test="infotype_idx != null">
+                and infotype_idx = #{infotype_idx}
+            </if>
+            <if test="info_value != null">
+                and info_value = #{info_value}
+            </if>
+        </where>
+    </select>
+</mapper>

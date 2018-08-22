@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- 心跳数据 -->
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/hearbeat/saveData" id="HEARBEAT_URL" />
+		<!--文件服务器-->
+		<RequestUrl id="uploadFileToFastDfs" requestMapping="/fileManager/uploadFileToFastDfs"/>
+		<RequestUrl id="queryFileManagerByEntity" requestMapping="/fileManager/queryFileManagerByEntity"/>
+		<!-- <RequestUrl requestMapping="/switch/switch" id="cloudbusinessservice_node_switch" /> -->
+	</project>
+	
+	<project projectName="clouddbservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/switchLog/addLog" id="switch_addLog" />
+		<!-- <RequestUrl requestMapping="/switch/switch" id="clouddbservice_node_switch" /> -->
+		<RequestUrl requestMapping="/hearbeat/saveData" id="hearbeat_saveData" />
+		<RequestUrl requestMapping="/hearbeat/getDeadNodes" id="hearbeat_getDeadNodes" />
+		<!-- Node管理 -->
+		<RequestUrl requestMapping="/node/queryByPage" id="node_queryNodeByPage" />
+		<RequestUrl requestMapping="/node/queryByParam" id="node_queryNodeByParam" />
+		<RequestUrl requestMapping="/node/queryById" id="node_queryNodeById" />
+		<RequestUrl requestMapping="/node/delete" id="node_deleteNodeById" />
+		<RequestUrl requestMapping="/node/update" id="node_updateNode" />
+		<RequestUrl requestMapping="/node/add" id="node_addNode" />
+		<RequestUrl requestMapping="/node/findContainerByNodeId" id="node_findByNodeId" />
+		<RequestUrl requestMapping="/node/findSecondary" id="node_findSecondary" />
+		<RequestUrl requestMapping="/node/findForwards" id="node_findForwards" />
+		<RequestUrl requestMapping="/node/findByContainerId" id="node_findByContainerId" />
+		<RequestUrl requestMapping="/node/update" id="node_switchState" />
+		<RequestUrl requestMapping="/node/findAddressByNodeName" id="node_findAddressByNodeName" />
+		<RequestUrl requestMapping="/node/findAddressForSSO" id="node_findAddressForSSO" />
+		<!-- NodeType管理 -->
+		<RequestUrl requestMapping="/nodeType/queryByPage" id="nodeType_queryNodeTypeByPage" />
+		<RequestUrl requestMapping="/nodeType/queryByParam" id="nodeType_queryNodeTypeByParam" />
+		<RequestUrl requestMapping="/nodeType/queryById" id="nodeType_queryNodeTypeById" />
+		<RequestUrl requestMapping="/nodeType/delete" id="nodeType_deleteNodeTypeById" />
+		<RequestUrl requestMapping="/nodeType/update" id="nodeType_updateNodeType" />
+		<RequestUrl requestMapping="/nodeType/add" id="nodeType_addNodeType" />
+		<!-- Container管理 -->
+		<RequestUrl requestMapping="/container/queryByPage" id="container_queryContainerByPage" />
+		<RequestUrl requestMapping="/container/queryByParam" id="container_queryContainerByParam" />
+		<RequestUrl requestMapping="/container/queryById" id="container_queryContainerById" />
+		<RequestUrl requestMapping="/container/delete" id="container_deleteContainerById" />
+		<RequestUrl requestMapping="/container/update" id="container_updateContainer" />
+		<RequestUrl requestMapping="/container/add" id="container_addContainer" />
+		<!-- Host管理 -->
+		<RequestUrl requestMapping="/host/queryByPage" id="host_queryHostByPage" />
+		<RequestUrl requestMapping="/host/queryByParam" id="host_queryHostByParam" />
+		<RequestUrl requestMapping="/host/queryById" id="host_queryHostById" />
+		<RequestUrl requestMapping="/host/delete" id="host_deleteHostById" />
+		<RequestUrl requestMapping="/host/update" id="host_updateHost" />
+		<RequestUrl requestMapping="/host/add" id="host_addHost" />
+	</project>
+	
+	<!-- cloudbusinessservice_authentication -->
+	<!-- <project projectName="cloudbusinessservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="cloudbusinessservice_authentication_switch" />
+	</project>
+	cloudbusinessservice_datasyn
+	<project projectName="cloudbusinessservice_datasyn" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="cloudbusinessservice_datasyn_switch" />
+	</project>
+	cloudbusinessservice_device
+	<project projectName="cloudbusinessservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="cloudbusinessservice_device_switch" />
+	</project>
+	cloudbusinessservice_nodemonitor
+	<project projectName="cloudbusinessservice_nodemonitor" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="cloudbusinessservice_nodemonitor_switch" />
+	</project>
+	clouddbservice_authentication
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="clouddbservice_authentication_switch" />
+	</project>
+	clouddbservice_device
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="clouddbservice_device_switch" />
+	</project>
+	clouddbservice_devicemonitor
+	<project projectName="clouddbservice_devicemonitor" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="clouddbservice_devicemonitor_switch" />
+	</project>
+	clouddbservice_nodemonitor
+	<project projectName="clouddbservice_nodemonitor" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="clouddbservice_nodemonitor_switch" />
+	</project>
+	cloudviewservice_device
+	<project projectName="cloudviewservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="cloudviewservice_device_switch" />
+	</project>
+	cloudviewservice_devicemonitor
+	<project projectName="cloudviewservice_devicemonitor" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="cloudviewservice_devicemonitor_switch" />
+	</project>
+	cloudviewservice_node
+	<project projectName="cloudviewservice_node" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="cloudviewservice_node_switch" />
+	</project>
+	cloudviewservice_nodemonitor
+	<project projectName="cloudviewservice_nodemonitor" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="cloudviewservice_nodemonitor_switch" />
+	</project>
+	cloudviewservice_register
+	<project projectName="cloudviewservice_register" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/switch/switch" id="cloudviewservice_register_switch" />
+	</project> -->
+
+</RequestUrlList>

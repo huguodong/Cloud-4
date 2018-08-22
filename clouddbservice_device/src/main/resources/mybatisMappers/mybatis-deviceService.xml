@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deviceService">
+
+	<insert id="insertDeviceService" parameterType="com.ssitcloud.devmgmt.entity.DeviceServiceEntity"
+		useGeneratedKeys="true" keyProperty="service_idx">
+		INSERT INTO device_service
+		(
+		service_id,library_idx, device_model_idx, service_name, 
+		service_desc,library_id,request_ip,operate_time
+		)
+		VALUES
+		(
+		#{service_id},#{library_idx},#{device_model_idx},#{service_name},#{service_desc},#{library_id}
+		,#{request_ip},#{operate_time}
+		)
+	</insert>
+	
+	<select id="queryDeviceServiceByPage" parameterType="com.ssitcloud.devmgmt.entity.DeviceServicePageEntity" resultType="com.ssitcloud.devmgmt.entity.DeviceServicePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT ds.*,st.service_type_name  FROM device_service ds left join device_service_type st on st.service_type_idx = ds.device_model_idx where 1=1 
+		<if test="service_name != null and service_name != ''">
+			and service_name like concat('%','${service_name}','%')
+		</if>
+		<if test="library_idx != null and library_idx != ''">
+			and library_idx = #{library_idx}
+		</if>
+		
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<select id="queryDeviceServiceByParams" parameterType="map" resultType="com.ssitcloud.devmgmt.entity.DeviceServiceEntity">
+		SELECT ds.*,dst.service_type_db FROM device_service ds left join device_service_type dst on ds.device_model_idx =dst.service_type_idx
+		where 1=1
+		<if test="service_idx != null and service_idx != ''">
+			AND service_idx = #{service_idx}
+		</if>
+		<if test="service_id != null and service_id != ''">
+			and service_id = #{service_id}
+		</if>
+		<if test="library_idx != null and library_idx != '' ">
+			and library_idx = #{library_idx}
+		</if>
+	</select>
+	
+	<update id="editDeviceService" parameterType="com.ssitcloud.devmgmt.entity.DeviceServiceEntity">
+		update device_service set device_model_idx = #{device_model_idx}
+		,library_idx=#{library_idx},service_name=#{service_name}
+		,service_desc=#{service_desc},library_id=#{library_id} 
+		,request_ip = #{request_ip},operate_time=#{operate_time}
+		,service_desc = #{service_desc}
+		where service_idx=#{service_idx}
+	</update>
+	
+	<update id="updateDeviceServiceOperateTime" parameterType="com.ssitcloud.devmgmt.entity.DeviceServiceEntity">
+		update device_service set operate_time=#{operate_time} where service_idx=#{service_idx}
+	</update>
+	
+	
+	<select id="queryServiceIdbyLibIdx" resultType="Map">
+		SELECT library_idx,GROUP_CONCAT(service_id) AS service_ids  
+		FROM device_service GROUP BY library_idx	
+	</select>
+	
+	<select id="queryServiceIdbyLibId" resultType="Map">
+		SELECT library_id,GROUP_CONCAT(service_id) AS service_ids  
+		FROM device_service GROUP BY library_id	
+	</select>
+	
+	<select id="queryDeviceServiceByServiceId" parameterType="map" resultType="com.ssitcloud.devmgmt.entity.DeviceServiceBaseEntity">
+		SELECT * FROM device_service where  service_id = #{service_id}
+	</select>
+	<delete id="deleteDeviceService" parameterType="map">
+		delete from device_service where 1=1
+		<if test="service_idx != null and service_idx != ''">
+			and service_idx = #{service_idx}
+		</if>
+	</delete>
+	<select id="queryServiceIdbyServiceIdx" resultType="Map">
+		SELECT service_idx,GROUP_CONCAT(service_id) AS service_ids  
+		FROM device_service GROUP BY service_idx	
+	</select>
+	
+	<select id="selectCountDeviceService" parameterType="map" resultType="int">
+		SELECT COUNT(*) AS totalNum from device_service where 1=1
+		<if test="device_model_idx != null and device_model_idx != '' ">
+			AND device_model_idx = #{device_model_idx}	
+		</if>
+		<if test="library_idx != null and library_idx !=''">
+			AND library_idx = #{library_idx}
+		</if>
+	</select>
+</mapper>

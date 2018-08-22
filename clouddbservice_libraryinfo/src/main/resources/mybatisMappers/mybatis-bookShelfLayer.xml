@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bookshelflayer">
+
+	<insert id="add" parameterType="com.ssitcloud.dblib.entity.BookShelfLayerEntity">
+		INSERT INTO `bookshelflayer` (
+			`lib_id`,
+			`shelf_id`,
+			`shelf_layer`,
+			`shelflayer_barcode`,
+			`shelflayer_name`,
+			`updatetime`
+		) VALUES (
+			#{lib_id},
+			#{shelf_id},
+			#{shelf_layer},
+			#{shelflayer_barcode},
+			#{shelflayer_name},
+			NOW()
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="com.ssitcloud.dblib.entity.BookShelfLayerEntity">
+		DELETE FROM `bookshelflayer`
+		<where>
+			<if test="lib_id !=null and lib_id !='' ">
+				and `lib_id` = #{lib_id} 
+			</if>
+			<if test="shelflayer_barcode !=null and shelflayer_barcode !='' ">
+				and `shelflayer_barcode` = #{shelflayer_barcode}
+			</if>
+		</where>
+	</delete>
+	
+	<select id="count" parameterType="com.ssitcloud.dblib.entity.BookShelfLayerEntity" resultType="int">
+		SELECT count(1) FROM `bookshelflayer` 
+		<where>
+			<if test="lib_id !=null and lib_id !='' ">
+				and `lib_id` = #{lib_id} 
+			</if>
+			<if test="shelflayer_barcode !=null and shelflayer_barcode !='' ">
+				and (`shelflayer_barcode` = #{shelflayer_barcode} or `shelflayer_name`  like concat('%','${shelflayer_barcode}','%') or `shelf_id` =  #{shelflayer_barcode})
+			</if>
+		</where>
+	</select>
+
+	<select id="select" parameterType="com.ssitcloud.dblib.entity.BookShelfLayerEntity" resultType="com.ssitcloud.dblib.entity.BookShelfLayerEntity">
+		SELECT * FROM `bookshelflayer` 
+		<where>
+			<if test="lib_id !=null and lib_id !=''">
+				and `lib_id` = #{lib_id} 
+			</if>
+			<if test="shelflayer_barcode !=null and shelflayer_barcode !='' ">
+				and (`shelflayer_barcode` = #{shelflayer_barcode} or `shelflayer_name`  like concat('%','${shelflayer_barcode}','%') or `shelf_id` =  #{shelflayer_barcode})
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectById" parameterType="com.ssitcloud.dblib.entity.BookShelfLayerEntity" resultType="com.ssitcloud.dblib.entity.BookShelfLayerEntity">
+		SELECT * FROM `bookshelflayer` where `lib_id` = #{lib_id} and `shelflayer_barcode` = #{shelflayer_barcode}
+	</select>
+	
+	<update id="update" parameterType="com.ssitcloud.dblib.entity.BookShelfLayerEntity">
+		UPDATE `bookshelflayer` SET 
+			`lib_id` = #{lib_id},
+			`shelf_id` = #{shelf_id},
+			`shelf_layer` = #{shelf_layer},
+			`shelflayer_barcode` = #{shelflayer_barcode},
+			`shelflayer_name` = #{shelflayer_name},
+			`updatetime` = NOW(),
+			version_stamp=version_stamp+1
+			WHERE `shelflayer_barcode` = #{shelflayer_barcode} 
+			<if test="version_stamp !=null and version_stamp !='' ">
+				and version_stamp = #{version_stamp}
+			</if>
+	</update>
+	
+	<select id="export" parameterType="com.ssitcloud.dblib.entity.BookShelfLayerEntity" resultType="com.ssitcloud.dblib.entity.ExportBookshelfEntity">
+		select sl.*,s.shelf_name,s.layerCount,s.layerSort,s.floorImage_url,s.shelfImage_url,s.shelfPoint,s.isSmartShelf ,GROUP_CONCAT(si.info_value order by si.info_type) as  info_value from bookshelflayer sl 
+			left join bookshelf s on sl.shelf_id = s.shelf_id and sl.lib_id = s.lib_id
+			LEFT JOIN bookshelfinfo si ON sl.shelf_id = si.shelf_id and sl.lib_id = si.lib_id
+		<where> 
+			<if test="lib_id !=null and lib_id !='' ">
+				and sl.lib_id = #{lib_id} 
+			</if>
+			<if test="shelflayer_barcode !=null and shelflayer_barcode !='' ">
+				and (sl.shelflayer_barcode = #{shelflayer_barcode} or sl.shelflayer_name  like concat('%','${shelflayer_barcode}','%') or sl.shelf_id =  #{shelflayer_barcode})
+			</if>
+		</where>
+		GROUP BY sl.shelflayer_barcode,lib_id
+		order by lib_id
+	</select>
+	
+</mapper>

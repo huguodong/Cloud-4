@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ScrollView
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:background="@color/white_normal"
+                android:layout_width="match_parent"
+                android:layout_height="44dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/bdr_back"
+                        android:layout_marginLeft="3dp"
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/back"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:text="还书机"
+                    android:gravity="center"
+                    android:textSize="19sp"
+                    android:textColor="#FF555555"
+                    android:id="@+id/textView3" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <include
+                layout="@layout/line_view" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:text="外设状态"
+                android:textSize="15sp"
+                android:textColor="@color/title"
+                android:gravity="center|left"
+                android:paddingLeft="15dp"/>
+
+            <!--<ListView
+                android:id="@+id/ext_state_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:text="功能状态"
+                android:textSize="15sp"
+                android:textColor="@color/title"
+                android:gravity="center|left"
+                android:paddingLeft="15dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

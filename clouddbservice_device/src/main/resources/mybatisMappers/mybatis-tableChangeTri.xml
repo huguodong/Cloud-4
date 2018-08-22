@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tableChangeTri">
+	<insert id="insertOne" parameterType="com.ssitcloud.entity.TableChangeTriEntity">
+		INSERT	INTO table_change_tri 
+		(table_name,data_idx,data_type,change_state,createtime) 
+		VALUES
+		(#{table_name},#{data_idx},#{data_type},#{change_state},#{createtime}) 
+	</insert>
+	<update id="updateOne" parameterType="com.ssitcloud.entity.TableChangeTriEntity">
+	</update>
+	<delete id="deleteOne" parameterType="com.ssitcloud.entity.TableChangeTriEntity">
+		DELETE from table_change_tri where tri_idx=#{tri_idx}
+	</delete>
+	<delete id="deleteDateWhereisOutof" parameterType="String">
+		DELETE FROM table_change_tri  WHERE createTime &lt;= #{value}
+	</delete>
+	<select id="selectOne" parameterType="com.ssitcloud.entity.TableChangeTriEntity" resultType="com.ssitcloud.entity.TableChangeTriEntity">
+		SELECT * FROM table_change_tri where tri_idx=#{tri_idx}
+	</select>
+	<select id="selectTableNamesOrderByCreatimeDescByIdx" parameterType="com.ssitcloud.entity.TableChangeTriEntity" resultType="com.ssitcloud.entity.TableChangeTriEntity">
+		SELECT  tri_idx,data_idx,table_name,data_type,change_state,createTime
+		FROM table_change_tri WHERE 1=1
+		AND change_state = 'I'
+		AND requestTime IS NULL
+		AND createTime in
+		(
+			SELECT MAX(createTime) 
+			FROM table_change_tri 
+			WHERE 1=1
+			AND table_name!='patch_info'
+			GROUP BY table_name,data_idx
+		)
+		<if test="data_idx!=null">
+		AND	data_idx=#{data_idx}
+		</if>
+		GROUP BY table_name,data_idx
+	</select>
+	<select id="selectPatchInfoChangesOrderByCreatimeDescByIdx" parameterType="com.ssitcloud.entity.TableChangeTriEntity" resultType="com.ssitcloud.entity.TableChangeTriEntity">
+		SELECT  tri_idx,data_idx,table_name,data_type,change_state,MAX(createTime) 
+		FROM table_change_tri 
+		WHERE 1=1
+		AND table_name='patch_info'
+		AND change_state!='D'
+		AND requestTime IS NULL
+		<if test="data_idx!=null">
+			AND data_idx=#{data_idx}
+		</if>
+		GROUP BY table_name
+	</select>
+	<select id="selectList" parameterType="com.ssitcloud.entity.TableChangeTriEntity" resultType="com.ssitcloud.entity.TableChangeTriEntity">
+		SELECT * FROM table_change_tri
+		where 1=1
+		<if test="tri_idx!=null">AND tri_idx=#{tri_idx}</if>
+		<if test="data_idx!=null">AND data_idx=#{data_idx}</if>
+		<if test="table_name!=null">AND table_name=#{table_name}</if>
+		<if test="data_type!=null">AND data_type=#{data_type}</if>
+		<if test="change_state!=null">AND change_state=#{change_state}</if>
+		<if test="createTime!=null">AND createTime=#{createTime}</if>
+	</select>
+	<!-- 
+		更新下载请求时间,下面的SQL语句貌似只对数据类型的有效果，会出现问题
+		模板类型和对多个设备更新的话 会出现问题
+		device_ext_config/
+		device_dbsync_config/
+		device_run_config/
+		device_monitor_config/
+		reader_type/
+		metadata_logic_obj/
+		metadata_run_config/
+		metadata_ext_model/
+		模板类型的话需要重新考虑
+	 -->
+	<update id="updataRequestTime" parameterType="Map">
+		UPDATE table_change_tri tct set tct.requestTime=#{requestTime}
+		where 1=1
+		AND tct.table_name=#{table_name}
+  		AND tct.data_idx=(SELECT DISTINCT device_id FROM device d WHERE d.device_id=#{device_id})
+	</update>
+	<!-- 新的更新操作 -->
+	<update id="updataRequestTimeByIdxList" parameterType="List">
+		update table_change_tri tct set tct.requestTime=NOW()
+		where tct.tri_idx in 
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	<!-- 新的更新操作 /table_name in (metadata_opercmd/metadata_order) -->
+	<update id="updateBytableNameList" parameterType="List">
+		update table_change_tri tct set tct.requestTime=NOW()
+		where tct.table_name in
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+</mapper>

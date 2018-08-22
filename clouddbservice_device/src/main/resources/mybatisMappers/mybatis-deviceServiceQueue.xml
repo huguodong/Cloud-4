@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deviceServiceQueue">
+
+	<insert id="insertDeviceServiceQueue" parameterType="com.ssitcloud.devmgmt.entity.DeviceServiceQueue"
+		useGeneratedKeys="true" keyProperty="queue_idx">
+		INSERT INTO device_service_queue 
+		(
+		device_service_idx,queue_type, queue_name, queue_ip, queue_port,
+		queue_virtual_host,queue_exchange,queue_route,queue_login_name,
+		queue_login_pwd,queue_id,device_service_id
+		)
+		VALUES
+		(
+		#{device_service_idx},#{queue_type},#{queue_name},#{queue_ip},#{queue_port},
+		#{queue_virtual_host},#{queue_exchange},#{queue_route},#{queue_login_name},#{queue_login_pwd}
+		,#{queue_id},#{device_service_id}
+		)
+		
+	</insert>
+	
+	<select id="queryDeviceServiceQueue" parameterType="map" resultType="com.ssitcloud.devmgmt.entity.DeviceServiceQueue">
+		SELECT * FROM device_service_queue where 1=1
+		<if test="device_service_idx !=null and device_service_idx !=''">
+			AND device_service_idx = #{device_service_idx}
+		</if>
+		<if test="queue_id != null and queue_id != ''">
+			and queue_id = #{queue_id}
+		</if>
+	</select>
+	
+	<update id="editDeviceServiceQueue" parameterType="com.ssitcloud.devmgmt.entity.DeviceServiceQueue">
+		update device_service_queue set queue_type=#{queue_type},queue_name=#{queue_name},queue_ip=#{queue_ip}
+		,queue_port=#{queue_port},queue_virtual_host=#{queue_virtual_host},queue_exchange=#{queue_exchange}
+		,queue_route = #{queue_route},queue_login_name=#{queue_login_name},queue_login_pwd=#{queue_login_pwd}
+		,device_service_id=#{device_service_id},queue_id=#{queue_id}
+		where queue_idx=#{queue_idx}
+	</update>
+	
+	<delete id="deleteDeviceServiceQueue" parameterType="map" > 
+		delete from device_service_queue where 1=1
+		<if test="device_service_idx != null and device_service_idx != ''">
+			AND device_service_idx = #{device_service_idx}
+		</if>
+		<if test="queue_idx != null and queue_idx != ''">
+			and queue_idx = #{queue_idx}
+		</if>
+	</delete>
+	
+		<select id="queryQueueIdbyServiceIdx" resultType="Map">
+		SELECT device_service_idx ,GROUP_CONCAT(queue_id) AS queue_ids  
+		FROM device_service_queue  GROUP BY device_service_idx	
+	</select>
+	<select id="queryQueueInfobyServiceIdxAndQueueId" parameterType="map" resultType="com.ssitcloud.devmgmt.entity.DeviceServiceQueue">
+		SELECT
+			dq.queue_idx,dq.queue_id,dq.device_service_idx,
+			dq.queue_type,
+			dq.queue_name,
+			dq.queue_ip,
+			dq.queue_port,
+			dq.queue_virtual_host,
+			dq.queue_exchange,
+			dq.queue_route,
+			dq.queue_login_name,
+			dq.queue_login_pwd,
+			dq.device_service_id
+		FROM
+			device_service ds,
+			device_service_queue dq
+		WHERE
+			ds.service_idx = dq.device_service_idx
+			AND ds.service_id = #{device_service_id}
+	</select>
+</mapper>

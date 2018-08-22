@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deviceExtConf">
+	<!-- 
+			device_ext_config
+			
+		library_idx		int(11) NOT NULL
+		device_tpl_type	int(11) NOT NULL模板区分 0模板 1数据
+		device_ext_id	int(11) NOT NULL外设
+		ext_comm_conf	varchar(100) NULL外设通信方式
+		ext_extend_conf	text NULL
+		logic_obj_idx	int(11) NOT NULL外设类型
+		ext_model_idx	int(11) NOT NULL外设型号
+		updatetime		timestamp NULL
+	 -->
+	 <select id="queryDeviceExtConfig" resultType="com.ssitcloud.entity.DeviceExtConfigEntity" parameterType="com.ssitcloud.entity.DeviceExtConfigEntity">
+		SELECT * FROM device_ext_config
+	    WHERE 1=1 
+	    <if test="library_idx!=null">
+	    	AND library_idx=#{library_idx}
+	    </if>
+	  	<if test="device_tpl_type!=null">
+	    	AND device_tpl_type=#{device_tpl_type}
+	    </if>
+	    <if test="device_ext_id!=null">
+	    	AND device_ext_id=#{device_ext_id}
+	    </if>
+	     <if test="ext_comm_conf!=null">
+	    	AND ext_comm_conf=#{ext_comm_conf}
+	    </if>
+	     <if test="ext_extend_conf!=null">
+	    	AND ext_extend_conf=#{ext_extend_conf}
+	    </if>
+	     <if test="logic_obj_idx!=null">
+	   		 AND logic_obj_idx=#{logic_obj_idx}
+	    </if>
+	     <if test="ext_model_idx!=null">
+	   		 AND ext_model_idx=#{ext_model_idx}
+	    </if>
+	     <if test="updatetime!=null">
+	   		 AND updatetime=#{updatetime}
+	    </if>
+	</select>
+	<select id="selectListByRemoteDevice" parameterType="com.ssitcloud.entity.DeviceExtConfigEntity" resultType="com.ssitcloud.system.entity.DeviceExtConfigRemoteEntity">
+		SELECT mlo.logic_obj,de.ext_comm_conf,de.ext_extend_conf,mem.ext_model FROM device_ext_config de
+		INNER JOIN metadata_ext_model mem ON de.ext_model_idx=mem.meta_ext_idx
+		INNER JOIN metadata_logic_obj mlo ON de.logic_obj_idx=mlo.meta_log_obj_idx
+		WHERE 1=1
+		<if test="library_idx!=null and library_idx!=''">
+			AND de.library_idx=#{library_idx} 
+		</if>
+		AND de.device_ext_id=#{device_ext_id}
+		<if test="device_tpl_type!=null and device_tpl_type!=''">
+			AND de.device_tpl_type=#{device_tpl_type} 
+		</if>
+	</select>
+	<insert id="insertDeviceExtConfig" parameterType="com.ssitcloud.entity.DeviceExtConfigEntity">
+		INSERT INTO device_ext_config 
+		(
+			library_idx,
+			device_tpl_type,
+			device_ext_id,
+			ext_comm_conf,
+			ext_extend_conf,
+			logic_obj_idx,
+			ext_model_idx,
+			updatetime
+		) 
+		VALUES 
+		(
+			#{library_idx},#{device_tpl_type},#{device_ext_id},
+			#{ext_comm_conf},#{ext_extend_conf},#{logic_obj_idx},
+			#{ext_model_idx},NOW()
+		)
+	</insert>
+	
+	<update id="updateDeviceExtConfig" parameterType="com.ssitcloud.entity.DeviceExtConfigEntity">
+		UPDATE device_ext_config 
+		<set>
+			<if test="library_idx!=null">
+				 library_idx=#{library_idx},
+			</if>
+			<if test="device_tpl_type!=null">
+				 device_tpl_type=#{device_tpl_type},
+			</if>
+			<if test="ext_comm_conf!=null">
+				 ext_comm_conf=#{ext_comm_conf},
+			</if>
+			<if test="ext_extend_conf!=null">
+				 ext_extend_conf=#{ext_extend_conf},
+			</if>
+			<if test="logic_obj_idx!=null">
+				 logic_obj_idx=#{logic_obj_idx},
+			</if>
+			<if test="ext_model_idx!=null">
+				 ext_model_idx=#{ext_model_idx},
+			</if>
+			<if test="library_idx!=null or device_tpl_type!=null or ext_comm_conf!=null 
+			or ext_extend_conf!=null or logic_obj_idx!=null or ext_model_idx!=null">
+				 updatetime=NOW()
+			</if>
+		</set>
+		WHERE device_ext_id=#{device_ext_id}
+	</update>
+	<delete id="deleteDeviceExtConfig" parameterType="com.ssitcloud.entity.DeviceExtTempEntity">
+		DELETE FROM device_ext_config
+		WHERE 1=1
+		AND  device_ext_id=#{device_ext_id}
+		AND  device_tpl_type = #{device_tpl_type}
+		<if test="library_idx!=null and library_idx!=''">
+			and library_idx=#{library_idx}
+		</if>
+	</delete>
+
+	<!-- 
+		
+			device_ext_template
+			
+		device_tpl_idx	int(11) NOT NULL
+		device_tpl_ID	varchar(10) NULL模板ID
+		device_tpl_desc	varchar(100) NULL模板描述
+		device_type	varchar(100) NULL设备类型
+	 -->
+	 <select id="selectDeviceExtTemp" parameterType="com.ssitcloud.entity.DeviceExtTempEntity" resultType="com.ssitcloud.entity.DeviceExtTempEntity">
+	 	SELECT * FROM device_ext_template
+	 	WHERE 1=1
+	 	<if test="device_tpl_idx!=null">
+	 		AND device_tpl_idx like CONCAT('%','${device_tpl_idx}','%')
+	 	</if>
+	 	<if test="device_tpl_ID!=null">
+	 		AND device_tpl_ID like CONCAT('%','${device_tpl_ID}','%')
+	 	</if>
+	 	<if test="device_tpl_desc!=null">
+	 		AND device_tpl_desc like CONCAT('%','${device_tpl_desc}','%')
+	 	</if>
+	 	<if test="device_type!=null">
+	 		AND device_type like CONCAT('%','${device_type}','%')
+	 	</if>
+	 </select>
+	 
+	 <select id="selectDeviceExtTempByDeviceType" parameterType="com.ssitcloud.entity.DeviceExtTempEntity" resultType="com.ssitcloud.entity.DeviceExtTempEntity">
+	 	SELECT * FROM device_ext_template
+	 	WHERE 1=1
+	 	<if test="device_type!=null">
+	 		AND device_type = #{device_type}
+	 	</if>
+	 </select>
+	 
+	<insert id="insertDeviceExtTemp" parameterType="com.ssitcloud.entity.DeviceExtTempEntity" useGeneratedKeys="true" keyProperty="device_tpl_idx">
+		insert into device_ext_template
+		(
+			device_tpl_ID,device_tpl_desc,device_type
+		)
+		VALUES
+		(
+			#{device_tpl_ID},#{device_tpl_desc},#{device_type}
+		)
+	</insert>
+	<insert id="insertDeviceExtTempWithIdx" useGeneratedKeys="false" parameterType="com.ssitcloud.entity.DeviceExtTempEntity">
+		insert into device_ext_template
+		(
+			device_tpl_idx,device_tpl_ID,device_tpl_desc,device_type
+		)
+		VALUES
+		(
+			#{device_tpl_idx},#{device_tpl_ID},#{device_tpl_desc},#{device_type}
+		)
+	</insert>
+	<update id="updateDeviceExtTemp" parameterType="com.ssitcloud.entity.DeviceExtTempEntity">
+		UPDATE device_ext_template
+		<set>
+			<if test="device_tpl_ID!=null">device_tpl_ID=#{device_tpl_ID},</if>
+			<if test="device_tpl_desc!=null">device_tpl_desc=#{device_tpl_desc},</if>
+			<if test="device_type!=null">device_type=#{device_type}</if>
+		</set>
+		WHERE device_tpl_idx=#{device_tpl_idx}
+	</update>
+	<delete id="deleteDeviceExtTemp" parameterType="Integer">
+		DELETE FROM device_ext_template
+		WHERE device_tpl_idx=#{device_tpl_idx}
+	</delete>
+	
+	<!-- 
+		外设元数据表 metadata_ext_model
+	`meta_ext_idx` int(11) NOT NULL AUTO_INCREMENT,
+  	`ext_model` varchar(100) NOT NULL COMMENT '外设型号',
+ 	`ext_model_desc` varchar(100) NOT NULL COMMENT '外设型号描述',
+  	`ext_model_version` varchar(100) DEFAULT NULL COMMENT '外设版本',
+ 	`ext_type` varchar(100) DEFAULT NULL COMMENT '外设类型' -->
+	<insert id="insertMetaExtModel" parameterType="com.ssitcloud.entity.MetadataExtModelEntity"
+		useGeneratedKeys="true" keyProperty="meta_ext_idx">
+		INSERT INTO metadata_ext_model
+		(ext_model, ext_model_desc,ext_model_version,ext_type)
+		VALUES
+		(#{ext_model},#{ext_model_desc},#{ext_model_version},#{ext_type})
+	</insert>
+
+	<update id="updateMetaExtModel" parameterType="com.ssitcloud.entity.MetadataExtModelEntity">
+		UPDATE metadata_ext_model
+		<set>
+			<if test="ext_model !=null and ext_model !=''">
+				ext_model = #{ext_model},
+			</if>
+			<if test="ext_model_desc !=null and ext_model_desc !=''">
+				ext_model_desc = #{ext_model_desc},
+			</if>
+			<if test="ext_model_version !=null and ext_model_version !=''">
+				ext_model_version = #{ext_model_version},
+			</if>
+			<if test="ext_type !=null and ext_type !=''">
+				ext_type = #{ext_type}
+			</if>
+		</set>
+		WHERE meta_ext_idx = #{meta_ext_idx}
+	</update>
+
+	<delete id="deleteMetaExtModel" parameterType="com.ssitcloud.entity.MetadataExtModelEntity">
+		DELETE FROM metadata_ext_model
+		WHERE meta_ext_idx = #{meta_ext_idx}
+	</delete>
+
+	<select id="selectMetaExtModel" parameterType="com.ssitcloud.entity.MetadataExtModelEntity"
+		resultType="com.ssitcloud.entity.MetadataExtModelEntity">
+		SELECT * FROM metadata_ext_model
+		<where>
+			<if test="meta_ext_idx !=null and meta_ext_idx !=''">
+				and meta_ext_idx = #{meta_ext_idx}
+			</if>
+			<if test="ext_model !=null and ext_model !=''">
+				and ext_model = #{ext_model}
+			</if>
+			<if test="ext_model_desc !=null and ext_model_desc !=''">
+				and ext_model_desc = #{ext_model_desc}
+			</if>
+			<if test="ext_model_version !=null and ext_model_version !=''">
+				and ext_model_version = #{ext_model_version}
+			</if>
+			<if test="ext_type !=null and ext_type !=''">
+				and ext_type = #{ext_type}
+			</if>
+		</where>
+	</select>
+	<update id="updateDeviceExtConfigByDeviceUser">
+		UPDATE device_ext_config de
+		<set>
+			<if test="ext_comm_conf!=null">de.ext_comm_conf=#{ext_comm_conf},</if>
+			<if test="ext_extend_conf!=null">de.ext_extend_conf=#{ext_extend_conf}</if>
+		</set>
+		WHERE 1=1
+		AND de.ext_model_idx=(SELECT meta_ext_idx FROM  metadata_ext_model WHERE ext_model=#{ext_model})
+		AND de.logic_obj_idx=(SELECT meta_log_obj_idx FROM metadata_logic_obj WHERE logic_obj=#{logic_obj})
+		AND de.device_ext_id=#{device_ext_id}
+		AND de.library_idx=#{library_idx}
+	</update>
+	
+	<select id="selExtDetailListByIdx" resultType="java.util.Map">
+		SELECT 
+		  ec.`device_tpl_type`,
+		  ec.`ext_comm_conf`,
+		  ec.`ext_extend_conf`,
+		  ec.`ext_model_idx`,
+		  ec.`logic_obj_idx`,
+		  ec.`library_idx`,
+		  ec.`device_ext_id`,
+		
+		  et.`device_tpl_ID`,
+		  et.`device_tpl_desc`,
+		  et.`device_type`,
+		  
+		  em.`ext_model`,
+		  em.`ext_model_desc`,
+		  em.`ext_model_version`,
+		  em.`ext_type`,
+		  
+		  lo.`logic_obj`,
+		  lo.`logic_obj_desc`
+		 
+		FROM
+		  device_ext_config ec,
+		  device_ext_template et,
+		  metadata_ext_model em,
+		  metadata_logic_obj lo 
+		WHERE ec.`device_ext_id` = et.`device_tpl_idx` 
+		  AND em.`meta_ext_idx` = ec.`ext_model_idx` 
+		  AND lo.`meta_log_obj_idx` = ec.`logic_obj_idx` 
+		  AND ec.`device_tpl_type` = '0'
+		  AND ec.`device_ext_id` = #{ext_tpl_id}
+		ORDER BY ec.`logic_obj_idx`
+	</select>
+	
+	<select id="selExtDataListByIdx" resultType="java.util.Map">
+		SELECT 
+		  ec.`device_tpl_type`,
+		  ec.`ext_comm_conf`,
+		  ec.`ext_extend_conf`,
+		  ec.`ext_model_idx`,
+		  ec.`logic_obj_idx`,
+		  ec.`library_idx`,
+		  ec.`device_ext_id`,
+
+		  em.`ext_model`,
+		  em.`ext_model_desc`,
+		  em.`ext_model_version`,
+		  em.`ext_type`,
+		  
+		  lo.`logic_obj`,
+		  lo.`logic_obj_desc`
+		 
+		FROM
+		  device_ext_config ec,
+		  metadata_ext_model em,
+		  metadata_logic_obj lo 
+		WHERE  em.`meta_ext_idx` = ec.`ext_model_idx` 
+		  AND lo.`meta_log_obj_idx` = ec.`logic_obj_idx` 
+		  AND ec.`device_tpl_type` = '1'
+		  AND ec.`device_ext_id` = #{device_idx}
+		ORDER BY ec.`logic_obj_idx`
+	</select>
+	
+	<select id="selExtTempListByParam" resultType="java.util.Map">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+			SELECT 
+			  det.`device_tpl_idx`,
+			  det.`device_tpl_ID`,
+			  det.`device_tpl_desc`,
+			  det.`device_type` ,
+			  md.`device_type_desc`
+			FROM
+			  `device_ext_template` det,
+			  `metadata_devicetype` md
+			<where>
+				det.`device_type` = md.`meta_devicetype_idx`
+				<if test="device_tpl_ID != null and device_tpl_ID !=''">
+				AND (  det.`device_tpl_ID` LIKE CONCAT('%','${device_tpl_ID}','%')
+					OR  det.`device_tpl_desc` LIKE CONCAT('%','${device_tpl_desc}','%') )
+				</if>
+				<if test="device_type != null and device_type !='' and device_type != '-1' ">
+					AND det.`device_type` = #{device_type}
+				</if>
+			</where> 
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	
+	
+	<select id="queryDeviceExtConfigAndExtModel" parameterType="com.ssitcloud.entity.DeviceExtConfigEntity" resultType="com.ssitcloud.entity.DeviceExtConfigEntity">
+		 SELECT * FROM device_ext_config de 
+ 		INNER JOIN metadata_ext_model mem ON mem.`meta_ext_idx`=de.`ext_model_idx`
+ 		INNER JOIN metadata_logic_obj mlo ON mlo.`meta_log_obj_idx`=de.`logic_obj_idx`
+	    
+	    AND de.device_ext_id=#{device_ext_id}
+	    AND de.device_tpl_type=#{device_tpl_type}
+	    <if test="library_idx!=null and library_idx!=''">
+	    	AND library_idx=#{library_idx}
+	    </if>
+	    <if test="ext_comm_conf!=null and ext_comm_conf!=''">
+	    	AND ext_comm_conf=#{ext_comm_conf}
+	    </if>
+	     <if test="ext_extend_conf!=null and ext_extend_conf!=''">
+	    	AND ext_extend_conf=#{ext_extend_conf}
+	    </if>
+	     <if test="logic_obj_idx!=null and logic_obj_idx!=''">
+	   		 AND logic_obj_idx=#{logic_obj_idx}
+	    </if>
+	     <if test="ext_model_idx!=null and ext_model_idx!=''">
+	   		 AND ext_model_idx=#{ext_model_idx}
+	    </if>
+	     <if test="updatetime!=null and updatetime!=''">
+	   		 AND updatetime=#{updatetime}
+	    </if>
+	</select>
+	
+	<select id="countUsingExtTempplate" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM device_config WHERE device_ext_tpl_idx = #{device_ext_tpl_idx} 
+	</select>
+	
+	<select id="selectDataTypeCount" parameterType="com.ssitcloud.entity.DeviceExtConfigEntity" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM device_ext_config 
+		where 1=1
+		and device_ext_id=#{device_ext_id} 
+		and device_tpl_type=#{device_tpl_type}
+		and library_idx=#{library_idx}
+	</select>
+	
+	<select id="countDeviceExtTempById" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM device_ext_template WHERE device_tpl_ID = #{device_tpl_ID}
+		<if test="device_tpl_idx!=null">
+			AND device_tpl_idx != #{device_tpl_idx}
+		</if>
+	</select>
+	
+	<select id="countDeviceExtTempByDesc" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM device_ext_template WHERE device_tpl_desc = #{device_tpl_desc}
+		<if test="device_tpl_idx!=null">
+			AND device_tpl_idx != #{device_tpl_idx}
+		</if>
+	</select>
+	
+	<select id="selectByDeviceMonitor" parameterType="com.ssitcloud.entity.DeviceExtConfigEntity" resultType="com.ssitcloud.entity.DeviceExtConfigEntity">
+	 	SELECT dexc.`library_idx`,
+		 dexc.`device_ext_id`,
+		 mlo.`logic_obj`,
+		 mlo.`logic_obj_desc`,
+		 mem.`ext_model`,
+		 mem.`ext_model_desc` 
+		 FROM device_ext_config dexc  
+		LEFT JOIN metadata_logic_obj mlo ON dexc.`logic_obj_idx`=mlo.meta_log_obj_idx
+		LEFT JOIN metadata_ext_model mem ON mem.`meta_ext_idx`=dexc.`ext_model_idx`
+		WHERE dexc.`device_ext_id`=#{device_ext_id}
+        AND dexc.`device_tpl_type`=#{device_tpl_type}
+	</select>
+	
+	<update id="updateDeviceExtLibrary">
+		UPDATE 
+		  device_ext_config de 
+		SET
+		  de.`library_idx` = #{newLibIdx}
+		WHERE de.`device_tpl_type` = 1 
+		  AND de.`device_ext_id` IN 
+		  <foreach collection="deviceList" item="deviceIdx" open="(" close=")" separator=",">
+			#{deviceIdx}
+		</foreach>
+	</update>
+	<select id="selectDeviceExtModalByLibraryIdx" parameterType="Map" resultType="com.ssitcloud.entity.DeviceExtConfigEntity">
+		SELECT * FROM device_ext_config de  WHERE de.`device_ext_id` IN 
+		(
+			SELECT dc.`device_ext_tpl_idx` FROM device_config dc WHERE dc.`library_idx`=#{library_idx}
+		)
+		AND de.`device_tpl_type`=0;
+	</select>
+	<select id="selectDeviceExtTempModalByLibraryIdx" parameterType="Map" resultType="com.ssitcloud.entity.DeviceExtTempEntity">
+		SELECT * FROM device_ext_template det WHERE det.`device_tpl_idx` IN 
+		(
+			SELECT dc.`device_ext_tpl_idx` FROM device_config dc WHERE dc.`library_idx`=#{library_idx}
+		)
+	</select>
+	
+</mapper>

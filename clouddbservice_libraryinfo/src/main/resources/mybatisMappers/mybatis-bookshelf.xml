@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="bookshelf">
+
+	<insert id="insertBookShelf" parameterType="com.ssitcloud.dblib.entity.BookShelfEntity">
+		INSERT INTO bookshelf (
+		  `lib_id`,
+		  `shelf_id`,
+		  `shelf_name`,
+		  `layerCount`,
+		  `layerSort`,
+		  `floorImage_url`,
+		  `shelfImage_url`,
+		  `shelfPoint`,
+		  `shelf_group_id`,
+		  `updatetime`,
+		  `isSmartShelf`
+		) 
+		VALUES
+		(
+			#{lib_id},
+			#{shelf_id},
+			#{shelf_name},
+			#{layerCount},
+			#{layerSort},
+			#{floorImage_url},
+			#{shelfImage_url},
+			#{shelfPoint},
+			#{shelf_group_id},
+			NOW(),
+			#{isSmartShelf}
+		)
+	</insert>
+		
+<select id="queryBookShelf" resultType="com.ssitcloud.dblib.entity.BookShelfEntity">
+	SELECT * FROM bookshelf WHERE `shelf_idx` = #{shelf_idx} 
+</select>
+
+<select id="queryBookShelfList" resultType="com.ssitcloud.dblib.entity.BookShelfEntity">
+	SELECT * FROM bookshelf 
+</select>
+
+
+	<select id="count" parameterType="com.ssitcloud.dblib.entity.BookShelfEntity" resultType="int">
+		SELECT count(1) FROM `bookshelf` 
+		<where>
+			<if test="lib_id !=null and lib_id !='' ">
+				and `lib_id` = #{lib_id} 
+			</if>
+			<if test="shelf_id !=null and shelf_id !='' ">
+				and (`shelf_id` = #{shelf_id} or `shelf_name` like concat('%','${shelf_id}','%'))
+			</if>
+		</where>
+	</select>
+	
+	<select id="select" parameterType="com.ssitcloud.dblib.entity.BookShelfEntity" resultType="com.ssitcloud.dblib.entity.BookShelfEntity">
+		SELECT * FROM `bookshelf` 
+		<where>
+			<if test="lib_id !=null and lib_id !=''">
+				and `lib_id` = #{lib_id} 
+			</if>
+			<if test="shelf_id !=null and shelf_id !='' ">
+				and (`shelf_id` = #{shelf_id} or `shelf_name`  like concat('%','${shelf_id}','%'))
+			</if>
+		</where>
+	</select>
+
+	<delete id="delete" parameterType="com.ssitcloud.dblib.entity.BookShelfEntity">
+		DELETE FROM `bookshelf` 
+		<where>
+			<if test="lib_id !=null and lib_id !=''">
+				and `lib_id` = #{lib_id} 
+			</if>
+			<if test="shelf_id !=null and shelf_id !='' ">
+				and `shelf_id` = #{shelf_id}
+			</if>
+		</where>
+	</delete>
+	
+	<select id="selectById" parameterType="com.ssitcloud.dblib.entity.BookShelfEntity" resultType="com.ssitcloud.dblib.entity.BookShelfEntity">
+		SELECT b.* FROM bookshelf b 
+		<where>
+			<if test="lib_id !=null and lib_id !='' ">
+				and b.lib_id = #{lib_id} 
+			</if>
+			<if test="shelf_id !=null and shelf_id !='' ">
+				and b.shelf_id = #{shelf_id} 
+			</if>
+		</where>
+	</select>
+	
+	<update id="update" parameterType="com.ssitcloud.dblib.entity.BookShelfEntity">
+		UPDATE `bookshelf` SET 
+			`lib_id` = #{lib_id},
+			`shelf_id` = #{shelf_id},
+			`shelf_name` = #{shelf_name},
+			`layerCount` = #{layerCount},
+			`layerSort` = #{layerSort},
+			`floorImage_url` = #{floorImage_url},
+			`shelfImage_url` = #{shelfImage_url},
+			`shelfPoint` = #{shelfPoint},
+			`isSmartShelf` = #{isSmartShelf},
+			`shelf_group_id` = #{shelf_group_id},
+			`updatetime` = NOW(),
+			version_stamp=version_stamp+1
+			WHERE `shelf_id` = #{shelf_id} 
+			<if test="version_stamp !=null and version_stamp !='' ">
+				and version_stamp = #{version_stamp} 
+			</if>
+	</update>
+	
+	<update id="updateShelfimage" parameterType="com.ssitcloud.dblib.entity.BookShelfEntity">
+		UPDATE `bookshelf` SET 
+			`shelfImage_url` = #{shelfImage_url},
+			`updatetime` = NOW()
+			WHERE `layerCount` = #{layerCount}
+			<if test="lib_id != null and lib_id != ''">
+			   and `lib_id` = #{lib_id}
+			</if>
+	</update>
+	
+	<update id="updateFloorimage" parameterType="com.ssitcloud.dblib.entity.BookShelfEntity">
+		update bookshelf inner join bookshelfinfo a on bookshelf.shelf_id = a.shelf_id and bookshelf.lib_id = a.lib_id and a.info_type = 1 and a.info_value = #{info_1}
+			INNER JOIN bookshelfinfo b on bookshelf.shelf_id = b.shelf_id and bookshelf.lib_id = a.lib_id and b.info_type = 2 and b.info_value = #{info_2}
+ 				set bookshelf.floorImage_url = #{floorImage_url},bookshelf.`updatetime` = NOW()
+ 				<where>
+			<if test="lib_id !=null and lib_id !='' ">
+				and bookshelf.lib_id = #{lib_id} 
+			</if>
+			<if test="shelf_id !=null and shelf_id !='' ">
+				and bookshelf.shelf_id = #{shelf_id} 
+			</if>
+		</where>
+	</update>
+	
+	
+	<update id="updatePoint" parameterType="com.ssitcloud.dblib.entity.BookShelfEntity">
+		UPDATE `bookshelf` SET 
+			`shelfPoint` = #{shelfPoint},
+			`updatetime` = NOW()
+			WHERE `shelf_id` = #{shelf_id}
+			<if test="lib_id != null and lib_id != ''">
+			   and `lib_id` = #{lib_id}
+			</if>
+	</update>
+
+</mapper>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bakuDao">
+<!-- 
+idx			int(11) NOT NULL主键
+file_name	varchar(50) NOT NULL备份文件名
+file_path	varchar(200) NOT NULL文件完整路径
+bakup_flg	tinyint(1) NULL备份是否成功 成功1 失败0
+is_exist	tinyint(4) NULL是否存在于系统中，在不同地方部署但是用的是同一个数据库，则备份文件可能不存在于系统中
+file_size	double NULL文件大小M
+create_time	timestamp NOT NULL创建时间
+md5			varchar(100) NULLMD5
+
+ -->
+ 	<insert id="insertBakDataInfo" useGeneratedKeys="true" keyProperty="idx" parameterType="Map">
+ 		insert into db_bakup 
+ 		(file_name,file_path,bakup_flg,is_exist,file_size,create_time,md5,library_idx) 
+ 		values 
+ 		(
+ 			#{file_name},
+ 			#{file_path},
+ 			#{bakup_flg},
+ 			#{is_exist},
+ 			#{file_size},
+ 			NOW(),
+ 			#{md5},
+ 			#{library_idx}
+ 		)
+ 	</insert>
+	<select id="queryBakDataInfo" parameterType="Map" resultType="com.ssitcloud.entity.BakupDataEntity">
+		SELECT * FROM db_bakup WHERE 1=1
+			<if test="idx!=null"> 
+				AND idx=#{idx}
+			</if>
+			<if test="file_name!=null">
+				AND file_name like CONCAT('%',${file_name},'%')
+			</if>
+			<if test="file_path!=null">
+				AND file_path like CONCAT('%',${file_path},'%')
+			</if>
+			<if test="bakup_flg!=null">
+				AND bakup_flg=#{bakup_flg}
+			</if>
+			<if test="is_exist!=null">
+				AND is_exist=#{is_exist}
+			</if>
+			<if test="file_size!=null">
+				AND file_size=#{file_size}
+			</if>
+			<if test="create_time_start!=null">
+				AND create_time &gt;= #{create_time_start}
+			</if>
+			<if test="create_time_end!=null">
+				AND create_time &lt;= #{create_time_end}
+			</if>
+	</select>
+	<select id="queryBakDataInfoByPage" parameterType="com.ssitcloud.entity.BakupDataEntity" resultType="com.ssitcloud.entity.BakupDataEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		select * from db_bakup db where 1=1
+		<if test="file_name!=null">
+			and file_name like concat('%','${file_name}','%')
+		</if>
+		<if test="bakup_flg!=null">
+			and bakup_flg=#{bakup_flg}
+		</if>
+		<if test="is_exist!=null">
+			and is_exist=#{is_exist}
+		</if>
+		<if test="create_time_start!=null">
+			and create_time &gt;=#{create_time_start,jdbcType=DATE}
+		</if>
+		<if test="create_time_end!=null">
+			and create_time &lt;=#{create_time_end,jdbcType=DATE}
+		</if>
+		<if test="library_idx_arr!=null">
+			and library_idx in 
+			<foreach collection="library_idx_arr" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="whetherPaging==false">
+			limit 50
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	<select id="queryBakDataInfoByIdx" parameterType="Map" resultType="com.ssitcloud.entity.BakupDataEntity">
+		SELECT * FROM db_bakup WHERE idx=#{idx}
+	</select>
+	<delete id="delBakDataInfoByIdx" parameterType="Map">
+		delete from db_bakup WHERE idx=#{idx}
+	</delete>
+	<delete id="delBakDataInfoByPath" parameterType="List">
+		delete from db_bakup WHERE file_path in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	<update id="updBakDataInfoByIdx" parameterType="Map">
+		update db_bakup 
+		<set>
+			<if test="file_name!=null">
+				file_name=#{file_name},
+			</if>
+			<if test="file_path!=null">
+				file_path=#{file_path},
+			</if>
+			<if test="bakup_flg!=null">
+				bakup_flg=#{bakup_flg},
+			</if>
+			<if test="is_exist!=null">
+				is_exist=#{is_exist},
+			</if>
+			<if test="restore_time!=null">
+				restore_time=#{restore_time},
+			</if>
+			<if test="md5!=null">
+				md5=#{md5},
+			</if>
+		</set> 
+		where idx=#{idx}
+	</update>
+	<update id="updBakDataInfoByFilePath" parameterType="Map">
+		update db_bakup 
+		<set>
+			<if test="file_name!=null">
+				file_name=#{file_name},
+			</if>
+			<if test="file_path!=null">
+				file_path=#{file_path},
+			</if>
+			<if test="bakup_flg!=null">
+				bakup_flg=#{bakup_flg},
+			</if>
+			<if test="is_exist!=null">
+				is_exist=#{is_exist},
+			</if>
+			<if test="restore_time!=null">
+				restore_time=#{restore_time},
+			</if>
+			<if test="md5!=null">
+				md5=#{md5},
+			</if>
+		</set> 
+		where file_path=#{file_path}
+	</update>
+	<update id="updBakDataInfoToExist">
+		update db_bakup 
+		<set>
+			is_exist=1
+		</set>
+		where file_path in 
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	<update id="updBakDataInfoToNotExist">
+		update db_bakup 
+		<set>
+			is_exist=0
+		</set>
+		where file_path in 
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	<select id="getLastLibBakUpTime" parameterType="Map" resultType="Map">
+		select create_time from db_bakup 
+		where 1=1
+		<if test="library_idx_arr!=null">
+			and library_idx in 
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		ORDER BY create_time DESC LIMIT 1
+	</select>
+</mapper>

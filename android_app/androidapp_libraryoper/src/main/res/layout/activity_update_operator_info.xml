@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:background="@color/white_normal"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/update_operator_info_return"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/back"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@string/update_operator_info_title"
+            android:gravity="center"
+            android:textSize="19sp"
+            android:textColor="#FF555555"
+            android:id="@+id/textView3" />
+        <TextView
+            android:id="@+id/update_operator_info_set_new_pwd"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="5dp"
+            android:layout_height="match_parent"
+            android:text="@string/set_new_pwd"
+            android:textSize="15sp"
+            android:textColor="@color/title"/>
+    </LinearLayout>
+    <include
+        layout="@layout/line_view" />
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:fillViewport="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="1"
+                android:baselineAligned="false">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/forget_pwd_text_view"
+                    android:text="@string/update_operator_info_operator_name"/>
+                <EditText
+                    android:id="@+id/update_operator_info_operator_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textSize="15sp"
+                    android:background="@color/input_font"
+                    android:textColorHint="@color/hint_color"
+                    android:focusable="false"/>
+
+                <!--<TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textSize="15dp"
+                    android:textColor="@color/forget_pwd_text_view"
+                    android:text="@string/update_operator_info_operator_sex"/>
+                <EditText
+                    android:id="@+id/update_operator_info_operator_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textSize="15dp"
+                    android:background="@color/input_font"
+                    android:textColorHint="@color/hint_color"
+                    android:focusable="false"/>-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/forget_pwd_text_view"
+                    android:text="@string/update_operator_info_mobile"/>
+                <EditText
+                    android:id="@+id/update_operator_info_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textSize="15sp"
+                    android:background="@color/input_font"
+                    android:textColorHint="@color/hint_color"
+                    android:hint="@string/update_operator_info_mobile_tip"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/forget_pwd_text_view"
+                    android:text="@string/update_operator_info_email"/>
+                <EditText
+                    android:id="@+id/update_operator_info_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textSize="15sp"
+                    android:background="@color/input_font"
+                    android:textColorHint="@color/hint_color"
+                    android:hint="@string/update_operator_info_email_tip"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="@string/update_operator_info_id_card"
+                    android:textColor="@color/forget_pwd_text_view"
+                    android:textSize="15dp"
+                    android:id="@+id/textView4" />
+
+                <EditText
+                    android:id="@+id/update_operator_info_id_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/input_font"
+                    android:focusable="false"
+                    android:padding="15dp"
+                    android:textColorHint="@color/hint_color"
+                    android:textSize="15sp" />
+                <!--android:hint="@string/update_operator_info_id_card_tip"-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/update_operator_info_submit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:text="@string/save_button"
+                        android:textSize="19sp"
+                        android:textColor="@color/button_font"
+                        android:background="@drawable/button_border"/>
+
+                    <Button
+                        android:id="@+id/logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:text="@string/logout_button"
+                        android:textSize="19sp"
+                        android:textColor="@color/button_font"
+                        android:background="@drawable/logout_border"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+
+        <include
+            layout="@layout/wait_view"
+            android:id="@+id/waitview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible" />
+
+    </FrameLayout>
+
+</LinearLayout>
+

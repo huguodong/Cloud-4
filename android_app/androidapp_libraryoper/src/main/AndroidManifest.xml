@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ssitcloud.app_operator">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".component.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.ForgetPwdActivity" />
+        <activity android:name=".view.SetNewPwdSuccessActivity" />
+        <activity android:name=".view.ChangePwdActivity" />
+        <activity
+            android:name=".view.UpdateOperatorInfoActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".view.IndexActivity" />
+        <activity android:name=".view.FeedBackActivity" />
+        <activity
+            android:name=".view.DeviceMonitorActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
+        <activity android:name=".view.SSLActivity" />
+        <activity android:name=".view.PlcStateActivity" />
+        <activity android:name=".view.DeviceMaintainActivity" />
+        <activity android:name=".view.MessageRemindActivity" />
+        <activity android:name=".view.RegionActivity" />
+
+        <service android:name=".service.AppSettingIntentService" />
+        <service android:name=".service.PermissionUpdateService" />
+    </application>
+
+</manifest>

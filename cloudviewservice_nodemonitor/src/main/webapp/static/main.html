@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8 oldie"><![endif]-->
+<!--[if IE 9]><html class="ie9 oldie"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<title>主功能页</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/common.js" ></script>
+<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+<![endif]-->
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="js/html5.js" ></script>
+	<script type="text/javascript" src="js/ie.js" ></script>
+<![endif]-->
+<style>
+* a{color:#000;}
+</style>
+</head>
+<body>
+<div class="g-header">
+	<a href="main.html" class="logo"></a>
+	<a class="exit" href="index.html"><span class="icon"></span>退出</a>
+	<div class="status"><span class="icon"></span>系统管理员</div>
+	<div class="g-select language">
+		<span class="icon"></span>
+		<select>
+			<option value="" selected>中文</option>
+			<option value="">英文</option>
+		</select>
+		<span class="arr-icon"></span>
+	</div>
+</div>
+<div class="main-content">
+	<div class="left-side">
+		<div class="control-btn"></div>
+		<div class="absolute-wrap">
+			<div class="title">菜单</div>
+			<div class="item">
+				<div class="t icon1"><a href="main.html">首页</a></div>
+			</div>
+
+			<div class="item">
+				<div class="t icon7">节点管理<span class="arr-icon"></span></div>
+				<ul>
+					<li><a href="node-manage.html">节点管理</a></li>
+					<li><a href="node-type.html">节点类型</a></li>
+					<li><a href="container-manage.html">容器管理</a></li>
+					<li><a href="vps-manager.html">云主机管理</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="page-title-bar">
+		<span class="title">首页</span>
+		<div class="today">今天是 2016年5月12日 星期四</div>
+	</div>
+	<div class="main">
+		<div class="main-page">
+			<div class="version">版本 V 1.0</div>
+			<div class="company">深圳市海恒智能技术有限公司</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	(function mainHeightController(){
+		var winH = $(window).height();
+		var headerH = $(".g-header").outerHeight();
+		var pageTitleBar = $(".page-title-bar").outerHeight();
+		var pagingBarH = $(".paging-bar").outerHeight();
+
+		$(".main-page").css({
+			"min-height":winH - headerH - pagingBarH -pageTitleBar - 40
+		});
+	})();
+});
+</script>
+</body>
+</html>

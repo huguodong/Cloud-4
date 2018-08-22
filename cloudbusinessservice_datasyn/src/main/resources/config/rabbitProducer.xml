@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/rabbit
+    http://www.springframework.org/schema/rabbit/spring-rabbit-1.3.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <!-- 连接服务配置 -->
+	<rabbit:connection-factory id="connectionFactory" connection-factory="rabbitConnectionFactoryBean"
+	 host="${rabbitmq.producer.host}" port="${rabbitmq.producer.port}"
+	 virtual-host="${rabbitmq.producer.vhost}" username="${rabbitmq.producer.username}" password="${rabbitmq.producer.password}" />
+	 <!-- SSL配置 -->
+	<bean id="rabbitConnectionFactoryBean"
+		class="org.springframework.amqp.rabbit.connection.RabbitConnectionFactoryBean">
+		<property name="useSSL" value="true" />
+		<property name="sslAlgorithm" value="TLSv1.2" />
+		<property name="sslPropertiesLocation" value="classpath:config/rabbitssl.properties" />
+	</bean>
+
+	<!-- 创建rabbitAdmin 代理类 -->
+	<rabbit:template id="template" connection-factory="connectionFactory"/>
+
+	<rabbit:admin connection-factory="connectionFactory" />
+    <!-- 定义队列，在下面的交换机中引用次队列，实现绑定 --> 
+    <rabbit:queue id="transDataQueue" name="${rabbitmq.producer.transData.queue}" durable="true"
+        auto-delete="false" exclusive="false" >
+        <!-- 定义队列属性  
+        <rabbit:queue-arguments>
+			<entry key="x-message-ttl">
+				<value type="java.lang.Long">10000</value>
+			</entry>
+			<entry key="x-ha-policy" value="all" />
+		</rabbit:queue-arguments>
+		-->
+    </rabbit:queue>
+      
+    <rabbit:queue id="transOperationLogQueue" name="${rabbitmq.producer.transOperationLog.queue}" durable="true"
+        auto-delete="false" exclusive="false" >
+    </rabbit:queue>
+                          
+    <!--路由设置 将队列绑定，属于topic类型     -->
+	<rabbit:topic-exchange id="transDataExchange" name="transDataExchange"
+		durable="true" auto-delete="false">
+		<rabbit:bindings>
+			<rabbit:binding  queue="${rabbitmq.producer.transData.queue}" pattern="#.transData.#" />
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+	<rabbit:topic-exchange id="transOperationLogExchange" name="transOperationLogExchange"
+		durable="true" auto-delete="false">
+		<rabbit:bindings>
+			<rabbit:binding  queue="${rabbitmq.producer.transOperationLog.queue}" pattern="#.transOperationLog.#" />
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+
+</beans>

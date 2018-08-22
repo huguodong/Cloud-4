@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/lost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/time"
+        android:background="@null"
+        android:text="-"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lost"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:minEms="5"
+        android:text="最后10天"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lost"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/time"
+        android:background="@null"
+        android:text="+"
+        android:textSize="20sp" />
+</RelativeLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="makeshelf">
+
+	<insert id="add" parameterType="com.ssitcloud.dblib.entity.MakeshelfEntity" useGeneratedKeys="true" keyProperty="markshelf_idx">
+		INSERT INTO `makeshelf` (
+			`markshelf_libId`,
+			`markshelf_libName`,
+			`markshelf_libFlag`,
+			`markshelf_floorName`,
+			`markshelf_floorFlag`,
+			`markshelf_zoneName`,
+			`markshelf_zoneFlag`,
+			`markshelf_rowCode`,
+			`markshelf_colNum`,
+			`markshelf_colSize`,
+			`markshelf_faceNum`,
+			`markshelf_shelfLayerNum`,
+			`updatetime`
+		) VALUES (
+			#{markshelf_libId},
+			#{markshelf_libName},
+			#{markshelf_libFlag},
+			#{markshelf_floorName},
+			#{markshelf_floorFlag},
+			#{markshelf_zoneName},
+			#{markshelf_zoneFlag},
+			#{markshelf_rowCode},
+			#{markshelf_colNum},
+			#{markshelf_colSize},
+			#{markshelf_faceNum},
+			#{markshelf_shelfLayerNum},
+			#{updatetime}
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="java.util.List">
+		<![CDATA[  
+			DELETE FROM `makeshelf` WHERE `markshelf_idx` in
+	    ]]>  
+	    <foreach collection="list" item = "makeshelf" open="(" separator="," close=")">
+	   		${makeshelf.markshelf_idx}
+	    </foreach>
+	  
+	</delete>
+	
+	<select id="count" parameterType="com.ssitcloud.dblib.entity.MakeshelfEntity" resultType="int">
+		SELECT count(1) FROM `makeshelf` 
+		<where>
+			<if test="markshelf_libId !=null and markshelf_libId !='' ">
+				and `markshelf_libId` = #{markshelf_libId} 
+			</if>
+			<if test="markshelf_libName !=null and markshelf_libName !='' ">
+				and `markshelf_libName` = #{markshelf_libName} 
+			</if>
+			<if test="markshelf_zoneName !=null and markshelf_zoneName !='' ">
+				and `markshelf_zoneName`  like concat('%','${markshelf_zoneName}','%')
+			</if>
+		</where>
+	</select>
+
+	<select id="select" parameterType="com.ssitcloud.dblib.entity.MakeshelfEntity" resultType="com.ssitcloud.dblib.entity.MakeshelfEntity">
+		SELECT * FROM `makeshelf` 
+		<where>
+			<if test="markshelf_libId !=null and markshelf_libId !='' ">
+				and `markshelf_libId` = #{markshelf_libId} 
+			</if>
+			<if test="markshelf_libName !=null and markshelf_libName !='' ">
+				and `markshelf_libName` = #{markshelf_libName} 
+			</if>
+			<if test="markshelf_zoneName !=null and markshelf_zoneName !='' ">
+				and  `markshelf_zoneName`  like concat('%','${markshelf_zoneName}','%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectById" parameterType="com.ssitcloud.dblib.entity.MakeshelfEntity" resultType="com.ssitcloud.dblib.entity.MakeshelfEntity">
+		SELECT * FROM `makeshelf`
+		<where>
+			<if test="markshelf_idx !=null and markshelf_idx !='' ">
+				and `markshelf_idx` = #{markshelf_idx} 
+			</if>
+		</where>
+	</select>
+	
+</mapper>

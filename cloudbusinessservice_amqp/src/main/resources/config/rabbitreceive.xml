@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/rabbit
+    http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+    <!-- 连接服务配置 -->
+	<rabbit:connection-factory id="connectionFactory" connection-factory="rabbitConnectionFactoryBean"
+	 host="${rabbitmq.host}" port="${rabbitmq.port}"
+	 virtual-host="${rabbitmq.vhost}" username="${rabbitmq.username}" password="${rabbitmq.password}" />
+	 <!-- SSL配置 -->
+	<bean id="rabbitConnectionFactoryBean"
+		class="org.springframework.amqp.rabbit.connection.RabbitConnectionFactoryBean">
+		<property name="useSSL" value="true" />
+		<property name="sslAlgorithm" value="TLSv1.2" />
+		<property name="sslPropertiesLocation" value="classpath:config/rabbitssl.properties" />
+	</bean>
+    <!-- 设置Ack模式为手动 -->    
+   <bean id="ackManual"
+        class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField"
+            value="org.springframework.amqp.core.AcknowledgeMode.MANUAL" />
+    </bean> 
+
+
+	<!-- 创建rabbitAdmin 代理类 -->
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory"  />
+    <rabbit:admin connection-factory="connectionFactory" />
+    <bean id="messageHandler" class="com.ssitcloud.amqp.msg.handler.MessageHandler"></bean> 
+    <!-- 消息监听适配器 -->
+    <bean id="messageListenerAdapter"  class="org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter">
+     	<constructor-arg ref="messageHandler"/>
+    </bean>
+    <bean class="org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <!-- <property name="acknowledgeMode" ref="ackManual" /> -->
+        <property name="queueNames" value="${rabbitmq.queues}" />
+        <property name="messageListener" ref="messageListenerAdapter" />
+        <property name="concurrentConsumers" value="${rabbitmq.concurrentConsumers}" />
+        <property name="maxConcurrentConsumers" value="${rabbitmq.maxConcurrentConsumers}" />
+       	<!-- 定义异常处理类，需要实现ErrorHandler   <property name="errorHandler" ref="mqErrorHandler" />-->
+    </bean>  
+</beans>

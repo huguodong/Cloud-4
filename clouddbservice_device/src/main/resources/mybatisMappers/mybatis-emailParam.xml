@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="email_param">
+
+	<insert id="insertEmailParam" parameterType="com.ssitcloud.entity.EmailParamEntity" useGeneratedKeys="true" keyProperty="email_idx">
+		insert into email_param
+		(		
+            lib_idx,email_smtp,email_port,email_account,email_password,email_code,email_use_flg
+		)
+		values
+		(
+             #{lib_idx},#{email_smtp},#{email_port},#{email_account},#{email_password},#{email_code},#{email_use_flg}
+		)
+	</insert>
+	
+	<update id="updateEmailParam" parameterType="com.ssitcloud.entity.EmailParamEntity">
+		update email_param
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="lib_idx!=null">
+				lib_idx=#{lib_idx},
+			</if>
+			<if test="email_smtp!=null">
+				email_smtp=#{email_smtp},
+			</if>
+			<if test="email_port!=null">
+				email_port=#{email_port},
+			</if>
+			<if test="email_account!=null">
+				email_account=#{email_account},
+			</if>
+			<if test="email_password!=null">
+				email_password=#{email_password},
+			</if>
+			<if test="email_code!=null">
+				email_code=#{email_code},
+			</if>
+			<if test="email_use_flg!=null">
+				email_use_flg=#{email_use_flg},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="email_idx!=null">
+			and email_idx=#{email_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteEmailParam" parameterType="com.ssitcloud.entity.EmailParamEntity">
+		delete from email_param where email_idx=#{email_idx}
+	</delete>
+	
+	<select id="selectEmailParam" parameterType="com.ssitcloud.entity.EmailParamEntity" resultType="com.ssitcloud.entity.EmailParamEntity">
+		SELECT email_idx,lib_idx,email_smtp,email_port,email_account,email_password,email_code,email_use_flg FROM email_param 
+	    where 1=1
+		<if test="email_idx!=null">
+			AND email_idx=#{email_idx}
+		</if>
+	</select>
+	<select id="selectEmailParams" parameterType="Map" resultType="com.ssitcloud.entity.EmailParamEntity">
+		SELECT email_idx,lib_idx,email_smtp,email_port,email_account,email_password,email_code,email_use_flg FROM email_param 
+	    where 1=1
+	    <if test="libIdxs!=null">
+			and lib_idx in
+	        <foreach collection="libIdxs" index="index" item="libIdx" open="(" separator="," close=")">
+	                #{libIdx,jdbcType=INTEGER}       
+	        </foreach>    
+		</if>
+		and email_use_flg=1
+	</select>
+	
+	<select id="selectEmailParamByPage" parameterType="com.ssitcloud.entity.page.EmailParamMgmtPageEntity" resultType="com.ssitcloud.entity.page.EmailParamMgmtPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT email_idx,lib_idx,email_smtp,email_port,email_account,email_password,email_code,email_use_flg FROM email_param 
+	    where 1=1
+	    <if test="lib_idx!=null">
+	       AND lib_idx=#{lib_idx}
+	    </if>
+	    <if test="lib_idx_str != null">
+	    	AND lib_idx in(${lib_idx_str}) 
+	    </if>
+	    <!-- 排序 -->
+	    ORDER BY
+	      lib_idx ASC
+	    <if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	
+	
+</mapper>

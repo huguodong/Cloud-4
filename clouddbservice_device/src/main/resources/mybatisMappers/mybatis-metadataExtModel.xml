@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="metadataExtModel">
+
+	<select id="selectListByDeviceExtConfig" resultType="com.ssitcloud.entity.MetadataExtModelEntity" parameterType="com.ssitcloud.entity.DeviceExtConfigEntity">
+		SELECT 
+		mem.ext_model,
+		mem.ext_model_desc,
+		mem.ext_model_version,
+		mem.`ext_model_driver_path`,
+		mem.ext_type 
+		FROM device_ext_config de
+		INNER JOIN metadata_ext_model mem ON de.ext_model_idx=mem.meta_ext_idx
+		WHERE 1=1
+		<if test="library_idx!=null and library_idx!=''">
+			AND de.library_idx=#{library_idx}
+		</if>
+		AND de.device_ext_id=#{device_ext_id}
+	</select>
+	<select id="selectListByDeviceExtConfigDown" resultType="com.ssitcloud.system.entity.MetadataExtModelRemoteEntity" parameterType="com.ssitcloud.entity.MetadataExtModelEntity">
+			SELECT 
+			mem.ext_model,
+			mem.ext_model_desc,
+			mem.ext_model_version,
+			mem.`ext_model_driver_path`,
+			mem.ext_type 
+			FROM device_ext_config de
+			INNER JOIN metadata_ext_model mem ON de.ext_model_idx=mem.meta_ext_idx
+			WHERE 1=1
+			<if test="library_idx!=null and library_idx!=''">
+				AND de.library_idx=#{library_idx}
+			</if>
+			AND de.device_ext_id=#{device_ext_id}
+	</select>
+	<select id="select" parameterType="com.ssitcloud.entity.MetadataExtModelEntity" resultType="com.ssitcloud.entity.MetadataExtModelEntity">
+		SELECT * from metadata_ext_model 
+		where 1=1
+		<if test="ext_model!=null and ext_model!=''">
+			AND ext_model=#{ext_model}
+		</if>
+		<if test="ext_model_desc!=null and ext_model_desc!=''">
+			AND ext_model_desc=#{ext_model_desc}
+		</if>
+		<if test="ext_model_version!=null and ext_model_version!=''">
+			AND ext_model_version=#{ext_model_version}
+		</if>
+		<if test="ext_type!=null and ext_type!=''">
+			AND ext_type=#{ext_type}
+		</if>
+	</select>
+	
+	<select id="selOneByIdx" parameterType="com.ssitcloud.entity.MetadataExtModelEntity" resultType="com.ssitcloud.entity.MetadataExtModelEntity">
+		select * from metadata_ext_model where meta_ext_idx=#{meta_ext_idx}
+	</select>
+	
+	<update id="updateByMap" parameterType="Map">
+		update metadata_ext_model
+		<set>
+			<if test="ext_model!=null">
+				ext_model=#{ext_model},
+			</if>
+			<if test="ext_model_desc!=null">
+				ext_model_desc=#{ext_model_desc},
+			</if>
+			<if test="ext_model_version!=null">
+				ext_model_version=#{ext_model_version},
+			</if>
+			<if test="ext_type!=null">
+				ext_type=#{ext_type},
+			</if>
+			<if test="ext_model_driver_path!=null">
+				ext_model_driver_path=#{ext_model_driver_path},
+			</if>
+		</set>
+		where meta_ext_idx=#{meta_ext_idx}
+	</update>
+	<insert id="insertMapWithIdx" useGeneratedKeys="false" parameterType="Map">
+		insert into metadata_ext_model 
+		(meta_ext_idx,ext_model,ext_model_desc,ext_model_version,ext_type,ext_model_driver_path)
+		values
+		(#{meta_ext_idx},#{ext_model},#{ext_model_desc},#{ext_model_version},#{ext_type},#{ext_model_driver_path})
+	</insert>
+</mapper>

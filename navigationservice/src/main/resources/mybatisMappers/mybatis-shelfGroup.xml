@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shelfGroup">
+
+	<insert id="add" parameterType="com.ssitcloud.shelfmgmt.entity.ShelfGroupEntity">
+		INSERT INTO `shelf_group` (
+			`lib_id`,
+			`shelf_group_id`,
+			`shelf_group_name`,
+			`shelf_group_desc`,
+			`shelf_config_id`,
+			`updatetime`
+		) VALUES (
+			#{lib_id},
+			#{shelf_group_id},
+			#{shelf_group_name},
+			#{shelf_group_desc},
+			#{shelf_config_id},
+			NOW()
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="com.ssitcloud.shelfmgmt.entity.ShelfGroupEntity">
+		DELETE FROM `shelf_group` WHERE `shelf_group_id` = '${shelf_group_id}'
+	</delete>
+	
+	<select id="count" parameterType="com.ssitcloud.shelfmgmt.entity.ShelfGroupEntity" resultType="int">
+		SELECT count(1) FROM `shelf_group` 
+		<where>
+			<if test="lib_id !=null and lib_id !='' ">
+				and `lib_id` = #{lib_id} 
+			</if>
+			<if test="shelf_group_id !=null and shelf_group_id !='' ">
+				and (`shelf_group_id` like concat('%','${shelf_group_id}','%') or `shelf_group_name` like concat('%','${shelf_group_id}','%'))
+			</if>
+		</where>
+	</select>
+	
+	<select id="select" resultType="com.ssitcloud.shelfmgmt.entity.ShelfGroupEntity">
+		SELECT * FROM `shelf_group`
+		<where>
+			<if test="lib_id !=null and lib_id !='' ">
+				and `lib_id` = #{lib_id} 
+			</if>
+			<if test="shelf_group_id !=null and shelf_group_id !='' ">
+				and (`shelf_group_id` like concat('%','${shelf_group_id}','%') or `shelf_group_name` like concat('%','${shelf_group_id}','%'))
+			</if>
+		</where>
+	</select>
+
+	<select id="selectById" parameterType="com.ssitcloud.shelfmgmt.entity.ShelfGroupEntity" resultType="com.ssitcloud.shelfmgmt.entity.ShelfGroupEntity">
+		SELECT  b.* FROM `shelf_group` b
+		where b.`shelf_group_id` = #{shelf_group_id} 
+	</select>
+	
+	<update id="update" parameterType="com.ssitcloud.shelfmgmt.entity.ShelfGroupEntity">
+		UPDATE `shelf_group` SET 
+			`shelf_group_id` = #{shelf_group_id},
+			`shelf_group_name` = #{shelf_group_name},
+			`shelf_group_desc` = #{shelf_group_desc},
+			`shelf_config_id` = #{shelf_config_id},
+			`updatetime` = NOW(),
+			version_stamp=version_stamp+1
+			WHERE `shelf_group_id` = #{shelf_group_id} 
+			<if test="version_stamp !=null and version_stamp !='' ">
+				AND version_stamp = #{version_stamp}
+			</if>
+	</update>
+</mapper>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+	<!--  project_name约定唯一-->
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl id="restoreDataByLibraryIdx" requestMapping="/bakup/restoreDataByLibraryIdx"></RequestUrl>
+		<RequestUrl id="bakupOnlyByLiraryIdxSsitAuth" requestMapping="/bakup/bakupOnlyByLiraryIdxSsitAuth"></RequestUrl>
+		<!-- 	IpWhite -->
+		<RequestUrl id="addIpWhite" requestMapping="/operator/addIpWhite"/>
+		<RequestUrl id="selIpWhiteByIdx" requestMapping="/operator/selIpWhiteByIdx"/>
+		<RequestUrl id="delIpWhiteByOperIdx" requestMapping="/operator/delIpWhiteByOperIdx"/>
+		<RequestUrl id="updIpWhite" requestMapping="/operator/updIpWhite"/>
+		<!-- 	library -->
+		<RequestUrl id="addLibrary" requestMapping="/library/addLibrary"/>
+		<!-- <RequestUrl id="delLibraryByIdx" requestMapping="/library/delLibraryByIdx"/> -->
+		<RequestUrl id="selLibraryByIdxOrId" requestMapping="/library/selLibraryByIdxOrId"/>
+		<RequestUrl id="selLibraryByIdxsOrIds" requestMapping="/library/selLibraryByIdxsOrIds"/>
+		<RequestUrl id="selLibraryByIdsFuzzy" requestMapping="/library/selLibraryByIdsFuzzy"/>
+		<RequestUrl id="selMasterLib" requestMapping="/library/selMasterLib"/>
+		<RequestUrl id="selLibraryIDByFuzzy" requestMapping="/library/selLibraryIDByFuzzy"></RequestUrl>
+		<RequestUrl id="querylibInfoByCurUser" requestMapping="/library/querylibInfoByCurUser"/>
+		<RequestUrl id="querylibInfoByCurUserEXT1" requestMapping="/library/querylibInfoByCurUserEXT1"></RequestUrl>
+		<RequestUrl id="querySlaveLibraryByMasterIdx" requestMapping="/library/querySlaveLibraryByMasterIdx"/>
+		<!-- 查询所有的主从关系 -->
+		<RequestUrl id="queryMasterSubRelations" requestMapping="/library/queryMasterSubRelations"/>
+		<RequestUrl id="selActualLibraryMaster" requestMapping="/library/selActualLibraryMaster"/>
+		
+		<RequestUrl id="sellibraryinfo" requestMapping="/library/sellibraryinfo"/>
+		<RequestUrl id="sellibinfoByParam" requestMapping="/library/sellibinfoByParam"/>
+		<RequestUrl id="addlibraryinfo" requestMapping="/library/addNewLibrary"/>
+		<RequestUrl id="dellibraryinfo" requestMapping="/library/delLibraryByIdx"/>
+		<RequestUrl id="updlibraryinfo" requestMapping="/library/modifyLibraty"/>
+		
+		<!-- 	library_info -->
+		<RequestUrl id="addLibraryInfo" requestMapping="/library/addLibraryInfo"/>
+		<!-- 	library_service_template -->
+		<RequestUrl id="addLibraryTemplate" requestMapping="/library/addLibraryTemplate"/>
+		<RequestUrl id="delLibraryTemplateById" requestMapping="/library/delLibraryTemplateById"/>
+		<RequestUrl id="updLibraryTemplate" requestMapping="/library/updLibraryTemplate"/>
+		<RequestUrl id="selLibraryTempList" requestMapping="/library/selLibraryTempList"/>
+		<RequestUrl id="selAllLibTemp" requestMapping="/library/selAllLibTemp"/>
+		<!-- 查询图书馆的模板信息，以及所有 有效的设备用户的id -->
+		<RequestUrl id="selLibraryTempAndDeviceIds" requestMapping="/library/selLibraryTempAndDeviceIds"/>
+		<RequestUrl id="selLibraryServiceTemplateByIdx" requestMapping="/library/selLibraryServiceTemplateByIdx"/>
+		<!--获取所有的不是slave的馆和其一级子馆 -->
+		<RequestUrl id="queryAllMasterLibAndSlaveLib" requestMapping="/library/queryAllMasterLibAndSlaveLib"/>
+		<RequestUrl id="getLibIdAndLibIdx" requestMapping="/library/getLibIdAndLibIdx"/>
+		<!-- 	metadata_infotype -->
+		<RequestUrl id="addMetadataInfotype" requestMapping="/metadata/addMetadataInfotype"/>
+		<RequestUrl id="selMetadataInfotype" requestMapping="/metadata/selMetadataInfotype"/>
+		<RequestUrl id="delMetadataInfotypeByIdx" requestMapping="/metadata/delMetadataInfotypeByIdx"/>
+		<RequestUrl id="selLibInfotype" requestMapping="/metadata/selLibInfotype"/>
+		<!-- 	operator -->
+		<RequestUrl id="getVaildTime" requestMapping="/operator/getVaildTime"/>
+		<RequestUrl id="changePassword" requestMapping="/operator/changePassword"/>
+		<RequestUrl id="loginCheck" requestMapping="/operator/loginCheck"/>
+		<RequestUrl id="delOperatorByIdx" requestMapping="/operator/delOperatorByIdx"/>
+		<RequestUrl id="updOperatorByIdx" requestMapping="/operator/updOperatorByIdx"/>
+		<RequestUrl id="updOperatorByParam" requestMapping="/operator/updOperatorByParam"/>
+		<RequestUrl id="selOperatorByOperIdOrIdx" requestMapping="/operator/selOperatorByOperIdOrIdx"/>
+		<RequestUrl id="queryOperatorNameByoperIdxArr" requestMapping="/operator/queryOperatorNameByoperIdxArr"/>
+		<!-- 重置用户密码 -->
+		<RequestUrl id="resetPassword" requestMapping="/operator/resetPassword"/>
+		<!-- 根据设备id查询设备ip -->
+		<RequestUrl id="queryDeviceIps" requestMapping="/operator/queryDeviceIps"/>
+		<!-- 发送请求到鉴权库，将旧馆设备转移到新馆，并且修改相关ip -->
+		<RequestUrl id="authTransferToLibrary" requestMapping="/operator/authTransferToLibrary"/>
+		<!-- 设备库中将旧馆设备转移到新馆成功之后，保存日志 -->
+		<RequestUrl id="devTransferToLibraryLog" requestMapping="/operator/devTransferToLibraryLog"/>
+		<!-- 检查用户密码格式 -->
+		<RequestUrl id="checkPwdFormat" requestMapping="/operator/checkPwdFormat"/>
+		
+		
+		
+		<!-- 管理员操作相关 -->
+		<RequestUrl id="queryOperatorByParam" requestMapping="/operator/queryOperatorByParam"/>
+		<!-- 删除一个用户 -->
+		<RequestUrl id="delOperator" requestMapping="/operator/delOperator"/>
+		<!-- 删除多个用户 -->
+		<RequestUrl id="delMultiOperator" requestMapping="/operator/delMultiOperator"/>
+		<RequestUrl id="updOperator" requestMapping="/operator/updOperator"/>
+		<RequestUrl id="queryOperatorDetailByIdx" requestMapping="/operator/queryOperatorDetailByIdx"/>
+		<!-- 查询所有的操作员模板 -->
+		<RequestUrl id="queryAllSoxTemp" requestMapping="/operator/queryAllSoxTemp"/>
+		<!-- 根据登录用户的信息查询可以显示的操作员类型信息 -->
+		<RequestUrl id="queryOperatorTypes" requestMapping="/operator/queryOperatorTypes"/>
+		<!--  更新操作员信息 -->
+		<RequestUrl id="updateOperator" requestMapping="/operator/updateOperator"/>
+		<!-- 新增操作原信息 -->
+		<RequestUrl id="addOperator" requestMapping="/operator/addOperator"/>
+		<!-- 根据operId删除对应的设备用户 -->
+		<RequestUrl id="deleteDevOperatorInfoByOperIds" requestMapping="/operator/deleteDevOperatorInfoByOperIds"></RequestUrl>
+		
+		<!-- sox_template表操作 -->
+		<RequestUrl id="getSoxTempListByParam" requestMapping="/operator/getSoxTempListByParam"/>
+		<RequestUrl id="addSoxTemp" requestMapping="/operator/addSoxTemp"/>
+		<RequestUrl id="updateSoxTemp" requestMapping="/operator/updateSoxTemp"/>
+		<RequestUrl id="delSoxTemp" requestMapping="/operator/delSoxTemp"/>
+		<RequestUrl id="delMultiSoxTemp" requestMapping="/operator/delMultiSoxTemp"/>
+		
+		
+		
+		
+		<!-- operation_log -->
+		<RequestUrl requestMapping="/systemlog/SelectSystemLog" id="SelectSystemLog"/>
+		<RequestUrl requestMapping="/systemlog/SelectOperatorInfo" id="SelectOperatorInfo"/>
+		<RequestUrl id="AddOperationLog" requestMapping="/systemlog/AddOperationLog"/>
+		<RequestUrl id="getOperationLogType" requestMapping="/systemlog/getOperationLogType"/>
+		<!-- 新增一个设备用户 -->
+		<RequestUrl id="addDevice" requestMapping="/operator/addDevice"/>
+		<!-- 	operator_info -->
+		<RequestUrl id="addOperatorInfo" requestMapping="/operator/addOperatorInfo"/>
+		<!-- 查询用户的所有信息项，以及可以添加的信息项 -->
+		<RequestUrl id="queryAllOperatorInfo" requestMapping="/operator/queryAllOperatorInfo"/>
+		<!-- 	password_history -->
+		<RequestUrl id="addPasswordHistory" requestMapping="/operator/addPasswordHistory"/>
+		<RequestUrl id="selPasswordHistorysByOperInfo" requestMapping="/operator/selPasswordHistorysByOperInfo"/>
+		<RequestUrl id="delPasswordHistoryByIdx" requestMapping="/operator/delPasswordHistoryByIdx"/>
+		<!-- 	sox_template -->
+		<RequestUrl id="addSoxTemplate" requestMapping="/operator/addSoxTemplate"/>
+		<RequestUrl id="delSoxTemplateById" requestMapping="/operator/delSoxTemplateById"/>
+	
+	</project>
+	
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/hearbeat/saveData" id="HEARBEAT_URL" />
+	</project>
+	
+</RequestUrlList>

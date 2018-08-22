@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bookitem">
+
+	<insert id="add" parameterType="com.ssitcloud.shelfmgmt.entity.BookitemEntity" useGeneratedKeys="true" keyProperty="bookitem_idx">
+		INSERT INTO `bookitem` (
+			`lib_id`,
+			`book_barcode`,
+			`book_uid`,
+			`bib_idx`,
+			`shelflayer_barcode`,
+			`update_uid_flag`,
+			`state`,
+			`updatetime`,
+			`statemodcount`,
+			`location`,
+			`device_idx`
+		) VALUES (
+			#{lib_id},
+			#{book_barcode},
+			#{book_uid},
+			#{bib_idx},
+			#{shelflayer_barcode},
+			#{update_uid_flag},
+			#{state},
+			#{updatetime},
+			#{statemodcount},
+			#{location},
+			#{device_idx}
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="java.util.List">
+		<![CDATA[  
+			DELETE FROM `bookitem` WHERE `book_barcode` in
+	    ]]>  
+	    <foreach collection="list" item = "bookitem" open="(" separator="," close=")">
+	   		#{bookitem.book_barcode}
+	    </foreach>
+	</delete>
+	
+	<select id="selectByCode" parameterType="com.ssitcloud.shelfmgmt.entity.BookitemEntity" resultType="com.ssitcloud.shelfmgmt.entity.BookitemEntity">
+		SELECT it.*,bi.title FROM `bookitem` it left join biblios bi on bi.bib_idx =it.bib_idx where `book_barcode` = #{book_barcode}
+	</select>
+	
+	<update id="update" parameterType="com.ssitcloud.shelfmgmt.entity.BookitemEntity">
+		update `bookitem` set  
+			`state` = #{state},
+			`updatetime` = #{updatetime},
+			`update_uid_flag` = #{update_uid_flag},
+			`bib_idx` = #{bib_idx}
+					 where `book_barcode` = #{book_barcode} 
+	</update>
+	
+</mapper>

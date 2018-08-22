@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="syncConfig">
+
+	
+
+	<select id="selectList" parameterType="com.ssitcloud.dblib.entity.SyncConfigEntity" resultType="com.ssitcloud.dblib.entity.SyncConfigEntity">
+		SELECT * FROM `cloud_dbsync_config` where last_modify_time is not null and (last_sync_time is null or last_sync_time &lt;= last_modify_time) AND sync_cycle is not null AND sync_cycle &lt;&gt; '';
+	</select>
+	
+	<select id="selectListByLibId" parameterType="com.ssitcloud.dblib.entity.SyncConfigEntity" resultType="com.ssitcloud.dblib.entity.SyncConfigEntityF">
+		SELECT db_name,table_name,issync,sync_cycle,sync_field_list,sync_type,sync_state FROM `cloud_dbsync_config` where lib_id = #{lib_id} and device_id = #{device_id};
+	</select>
+	
+	<insert id="insertCloudDbSyncConfig" parameterType="com.ssitcloud.dblib.entity.SyncConfigEntity">
+		INSERT INTO `cloud_dbsync_config` (db_name,table_name,lib_id,issync,sync_cycle,sync_field_list
+		,sync_type,sync_state,lib_idx,device_id)
+		values(#{db_name},#{table_name},#{lib_id},#{issync},#{sync_cycle},#{sync_field_list},
+		#{sync_type},#{sync_state},#{lib_idx},#{device_id})
+	</insert>
+	
+	<select id="selectCloudDbSyncConfig" parameterType="com.ssitcloud.dblib.entity.SyncConfigEntity" resultType="com.ssitcloud.dblib.entity.SyncConfigEntity">
+		SELECT * FROM `cloud_dbsync_config` WHERE 1=1 
+		<if test="table_name != null">
+			AND table_name = #{table_name}
+		</if>
+		<if test="lib_id != null ">
+			AND lib_id = #{lib_id}
+		</if>
+		<if test="device_id != null ">
+			AND device_id = #{device_id}
+		</if>
+		<if test="db_name != null">
+			AND db_name = #{db_name}
+		</if>
+	</select>
+	
+	<update id="updateCloudDbSyncConfig" parameterType="com.ssitcloud.dblib.entity.SyncConfigEntity">
+		update `cloud_dbsync_config` set issync = #{issync},sync_cycle = #{sync_cycle},sync_field_list = #{sync_field_list}
+		,sync_type = #{sync_type},sync_state = #{sync_state}
+		 where db_name=#{db_name} and table_name = #{table_name} and lib_id = #{lib_id} and device_id = #{device_id}
+	</update>
+	
+</mapper>

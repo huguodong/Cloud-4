@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="bookitem">
+
+<insert id="insertBookItem" parameterType="com.ssitcloud.dblib.entity.BookItemEntity"
+ useGeneratedKeys="true" keyProperty="bookitem_idx">
+	INSERT INTO bookitem (
+	  `lib_idx`,
+	  `nowlib_idx`,
+	  `serverlib_idx`,
+	  `book_barcode`,
+	  `book_uid`,
+	  `bib_idx`,
+	  `callNo`,
+	  `shelflayer_barcode`,
+	  `update_uid_flag`,
+	  `state`,
+	  `updatetime`,
+	  `statemodcount`,
+	  `location`,
+	  `nowlocation`,
+	  `device_idx`,
+	  `createtime`
+	) 
+	VALUES
+	(
+		#{lib_idx},
+		#{nowlib_idx},
+		#{serverlib_idx},
+		#{book_barcode},
+		#{book_uid},
+		#{bib_idx},
+		#{callNo},
+		#{shelflayer_barcode},
+		#{update_uid_flag},
+		#{state},
+		DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s'),
+		#{stateModCount},
+		#{location},
+		#{nowlocation},
+	    #{device_idx},
+	    DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')
+	)
+</insert>
+
+
+<delete id="deleteBookItem" parameterType="com.ssitcloud.dblib.entity.BookItemEntity">
+	DELETE FROM bookitem WHERE `bookitem_idx` = #{bookitem_idx} 
+</delete>
+
+<update id="updateBookItem" parameterType="com.ssitcloud.dblib.entity.BookItemEntity">
+	UPDATE bookitem 
+	<set>
+		<if test="lib_idx != null and lib_idx != ''">
+		  `lib_idx` = #{lib_idx},
+		</if>
+		<if test="nowlib_idx != null and nowlib_idx != ''">
+		  `nowlib_idx` = #{nowlib_idx},
+		</if>
+		<if test="serverlib_idx != null and serverlib_idx != ''">
+		  `serverlib_idx` = #{serverlib_idx},
+		</if>
+		<if test="classNo !=null and classNo != ''">
+		  `classNo` = #{classNo},
+		</if>
+		<if test="book_barcode !=null and book_barcode != ''">
+		  `book_barcode` = #{book_barcode},
+		</if>
+		<if test="book_uid !=null and book_uid != ''">
+		  `book_uid` = #{book_uid},
+		</if>
+		<if test="bib_idx !=null and bib_idx != ''">
+		  `bib_idx` = #{bib_idx},
+		</if>
+		<if test="shelflayer_barcode !=null">
+		  `shelflayer_barcode` = #{shelflayer_barcode},
+		</if>
+		<if test="update_uid_flag !=null">
+		  `update_uid_flag` = #{update_uid_flag},
+		</if>
+		<if test="state !=null">
+		  `state` = #{state},
+		</if>
+		<if test="stateModCount !=null ">
+		  `statemodcount` = #{stateModCount},
+		</if>
+		<if test="location !=null and location != ''">
+		  `location` = #{location},
+		</if>
+		<if test="nowlocation != null and nowlocation !='' ">
+		  `nowlocation` = #{nowlocation},
+		</if>
+		<if test="device_idx !=null">
+		  `device_idx` = #{device_idx},
+		</if>
+		  `updatetime` =  DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')
+	</set>
+	where `bookitem_idx` = #{bookitem_idx} 
+</update>
+
+<select id="queryBookItem" resultType="com.ssitcloud.dblib.entity.BookItemEntity">
+	SELECT * FROM bookitem WHERE `bookitem_idx` = #{bookitem_idx} 
+</select>
+
+<select id="queryBookItemList" resultType="com.ssitcloud.dblib.entity.BookItemEntity">
+	SELECT * FROM bookitem 
+</select>
+
+
+<select id="queryBookItemListByPage" resultType="com.ssitcloud.dblib.entity.page.BookItemPageEntity">
+	<if test="whetherPaging==true">
+		<include refid="paging.head"/>
+	</if>
+	
+	SELECT * FROM bookitem where 1=1 
+	<if test="device_idx != null">
+		and device_idx = #{device_idx} 
+	</if>
+	<if test="lib_idx != null">
+		and lib_idx = #{lib_idx} 
+	</if>
+	<if test="state != null">
+		and state = #{state} 
+	</if>
+	<if test="whetherPaging==true">
+		<include refid="paging.tail"/>
+	</if>
+</select>
+
+	<delete id="delete" parameterType="java.util.List">
+		<![CDATA[  
+			DELETE FROM `bookitem` WHERE `book_barcode` in
+	    ]]>  
+	    <foreach collection="list" item = "bookitem" open="(" separator="," close=")">
+	   		#{bookitem.book_barcode}
+	    </foreach>
+	</delete>
+	
+	<select id="select" resultType="com.ssitcloud.dblib.entity.BookItemEntity">
+		SELECT * FROM `bookitem` where `lib_idx` = #{lib_idx}
+	</select>
+
+	<select id="selectByCode" parameterType="com.ssitcloud.dblib.entity.BookItemEntity" resultType="com.ssitcloud.dblib.entity.BookItemEntity">
+		SELECT * FROM `bookitem` where `book_barcode` = #{book_barcode} and `lib_idx` = #{lib_idx}
+	</select>
+	
+	<select id="queryAllBookitemAndBookInfoByCode" resultType="com.ssitcloud.dblib.entity.page.BookUnionEntity">
+		select <include refid="queryBookitemAndBookInfoRows" />
+		FROM
+			bookitem AS bi
+		INNER JOIN biblios AS bibo ON bi.bib_idx = bibo.bib_idx 
+		WHERE `book_barcode` = #{book_barcode} and `lib_idx` = #{lib_idx}
+	</select>
+	
+	<update id="update" parameterType="com.ssitcloud.dblib.entity.BookItemEntity">
+		update `bookitem` set  
+			`state` = #{state},
+			`updatetime` = =  DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s'),
+			`statemodcount` = #{stateModCount},
+					 where `bookitem_idx` = #{bookitem_idx} 
+	</update>
+	
+	<update id="updateBookitemByCodeAndLibId" parameterType="com.ssitcloud.dblib.entity.BookItemEntity">
+	UPDATE bookitem 
+	<set>
+		<if test="book_uid !=null and book_uid != ''">
+		  `book_uid` = #{book_uid},
+		</if>
+		<if test="bib_idx !=null and bib_idx != ''">
+		  `bib_idx` = #{bib_idx},
+		</if>
+		<if test="callNo !=null">
+		  `callNo` = #{callNo},
+		</if>
+		<if test="shelflayer_barcode !=null">
+		  `shelflayer_barcode` = #{shelflayer_barcode},
+		</if>
+		<if test="update_uid_flag !=null">
+		  `update_uid_flag` = #{update_uid_flag},
+		</if>
+		<if test="state !=null">
+		  `state` = #{state},
+		</if>
+		<if test="updatetime !=null">
+		  `updatetime` = =  DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s'),
+		</if>
+		<if test="stateModCount !=null ">
+		  `statemodcount` = #{stateModCount},
+		</if>
+		<if test="location !=null and location != ''">
+		  `location` = #{location},
+		</if>
+		<if test="device_idx !=null">
+		  `device_idx` = #{device_idx},
+		</if>
+	</set>
+	<where>
+		`lib_idx` = #{lib_idx} and `book_barcode` = #{book_barcode}
+	</where>
+	</update>
+
+	<select id="queryAllBookitemByLibId" resultType="com.ssitcloud.dblib.entity.BookItemEntity">
+		SELECT * FROM `bookitem` where `lib_idx` = #{lib_idx}
+	</select>
+	<sql id="queryBookitemAndBookInfoRows">
+	bi.bookitem_idx,bi.lib_idx,bi.nowlib_idx,bi.serverlib_idx,bi.callNo,
+	bi.book_barcode,bi.book_uid,bi.bib_idx,bi.shelflayer_barcode,
+	bi.update_uid_flag,bi.state,bi.updatetime,bi.statemodcount,bi.location,
+	bi.nowlocation,bi.device_idx,bibo.ISBN,bibo.title,bibo.author,
+	bibo.classNo,bibo.publish,bibo.pubAddress,bibo.pubDate,
+	bibo.price,bibo.`subject`,bibo.book_page,bibo.book_size,
+	bibo.contents,bibo.seriesBook,bibo.lang,bibo.version,
+	bibo.bookimage_url
+	</sql>
+	<sql id="queryBookitemAndBookInfoBaseWhere">
+		<if test="device_idx != null">
+			and bi.device_idx = #{device_idx} 
+		</if>
+		<if test="nowlib_idx != null">
+			and bi.nowlib_idx = #{nowlib_idx} 
+		</if>
+		<if test="state != null">
+			and bi.state = #{state}
+		</if>
+		<if test="classNo != null">
+			and classNo like '${classNo}%' 
+		</if>
+	</sql>
+	<select id="queryBookitemAndBookInfo" parameterType="java.util.Map"
+		resultType="com.ssitcloud.dblib.entity.page.BookUnionEntity">
+		<if test="title != null">
+		(
+			SELECT
+				<include refid="queryBookitemAndBookInfoRows" />
+			FROM
+				bookitem AS bi
+			INNER JOIN biblios AS bibo ON bi.bib_idx = bibo.bib_idx
+			where 
+				bibo.title like '%${title}%'
+			<include refid="queryBookitemAndBookInfoBaseWhere" />
+		)
+		</if>
+		<if test="isbn != null">
+			<if test="title != null"> union </if>
+			(
+			SELECT
+				<include refid="queryBookitemAndBookInfoRows" />
+			FROM
+				bookitem AS bi
+			INNER JOIN biblios AS bibo ON bi.bib_idx = bibo.bib_idx
+			where 
+				bibo.ISBN = #{isbn} 
+			<include refid="queryBookitemAndBookInfoBaseWhere" />
+			)
+		</if>
+		<if test="author != null">
+			<if test="title != null or isbn != null"> union </if>
+			(
+			SELECT
+				<include refid="queryBookitemAndBookInfoRows" />
+			FROM
+				bookitem AS bi
+			INNER JOIN biblios AS bibo ON bi.bib_idx = bibo.bib_idx
+			where 
+				bibo.author like '%${author}%' 
+			<include refid="queryBookitemAndBookInfoBaseWhere" />
+			)
+		</if>
+		<if test="publish != null">
+			<if test="title != null or isbn != null or author != null"> union </if>
+			(
+			SELECT
+				<include refid="queryBookitemAndBookInfoRows" />
+			FROM
+				bookitem AS bi
+			INNER JOIN biblios AS bibo ON bi.bib_idx = bibo.bib_idx
+			where 
+				bibo.publish = #{publish} 
+			<include refid="queryBookitemAndBookInfoBaseWhere" />
+			)
+		</if>
+		<!-- 以上查询无效的时候，生成的默认查询 -->
+		<if test="title == null and isbn == null and author == null and publish == null">
+			SELECT
+				<include refid="queryBookitemAndBookInfoRows" />
+			FROM
+				bookitem AS bi
+			INNER JOIN biblios AS bibo ON bi.bib_idx = bibo.bib_idx
+			where 
+				1=1 
+			<include refid="queryBookitemAndBookInfoBaseWhere" />
+		</if>
+		order by title ASC
+		<if test="limitS != null and limitE != null">
+			limit #{limitS},#{limitE} 
+		</if>
+	</select>
+	
+	<select id="queryBookitemAndBookInfobyIdx"
+		parameterType="java.lang.Integer"
+		resultType="com.ssitcloud.dblib.entity.page.BookUnionEntity">
+		select <include refid="queryBookitemAndBookInfoRows" />
+		FROM
+			bookitem AS bi
+		INNER JOIN biblios AS bibo ON bi.bib_idx = bibo.bib_idx 
+		where 
+			bi.bookitem_idx = #{bookitem_idx}
+	</select>
+	
+	<select id="queryAllBookitemAndBookInfo" resultType="com.ssitcloud.dblib.entity.page.BookUnionEntity">
+		select <include refid="queryBookitemAndBookInfoRows" />
+		FROM
+			bookitem AS bi
+		INNER JOIN biblios AS bibo ON bi.bib_idx = bibo.bib_idx 
+		WHERE `lib_idx` = #{lib_idx}
+	</select>
+	
+	<select id="queryBookItemByLibIdxAndBookBarcode" resultType="com.ssitcloud.dblib.entity.BookItemEntity">
+		SELECT * FROM bookitem WHERE `lib_idx` = #{lib_idx} AND `book_barcode` = #{book_barcode} limit 1
+	</select>
+	
+	
+	
+	<select id="queryBookItemAndBibliosInfo" resultType="java.util.Map">
+		SELECT 
+		  bi.`bookitem_idx`,
+		  bi.`lib_idx`,
+		  bi.`nowlib_idx`,
+		  bi.`serverlib_idx`,
+		  bi.`book_barcode`,
+		  bi.`book_uid`,
+		  bi.`callNo`,
+		  bi.`shelflayer_barcode`,
+		  bi.`state`,
+		  bi.`updatetime`,
+		  bi.`statemodcount`,
+		  bi.`location`,
+		  bi.`nowlocation`,
+		  bi.`device_idx`,
+		  bi.`booktype_idx`,
+		  bi.`mediatype_idx`,
+		  bi.`createtime`,
+		  bi.`regdate`,
+		  b.`isbn`,
+		  b.`title`,
+		  b.`author`,
+		  b.`classNo`,
+		  b.`publish`,
+		  b.`pubAddress`,
+		  b.`pubDate`,
+		  b.`price`,
+		  b.`subject`,
+		  b.`book_page`,
+		  b.`book_size`,
+		  b.`contents`,
+		  b.`seriesBook`,
+		  b.`lang`,
+		  b.`version`,
+		  b.`bookimage_url`
+		FROM
+		  bookitem bi,
+		  biblios b 
+		WHERE bi.`bib_idx` = b.`bib_idx`  
+		and bi.bookitem_idx > #{bookitem_idx}
+		order by bi.bookitem_idx
+		limit 5000
+	</select>
+	
+	
+	<insert id="insertBookItemNoUpdatetime" parameterType="com.ssitcloud.dblib.entity.BookItemEntity"
+	 useGeneratedKeys="true" keyProperty="bookitem_idx">
+		INSERT INTO bookitem (
+		  `lib_idx`,
+		  `nowlib_idx`,
+		  `serverlib_idx`,
+		  `callNo`,
+		  `book_barcode`,
+		  `book_uid`,
+		  `bib_idx`,
+		  `shelflayer_barcode`,
+		  `update_uid_flag`,
+		  `state`,
+		  `updatetime`,
+		  `statemodcount`,
+		  `location`,
+		  `nowlocation`,
+		  `device_idx`,
+		  `createtime`
+		) 
+		VALUES
+		(
+			#{lib_idx},
+			#{nowlib_idx},
+			#{serverlib_idx},
+			#{callNo},
+			#{book_barcode},
+			#{book_uid},
+			#{bib_idx},
+			#{shelflayer_barcode},
+			#{update_uid_flag},
+			#{state},
+			null,
+			#{stateModCount},
+			#{location},
+			#{nowlocation},
+		    #{device_idx},
+		    DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')
+		)
+	</insert>
+	
+	<update id="updateBookItemNoUpdatetime" parameterType="com.ssitcloud.dblib.entity.BookItemEntity">
+		UPDATE bookitem 
+		<set>
+			<if test="lib_idx != null and lib_idx != ''">
+			  `lib_idx` = #{lib_idx},
+			</if>
+			<if test="nowlib_idx != null and nowlib_idx != ''">
+			  `nowlib_idx` = #{nowlib_idx},
+			</if>
+			<if test="serverlib_idx != null and serverlib_idx != ''">
+			  `serverlib_idx` = #{serverlib_idx},
+			</if>
+			<if test="book_barcode !=null and book_barcode != ''">
+			  `book_barcode` = #{book_barcode},
+			</if>
+			<if test="book_uid !=null and book_uid != ''">
+			  `book_uid` = #{book_uid},
+			</if>
+			<if test="bib_idx !=null and bib_idx != ''">
+			  `bib_idx` = #{bib_idx},
+			</if>
+			<if test="callNo !=null">
+			  `callNo` = #{callNo},
+			</if>
+			<if test="shelflayer_barcode !=null">
+			  `shelflayer_barcode` = #{shelflayer_barcode},
+			</if>
+			<if test="update_uid_flag !=null">
+			  `update_uid_flag` = #{update_uid_flag},
+			</if>
+			<if test="state !=null">
+			  `state` = #{state},
+			</if>
+			<if test="stateModCount !=null ">
+			  `statemodcount` = #{stateModCount},
+			</if>
+			<if test="location !=null and location != ''">
+			  `location` = #{location},
+			</if>
+			<if test="nowlocation != null and nowlocation !='' ">
+			  `nowlocation` = #{nowlocation},
+			</if>
+			<if test="device_idx !=null">
+			  `device_idx` = #{device_idx},
+			</if>
+			  `updatetime` = null
+		</set>
+		where `bookitem_idx` = #{bookitem_idx} 
+	</update>
+	
+	<select id="queryBookItemByUnion" parameterType="com.ssitcloud.dblib.entity.page.BookUnionEntity"
+	resultType="com.ssitcloud.dblib.entity.page.BookUnionEntity">
+		SELECT 
+		  bi.`bookitem_idx`,
+		  bi.`bib_idx`,
+		  bi.`lib_idx`,
+		  bi.`nowlib_idx`,
+		  bi.`serverlib_idx`,
+		  bi.`book_barcode`,
+		  bi.`book_uid`,
+		  bi.`callNo`,
+		  bi.`shelflayer_barcode`,
+		  bi.`state`,
+		  bi.`updatetime`,
+		  bi.`statemodcount`,
+		  bi.`location`,
+		  bi.`nowlocation`,
+		  bi.`device_idx`,
+		  bi.`booktype_idx`,
+		  bi.`mediatype_idx`,
+		  bi.`createtime`,
+		  bi.`regdate`,
+		  b.`isbn`,
+		  b.`title`,
+		  b.`author`,
+		  b.`classNo`,
+		  b.`publish`,
+		  b.`pubAddress`,
+		  b.`pubDate`,
+		  b.`price`,
+		  b.`subject`,
+		  b.`book_page`,
+		  b.`book_size`,
+		  b.`contents`,
+		  b.`seriesBook`,
+		  b.`lang`,
+		  b.`version`,
+		  b.`bookimage_url`
+		FROM
+		  bookitem bi,
+		  biblios b 
+		WHERE bi.`bib_idx` = b.`bib_idx`  
+		
+		<if test="lib_idx != null and lib_idx !=''">
+			and bi.lib_idx = #{lib_idx}
+		</if>
+		
+		<if test="ISBN != null and ISBN != ''">
+			AND b.isbn = #{ISBN}
+		</if>
+		
+		<if test="title != null and title != ''">
+			AND b.title = #{title}
+		</if>
+		<if test="author != null and author != ''">
+			AND b.author = #{author}
+		</if>	
+	</select>
+	<insert id="insertBookItem2" parameterType="com.ssitcloud.dblib.entity.BibliosAndBook"
+ useGeneratedKeys="true" keyProperty="bookitem_idx">
+	INSERT INTO bookitem (
+	  `lib_idx`,
+	  `nowlib_idx`,
+	  `serverlib_idx`,
+	  `book_barcode`,
+	  `book_uid`,
+	  `bib_idx`,
+	  `callNo`,
+	  `shelflayer_barcode`,
+	  `update_uid_flag`,
+	  `state`,
+	  `updatetime`,
+	  `statemodcount`,
+	  `location`,
+	  `nowlocation`,
+	  `device_idx`,
+	  `createtime`,
+	  `regdate`
+	) 
+	VALUES
+	(
+		#{lib_idx},
+		#{nowlib_idx},
+		#{serverlib_idx},
+		#{book_barcode},
+		#{book_uid},
+		#{bib_idx},
+		#{callNo},
+		#{shelflayer_barcode},
+		#{update_uid_flag},
+		#{state},
+		DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s'),
+		#{stateModCount},
+		#{location},
+		#{nowlocation},
+	    #{device_idx},
+	    #{createtime},
+	    #{regdate}
+	)
+</insert>
+<update id="updateState" parameterType="com.ssitcloud.dblib.entity.BookItemEntity">
+		UPDATE bookitem 
+		<set>
+			<if test="state !=null">
+			  `state` = #{state},
+			</if>
+			  `updatetime` = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')
+		</set>
+		where `book_barcode` = #{book_barcode} 
+		<if test="lib_idx != null and lib_idx !=''">
+			and lib_idx = #{lib_idx}
+		</if>
+</update>
+	
+<!-- 通过lib_id和b_code等条件查询图书信息作为图书推荐规则 -->
+<select id="queryBookInfoForRecommend" resultType="com.ssitcloud.dblib.entity.BookItemEntity">
+	SELECT bi.book_barcode,bi.shelflayer_barcode,bi.callNo,(CASE WHEN DATE(COALESCE(regdate,createtime))>DATE_SUB(CURDATE(), INTERVAL 7 DAY) THEN 'true' ELSE 'false' END) isNewArrival,b.title,b.ISBN FROM `bookitem` bi LEFT JOIN `biblios` b ON bi.bib_idx=b.bib_idx 
+	<where>
+		<if test="title !=null and title !='' ">
+			and b.title = #{title} 
+		</if>
+		<if test="book_barcode !=null and book_barcode !='' ">
+			and bi.book_barcode = #{book_barcode} 
+		</if>
+		<if test="lib_idx !=null and lib_idx !='' ">
+			and bi.lib_idx = #{lib_idx} 
+		</if>
+		<if test="state !=null and state !='' ">
+			and bi.state = #{state} 
+		</if>
+	</where>
+</select>
+</mapper>

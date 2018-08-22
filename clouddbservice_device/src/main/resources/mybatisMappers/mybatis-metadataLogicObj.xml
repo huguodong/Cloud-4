@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="metalogicobj">
+	
+	<insert id="insert" parameterType="com.ssitcloud.entity.MetadataLogicObjEntity"
+		useGeneratedKeys="true" keyProperty="meta_log_obj_idx">
+		INSERT INTO metadata_logic_obj
+		(logic_obj, logic_obj_desc)
+		VALUES
+		(#{logic_obj},#{logic_obj_desc})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.MetadataLogicObjEntity">
+		UPDATE metadata_logic_obj
+		<set>
+			<if test="logic_obj !=null and logic_obj !=''">
+				logic_obj = #{logic_obj},
+			</if>
+			<if test="logic_obj_desc !=null and logic_obj_desc !=''">
+				logic_obj_desc = #{logic_obj_desc},
+			</if>
+		</set>
+		WHERE meta_log_obj_idx = #{meta_log_obj_idx}
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM metadata_logic_obj
+		WHERE  meta_log_obj_idx = #{meta_log_obj_idx}
+	</delete>
+
+	<select id="select" parameterType="com.ssitcloud.entity.MetadataLogicObjEntity"
+		resultType="com.ssitcloud.entity.MetadataLogicObjEntity">
+		SELECT * FROM metadata_logic_obj
+		<where>
+			<if test="meta_log_obj_idx !=null and meta_log_obj_idx !=''">
+				and meta_log_obj_idx = #{meta_log_obj_idx}
+			</if>
+			<if test="logic_obj !=null and logic_obj !=''">
+				and logic_obj = #{logic_obj}
+			</if>
+			<if test="logic_obj_desc !=null and logic_obj_desc !=''">
+				and logic_obj_desc = #{logic_obj_desc}
+			</if>
+		</where>
+	</select>
+	<!-- 数据同步-->
+	<select id="selectListByDeviceExtConfig" resultType="com.ssitcloud.system.entity.MetadataLogicObjRemoteEntity" parameterType="com.ssitcloud.entity.DeviceExtConfigEntity">
+		SELECT  
+		mlo.logic_obj,
+		mlo.logic_obj_desc 
+		FROM device_ext_config de
+		INNER JOIN metadata_logic_obj mlo ON de.logic_obj_idx=mlo.meta_log_obj_idx
+		WHERE  1=1
+		<if test="library_idx!=null and library_idx!=''">
+			AND de.library_idx=#{library_idx}
+		</if>
+		AND de.device_tpl_type=#{device_tpl_type}
+		AND de.device_ext_id=#{device_ext_id}
+	</select>
+	
+	<select id="selectInlogicObjArr" resultType="com.ssitcloud.entity.MetadataLogicObjEntity" parameterType="List">
+		SELECT * from metadata_logic_obj
+		where logic_obj in 
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}			
+		</foreach>
+	</select>
+	<insert id="insertMapWithIdx" parameterType="Map"
+		useGeneratedKeys="false">
+		INSERT INTO metadata_logic_obj
+		(meta_log_obj_idx,logic_obj, logic_obj_desc)
+		VALUES
+		(#{meta_log_obj_idx},#{logic_obj},#{logic_obj_desc})
+	</insert>
+	<select id="selOneByIdx" parameterType="com.ssitcloud.entity.MetadataLogicObjEntity" resultType="com.ssitcloud.entity.MetadataLogicObjEntity">
+		select * from metadata_logic_obj 
+		where meta_log_obj_idx=#{meta_log_obj_idx}
+	</select>
+	<update id="updateByMap" parameterType="Map">
+		UPDATE metadata_logic_obj
+		<set>
+			<if test="logic_obj !=null">
+				logic_obj = #{logic_obj},
+			</if>
+			<if test="logic_obj_desc !=null">
+				logic_obj_desc = #{logic_obj_desc},
+			</if>
+		</set>
+		WHERE meta_log_obj_idx = #{meta_log_obj_idx}
+	</update>
+</mapper>

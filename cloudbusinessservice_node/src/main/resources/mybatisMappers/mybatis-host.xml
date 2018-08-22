@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="host">
+
+	<insert id="addHost" parameterType="com.ssitcloud.node.entity.HostEntity" useGeneratedKeys="true" keyProperty="host_idx">
+		INSERT INTO `host` (
+			`host_id`,
+			`host_name`,
+			`host_ip1`,
+			`host_ip2`,
+			`host_desc`
+		) VALUES (
+			#{host_id},
+			#{host_name},
+			#{host_ip1},
+			#{host_ip2},
+			#{host_desc}
+		)
+	</insert>
+
+	<delete id="deleteHostById" parameterType = "java.util.List">
+		<![CDATA[  
+			DELETE FROM `host` WHERE `host_idx` in
+	    ]]>  
+	    <foreach collection="list" item = "host_idx" open="(" separator="," close=")">
+	   		#{host_idx}
+	    </foreach> 
+	</delete>
+
+	<select id="queryHostByPage" resultType="com.ssitcloud.node.entity.HostEntity">
+		SELECT `host_idx`,`host_id`,`host_name`,`host_ip1`,`host_ip2`,`host_desc` FROM `host`
+	</select>
+
+	<select id="queryHostByParam" parameterType="com.ssitcloud.node.entity.page.HostPageEntity" resultType="com.ssitcloud.node.entity.page.HostPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT * FROM `host`
+		<where>
+				<if test="host_idx != null and host_idx != 0">
+					AND `host_idx` = #{host_idx}
+				</if>
+				<if test="host_id != null and host_id != ''">
+					AND `host_id` LIKE CONCAT('%', #{host_id}, '%')
+				</if>
+				<if test="host_name != null and host_name != ''">
+					AND `host_name` LIKE CONCAT('%', #{host_name}, '%')
+				</if>
+				<if test="host_ip1 != null and host_ip1 != ''">
+					AND `host_ip1` = #{host_ip1}
+				</if>
+				<if test="host_ip2 != null and host_ip2 != ''">
+					AND `host_ip2` = #{host_ip2}
+				</if>
+				<if test="host_desc != null and host_desc != ''">
+					AND `host_desc` = #{host_desc}
+				</if>
+		</where>
+		ORDER BY `host_idx`
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+
+	<select id="queryHostById" resultType="com.ssitcloud.node.entity.HostEntity">
+		SELECT * FROM `host`
+		<where> 
+			<if test = "_parameter!=null and _parameter > 0">
+				AND `host_idx` = #{_parameter}
+			</if>
+		</where>
+	</select>
+
+	<update id="updateHost" parameterType="com.ssitcloud.node.entity.HostEntity">
+		UPDATE `host`
+		<set>
+			<if test="host_id !=null">
+			`host_id` = #{host_id},
+			</if>
+			<if test="host_name !=null">
+			`host_name` = #{host_name},
+			</if>
+			<if test="host_ip1 !=null">
+			`host_ip1` = #{host_ip1},
+			</if>
+			<if test="host_ip2 !=null">
+			`host_ip2` = #{host_ip2},
+			</if>
+			<if test="host_desc !=null">
+			`host_desc` = #{host_desc},
+			</if>
+		</set>
+		WHERE host_idx = #{host_idx}
+	</update>
+
+</mapper>

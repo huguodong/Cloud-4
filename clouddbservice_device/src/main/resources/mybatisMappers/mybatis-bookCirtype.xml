@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book_cirtype">
+
+	<insert id="insertBookCirtype" parameterType="com.ssitcloud.entity.BookCirtypeEntity" useGeneratedKeys="true" keyProperty="cirtype_idx">
+		insert into book_cirtype
+		(		
+            lib_idx,cirtype_code,cirtype_name,cirtype_mark
+		)
+		values
+		(
+             #{lib_idx},#{cirtype_code},#{cirtype_name},#{cirtype_mark}
+		)
+	</insert>
+	
+	<update id="updateBookCirtype" parameterType="com.ssitcloud.entity.BookCirtypeEntity">
+		update book_cirtype
+		<set>
+			<if test="lib_idx!=null">
+				lib_idx=#{lib_idx},
+			</if>
+			<if test="cirtype_code!=null">
+				cirtype_code=#{cirtype_code},
+			</if>
+			<if test="cirtype_name!=null">
+				cirtype_name=#{cirtype_name},
+			</if>
+			<if test="cirtype_mark!=null">
+				cirtype_mark=#{cirtype_mark},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="cirtype_idx!=null">
+			and cirtype_idx=#{cirtype_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteBookCirtype" parameterType="com.ssitcloud.entity.BookCirtypeEntity">
+		delete from book_cirtype where cirtype_idx=#{cirtype_idx}
+	</delete>
+	
+	<select id="selectBookCirtype" parameterType="com.ssitcloud.entity.BookCirtypeEntity" resultType="com.ssitcloud.entity.BookCirtypeEntity">
+		SELECT cirtype_idx,lib_idx,cirtype_code,cirtype_name,cirtype_mark FROM book_cirtype 
+	    where 1=1
+		<if test="cirtype_idx!=null">
+			AND cirtype_idx=#{cirtype_idx}
+		</if>
+	</select>
+	<select id="selectBookCirtypes" parameterType="com.ssitcloud.entity.BookCirtypeEntity" resultType="com.ssitcloud.entity.BookCirtypeEntity">
+		SELECT cirtype_idx,lib_idx,cirtype_code,cirtype_name,cirtype_mark FROM book_cirtype 
+	    where 1=1
+	</select>
+	
+	
+	
+</mapper>

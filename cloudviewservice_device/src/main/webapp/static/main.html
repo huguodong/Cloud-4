@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8 oldie"><![endif]-->
+<!--[if IE 9]><html class="ie9 oldie"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<title>主功能页</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/common.js" ></script>
+<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+<![endif]-->
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="js/html5.js" ></script>
+	<script type="text/javascript" src="js/ie.js" ></script>
+<![endif]-->
+<style>
+* a{color:#000;}
+</style>
+</head>
+<body>
+<div class="g-header">
+	<a href="main.html" class="logo"></a>
+	<a class="exit" href="index.html"><span class="icon"></span>退出</a>
+	<div class="status"><span class="icon"></span>系统管理员</div>
+	<div class="g-select language">
+		<span class="icon"></span>
+		<select>
+			<option value="" selected>中文</option>
+			<option value="">英文</option>
+		</select>
+		<span class="arr-icon"></span>
+	</div>
+</div>
+<div class="main-content">
+	<div class="left-side">
+		<div class="control-btn"></div>
+		<div class="absolute-wrap">
+			<div class="title">菜单</div>
+			<div class="item">
+				<div class="t icon1"><a href="main.html">首页</a></div>
+			</div>
+			<div class="item">
+				<div class="t icon2">用户管理<span class="arr-icon"></span></div>
+				<ul>
+					<li><a href="user-manage.html">操作员管理</a></li>
+					<li><a href="usergroup-manage.html">操作员分组管理</a></li>
+					<li><a href="config-password.html">用户鉴权模板配置</a></li>
+					<li><a href="authority-fenzu.html">权限分组</a></li>
+				</ul>
+			</div>
+			<div class="item">
+				<div class="t icon3">图书馆管理<span class="arr-icon"></span></div>
+				<ul>
+					<li><a href="library-guanli.html">图书馆管理</a></li>
+					<li><a href="config-tushuguan.html">图书馆模板配置</a></li>
+					<li><a href="config-ACS.html">ACS服务模板配置</a></li>
+					<li><a href="system-readertype.html">读者流通类型管理</a></li>
+					<li><a href="system-card.html">维护卡管理</a></li>
+				</ul>
+			</div>
+			<div class="item">
+				<div class="t icon4">设备管理<span class="arr-icon"></span></div>
+					<ul>
+					<li><a href="equipment-guanli.html">设备管理</a></li>
+					<li><a href="equipment-leixing.html">设备类型</a></li>
+					<li><a href="equipment-fenzu.html">设备分组</a></li>
+					<li><a href="config-monitoring.html">设备监控模板配置</a></li>
+					<li><a href="config-yingjian.html">硬件与逻辑名模板配置</a></li>
+					<li><a href="config-yunxing.html">运行模板配置</a></li>
+					<li><a href="config-shujuku.html">数据库同步模板配置</a></li>
+					</ul>
+			</div>
+			<div class="item">
+				<div class="t icon5">系统管理<span class="arr-icon"></span></div>
+					<ul>
+						<li><a href="system-databackup.html">数据库备份</a></li>
+						<li><a href="system-log.html">系统日志</a></li>
+					</ul>
+			</div>
+			<div class="item">
+				<div class="t icon6">升级管理<span class="arr-icon"></span></div>
+					<ul>
+						<li><a href="config-shengji.html">升级模板配置</a></li>
+					</ul>
+			</div>
+		</div>
+	</div>
+	<div class="page-title-bar">
+		<span class="title">首页</span>
+		<div class="today">今天是 2016年5月12日 星期四</div>
+	</div>
+	<div class="main">
+		<div class="main-page">
+			<div class="version">版本 V 1.0</div>
+			<div class="company">深圳市海恒智能技术有限公司</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	(function mainHeightController(){
+		var winH = $(window).height();
+		var headerH = $(".g-header").outerHeight();
+		var pageTitleBar = $(".page-title-bar").outerHeight();
+		var pagingBarH = $(".paging-bar").outerHeight();
+
+		$(".main-page").css({
+			"min-height":winH - headerH - pagingBarH -pageTitleBar - 40
+		});
+	})();
+});
+</script>
+</body>
+</html>

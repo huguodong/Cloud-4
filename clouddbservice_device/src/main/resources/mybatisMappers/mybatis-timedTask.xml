@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="timed_task">
+
+	<insert id="insertTimedTask" parameterType="com.ssitcloud.entity.TimedTaskEntity" useGeneratedKeys="true" keyProperty="task_idx">
+		insert into timed_task
+		(		
+            lib_idx,task_type,task_starttime,oper_idx,task_name,task_desc,task_state,creattime,updatetime
+		)
+		values
+		(
+             #{lib_idx},#{task_type},#{task_starttime},#{oper_idx},#{task_name},#{task_desc},#{task_state},#{creattime},#{updatetime}
+		)
+	</insert>
+	
+	<update id="updateTimedTask" parameterType="com.ssitcloud.entity.TimedTaskEntity">
+		update timed_task
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="lib_idx!=null">
+				lib_idx=#{lib_idx},
+			</if>
+			<if test="task_type!=null">
+				task_type=#{task_type},
+			</if>
+			<if test="task_starttime!=null">
+				task_starttime=#{task_starttime},
+			</if>
+			<if test="oper_idx!=null">
+				oper_idx=#{oper_idx},
+			</if>
+			<if test="task_name!=null">
+				task_name=#{task_name},
+			</if>
+			<if test="task_desc!=null">
+				task_desc=#{task_desc},
+			</if>
+			<if test="task_state!=null">
+				task_state=#{task_state},
+			</if>
+			<if test="creattime!=null">
+				creattime=#{creattime},
+			</if>
+			<if test="updatetime!=null">
+				updatetime=#{updatetime},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="task_idx!=null">
+			and task_idx=#{task_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteTimedTask" parameterType="com.ssitcloud.entity.TimedTaskEntity">
+		delete from timed_task where task_idx=#{task_idx}
+	</delete>
+	
+	<select id="selectTimedTask" parameterType="com.ssitcloud.entity.TimedTaskEntity" resultType="com.ssitcloud.entity.TimedTaskEntity">
+		SELECT task_idx,lib_idx,task_type,task_starttime,oper_idx,task_name,task_desc,task_state,creattime,updatetime FROM timed_task 
+	    where 1=1
+		<if test="task_idx!=null">
+			AND task_idx=#{task_idx}
+		</if>
+		<if test="task_state!=null">
+			AND task_state=#{task_state}
+		</if>
+	</select>
+	<select id="selectTimedTasks" parameterType="com.ssitcloud.entity.TimedTaskEntity" resultType="com.ssitcloud.entity.TimedTaskEntity">
+		SELECT task_idx,lib_idx,task_type,task_starttime,oper_idx,task_name,task_desc,task_state,creattime,updatetime FROM timed_task
+	</select>
+	
+	
+	
+</mapper>

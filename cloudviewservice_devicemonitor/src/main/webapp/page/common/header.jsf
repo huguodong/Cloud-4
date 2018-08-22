@@ -1,0 +1,26 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+
+<div class="g-loading"></div>
+<div class="g-header">
+	<a href="${pageContext.request.contextPath}/page/main.jsp" class="logo"></a> 
+	<a class="exit" href="${pageContext.request.contextPath}/login/logout"><span	class="icon"></span>退出</a>
+	<div class="status">
+		<span class="icon"></span>系统管理员
+	</div>
+	<!-- <div class="g-select language">
+		<span class="icon"></span>
+		<select id="langSelect">
+			<option value="zh_CN" selected>中文</option>
+			<option value="cn_US">英文</option>
+		</select> <span class="arr-icon"></span>
+	</div> -->
+</div>
+
+<script type="text/javascript">
+var o = <shiro:principal/>;
+if(o){
+	$(".status").html('<span class="icon"></span>'+o.operator_name);
+}
+
+</script>

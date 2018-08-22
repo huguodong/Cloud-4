@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList xmlns="http://www.example.org/RequestURLConfSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- project_name约定唯一 -->
+	<project projectName="cloudbusinessservice_nodemonitor" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/nodeMonitor/queryByPage" id="queryNodeMonitorByPage" />
+		<RequestUrl requestMapping="/nodeMonitor/queryByParam" id="queryNodeMonitorByParam" />
+		<RequestUrl requestMapping="/nodeMonitor/queryById" id="queryNodeMonitorById" />
+		<RequestUrl requestMapping="/nodeMonitor/getTypeList" id="getTypeList" />
+	</project>
+	
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/hearbeat/saveData" id="HEARBEAT_URL" />
+	</project>
+	
+	<!-- 验证 -->
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/operator/loginCheck" id="loginCheck"/>
+	</project>
+	
+	<project projectName="cloudbusinessservice_device" baseURL="http://127.0.0.1:8080">
+		<!-- 查询权限 -->
+		<RequestUrl requestMapping="/permission/SelPermissionbyOperIdx" id="SelPermissionByOperIdx"/>
+		<RequestUrl requestMapping="/metaopercmd/SelectMetaOperCmd" id="SelectMetaOperCmd"/>
+		<!-- 云平台管理员获取所有权限 -->
+		<RequestUrl requestMapping="/permission/SelPermissionBySsitCloudAdmin" id="SelPermissionBySsitCloudAdmin"/>
+	</project>
+
+</RequestUrlList>

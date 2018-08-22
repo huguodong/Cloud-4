@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devicelogconfig">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.DeviceLogConfigEntity"
+		useGeneratedKeys="true" keyProperty="device_log_idx">
+		INSERT INTO device_log_config
+		(device_idx, runlog_level,runlog_type,runlog_filesize,library_idx)
+		VALUES
+		(#{device_idx},#{runlog_level},#{runlog_type},#{runlog_filesize},#{library_idx})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.DeviceLogConfigEntity">
+		UPDATE device_log_config
+		<set>
+			<if test="device_idx !=null and device_idx !=''">
+				device_idx = #{device_idx},
+			</if>
+			<if test="runlog_level !=null and runlog_level !=''">
+				runlog_level = #{runlog_level},
+			</if>
+			<if test="runlog_type !=null and runlog_type !=''">
+				runlog_type = #{runlog_type},
+			</if>
+			<if test="runlog_filesize !=null and runlog_filesize !=''">
+				runlog_filesize = #{runlog_filesize},
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				library_idx = #{library_idx},
+			</if>
+		</set>
+		WHERE device_log_idx = #{device_log_idx}
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM device_log_config
+		WHERE  device_log_idx = #{device_log_idx}
+	</delete>
+
+	<select id="select" parameterType="com.ssitcloud.entity.DeviceLogConfigEntity"
+		resultType="com.ssitcloud.entity.DeviceLogConfigEntity">
+		SELECT * FROM device_log_config
+		<where>
+			<if test="device_log_idx !=null and device_log_idx !=''">
+				and device_log_idx = #{device_log_idx}
+			</if>
+			<if test="device_idx !=null and device_idx !=''">
+				and device_idx = #{device_idx}
+			</if>
+			<if test="runlog_level !=null and runlog_level !=''">
+				and runlog_level = #{runlog_level}
+			</if>
+			<if test="runlog_type !=null and runlog_type !=''">
+				and runlog_type = #{runlog_type}
+			</if>
+			<if test="runlog_filesize !=null and runlog_filesize !=''">
+				and runlog_filesize = #{runlog_filesize}
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

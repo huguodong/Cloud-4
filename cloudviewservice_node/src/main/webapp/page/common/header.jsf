@@ -1,0 +1,291 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+
+<div class="g-loading"></div>
+<div class="g-header">
+	<a href="${pageContext.request.contextPath}/page/main.jsp" class="logo"></a> 
+	<a class="exit" href="${pageContext.request.contextPath}/login/logout"><span	class="icon"></span>退出</a>
+	<a class="exit" href="javascript:void(0)" id="changePwd"></span>修改密码</a>
+	<div class="status">
+		<span class="icon"></span>系统管理员
+	</div>
+	<%-- <div class="g-select language">
+		<span class="icon"></span>
+		<select id="langSelect">
+			<option value="zh_CN" selected>中文</option>
+			<option value="cn_US">英文</option>
+		</select> <span class="arr-icon"></span>
+	</div> --%>
+</div>
+<style>
+.g-password-dialog{
+    display: none;
+    width: 400px;
+    height:260px;
+    padding-bottom: 40px;
+    text-align: center;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.g-password-dialog .line{
+    display: block;
+    height: 5px;
+    background-color: #00a2e9;
+}
+.g-password-dialog .word {
+ 	padding-top: 36px;
+    height: 230px;
+    font-size: 14px;
+    color: #333333;
+    box-sizing: border-box;
+}
+
+.g-password-dialog .form-btn {
+	display: inline-block;
+    width: 120px;
+    height: 35px;
+    margin: 0 5px;
+    line-height: 35px;
+    color: #FFF;
+    border-radius: 4px;
+    background-color: #aaaaaa;
+}
+.g-password-dialog .g-input{
+    height: 28px;
+}
+.g-password-dialog .item li {
+    float: left;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.g-password-dialog span.error-msg {
+	display:none;	
+}
+
+.g-password-dialog li.error .g-input {
+	background-color: #ffeeee;
+    border-color: #ff2323;
+}
+
+.g-password-dialog li.error span.error-msg {
+	display:inline;	
+	color: #ff2323;
+}
+
+.changePwd .left {
+	float: left;
+	width: 130px;
+	line-height: 28px;
+	padding-right: 20px;
+	text-align: right;
+}
+</style>
+
+<div class="g-password-dialog changePwd">
+	<span class="line"></span>
+	<div class="word">
+		<div class="item">
+			<ul>
+				<li class="">
+					<div class="left">原始密码:</div>
+					<div class="right"><input class="g-input" type="password" id="oldpwd" name="" placeholder="">
+					<span class="error-msg"></span></div>
+				</li>
+				<li class="">
+					<div class="left">新密码:</div>
+					<div class="right"><input class="g-input" type="password" id="newpwd1" name="" placeholder="">
+					<span class="error-msg"></span></div>
+				</li>
+				<li class="">
+					<div class="left">确认密码:</div>
+					<div class="right"><input class="g-input" type="password" id="newpwd2" name="" placeholder="">
+					<span class="error-msg"></span></div>
+				</li>
+			</ul>
+			
+		</div>
+	</div>
+	
+	<div class="form-btn cancel g-btn-gray">取消</div>
+	<div class="form-btn save g-btn-blue">确认</div>
+</div>
+
+<script type="text/javascript">
+/* var oper = <shiro:principal/>;
+//if(oper){ */
+	//$(".status").html('<span class="icon"></span>'+oper.operator_name);
+//}
+
+<%-- 修改密码 --%>
+var passwordLayer = null;
+$(document).on("click","#changePwd",function(){
+	$(".g-password-dialog :input").val("");
+	$(".g-password-dialog li.error").removeClass("error");
+	
+	passwordLayer = layer.open({
+		type: 1,
+		shade: false,
+		title: false, //不显示标题
+		scrollbar :false,
+		closeBtn :0,
+		shade:0.5,
+		shadeClose :false,
+		area:["400px","300px"],
+		offset :["195px"],
+		content: $('.g-password-dialog.changePwd')
+	});
+});
+
+<%-- 取消修改 --%>
+$(document).on("click",".changePwd .cancel",function(){
+	if(passwordLayer!=null){
+		layer.close(passwordLayer);
+	}
+});
+
+<%-- 确认修改 --%>
+$(document).on("click",".changePwd .save",function(){
+	if($(this).hasClass("disabled")){
+		return;
+	}
+	$(this).removeClass("disabled");
+	if(!checkPwd()){
+		return;
+	}
+	$(".g-loading").fadeIn(100);
+	var password = {};
+	password.old = $("#oldpwd").val();
+	password.pwd1 = $("#newpwd1").val();
+	password.pwd2 = $("#newpwd2").val();
+	$.ajax({
+		url:"${pageContext.request.contextPath}/operator/changePassword",
+		type:"POST",
+		data:{"json":JSON.stringify(password)},
+		timeout:8000
+	}).done(function(data){
+		$(".g-loading").stop();
+		$(".g-loading").hide();
+		if(data!=null){
+			if(data.state){
+				layer.alert("修改成功!");
+				if(passwordLayer!=null){
+					layer.close(passwordLayer);
+				}
+			}else{
+				if(data.retMessage=="charset"){
+					var msg = data.message;
+					var char = msg.substring(msg.indexOf(":")+1);
+					var info = "";
+					if(char.indexOf("1")>-1){
+						info += "大写字母,";
+					}
+					if(char.indexOf("2")>-1){
+						info += "小写字母,";
+					}
+					if(char.indexOf("3")>-1){
+						info += "数字,";
+					}
+					if(char.indexOf("4")>-1){
+						info += "特殊字符(^%&',;=?$/),";
+					}
+					if(info.length>0){
+						info = info.substring(0,info.length-1);
+					}
+					info = "密码由"+info+"组成";
+					$("#newpwd1").closest("li").addClass("error");
+					$("#newpwd1").closest("li").find("span").html(info);
+				}else if(data.retMessage == "length"){
+					$("#newpwd1").closest("li").addClass("error");
+					$("#newpwd1").closest("li").find("span").html(data.message);
+				}else{
+					layer.alert(data.message);
+				}
+			}
+		}
+	}).always(function(data,status){
+		$(".g-loading").stop();
+		$(".g-loading").hide();
+		if(status=="timeout"){
+			layer.alert("连接超时，请重试");
+		}
+	});
+	
+});
+
+<%-- 检查密码 --%>
+function checkPwd(){
+	var flag = true;
+	var old = $("#oldpwd").val();
+	var pwd1 = $("#newpwd1").val();
+	var pwd2 = $("#newpwd2").val();
+	if(_.isEmpty(old)){
+		$("#oldpwd").closest("li").addClass("error");
+		$("#oldpwd").closest("li").find("span").html("请输入原始密码");
+		flag = false;
+	}else{
+		$("#oldpwd").closest("li").removeClass("error");
+	}
+	if(_.isEmpty(pwd1)){
+		$("#newpwd1").closest("li").addClass("error");
+		$("#newpwd1").closest("li").find("span").html("请输入新密码");
+		flag = false;
+	}else{
+		$("#newpwd1").closest("li").removeClass("error");
+	}
+	if(_.isEmpty(pwd2)){
+		$("#newpwd2").closest("li").addClass("error");
+		$("#newpwd2").closest("li").find("span").html("请输入确认密码");
+		flag = false;
+	}else{
+		$("#newpwd2").closest("li").removeClass("error");
+	}
+	
+	if(!_.isEmpty(pwd1) && !_.isEmpty(pwd2)){
+		if(!_.isEqual(pwd1,pwd2)){
+			$("#newpwd2").closest("li").addClass("error");
+			$("#newpwd2").closest("li").find("span").html("密码不一致，请确认");
+			$("#newpwd2").focus();
+			flag = false;
+		}else{
+			$("#newpwd2").closest("li").removeClass("error");
+		}
+	}
+	
+	return flag;
+}
+
+<%-- 确认密码修改事件 --%>
+$("#newpwd1,#newpwd2").on("blur",function(){
+	if($("#newpwd1").closest("li").hasClass("error")
+			|| $("#newpwd2").closest("li").hasClass("error")){
+		var pwd1 = $("#newpwd1").val();
+		var pwd2 = $("#newpwd2").val();
+		if(_.isEmpty(pwd2)){
+			$("#newpwd2").closest("li").addClass("error");
+			$("#newpwd2").closest("li").find("span.error-msg").html("请输入确认密码");
+			flag = false;
+		}else{
+			$("#newpwd2").closest("li").removeClass("error");
+		}
+		if(_.isEmpty(pwd1)){
+			$("#newpwd1").closest("li").addClass("error");
+			$("#newpwd1").closest("li").find("span.error-msg").html("请输入密码");
+			flag = false;
+		}else{
+			$("#newpwd1").closest("li").removeClass("error");
+		}
+		if(!_.isEmpty(pwd1) && !_.isEmpty(pwd2)){
+			if(!_.isEqual(pwd1,pwd2)){
+				$("#newpwd2").closest("li").addClass("error");
+				$("#newpwd2").closest("li").find("span.error-msg").html("密码不一致，请确认");
+				flag = false;
+			}else{
+				$("#newpwd2").closest("li").removeClass("error");
+			}
+		}
+	}
+});
+
+</script>

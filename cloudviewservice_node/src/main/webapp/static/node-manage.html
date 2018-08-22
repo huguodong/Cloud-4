@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8 oldie"><![endif]-->
+<!--[if IE 9]><html class="ie9 oldie"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <meta HTTP-EQUIV="expires" CONTENT="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <title>节点管理</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/common.js" ></script>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="css/ie.css" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="js/html5.js" ></script>
+    <script type="text/javascript" src="js/ie.js" ></script>
+    <![endif]-->
+
+</head>
+<body>
+<div class="equipment-guanli">
+    <div class="g-loading"></div>
+    <div class="g-header">
+        <a href="main.html" class="logo"></a>
+        <a class="exit" href="index.html"><span class="icon"></span>退出</a>
+        <div class="status"><span class="icon"></span>系统管理员</div>
+        <div class="g-select language">
+            <span class="icon"></span>
+            <select>
+                <option value="" selected>中文</option>
+                <option value="">英文</option>
+            </select>
+            <span class="arr-icon"></span>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="left-side">
+            <div class="control-btn"></div>
+            <div class="absolute-wrap">
+                <div class="title">菜单</div>
+                <div class="item">
+                    <div class="t icon1"><a href="main.html">首页</a></div>
+                </div>
+                <div class="item active">
+                    <div class="t icon7">节点管理<span class="arr-icon"></span></div>
+                    <ul>
+                        <li class="active"><a href="node-manage.html">节点管理</a></li>
+                        <li><a href="node-type.html">节点类型</a></li>
+                        <li><a href="container-manage.html">容器管理</a></li>
+                        <li><a href="vps-manager.html">云主机管理</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page-title-bar">
+            <span class="title">节点管理<a href="help-page.html" target="_blank" class="g-help"></a></span>
+            <div class="form-wrap fr">
+                <div class="g-select">
+                    <select>
+                        <option value="-1" selected>选择类型</option>
+                        <option value="">视图层</option>
+                        <option value="">业务层</option>
+                        <option value="">数据层</option>
+                    </select>
+                    <span class="arr-icon"></span>
+                </div>
+                <!--<div class="g-select">
+                    <select>
+                        <option value="-1" selected>选择分组</option>
+                        <option value="">分组1</option>
+                    </select>
+                    <span class="arr-icon"></span>
+                </div>-->
+                <input type="text" name=""  class="input g-input" placeholder="输入关键词" />
+                <div class="btn search">查询</div>
+                <div class="btn increase g-btn-green">新增</div>
+                <div class="btn delete">删除</div>
+            </div>
+        </div>
+        <div class="main">
+            <table class="g-table">
+                <thead>
+                <tr>
+                    <th class="col1"><div class="g-checkbox"><input type="checkbox" name=""/></div></th>
+                    <th class="col2">节点ID</th>
+                    <th class="col3">节点名称</th>
+                    <th class="col4">节点类型</th>
+                    <th class="col4">业务类型</th>
+                    <th class="co20">节点属性</th>
+                    <th class="col5">节点路径</th>
+                    <th class="col5">上下层通讯列表</th>
+                    <th class="col6">节点IP</th>
+                    <th class="col7">节点端口</th>
+                    <th class="col8">服务图书馆列表</th>
+                    <th class="col9">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col1"><div class="g-checkbox"><input type="checkbox" name=""  /></div></td>
+                    <td class="col2">NODE001</td>
+                    <td class="col3">节点001</td>
+                    <td class="col4">类型01</td>
+                    <td class="col4">aaa</td>
+                    <td class="co20">主</td>
+                    <td class="col5">/a/a/a/b</td>
+                    <td class="co5"><span class="btn-a detail comm">列表详情</span></td></td>
+                    <td class="col6">127.0.0.1</td>
+                    <td class="col7">3306</td>
+                    <td class="col8"><span class="btn-a detail lib">列表详情</span></td>
+                    <td class="col9">
+                        <span class="btn-a edit">编辑</span>
+                        <span class="btn-a delete">删除</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="paging-bar">
+            <div class="left">
+                <span class="t fl">选择</span>
+                <div class="btn g-chooseAll">全选</div>
+                <div class="btn g-noChooseAll">反选</div>
+                <span class="t2 fl">显示</span>
+                <div class="g-select refresh">
+                    <select>
+                        <option value="" selected>30</option>
+                        <option value="">60</option>
+                    </select>
+                    <span class="arr-icon"></span>
+                </div>
+                <span class="t2 fl">已选中7个</span>
+            </div>
+            <div class="right">
+                <div class="prev-page">上一页</div>
+                <ul>
+                    <li class="active">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>...</li>
+                    <li>50</li>
+                    <li>120</li>
+                </ul>
+                <div class="next-page">下一页</div>
+            </div>
+            <span class="total-page fr">共500</span>
+        </div>
+    </div>
+</div>
+<div class="g-lib-detail-dialog">
+    <div class="title">图书管服务列表</div>
+    <div class="list">
+        <div style="width:95%;height:500px;overflow:auto;padding-top: 30px">
+            <ul>
+                <li style="float: left;width:25%">
+                    <label >A图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >E图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >A图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >E图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >C图书馆</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="g-comm-detail-dialog">
+    <div class="title">上下层通讯务列表</div>
+    <div style="padding-top: 10px;padding-left: 20px">上层通讯列表</div>
+    <div class="list">
+        <div style="width:95%;height:200px;overflow:auto;padding-top: 30px">
+            <ul>
+                <li style="float: left;width:25%">
+                    <label >A图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >E图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >A图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >E图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >C图书馆</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="padding-top: 10px;padding-left: 20px">下层通讯列表</div>
+    <div class="list">
+        <div style="width:95%;height:200px;overflow:auto;padding-top: 30px">
+            <ul>
+                <li style="float: left;width:25%">
+                    <label >A图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >E图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >A图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >E图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <label >C图书馆</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="g-delete-dialog">
+    <span class="line"></span>
+    <div class="word">
+        当前选择了 <span class="font-red">7</span> 个项目<br>
+        是否要删除选择的配置？
+    </div>
+    <div class="form-btn cancel g-btn-gray">取消</div>
+    <div class="form-btn remove g-btn-red">删除</div>
+</div>
+<div class="form-dialog">
+    <div class="title">新增节点</div>
+    <div class="form-wrap">
+        <ul>
+            <li>
+                <div class="left">节点&nbsp&nbspI&nbsp&nbspD</div>
+                <div class="right">
+                    <input type="text" name=""  id="node_id" class="g-input" value="NODE001" disabled/>
+                </div>
+            </li>
+            <li>
+                <div class="left">节点名称</div>
+                <div class="right">
+                    <input type="text" name=""  id="node_name" class="g-input" value="节点001" disabled/>
+                </div>
+            </li>
+            <li>
+                <div class="left"><span class="g-mustIn">节点类型</span></div>
+                <div class="right">
+                    <div class="g-select">
+                        <select>
+                            <option value="" selected>请选择</option>
+                            <option value=""></option>
+                        </select>
+                        <span class="arr-icon"></span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="left"><span class="g-mustIn">业务类型</span></div>
+                <div class="right">
+                    <div class="g-select">
+                        <select>
+                            <option value="" selected>请选择</option>
+                            <option value=""></option>
+                        </select>
+                        <span class="arr-icon"></span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="left"><span class="g-mustIn">节点属性</span></div>
+                <div class="right">
+                    <div class="g-select">
+                        <select>
+                            <option value="" selected>请选择</option>
+                            <option value="">主节点</option>
+                            <option value="">备节点</option>
+                        </select>
+                        <span class="arr-icon"></span>
+                    </div>
+                </div>
+            </li>
+            <li class="error">
+                <div class="left"><span class="g-mustIn">节点路径</span></div>
+                <div class="right">
+                    <input type="text" name=""  class="g-input" placeholder="请输入"  />
+                </div>
+            </li>
+            <li class="error">
+                <div class="left"><span class="g-mustIn">节点&nbsp&nbspI&nbsp&nbspP</span></div>
+                <div class="right">
+                    <input type="text" name=""  class="g-input" placeholder="请输入"  />
+                    <span class="error-msg">错误信息</span>
+                </div>
+            </li>
+            <li class="error">
+                <div class="left"><span class="g-mustIn">节点端口</span></div>
+                <div class="right">
+                    <input type="text" name=""  class="g-input" placeholder="请输入"  />
+                    <span class="error-msg">错误信息</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="list">
+        <label >上层通讯列表</label>
+        <div style="width:95%;height:100px;overflow:auto;">
+            <lu>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li><li style="float: left;width:25%">
+                <div class="g-checkbox"><input type="checkbox" name=""></div>
+                <label >A图书馆</label>
+            </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li><li style="float: left;width:25%">
+                <div class="g-checkbox"><input type="checkbox" name=""></div>
+                <label >A图书馆</label>
+            </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li>
+            </lu>
+        </div>
+    </div>
+    <div class="list">
+        <label >下层通讯列表</label>
+        <div style="width:95%;height:100px;overflow:auto;">
+            <lu>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li><li style="float: left;width:25%">
+                <div class="g-checkbox"><input type="checkbox" name=""></div>
+                <label >A图书馆</label>
+            </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li><li style="float: left;width:25%">
+                <div class="g-checkbox"><input type="checkbox" name=""></div>
+                <label >A图书馆</label>
+            </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li>
+            </lu>
+        </div>
+    </div>
+    <div class="list">
+        <label >服务图书管列表</label>
+        <div style="width:95%;height:100px;overflow:auto;">
+            <lu>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >A图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >A图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >A图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li><li style="float: left;width:25%">
+                <div class="g-checkbox"><input type="checkbox" name=""></div>
+                <label >A图书馆</label>
+            </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li><li style="float: left;width:25%">
+                <div class="g-checkbox"><input type="checkbox" name=""></div>
+                <label >A图书馆</label>
+            </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >B图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >C图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >D图书馆</label>
+                </li>
+                <li style="float: left;width:25%">
+                    <div class="g-checkbox"><input type="checkbox" name=""></div>
+                    <label >E图书馆</label>
+                </li>
+
+
+            </lu>
+        </div>
+    </div>
+    <div class="" style="text-align: center;padding-bottom: 30px;padding-top: 20px" width="100%">
+        <input type="submit" value="新增" class="submit g-btn-green" />
+    </div>
+</div>
+<script src="plugins/layer/layer.js"></script>
+<script type="text/javascript">
+    $(function(){
+        (function mainHeightController(){
+            var winH = $(window).height();
+            var headerH = $(".g-header").outerHeight();
+            var pageTitleBar = $(".page-title-bar").outerHeight();
+            var pagingBarH = $(".paging-bar").outerHeight();
+
+            $(".main").css({
+                "min-height":winH - headerH - pagingBarH -pageTitleBar
+            });
+        })();
+        var detailLayer = null;
+        var delLayer = null;
+        var editlLayer = null;
+        $(".delete").on("click",function(){
+            delLayer = layer.open({
+                type: 1,
+                shade: false,
+                title: false, //不显示标题
+                scrollbar :false,
+                closeBtn :0,
+                shade:0.5,
+                shadeClose :true,
+                area:["400px"],
+                offset :["195px"],
+                content: $('.g-delete-dialog')
+            });
+
+        });
+
+        $(".lib").on("click",function(){
+            detailLayer = layer.open({
+                type: 1,
+                shade: false,
+                title: false, //不显示标题
+                scrollbar :false,
+                closeBtn :1,
+                shade:0.5,
+                shadeClose :true,
+                area:["600px"],
+                offset :["150px"],
+                content: $('.g-lib-detail-dialog')
+            });
+
+        });
+        $(".comm").on("click",function(){
+            detailLayer = layer.open({
+                type: 1,
+                shade: false,
+                title: false, //不显示标题
+                scrollbar :false,
+                closeBtn :1,
+                shade:0.5,
+                shadeClose :true,
+                area:["600px"],
+                offset :["150px"],
+                content: $('.g-comm-detail-dialog')
+            });
+
+        });
+
+        $(".edit").on("click",function(){
+            layerOpen({
+                "title":"编辑节点",
+                "btnText":"保存",
+                "btnColorClass":"g-btn-blue",
+                "status" : true
+            });
+        });
+
+        $(".increase").on("click",function(){
+            layerOpen({
+                "title":"新增节点",
+                "btnText":"新增",
+                "btnColorClass":"g-btn-blue",
+                "status" : false
+            });
+        });
+
+
+        function layerOpen(options){
+            var defaults = {
+                title:"",
+                btnText : "新增"
+            }
+            options = $.extend(defaults,options);
+
+            var $submit = $(".form-dialog .submit");
+            $(".form-dialog .title").text(options.title);
+            if(options.status){
+                $("#node_id").val("NODE001");
+                $("#node_id").attr("disabled")
+                $("#node_name").val("节点001");
+                $("#node_name").attr("disabled");
+            }
+            else{
+                $("#node_id").val("");
+                $("#node_id").removeAttr("disabled");
+                $("#node_name").val("");
+                $("#node_name").removeAttr("disabled");
+            }
+            $submit.val(options.btnText);
+            $submit.removeClass("g-btn-green").removeClass(".g-btn-blue");
+            $submit.addClass(options.btnColorClass);
+            editlLayer = layer.open({
+                type: 1,
+                shade: false,
+                title: false, //不显示标题
+                scrollbar :false,
+                closeBtn :1,
+                shade:0.5,
+                shadeClose :true,
+                area:["800px"],
+                offset :["30px"],
+                content: $('.form-dialog')
+            });
+        }
+
+        $(".form-btn.cancel").on("click",function(){
+            if (delLayer) {
+                layer.close(delLayer);
+            }
+        });
+        $(".form-btn.remove").on("click",function(){
+            /*执行删除操作*/
+            if (delLayer) {
+                layer.close(delLayer);
+            }
+        });
+        $(".submit").on("click",function(){
+            /*执行删除操作*/
+            if(detailLayer){
+                layer.close(editlLayer);
+            }
+
+        });
+    });
+</script>
+</body>
+</html>

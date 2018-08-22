@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reader_default">
+
+	<insert id="insertReaderDefault" parameterType="com.ssitcloud.dblib.entity.ReaderDefaultEntity" useGeneratedKeys="true" keyProperty="default_idx">
+		insert into reader_default
+		(		
+            reader_idx,default_device
+		)
+		values
+		(
+             #{reader_idx},#{default_device}
+		)
+	</insert>
+	
+	<update id="updateReaderDefault" parameterType="com.ssitcloud.dblib.entity.ReaderDefaultEntity">
+		update reader_default
+		<set>
+			<if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if>
+			<if test="default_device!=null">
+				default_device=#{default_device},
+			</if>
+		</set>
+		   WHERE default_idx=#{default_idx}
+	</update>
+	
+     <delete id="deleteReaderDefault" parameterType="com.ssitcloud.dblib.entity.ReaderDefaultEntity">
+		delete from reader_default where default_idx=#{default_idx}
+	</delete>
+	
+	<select id="selectReaderDefault" parameterType="com.ssitcloud.dblib.entity.ReaderDefaultEntity" resultType="com.ssitcloud.dblib.entity.ReaderDefaultEntity">
+		SELECT default_idx,reader_idx,default_device FROM reader_default 
+	    where 1=1
+		<if test="default_idx!=null">
+			AND default_idx=#{default_idx}
+		</if>
+	</select>
+	<select id="selectReaderDefaults" parameterType="com.ssitcloud.dblib.entity.ReaderDefaultEntity" resultType="com.ssitcloud.dblib.entity.ReaderDefaultEntity">
+		SELECT default_idx,reader_idx,default_device FROM reader_default 
+	    where 1=1
+	</select>
+	
+	
+	
+</mapper>

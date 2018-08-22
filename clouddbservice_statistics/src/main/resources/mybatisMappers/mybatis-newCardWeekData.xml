@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="newCardWeekData">
+
+	<insert id="insertNewCardWeekData" parameterType="com.ssitcloud.dbstatistics.entity.NewCardWeekDataEntity" useGeneratedKeys="true" keyProperty="newCard_idx">
+		insert into newcardweekdata
+		(		
+            device_idx,lib_idx,newCardCountType,newCardsubType,newCardWeekCount,newCardDate,createDate,updateDate
+		)
+		values
+		(
+             #{device_idx},#{lib_idx},#{newCardCountType},#{newCardsubType},#{newCardWeekCount},#{newCardDate},#{createDate},#{updateDate}
+		)
+	</insert>
+	
+	<update id="updateNewCardWeekData" parameterType="com.ssitcloud.dbstatistics.entity.NewCardWeekDataEntity">
+		update newcardweekdata
+		<set>
+		    <if test="device_idx!=null">
+				device_idx=#{device_idx},
+			</if>
+			<if test="lib_idx!=null">
+				lib_idx=#{lib_idx},
+			</if>
+			<if test="newCardCountType!=null">
+				newCardCountType=#{newCardCountType},
+			</if>
+			<if test="newCardsubType!=null">
+				newCardsubType=#{newCardsubType},
+			</if>
+			<if test="newCardWeekCount!=null">
+				newCardWeekCount=#{newCardWeekCount},
+			</if>
+			<if test="newCardDate!=null">
+				newCardDate=#{newCardDate},
+			</if>
+			<if test="createDate!=null">
+				createDate=#{createDate},
+			</if>
+			<if test="updateDate!=null">
+				updateDate=#{updateDate},
+			</if>
+		</set>
+		   WHERE newCard_idx=#{newCard_idx}
+	</update>
+	
+     <delete id="deleteNewCardWeekData" parameterType="com.ssitcloud.dbstatistics.entity.NewCardWeekDataEntity">
+		delete from newcardweekdata where newCard_idx=#{newCard_idx}
+	</delete>
+	
+	<select id="selectNewCardWeekData" parameterType="com.ssitcloud.dbstatistics.entity.NewCardWeekDataEntity" resultType="com.ssitcloud.dbstatistics.entity.NewCardWeekDataEntity">
+		SELECT newCard_idx,lib_idx,device_idx,newCardCountType,newCardsubType,newCardWeekCount,newCardDate,createDate,updateDate FROM newcardweekdata 
+	    where 1=1
+		<if test="newCard_idx!=null">
+			AND newCard_idx=#{newCard_idx}
+		</if>
+		<if test="lib_idx !=null and lib_idx !=''">
+			AND `lib_idx` = #{lib_idx}
+		</if>
+		<if test="device_idx !=null and device_idx !=''">
+			AND `device_idx` = #{device_idx}
+		</if>
+		<if test="newCardCountType !=null and newCardCountType !=''">
+			AND `newCardCountType` = #{newCardCountType}
+		</if>
+		<if test="newCardsubType !=null and newCardsubType !=''">
+			AND `newCardsubType` = #{newCardsubType}
+		</if>
+		<if test="newCardDate !=null and newCardDate !=''">
+			AND `newCardDate` = #{newCardDate}
+		</if>
+	</select>
+	<select id="selectNewCardWeekDatas" parameterType="com.ssitcloud.dbstatistics.entity.NewCardWeekDataEntity" resultType="com.ssitcloud.dbstatistics.entity.NewCardWeekDataEntity">
+		SELECT newCard_idx,lib_idx,device_idx,newCardCountType,newCardsubType,newCardWeekCount,newCardDate,createDate,updateDate FROM newcardweekdata 
+	    where 1=1
+	</select>
+	<select id="getAllNewCardWeek" parameterType="com.ssitcloud.dbstatistics.entity.NewCardWeekDataEntity" resultType="com.ssitcloud.dbstatistics.entity.NewCardWeekDataEntity">
+		SELECT * FROM newcardweekdata 
+	</select>
+	
+	<select id="countCardissueLog" parameterType="map" resultType="com.ssitcloud.statistics.entity.StatisticsEntity">
+		<choose>
+			<when test="chart_type=='pie'">
+				SELECT 'newCardsubType' type,sum(newCardWeekCount) total from newcardweekdata ll
+			</when>
+			<otherwise>
+				SELECT 'week' type,sum(newCardWeekCount) total,ll.`newCardDate` time from newcardweekdata ll
+			</otherwise>
+		</choose>
+		<where>
+			<if test="lib_idx != null and lib_idx.size() >0">
+				AND ll.`lib_idx` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="device_idx!=null and device_idx!='' and device_idx!=0">
+				AND ll.`device_idx`=#{device_idx}
+			</if>
+			<if test="newCardCountType!=null and newCardCountType!=''">
+				AND ll.`newCardCountType`=#{newCardCountType}
+			</if>
+			<if test="newCardsubType!=null and newCardsubType!=''">
+				AND ll.`newCardsubType`=#{newCardsubType}
+			</if>
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND ll.`newCardDate` BETWEEN #{startTime} AND #{endTime} 
+			</if>
+		</where>
+		<choose>
+			<when test="chart_type=='pie'">
+				GROUP BY newCardsubType
+			</when>
+			<otherwise>
+				GROUP BY TIME ORDER BY TIME
+			</otherwise>
+		</choose>
+	</select>
+</mapper>

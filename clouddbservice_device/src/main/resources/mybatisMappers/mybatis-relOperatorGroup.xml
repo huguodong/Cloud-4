@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reloperatorgroup">
+	<!-- 		
+	INNER JOIN rel_operator_device_group rodg ON rodg.`operator_group_idx`=rog.`operator_group_idx`
+	 -->
+	<select id="queryRoleAndPermession" resultType="com.ssitcloud.entity.UserRolePermessionEntity" parameterType="com.ssitcloud.entity.UserRolePermessionEntity">
+		SELECT 
+		rog.`operator_idx`,
+		rog.`library_idx`,
+		sg.`service_group_idx`,
+		sg.`service_group_name`,
+		mo.`meta_opercmd_idx`,
+		mo.`opercmd`,
+		mo.`operbusinesstype`,
+		mo.`opercmd_desc`,
+		mo.opercmd_url,
+		mo.opercmd_typeinfo 
+		FROM 
+		rel_operator_group rog 
+		INNER JOIN rel_operator_service_group rosg ON rosg.`operator_group_idx`=rog.`operator_group_idx`
+		INNER JOIN service_group sg ON sg.`service_group_idx`=rosg.`service_group_idx`
+		INNER JOIN rel_service_group rsg ON rsg.`service_group_idx`=rosg.`service_group_idx`
+		INNER JOIN metadata_opercmd mo ON mo.`meta_opercmd_idx`=rsg.`meta_opercmd_idx`
+		WHERE 1=1 
+		AND rog.`operator_idx`=#{operator_idx}
+		<if test="opercmd!=null and opercmd!=''">
+			AND mo.opercmd like CONCAT('','${opercmd}','%')
+		</if>
+		<if test="opercmd_typeinfo!=null and opercmd_typeinfo!=''">
+			AND mo.opercmd_typeinfo=#{opercmd_typeinfo}
+		</if>
+		GROUP BY 
+		rog.`operator_idx`,
+		rog.`library_idx`,
+		sg.`service_group_idx`,
+		sg.`service_group_name`,
+		mo.`meta_opercmd_idx`,
+		mo.`opercmd`,
+		mo.`operbusinesstype`,
+		mo.`opercmd_desc`,
+		mo.opercmd_url,
+		mo.opercmd_typeinfo 
+		order by mo.`opercmd`
+	</select>
+	<!-- 查询所有权限 （管理员权限） -->
+	<select id="queryAll" resultType="com.ssitcloud.entity.UserRolePermessionEntity">
+		select 
+		mo.`meta_opercmd_idx`,
+		mo.`opercmd`,
+		mo.`operbusinesstype`,
+		mo.`opercmd_desc`,
+		mo.opercmd_url 
+		from metadata_opercmd mo
+		order by mo.`opercmd`
+	</select>
+	<insert id="insert" parameterType="com.ssitcloud.entity.RelOperatorGroupEntity"
+		useGeneratedKeys="true" keyProperty="rel_operator_idx">
+		INSERT INTO rel_operator_group
+		(operator_group_idx, operator_idx, library_idx)
+		VALUES
+		(#{operator_group_idx},#{operator_idx},#{library_idx})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.RelOperatorGroupEntity">
+		UPDATE rel_operator_group
+		<set>
+			<if test="operator_group_idx !=null and operator_group_idx !=''">
+				operator_group_idx = #{operator_group_idx},
+			</if>
+			<if test="operator_idx !=null and operator_idx !=''">
+				operator_idx = #{operator_idx},
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				library_idx = #{library_idx}
+			</if>
+		</set>
+		WHERE rel_operator_idx = #{rel_operator_idx}
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.RelOperatorGroupEntity">
+		DELETE FROM rel_operator_group
+		WHERE  rel_operator_idx = #{rel_operator_idx}
+		
+	</delete>
+
+	<select id="selectByidx" parameterType="com.ssitcloud.entity.RelOperatorGroupEntity"
+		resultType="com.ssitcloud.entity.RelOperatorGroupEntity">
+		SELECT * FROM rel_operator_group
+		<where>
+			<if test="rel_operator_idx !=null and rel_operator_idx !=''">
+				and rel_operator_idx = #{rel_operator_idx}
+			</if>
+			<if test="operator_group_idx !=null and operator_group_idx !=''">
+				and operator_group_idx = #{operator_group_idx}
+			</if>
+			<if test="operator_idx !=null and operator_idx !=''">
+				and operator_idx = #{operator_idx}
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectAll" resultType="com.ssitcloud.entity.RelOperatorGroupEntity">
+		SELECT * FROM
+		rel_operator_group
+	</select>
+	
+	
+	<select id="queryOperatorGroupByOperIdx" resultType="com.ssitcloud.entity.RelOperatorGroupEntity">
+		SELECT * FROM rel_operator_group WHERE operator_idx = #{operator_idx} limit 1
+	</select>
+	
+	<delete id="deleteRelByOperatorIdx">
+		DELETE FROM rel_operator_group WHERE operator_idx = #{operator_idx}
+	</delete>
+	<delete id="deleteRelOperatorGroupByOperatorIdxs" parameterType="List">
+		DELETE FROM rel_operator_group
+		WHERE operator_idx IN
+		<foreach collection="list" item="operator_idx" open="(" close=")" separator=",">
+			#{operator_idx}
+		</foreach>
+	</delete>
+
+</mapper>

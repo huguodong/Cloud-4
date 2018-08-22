@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="devicereader">
+
+	<insert id="saveDeviceReaderInfo" parameterType="com.ssitcloud.dblib.entity.DeviceReaderEntity" useGeneratedKeys="true" keyProperty="reader_idx">
+		INSERT INTO devicereader (
+		`lib_idx`,
+		`authcardno`,
+		`authtype`,
+		`cardtype`,
+		`expiredate`,
+		`privilegefee`,
+		`name`,
+		`birth`,
+		`gender`,
+		`ethnicgroup`,
+		`address`
+		)
+		VALUES
+		  (
+		 	#{lib_idx},
+			#{authcardno},
+			#{authtype},
+			#{cardtype},
+			#{expiredate},
+			#{privilegefee},
+			#{name},
+			#{birth},
+			#{gender},
+			#{ethnicgroup},
+			#{address}
+		  )
+	</insert>
+	<update id="updateDeviceReaderInfo" parameterType="com.ssitcloud.dblib.entity.DeviceReaderEntity" >
+		UPDATE  devicereader 
+		set
+		`authtype`= #{authtype},
+		`cardtype`= #{cardtype},
+		`expiredate`= #{expiredate},
+		`privilegefee`= #{privilegefee},
+		`name`= #{name},
+		`birth`= #{birth},
+		`gender`= #{gender},
+		`ethnicgroup`= #{ethnicgroup},
+		`address`= #{address}
+		where lib_idx = #{lib_idx} and authcardno = #{authcardno}
+	</update>
+	
+	<select id="countReaderByLibIdxAndCardno" resultType="java.lang.Integer">
+		select COUNT(*) from devicereader where lib_idx = #{lib_idx} and authcardno = #{authcardno}
+	</select>
+</mapper>

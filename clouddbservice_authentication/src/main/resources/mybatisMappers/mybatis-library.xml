@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="library">
+
+
+
+<insert id="addLibrary" parameterType="com.ssitcloud.dbauth.entity.LibraryEntity"
+  useGeneratedKeys="true" keyProperty="library_idx">
+	INSERT INTO `library` ( 
+		`lib_id`,
+		`lib_name`,
+		`lib_type`,
+		`lib_service_tpl_id`,
+		`service_start_date`,
+		`service_expire_date`,
+		`createtime`
+	) VALUES (
+		#{lib_id},
+		#{lib_name},
+		#{lib_type},
+		#{lib_service_tpl_id},
+		<!-- NOW(), -->
+		#{service_start_date},
+		#{service_expire_date},
+		NOW()
+	)
+</insert>
+<insert id="addLibraryWithIdx" parameterType="com.ssitcloud.dbauth.entity.LibraryEntity"
+  useGeneratedKeys="true" keyProperty="library_idx">
+	  INSERT INTO `library` ( 
+	    `library_idx`,
+		`lib_id`,
+		`lib_name`,
+		`lib_type`,
+		`lib_service_tpl_id`,
+		`service_start_date`,
+		`service_expire_date`,
+		`createtime`
+	) VALUES (
+		#{library_idx},
+		#{lib_id},
+		#{lib_name},
+		#{lib_type},
+		#{lib_service_tpl_id},
+		NOW(),
+		#{service_expire_date},
+		NOW()
+	)
+  
+</insert>
+<delete id="delLibraryByIdx">
+	DELETE FROM `library` WHERE `library_idx` = #{library_idx} 
+	<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+	</if>
+</delete>
+
+<select id="selMasterlib" resultType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	SELECT library_idx,lib_id,lib_name,lib_type
+	FROM `library`
+</select>
+
+<select id="selLibraryByIdxOrId" resultType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	SELECT * FROM `library` 
+	<where>
+		<choose>
+			<when test="library_idx != null">
+				AND	`library_idx` = #{library_idx}
+			</when>
+			<when test="lib_id != null and lib_id != ''">
+				AND	`lib_id` = #{lib_id}
+			</when>
+			<otherwise>
+				AND 1 = 0
+			</otherwise>
+		</choose>
+	</where> 
+	
+</select>
+
+<select id="selLibraryByIdxsOrIds" resultType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	SELECT * FROM `library` 
+	<where>
+		<if test="lib_idxs != null and lib_idxs.size() >0">
+			OR `library_idx` IN 
+			<foreach collection="lib_idxs" item="lib_idx" open="(" close=")" separator=",">
+				#{lib_idx}
+			</foreach>
+		</if>
+		<if test="lib_ids != null and lib_ids.size() >0">
+			OR `lib_id` IN 
+			<foreach collection="lib_ids" item="lib_id" open="(" close=")" separator=",">
+				#{lib_id}
+			</foreach>
+		</if>
+	</where> 	
+</select>
+
+<select id="selLibraryByFuzzy" resultType="com.ssitcloud.dbauth.entity.LibraryEntity"
+	parameterType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	SELECT * FROM `library` 
+	WHERE  lib_id LIKE  CONCAT('%', #{lib_id}, '%');
+</select>
+<select id="selLibraryIDByFuzzy" resultType="String" parameterType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	SELECT library_idx FROM `library` 
+	WHERE  lib_id LIKE  CONCAT('%', '${lib_id}', '%');
+</select>
+<select id="selLibrarybyPage" parameterType="com.ssitcloud.dbauth.entity.page.LibraryPageEntity"
+resultType="com.ssitcloud.dbauth.entity.page.LibraryPageEntity">
+	<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+	</if>
+	SELECT * FROM library
+	WHERE 1=1
+		<if test="library_idx !=null and library_idx !=0">
+		<!-- 修改前是直接library_idx=#{library_idx}，后来因为需求是主馆可以查看自己添加的子馆，故更改为查询馆关系表，关联查询 modify by huanghuang 20170221 -->
+		<!-- 修改前是主馆可以查看自己添加的子馆，修改后可以查询本馆和子馆， lqw 2017-5-10 -->
+			AND (library_idx in(
+				SELECT distinct slave_lib_id
+				FROM 
+					rel_libs 
+				WHERE 
+					master_lib_id = #{library_idx}
+			) or library_idx=#{library_idx})
+		</if>
+		<if test="lib_name !=null and lib_name !=''" >
+			AND lib_name LIKE  CONCAT('%', #{lib_name}, '%') OR lib_id LIKE  CONCAT('%', #{lib_name}, '%')
+		</if>
+			AND library_idx!=0
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+</select>
+
+<select id="selLibrarybyParam" parameterType="com.ssitcloud.dbauth.entity.page.LibraryPageTempInfoEntity"
+resultType="com.ssitcloud.dbauth.entity.page.LibraryPageTempInfoEntity">
+	<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+	</if>
+	SELECT lib.* FROM library lib
+		<if test="service_cycle !=null or max_device_count !=null or max_operator_count !=null or max_sublib_count !=null"  >
+			,library_service_template lib_temp
+		</if>
+		<if test="master_lib_id != null or slave_lib_id != null" >
+			,rel_libs rel
+		</if>
+	WHERE 1=1
+		<if test="lib_type !=null" >
+			AND lib.lib_type = #{lib_type}
+		</if>
+		<if test="lib_name !=null and lib_name !=''" >
+			AND (lib.lib_name LIKE  CONCAT('%', '${lib_name}', '%') or lib.lib_id LIKE  CONCAT('%', '${lib_name}', '%'))
+		</if>
+		<if test="library_idx !=null and library_idx!=0" >
+			AND lib.library_idx = #{library_idx}
+		</if>
+		<if test="service_cycle !=null " >
+			AND lib_temp.service_cycle = #{service_cycle}
+			AND lib.lib_service_tpl_id = lib_temp.lib_service_tpl_id
+		</if>
+		<if test="max_device_count !=null " >
+			AND lib_temp.max_device_count = #{max_device_count}
+			AND lib.lib_service_tpl_id = lib_temp.lib_service_tpl_id
+		</if>
+		<if test="max_operator_count !=null" >
+			AND lib_temp.max_operator_count = #{max_operator_count}
+			AND lib.lib_service_tpl_id = lib_temp.lib_service_tpl_id
+		</if>
+		<if test="max_sublib_count !=null" >
+			AND lib_temp.max_sublib_count = #{max_sublib_count}
+			AND lib.lib_service_tpl_id = lib_temp.lib_service_tpl_id
+		</if>
+		<if test="master_lib_id != null " >
+			AND rel.master_lib_id = lib.library_idx  
+		</if>
+		<if test="slave_lib_id != null " >
+			AND rel.slave_lib_id = lib.library_idx 
+		</if>
+		AND lib.library_idx!=0
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+</select>
+
+<update id="updateLibrary" parameterType = "com.ssitcloud.dbauth.entity.LibraryEntity">
+	UPDATE  library
+	<set>
+		<if test="lib_id !=null ">
+			lib_id = #{lib_id},
+		</if>
+		<if test="lib_name !=null ">
+			lib_name = #{lib_name},
+		</if>
+		<if test="lib_service_tpl_id !=null">
+			lib_service_tpl_id = #{lib_service_tpl_id},
+		</if>
+		<if test="service_expire_date !=null ">
+			service_expire_date = #{service_expire_date},
+		</if>
+		<if test="service_start_date!=null">
+			service_start_date=#{service_start_date},
+		</if>
+		version_stamp=version_stamp+1
+	</set>
+	WHERE library_idx = #{library_idx} 
+	<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+	</if>
+	
+</update>
+<select id="querySlaveLibraryByMasterIdx" resultType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	SELECT * FROM library lib 
+		WHERE lib.`library_idx` IN 
+		(SELECT rl.`slave_lib_id` FROM rel_libs rl WHERE rl.`master_lib_id`=#{library_idx})
+</select>
+<select id="queryMasterLibraryBySlaveIdx" resultType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	SELECT lib.* FROM library lib JOIN rel_libs rl ON lib.`library_idx`=rl.`master_lib_id` WHERE rl.`slave_lib_id`=#{library_idx}
+</select>
+<!-- 查询所有不是子馆的图书馆 -->
+<!-- updated by minganggang 查询的应该是master -->
+<select id="queryLibWhereisNotSlaveLib" parameterType="com.ssitcloud.dbauth.entity.LibraryEntity" resultType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	SELECT * FROM library lib 
+	WHERE EXISTS (select count(1) from rel_libs where library_idx = master_lib_id)
+	<if test="library_idx!=null">
+		AND library_idx=#{library_idx}
+	</if>
+</select>
+<select id="getLibIdAndLibIdx" resultType="Map">
+	SELECT library_idx,lib_id from library
+	where library_idx!=0
+</select>
+<select id="countLibraryByTempId" resultType="java.lang.Integer">
+	SELECT COUNT(*) from library WHERE lib_service_tpl_id = #{lib_service_tpl_id}
+</select>
+<select id="selectLibraryByTempId" parameterType="com.ssitcloud.dbauth.entity.LibraryEntity" resultType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	SELECT * FROM library  WHERE lib_service_tpl_id = #{lib_service_tpl_id}
+</select>
+
+<resultMap id="childLibInfoMap" type="com.ssitcloud.dbauth.entity.page.LibraryUnionEntity">
+	<id property="library_idx" column="lib_idx" />
+	<result property="lib_id" column="lb.lib_id"/>
+	<result property="lib_name" column="lb.lib_name"/>
+	<result property="lib_service_tpl_id" column="lb.lib_service_tpl_id"/>
+	<result property="service_start_date" column="lb.service_start_date"/>
+	<result property="service_expire_date" column="lb.service_expire_date"/>
+	<result property="createtime" column="lb.createtime"/>
+	<result property="version_stamp" column="lb.version_stamp"/>
+	<collection property="libraryInfoEntitys" ofType="com.ssitcloud.dbauth.entity.LibraryInfoEntity">
+		<result property="library_idx" column="lf_lib_idx" />
+		<result property="infotype_idx" column="lf_info_idx" />
+		<result property="info_value" column="info_value" />
+	</collection>
+</resultMap>
+
+<!-- 根据主馆idx，查询子馆信息 -->
+<select id="selectChildLibrary" resultMap="childLibInfoMap">
+	SELECT
+		lb.library_idx as lib_idx,
+		lb.lib_id,
+		lb.lib_name,
+		lb.lib_service_tpl_id,
+		lb.service_start_date,
+		lb.service_expire_date,
+		lb.createtime,
+		lb.version_stamp,
+		lf.library_idx as lf_lib_idx,
+		lf.infotype_idx as lf_info_idx,
+		lf.info_value
+	FROM
+		library_info AS lf
+	RIGHT JOIN library AS lb ON lf.library_idx = lb.library_idx
+	INNER JOIN rel_libs ON rel_libs.slave_lib_id = lb.library_idx
+	where rel_libs.master_lib_id = #{master_lib_idx} 
+	<if test="lib_name != null">
+		and lb.lib_name like '%${lib_name}%' 
+	</if>
+	<if test="regionCode != null">
+		and lb.library_idx in(select library_idx FROM library_info where library_info.info_value like '${regionCode}%' and library_info.infotype_idx = 24)
+	</if>
+	<!-- 不能加limit -->
+</select>
+
+<select id="selectLibraryAndInfo" resultMap="childLibInfoMap">
+	SELECT
+		lb.library_idx AS lib_idx,
+		lb.lib_id,
+		lb.lib_name,
+		lb.lib_service_tpl_id,
+		lb.service_start_date,
+		lb.service_expire_date,
+		lb.createtime,
+		lb.version_stamp,
+		lf.library_idx AS lf_lib_idx,
+		lf.infotype_idx AS lf_info_idx,
+		lf.info_value
+	FROM
+		library_info AS lf
+	RIGHT JOIN library AS lb ON lf.library_idx = lb.library_idx
+	where lb.library_idx = #{library_idx}
+	<!-- 不能加limit -->
+</select>
+
+<select id="getAllLibraryList" resultType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	SELECT * FROM library 
+</select>
+
+<select id="selLibraryByNameORLibId" resultType="com.ssitcloud.dbauth.entity.LibraryEntity"
+	parameterType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	SELECT
+	*
+	FROM
+		library
+	WHERE
+		lib_id LIKE CONCAT('%',#{lib_name}, '%')
+	OR lib_name LIKE CONCAT('%',#{lib_name}, '%')
+</select>
+<!-- 查询子馆地址编号 -->
+<select id="selectChildLibraryRegionCode" resultType="java.util.Map">
+	SELECT
+		library.library_idx as `library_idx`,
+		temp.info_value as `regi_code`
+	FROM
+		library
+		INNER JOIN rel_libs ON rel_libs.slave_lib_id = library.library_idx
+		LEFT JOIN (SELECT
+			library_info.library_idx,
+			library_info.info_value
+			FROM
+			library_info where infotype_idx = 24) 
+		as temp on temp.library_idx = rel_libs.slave_lib_id
+		where rel_libs.master_lib_id = #{0} 
+</select>
+
+<!-- 查询所有的主从馆关系 -->
+<select id="queryMasterSubRelations" resultType="java.util.Map">
+	SELECT master_lib_id , GROUP_CONCAT(slave_lib_id) slave_lib_id FROM rel_libs where rel_type=#{rel_type} GROUP BY master_lib_id
+</select>
+
+<!-- 查询真实馆主馆 ,一级主馆-->
+<select id="selActualLibraryMaster" resultType="com.ssitcloud.dbauth.entity.LibraryEntity"
+	parameterType="com.ssitcloud.dbauth.entity.LibraryEntity">
+	select * from library d where not EXISTS (
+	select a.library_idx from library a INNER JOIN rel_libs b 
+	on a.library_idx = b.slave_lib_id and a.lib_type = 0
+	and not EXISTS (select c.library_idx from library c where b.master_lib_id = c.library_idx and c.lib_type = 1)
+	where d.library_idx = a.library_idx)
+	and lib_type = 0;
+</select>
+</mapper>

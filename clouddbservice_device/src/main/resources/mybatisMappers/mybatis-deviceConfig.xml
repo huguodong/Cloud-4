@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="deviceConfig">
+	<!-- 根據邏輯的遠程接口使用 device_id 和 library_id 查詢  -->
+	<select id="queryDeviceConfigByDevIdAndLibIdx" parameterType="Map" resultType="com.ssitcloud.entity.DeviceConfigEntity">
+		SELECT DISTINCT 
+	    dconf.`device_idx`,
+		dconf.`library_idx`,
+		dconf.`device_dbsync_tpl_flg`,
+		dconf.`device_dbsync_tpl_idx`,
+		dconf.`device_ext_tpl_flg`,
+		dconf.`device_ext_tpl_idx`,
+		dconf.`device_monitor_tpl_flg`,
+		dconf.`device_monitor_tpl_idx`,
+		dconf.`device_run_tpl_flg`,
+		dconf.`device_run_tpl_idx`	 
+		FROM device_config dconf
+		WHERE 1=1
+		AND dconf.device_idx=(SELECT DISTINCT d.`device_idx` FROM device d WHERE d.`device_id`=#{device_id} AND d.`library_idx`=#{library_id} )
+		AND dconf.library_idx=#{library_id}
+	</select>
+	<!-- 一般查詢 -->
+	<select id="queryDeviceConfig" parameterType="com.ssitcloud.entity.DeviceConfigEntity" resultType="com.ssitcloud.entity.DeviceConfigEntity">
+		SELECT DISTINCT 
+		dconf.`device_idx`,
+		dconf.`library_idx`,
+		dconf.`device_dbsync_tpl_flg`,
+		dconf.`device_dbsync_tpl_idx`,
+		dconf.`device_ext_tpl_flg`,
+		dconf.`device_ext_tpl_idx`,
+		dconf.`device_monitor_tpl_flg`,
+		dconf.`device_monitor_tpl_idx`,
+		dconf.`device_run_tpl_flg`,
+		dconf.`device_run_tpl_idx`	 
+		FROM device_config dconf
+		WHERE 1=1
+		<if test="device_idx!=null">
+			AND device_idx=#{device_idx}
+		</if>
+		<if test="library_idx!=null">
+			AND library_idx=#{library_idx}
+		</if>
+		<if test="device_dbsync_tpl_flg!=null">
+			AND device_dbsync_tpl_flg=#{device_dbsync_tpl_flg}
+		</if>
+		<if test="device_dbsync_tpl_idx!=null">
+			AND device_dbsync_tpl_idx=#{device_dbsync_tpl_idx}
+		</if>
+		<if test="device_ext_tpl_flg!=null">
+			AND device_ext_tpl_flg=#{device_ext_tpl_flg}
+		</if>
+		<if test="device_ext_tpl_idx!=null">
+			AND device_ext_tpl_idx=#{device_ext_tpl_idx}
+		</if>
+		<if test="device_monitor_tpl_flg!=null">
+			AND device_monitor_tpl_flg=#{device_monitor_tpl_flg}
+		</if>
+		<if test="device_monitor_tpl_idx!=null">
+			AND device_monitor_tpl_idx=#{device_monitor_tpl_idx}
+		</if>
+		<if test="device_run_tpl_flg!=null">
+			AND device_run_tpl_flg=#{device_run_tpl_flg}
+		</if>
+		<if test="device_run_tpl_idx!=null">
+			AND device_run_tpl_idx=#{device_run_tpl_idx}
+		</if>
+	</select>
+	<!--根据device_idx查询数据 -->
+	<select id="queryDeviceConfigByDeviceIdx" parameterType="com.ssitcloud.entity.DeviceConfigEntity" resultType="com.ssitcloud.entity.DeviceConfigEntity">
+		SELECT * FROM device_config dconf
+		WHERE 1=1
+		AND device_idx=#{device_idx}
+	</select>
+	<select id="queryDeviceConfigOldByDeviceIdx" parameterType="com.ssitcloud.entity.DeviceConfigEntity" resultType="com.ssitcloud.entity.DeviceConfigEntity">
+		SELECT * FROM device_config_old
+		WHERE 1=1 
+		AND device_idx=#{device_idx}
+		order by createtime desc
+		LIMIT 1
+	</select>
+	<select id="queryDeviceConfigInDeviceIdxArr" parameterType="String" resultType="com.ssitcloud.entity.DeviceConfigEntity">
+		SELECT * FROM device_config dconf
+		WHERE device_idx IN
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<!-- 插入一個記錄 -->
+	<insert id="insertDeviceConfig" parameterType="com.ssitcloud.entity.DeviceConfigEntity">
+		INSERT INTO device_config 
+		(
+			device_idx,
+			library_idx,
+			device_ext_tpl_idx,
+			device_ext_tpl_flg,
+			device_monitor_tpl_idx,
+			device_monitor_tpl_flg,
+			device_run_tpl_idx,
+			device_run_tpl_flg,
+			device_dbsync_tpl_idx,
+			device_dbsync_tpl_flg
+		)  VALUES
+		(
+			#{device_idx},
+			#{library_idx},
+			#{device_ext_tpl_idx},
+			#{device_ext_tpl_flg},
+			#{device_monitor_tpl_idx},
+			#{device_monitor_tpl_flg},
+			#{device_run_tpl_idx},
+			#{device_run_tpl_flg},
+			#{device_dbsync_tpl_idx},
+			#{device_dbsync_tpl_flg}
+		)
+	</insert>
+	<update id="updateDeviceConfig" parameterType="com.ssitcloud.entity.DeviceConfigEntity">
+		UPDATE device_config 
+		<set>
+			<if test="device_dbsync_tpl_flg!=null ">
+				`device_dbsync_tpl_flg`=#{device_dbsync_tpl_flg},
+			</if>
+			<if test="device_dbsync_tpl_idx!=null">
+				`device_dbsync_tpl_idx`=#{device_dbsync_tpl_idx},
+			</if>
+			<if test="device_ext_tpl_flg!=null">
+				`device_ext_tpl_flg`=#{device_ext_tpl_flg},
+			</if>
+			<if test="device_ext_tpl_idx!=null">
+				`device_ext_tpl_idx`=#{device_ext_tpl_idx},
+			</if>
+			<if test="device_monitor_tpl_flg!=null">
+				`device_monitor_tpl_flg`=#{device_monitor_tpl_flg},
+			</if>
+			<if test="device_monitor_tpl_idx!=null">
+				`device_monitor_tpl_idx`=#{device_monitor_tpl_idx},
+			</if>
+			<if test="device_run_tpl_flg!=null">
+				`device_run_tpl_flg`=#{device_run_tpl_flg},
+			</if>
+			<if test="device_run_tpl_idx!=null">
+				`device_run_tpl_idx`=#{device_run_tpl_idx},
+			</if>
+			<if test="library_idx!=null">
+				`library_idx`=#{library_idx}
+			</if>
+		</set>
+		WHERE  `device_idx`= #{device_idx}
+	</update>
+	<delete id="deleteDeviceConfig" parameterType="com.ssitcloud.entity.DeviceConfigEntity">
+		DELETE from device_config dconf 
+		WHERE 1=1
+		AND dconf.`device_idx`=#{device_idx} 
+	</delete>
+	<delete id="deleteDeviceConfigOldByIdx" parameterType="com.ssitcloud.entity.DeviceConfigEntity">
+		DELETE from device_config_old 
+		WHERE 1=1
+		AND device_idx=#{device_idx} 
+	</delete>
+	
+	
+	<update id="updateDeviceConfigLibrary">
+		UPDATE 
+		  device_config de 
+		SET
+		  de.`library_idx` = #{newLibIdx}
+		WHERE  de.`device_idx` IN 
+		  <foreach collection="deviceList" item="deviceIdx" open="(" close=")" separator=",">
+			#{deviceIdx}
+		</foreach>
+	</update>
+	
+	<select id="queryDeviceConfigByLibraryIdx" parameterType="com.ssitcloud.entity.DeviceConfigEntity" resultType="com.ssitcloud.entity.DeviceConfigEntity">
+		select * from device_config where library_idx=#{library_idx}
+	</select>
+	
+</mapper>

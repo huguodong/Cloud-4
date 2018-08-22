@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="display">
+    <select id="bookRank" resultType="com.ssit.entity.BookEntity">
+      select `name`,cover_img coverImg from book
+    </select>
+
+    <select id="bookCategory" resultType="com.ssit.entity.BookCategoryEntity">
+        select id, `name`, circulate_total circulateTotal, proportion from book_category order by proportion desc
+    </select>
+
+    <select id="bookCirculate" resultType="com.ssit.entity.BookCirculateEntity">
+        select borrow_total borrowTotal, return_total returnTotal, continue_total continueTotal, `time` from book_circulate
+        limit #{num}
+    </select>
+
+    <select id="equipmentCount" resultType="com.ssit.entity.EquipmentEntity">
+        select total from equipment
+    </select>
+
+    <select id="libraryList" resultType="com.ssit.entity.LibraryEntity">
+        select id, `name` from library
+    </select>
+
+    <select id="visitRecord" resultType="com.ssit.entity.VisitRecordEntity">
+        select today_total todayTotal, month_total monthTotal, year_total yearTotal from visit_record
+    </select>
+
+    <select id="visitRecordTodayList" resultType="com.ssit.entity.VisitRecordTodayEntity">
+        select in_total inTotal, out_total outTotal, `time` from visit_record_today limit #{num}
+    </select>
+
+    <select id="statistics" resultType="com.ssit.entity.StatisticsEntity">
+        select
+          card_today_total cardTodayTotal,
+          card_month_total cardMonthTotal,
+          card_year_total cardYearTotal,
+          book_borrow_today_total bookBorrowTodayTotal,
+          book_borrow_month_total bookBorrowMonthTotal,
+          book_borrow_year_total bookBorrowYearTotal,
+          book_return_today_total bookReturnTodayTotal,
+          book_return_month_total bookReturnMonthTotal,
+          book_return_year_total bookReturnYearTotal
+        from statistics
+    </select>
+
+    <!-- 删除前一天的数据 -->
+    <update id="initBookCirculate">
+        <!-- 当天文献借还量 -->
+        update book_circulate set borrow_total = 0, return_total = 0, continue_total = 0
+    </update>
+    <update id="initStatistics">
+        <!-- 当日还书/当日借书/当日办证 -->
+        update statistics set book_borrow_today_total = 0, book_return_today_total = 0, card_today_total = 0
+    </update>
+    <update id="initVisitRecord">
+        <!-- 当日到馆人数 -->
+        update visit_record set today_total = 0
+    </update>
+    <update id="initVisitRecordToday">
+        <!-- 当天人流量 -->
+        update visit_record_today set in_total = 0, out_total = 0
+    </update>
+
+    <!-- 每一段时间修改一次数据 -->
+    <update id="updateStatistics">
+        update statistics set
+          book_borrow_today_total = (book_borrow_today_total+#{bookBorrowTodayTotal}),
+          book_borrow_month_total = (book_borrow_month_total+#{bookBorrowTodayTotal}),
+          book_borrow_year_total = (book_borrow_year_total+#{bookBorrowTodayTotal}),
+          book_return_today_total = (book_return_today_total+#{bookReturnTodayTotal}),
+          book_return_month_total = (book_return_month_total+#{bookReturnTodayTotal}),
+          book_return_year_total = (book_return_year_total+#{bookReturnTodayTotal})
+    </update>
+    <update id="updateBookCirculate">
+        update book_circulate set
+          borrow_total = (borrow_total+#{borrowTotal}),
+          return_total = (return_total+#{returnTotal}),
+          continue_total = (continue_total+#{continueTotal})
+        where id = #{id}
+    </update>
+    <update id="updateBookCategory">
+        update book_category set
+          circulate_total = (#{circulateTotal}),
+          proportion = #{proportion}
+        where id = #{id}
+    </update>
+    <update id="updateVisitRecord">
+        update visit_record set
+          today_total = (today_total+#{todayTotal}),
+          month_total = (month_total+#{todayTotal}),
+          year_total = (year_total+#{todayTotal})
+    </update>
+    <update id="updateVisitRecordToday">
+        update visit_record_today set
+          in_total = (in_total+#{inTotal}),
+          out_total = (out_total+#{outTotal})
+        where id = #{id}
+    </update>
+    <update id="updateStatisticsCard">
+        update statistics set
+          card_today_total = (card_today_total + #{cardTodayTotal}),
+          card_month_total = (card_month_total + #{cardTodayTotal}),
+          card_year_total = (card_year_total + #{cardTodayTotal})
+    </update>
+</mapper>

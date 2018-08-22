@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="financeLog">
+<select id="countByDevice">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		 <if test="operator!=null">
+			{
+			  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+			},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			{
+			  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+			},
+		</if>
+		  {
+		  	$group:{
+		  		_id:"sum",count:{$sum:"$Money"}
+		  	}
+		  }
+	]
+}
+</select>
+<select id="countByRederCardType">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		 <if test="operator!=null">
+			{
+			  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+			},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			{
+			  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+			},
+		</if>
+		<if test="cardType!=null">
+		  {
+	  		$match:{"CardType":{$in:${cardType}}}
+	 	  },
+		</if>
+		  {
+		  	$group:{
+		  		_id:{"CardType":"$CardType"},count:{$sum:"$Money"}
+		  	}
+		  }
+	]
+}
+</select>
+<select id="countByAuthCardType">
+{
+	aggregate:"loan_log",
+	pipeline:[
+	    <if test="operator!=null">
+			{
+			  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+			},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			{
+			  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+			},
+	   </if>
+	   <if test="authType!=null">
+	   	  {
+	  		$match:{"AuthType":{$in:${authType}}}
+	  	  },
+	   </if>
+	  {
+	  	$group:{
+	  		_id:{"AuthType":"$AuthType"},count:{$sum:"$Money"}
+	  	}
+	  }
+	]
+}
+</select>
+
+</mapper>

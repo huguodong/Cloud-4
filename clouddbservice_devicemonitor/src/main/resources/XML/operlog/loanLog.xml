@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="loanLog">
+<select id="queryLoanLog">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		<if test="name!=null">
+			{
+				$match:{"name":{$regex:/.*${name}*./}}
+			},
+		</if>
+		<if test="barcode!=null">
+			{
+				$match:{"Barcode":{$regex:/.*${barcode}*./}}
+			},
+		</if>
+		<if test="title!=null">
+		{
+			$match:{"Title":{$regex:/.*${title}*./}}
+		},
+		</if>
+		<if test="callno!=null">
+			{
+				$match:{"callno":{$regex:/.*${callno}*./}}
+			},
+		</if>
+		<if test="operator!=null">
+			{
+			  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+			},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			{
+			  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+			},
+		</if>
+		<if test="opercmd!=null"></if>
+		{
+			$match:{"opercmd":{$in:${opercmd}}}
+		},
+		<if test="operresult!=null"></if>
+		{
+			$match:{"operresult":{$in:${operresult}}}
+		},
+		<if test="permanentLocation!=null">
+		{
+			$match:{"PermanentLocation":{$in:${permanentLocation}}}
+		},
+		</if>
+		<if test="circulationType!=null">
+		{
+			$match:{"CirculationType":{$in:${circulationType}}}
+		},
+		</if>
+		<if test="currentLocation!=null">
+		{
+			$match:{"CurrentLocation":{$in:${currentLocation}}}
+		},
+		</if>
+		<if test="mediaType!=null">
+		{
+			$match:{"MediaType":{$in:${mediaType}}}
+		},
+		</if>
+		<if test="classNo!=null">
+		{
+			$match:{"classNo":{$in:${classNo}}}
+		}
+		</if>
+		<include refid="paging.page"/>
+
+	]
+}
+</select>
+<select id="countLoanLogbyDevice">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		{
+		    $project:{"opercmd":1,"operator":1,"opertime":1}
+		},
+		<if test="operator!=null">
+			{
+			  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+			},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			{
+			  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+			},
+		</if>
+		<if test="opercmd!=null">
+			{
+				$match:{"opercmd":{$in:${opercmd}}}
+			},
+		</if>
+		{
+			$group:{
+				_id:{opercmd:"$opercmd"},
+				count:{$sum:1}
+			}
+		}
+		<include refid="paging.page"/>
+
+	]
+}
+</select>
+<select id="countLoanLogbyMediaType">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		{
+	  	  $project:{"opercmd":1,"MediaType":1,"operator":1,"opertime":1}
+		},
+		<if test="operator!=null">
+			{
+			  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+			},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			{
+			  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+			},
+		</if>
+		<if test="mediaType!=null">
+			{
+				$match:{"MediaType":{ $in:${mediaType} }}
+			},
+		</if>
+		{
+			$group:{
+				_id:{opercmd:"$opercmd",MediaType:"$MediaType"},
+				count:{$sum:1}
+			}
+		}
+		<include refid="paging.page"/>
+
+	]
+}
+</select>
+<!-- 图书流通类型 -->
+<select id="countLoanLogbyCirculationType">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		{
+		    $project:{"opercmd":1,"CirculationType":1,"operator":1,"opertime":1}
+		},
+		<if test="operator!=null">
+			{
+			  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+			},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			{
+			  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+			},
+		</if>
+		<if test="circulationType!=null">
+			{
+				$match:{"CirculationType":{ $in:${circulationType}}}
+			},
+		</if>
+		{
+			$group:{
+				_id:{opercmd:"$opercmd",CirculationType:"$CirculationType"},
+				count:{$sum:1}
+			}
+		}
+		<include refid="paging.page"/>
+
+	]
+}
+</select>
+<select id="countLoanLogbyPerLoc">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		{
+	   		 $project:{"opercmd":1,"PermanentLocation":1,"operator":1,"opertime":1}
+		},
+		<if test="operator!=null">
+			{
+			  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+			},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			{
+			  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+			},
+		</if>
+		<if test="permanentLocation!=null">
+			{
+				$match:{"PermanentLocation":{ $in:${permanentLocation}}}
+			},
+		</if>
+		{
+			$group:{
+				_id:{opercmd:"$opercmd",PermanentLocation:"$PermanentLocation"},
+				count:{$sum:1}
+			}
+		}
+		<include refid="paging.page"/>
+
+	]
+}
+</select>
+<select id="countLoanLogbyGender">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		{
+		    $project:{"opercmd":1,"operator":1,"opertime":1,"sex":1}
+		},
+		<if test="operator!=null">
+			{
+			  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+			},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			{
+			  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+			},
+		</if>
+		<if test="opercmd!=null">
+			{
+				$match:{"opercmd":{$in:${opercmd}}}
+			},
+		</if>
+		<if test="sex!=null">
+			{
+				$match:{"sex":{$in:${sex}}}
+			},
+		</if>
+		{
+			$group:{
+				_id:{opercmd:"$opercmd",sex:"$sex"},count:{$sum:1}
+			}
+		}
+		<include refid="paging.page"/>
+
+	]
+}
+</select>
+<select id="countLoanLogbyReaderAge">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		{
+			$project:{"opercmd":1,"opertime":1,"operator":1,"age":1}
+		},
+		<if test="operator!=null">
+			{
+			  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+			},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			{
+			  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+			},
+		</if>
+		<if test="startAge!=null and endAge!=null">
+			{
+			  $match:{"age":{$gte:${startAge},$lte:${endAge}}}
+			},
+		</if>
+		<if test="opercmd!=null">
+			{
+			  $match:{"opercmd":{$in:${opercmd}}}
+			},
+		</if>
+		{
+			$group:{
+				_id:{"opercmd":"$opercmd"},"sum":{$sum:1}
+			}
+		},
+		{
+			$sort:{"_id.opercmd":1}
+		}
+		<include refid="paging.page"/>
+
+	]
+}
+</select>
+<select id="countLoanLogbyCirType">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		{
+	   	    $project:{"opercmd":1,"cirName":1,"operator":1,"opertime":1,"cirType":1}
+		},
+		<if test="operator!=null">
+			{
+			  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+			},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			{
+			  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+			},
+		</if>
+		<if test="cirType!=null">
+			{
+				$match:{"cirType":{ $in:${cirType}}}
+			},
+		</if>
+		{
+			$group:{
+				_id:{opercmd:"$opercmd",cirType:"$cirType",cirName:"$cirName"},
+				count:{$sum:1}
+			}
+		}
+	]
+}	
+</select>
+<select id="countLoanLogbyResult">
+{
+ aggregate:"loan_log",
+ pipeline:[
+ 	{
+	  $match : { "operresult" : { $in:${operresult} }}
+	},
+	<if test="operator!=null">
+		{
+		  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+		},
+	</if>
+	<if test="startTime!=null and endTime!=null">
+		{
+		  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+		},
+	</if>
+	{
+	  $group: 
+	  {
+	     _id:{operresult:"$operresult",opercmd:"$opercmd"},count:{"$sum":1}
+	  }	
+	},
+	{
+	   $sort:{"_id.opercmd":1}
+	}
+	<include refid="paging.page"/>
+ ]
+}
+</select>
+<select id="countLoanLogbyTime">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		{
+	  	  $project:
+	  			{opertime:1,opercmd:1,AuthCardno:1,
+		         month: { $substr: [ { $ifNull: [ "$ItemLoanDate", "$ItemReturnDate" ] }, 4, 2 ] },
+	            }
+		},
+		<if test="operator!=null">
+		{
+		  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+		},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+		{
+		  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+		},
+		</if>
+		<if test="opercmd!=null">
+			{
+				$match:{"opercmd":{$in:${opercmd}}}
+			},
+		</if>
+		{
+		  $group: 
+		  {
+		     _id:{opercmd:"$opercmd",month:"$month"},count:{"$sum":1}
+		  }	
+		},
+		{
+		  $sort:{"month":1}
+		}
+		<include refid="paging.page"/>
+	]
+}
+</select>
+<select id="countLoanLogby22">
+{
+	aggregate:"loan_log",
+	pipeline:[
+		<if test="classNos!=null">
+		{
+	 	 $match : { "classNo" : { $in:${classNos}}}
+		},
+		</if>
+		<if test="operator!=null">
+		{
+		  $match : { "operator" : {$regex:/*.${operator}.*/i}}
+		},
+		</if>
+		<if test="startTime!=null and endTime!=null">
+		{
+		  $match : { "opertime" : { $gte:"${startTime}",$lte:"${endTime}"}}
+		},
+		</if>
+		{
+		  $group: 
+		  {
+		     _id:{classNo:"$classNo",opercmd:"$opercmd"},count:{"$sum":1}
+		  }	
+		},
+		{
+		   $sort:{"_id.classNo":1}
+		}
+		<include refid="paging.page"/>
+	]
+}
+</select>
+<select id="countLogistics">
+{
+	aggregate:"cashbox_log",
+	pipeline:[
+		{
+			$group:{_id:"sum",count:{$sum:"$Money"}}
+		}
+	<if test="startTime!=null and endTime!=null">
+		,{
+			$match:{"opertime":{$gte:"${startTime}",$lte:"${endTime}"}}
+		}			
+	</if>
+		<include refid="paging.page"/>
+	]
+}
+</select>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="orange">#eb9c32</color>
+
+    <!--失败红-->
+    <color name="fail_red">#ff0000</color>
+    <!--成功绿-->
+    <color name="success_green">#7ED321</color>
+
+    <!--遮盖灰-->
+    <color name="cover_grey">#4D000000</color>
+    <!-- 底纹线颜色 -->
+    <color name="border_line_corlor">#EEEEEE</color>
+    <!-- 淡黄 -->
+    <color name="pale_yellow">#F6A623</color>
+    <!-- 读者卡框线颜色 -->
+    <color name="reader_card_grey">#EEEEEE</color>
+    <!-- 首选读者卡框线颜色 -->
+    <color name="reader_card_prefer">#7ED321</color>
+
+    <color name="barcode_color">#FF777777</color>
+
+    <color name="blue">#ff33b5e5</color>
+</resources>

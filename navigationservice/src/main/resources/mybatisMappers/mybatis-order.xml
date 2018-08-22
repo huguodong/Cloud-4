@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="order">
+
+	<insert id="addOrder" parameterType="com.ssitcloud.order.entity.OrderEntity" useGeneratedKeys="true" keyProperty="idx">
+		INSERT INTO `borrowprivileges` (
+			`book_barcode`,
+			`readerid`,
+			`state`,
+			`packetid`,
+			`overduedate`,
+			`updatetime`
+		) VALUES (
+			#{book_barcode},
+			#{readerid},
+			#{state},
+			#{packetid},
+			#{overduedate},
+			#{updatetime}
+		)
+	</insert>
+
+	<select id="queryAllOrder" resultType="com.ssitcloud.order.entity.OrderEntity">
+		SELECT * FROM `borrowprivileges`
+	</select>
+
+	<select id="queryOrderByParam" parameterType="com.ssitcloud.order.entity.page.OrderPageEntity"  resultType="com.ssitcloud.order.entity.page.OrderPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT o.* FROM `borrowprivileges` o 
+		<where>
+			<if test="book_barcode != null and book_barcode != ''">
+				o.`book_barcode` LIKE  CONCAT('%', #{book_barcode}, '%')
+			</if>
+		</where>
+		ORDER BY o.`book_barcode`
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+
+	<select id="queryOrderById" resultType="com.ssitcloud.order.entity.OrderEntity">
+		SELECT * FROM `borrowprivileges`
+		<where>
+			<choose>
+				<when test="_parameter!=null">
+					AND `idx` = #{idx}
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+	<update id="updateOrder" parameterType="com.ssitcloud.order.entity.OrderEntity">
+		UPDATE `borrowprivileges`
+		<set>
+			<if test="book_barcode !=null ">
+			`book_barcode` = #{book_barcode},
+			</if>
+			<if test="readerid !=null ">
+			`readerid` = #{readerid},
+			</if>
+			<if test="state !=null ">
+			`state` = #{state},
+			</if>
+			<if test="packetid !=null ">
+			`packetid` = #{packetid},
+			</if>
+			<if test="overduedate !=null ">
+			`overduedate` = #{overduedate},
+			</if>
+			<if test="updatetime !=null ">
+			`updatetime` = #{updatetime},
+			</if>
+		</set>
+		WHERE idx = #{idx}
+	</update>
+
+</mapper>

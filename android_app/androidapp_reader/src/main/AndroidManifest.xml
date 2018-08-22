@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ssitcloud.app_reader">
+
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 向SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--二维码识别需要-->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:name=".common.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme">
+
+        <!-- <activity android:name="com.ssitcloud.app_reader.MainActivity"> -->
+        <!--  -->
+        <!-- </activity> -->
+        <activity
+            android:name=".view.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.ReaderCardListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.LibraryListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.BindCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.RenewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.PersonalSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.WelComeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.ReaderCardDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.ReaderAuthActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.ForgetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.ChangePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.ElectronicCertificateActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.DeviceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.BookItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.BookInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.FavoritActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.BorrowBarcodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.ModifyPersonalInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.FeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.RegionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.ReservationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.ReservationBarcodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.DeviceRegionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.ScannerBarcodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.WebSettingActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".service.DataUpdateService"
+            android:enabled="true" />
+        <service
+            android:name=".service.NotificationService"
+            android:enabled="true" />
+        <service
+            android:name=".service.DataUpdateIntentService"
+            android:enabled="true" />
+
+    </application>
+
+</manifest>

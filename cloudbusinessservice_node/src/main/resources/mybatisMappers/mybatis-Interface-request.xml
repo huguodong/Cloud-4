@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="interfaceRequest">
+	
+	<insert id="addRequest" parameterType="com.ssitcloud.request.entity.InterfaceRequestDto" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO `ssit_interface_request` (
+			`request_id`,
+			`request_hostname`,
+			`request_ip`,
+			`request_body`,
+			`request_url`,
+			`request_port`,
+			`request_type`,
+			`request_time`,
+			`local_ip`,
+			`response_body`,
+			`remark`,
+			`response_status`,
+			`response_time`,
+			`createTime`,
+			`updateTime`
+		) VALUES (
+			#{requestId},
+			#{requestHostname},
+			#{requestIp},
+			#{requestBody},
+			#{requestUrl},
+			#{requestPort},
+			#{requestType},
+			#{requestTime},
+			#{localIp},
+			#{responseBody},
+			#{remark},
+			#{responseStatus},
+			#{responseTime},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
+	<update id="updateRequest" parameterType="com.ssitcloud.request.entity.InterfaceRequestDto">
+		update `ssit_interface_request` 
+		set `updateTime`=NOW()
+		<if test="responseStatus != null and responseStatus != '' ">
+			, `response_status` = #{responseStatus}
+		</if>
+		<if test="responseBody != null and responseBody != '' ">
+			, `response_body` = #{responseBody}
+		</if>
+		<if test="requestHostname != null and requestHostname != '' ">
+			, `request_hostname` = #{requestHostname}
+		</if>
+		<if test="requestIp != null and requestIp != '' ">
+			, `request_ip` = #{requestIp}
+		</if>
+		<if test="requestBody != null and requestBody != '' ">
+			, `request_body` = #{requestBody}
+		</if>
+		<if test="requestUrl != null and requestUrl != '' ">
+			, `request_url` = #{requestUrl}
+		</if>
+		<if test="requestPort != null and requestPort != '' ">
+			, `request_port` = #{requestPort}
+		</if>
+		<if test="requestType != null and requestType != '' ">
+			, `request_type` = #{requestType}
+		</if>
+		<if test="localIp != null and localIp != '' ">
+			, `local_ip` = #{localIp}
+		</if>
+		<if test="responseBody != null and responseBody != '' ">
+			, `response_body` = #{responseBody}
+		</if>
+		<if test="responseTime !=null">
+			,`response_time` = #{responseTime},
+		</if>
+		<if test="requestTime !=null">
+			,`request_time` = #{requestTime},
+		</if>
+		where `request_id`=#{requestId}
+	</update>
+	
+	
+	<delete id="deleteRequest" parameterType="com.ssitcloud.request.entity.InterfaceRequestDto">
+		delete from `ssit_interface_request` where 1=1 
+		<if test="id != null and id != '' ">
+			and `id` = #{id}
+		</if>
+		<if test="requestId != null and requestId != '' ">
+			and `request_id` = #{requestId}
+		</if>
+	</delete>
+	<select id="queryRequest" resultType="com.ssitcloud.request.entity.InterfaceRequestDto" parameterType="com.ssitcloud.request.entity.InterfaceRequestDto" >
+		select 
+			`id`					as  id              ,
+			`request_id` 			as requestId		,
+			`request_hostname` 		as requestHostname	,
+			`request_ip`			as requestIp	  	,
+			`request_body`			as requestBody	  	,
+			`request_url`			as requestUrl		,
+			`request_port`			as requestPort		,
+			`request_type`			as requestType		,
+			`request_time`			as requestTime		,
+			`local_ip`				as localIp			,
+			`response_body`			as responseBody		,
+			`remark`				as remark			,
+			`response_status`		as responseStatus	,
+			`response_time`			as responseTime		,
+			`createTime`			as createTime		,
+			`updateTime`            as updateTime
+					
+		from `ssit_interface_request` 
+		
+		where 1 = 1  
+		
+		<if test="requestId != null and requestId != '' ">
+			and `request_id` = #{requestId}
+		</if>
+		<if test="responseStatus != null">
+			and `response_status` = #{responseStatus}
+		</if>
+		<if test="startTime !=null">
+			and	`updateTime`  <![CDATA[ >= ]]> #{startTime}
+		</if>
+		<if test="endTime !=null">
+			and `updateTime` <![CDATA[ <= ]]> #{endTime}
+		</if>
+		
+	</select>
+</mapper>

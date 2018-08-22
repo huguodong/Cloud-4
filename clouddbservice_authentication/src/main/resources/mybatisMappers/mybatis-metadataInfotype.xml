@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="infotype">
+
+<insert id="addMetadataInfotype" parameterType="com.ssitcloud.dbauth.entity.MetadataInfotypeEntity" useGeneratedKeys="true" keyProperty="infotype_idx" >
+	INSERT INTO metadata_infotype (info_type, info_type_desc) 
+		VALUES
+		  (#{info_type},#{info_type_desc})
+</insert>
+
+<select id="select" resultType="com.ssitcloud.dbauth.entity.MetadataInfotypeEntity">
+	SELECT * FROM metadata_infotype
+</select>
+<select id="selectLibdata" resultType="com.ssitcloud.dbauth.entity.MetadataInfotypeEntity">
+	SELECT * FROM metadata_infotype
+	WHERE info_type = 2
+</select>
+
+<select id="selOperatorInfotypeList" resultType="com.ssitcloud.dbauth.entity.MetadataInfotypeEntity">
+	SELECT * FROM metadata_infotype
+	WHERE info_type = 1 ORDER BY `info_type_desc` 
+</select>
+
+<delete id="delMetadataInfotypeByIdx">
+	DELETE FROM metadata_infotype WHERE infotype_idx = #{infotype_idx}
+</delete>
+<select id="selectInfoByIdx" parameterType="com.ssitcloud.dbauth.entity.MetadataInfotypeEntity" resultType="com.ssitcloud.dbauth.entity.MetadataInfotypeEntity">
+	select * from metadata_infotype where infotype_idx = #{infotype_idx}
+</select>
+<update id="update" parameterType="com.ssitcloud.dbauth.entity.MetadataInfotypeEntity">
+	update metadata_infotype
+	<set>
+		<if test="info_type!=null">
+			info_type=#{info_type},
+		</if>
+		<if test="info_type_desc!=null">
+			info_type_desc=#{info_type_desc}
+		</if>
+	</set>
+	where infotype_idx=#{infotype_idx}
+</update>
+
+
+</mapper>

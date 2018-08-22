@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList xmlns="http://www.example.org/RequestURLConfSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	>
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 切换主备 -->
+		<RequestUrl requestMapping="/switchServer/switch" id="switch_switcher" />
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/hearbeat/saveData" id="HEARBEAT_URL" />
+	</project>
+	
+	<!-- 验证 -->
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/operator/loginCheck" id="loginCheck"/>
+	</project>
+	
+	<!-- 查询图书馆-->
+	<project projectName="cloudbusinessservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/library/SelectLibraryInfo" id="SelectLibraryInfo"/>
+		<RequestUrl requestMapping="/library/SelectMasterLib" id="SelectMasterLib"/>
+	</project>
+	
+	<!-- 查询权限 -->
+	<project projectName="cloudbusinessservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/permission/SelPermissionbyOperIdx" id="SelPermissionByOperIdx"/>
+		<RequestUrl requestMapping="/metaopercmd/SelectMetaOperCmd" id="SelectMetaOperCmd"/>
+		<!-- 云平台管理员获取所有权限 -->
+		<RequestUrl requestMapping="/permission/SelPermissionBySsitCloudAdmin" id="SelPermissionBySsitCloudAdmin"/>
+		<!-- 云平台管理员获取所有菜单 -->
+		<RequestUrl requestMapping="/permission/SelMenuBySsitCloudAdmin" id="SelMenuBySsitCloudAdmin"/>
+	</project>
+	
+	<project projectName="cloudbusinessservice_database" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/server/getUserMenus" id="getUserMenus"/>
+		<RequestUrl requestMapping="/server/getServerConfig" id="getServerConfig"/>
+		<RequestUrl requestMapping="/server/addDBConnect" id="addDBConnect"/>
+		<RequestUrl requestMapping="/server/removeDBConnect" id="removeDBConnect"/>
+		<RequestUrl requestMapping="/table/properties" id="properties"/>
+		<RequestUrl requestMapping="/table/tableField" id="tableField"/>
+		<RequestUrl requestMapping="/table/tableIndex" id="tableIndex"/>
+		<RequestUrl requestMapping="/table/tableKey" id="tableKey"/>
+		
+		<RequestUrl requestMapping="/table/updateField" id="updateField"/>
+		<RequestUrl requestMapping="/table/updateIndex" id="updateIndex"/>
+		<RequestUrl requestMapping="/table/updateconstraint" id="updateconstraint"/>
+		
+		<RequestUrl requestMapping="/table/deleteField" id="deleteField"/>
+		<RequestUrl requestMapping="/table/deleteIndex" id="deleteIndex"/>
+		<RequestUrl requestMapping="/table/deleteConstraint" id="deleteConstraint"/>
+		
+		<RequestUrl requestMapping="/table/addField" id="addField"/>
+		<RequestUrl requestMapping="/table/addIndex" id="addIndex"/>
+		<RequestUrl requestMapping="/table/addConstraint" id="addConstraint"/>
+		<RequestUrl requestMapping="/table/addtabAction" id="addtabAction"/>
+		<RequestUrl requestMapping="/table/excuteSql" id="excuteSql"/>
+		<RequestUrl requestMapping="/table/serverInfo" id="serverInfo"/>
+		
+		
+		<RequestUrl requestMapping="/collection/properties" id="mproperties"/>
+		<RequestUrl requestMapping="/collection/collectionData" id="collectionData"/>
+		<RequestUrl requestMapping="/collection/deleteDocument" id="deleteDocument"/>
+		<RequestUrl requestMapping="/collection/addDocument" id="addDocument"/>
+		<RequestUrl requestMapping="/collection/updateDocument" id="updateDocument"/>
+		<RequestUrl requestMapping="/collection/addcollectionAction" id="addcollectionAction"/>
+	</project>
+
+</RequestUrlList>

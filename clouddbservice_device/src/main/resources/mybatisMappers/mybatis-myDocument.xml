@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mydocument">
+
+	<insert id="insertMyDocument" parameterType="com.ssitcloud.entity.MyDocumentEntity" useGeneratedKeys="true" keyProperty="document_idx">
+		insert into mydocument
+		(		
+            reader_idx,barcode,document_desc,createtime
+		)
+		values
+		(
+             #{reader_idx},#{barcode},#{document_desc},#{createtime}
+		)
+	</insert>
+	
+	<update id="updateMyDocument" parameterType="com.ssitcloud.entity.MyDocumentEntity">
+		update mydocument
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if>
+			<if test="barcode!=null">
+				barcode=#{barcode},
+			</if>
+			<if test="document_desc!=null">
+				document_desc=#{document_desc},
+			</if>
+			<if test="createtime!=null">
+				createtime=#{createtime},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="document_idx!=null">
+			and document_idx=#{document_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteMyDocument" parameterType="com.ssitcloud.entity.MyDocumentEntity">
+		delete from mydocument where document_idx=#{document_idx}
+	</delete>
+	
+	<select id="selectMyDocument" parameterType="com.ssitcloud.entity.MyDocumentEntity" resultType="com.ssitcloud.entity.MyDocumentEntity">
+		SELECT document_idx,reader_idx,barcode,document_desc,createtime FROM mydocument 
+	    where 1=1
+		<if test="document_idx!=null">
+			AND document_idx=#{document_idx}
+		</if>
+	</select>
+	<select id="selectMyDocuments" parameterType="com.ssitcloud.entity.page.MyDocumentQueryEntity" resultType="com.ssitcloud.entity.MyDocumentEntity">
+		SELECT document_idx,reader_idx,barcode,document_desc,createtime FROM mydocument 
+	    where 1=1 
+	    <if test="reader_idx != null">
+	    	and reader_idx = #{reader_idx} 
+	    </if>
+	    <if test="barcode != null">
+	    	and barcode = #{barcode} 
+	    </if>
+	    <if test="document_desc != null">
+	    	and document_desc like '${document_desc}%' 
+	    </if>
+	    <if test="createtime != null">
+	    	and createtime &gt;= DATE_FORMAT(#{createtime},'%Y-%m-%d') 
+	    </if>
+	    order by createtime DESC 
+	    <if test="pageCurrent != null and pageSize != null">
+	    LIMIT #{limitIndex},#{limitOffset}
+	    </if>
+	</select>
+	
+	
+	
+</mapper>

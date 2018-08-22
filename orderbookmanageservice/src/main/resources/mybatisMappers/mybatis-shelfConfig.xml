@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shelfConfig">
+
+	<insert id="add" parameterType="com.ssitcloud.shelfmgmt.entity.ShelfConfigEntity" useGeneratedKeys="true" keyProperty="shelf_config_idx">
+		INSERT INTO `shelf_config` (
+			`shelf_config_id`,
+			`shelf_config_name`,
+			`shelf_ip`,
+			`shelf_port`
+		) VALUES (
+			#{shelf_config_id},
+			#{shelf_config_name},
+			#{shelf_ip},
+			#{shelf_port}
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="java.util.List">
+			<![CDATA[  
+			DELETE FROM `shelf_config` WHERE `shelf_config_idx` in
+	    ]]>  
+	    <foreach collection="list" item = "shelfConfig" open="(" separator="," close=")">
+	   		${shelfConfig.shelf_config_idx}
+	    </foreach>
+	  
+	</delete>
+	
+	<select id="count" parameterType="com.ssitcloud.shelfmgmt.entity.ShelfConfigEntity" resultType="int">
+		SELECT count(1) FROM `shelf_config` 
+		<where>
+			<if test="shelf_config_id !=null and shelf_config_id !='' ">
+				and (`shelf_config_id` like concat('%','${shelf_config_id}','%') or `shelf_config_name` like concat('%','${shelf_config_id}','%'))
+			</if>
+		</where>
+	</select>
+	
+	<select id="select" resultType="com.ssitcloud.shelfmgmt.entity.ShelfConfigEntity">
+		SELECT * FROM `shelf_config`
+		<where>
+			<if test="shelf_config_id !=null and shelf_config_id !='' ">
+				and (`shelf_config_id` like concat('%','${shelf_config_id}','%') or `shelf_config_name` like concat('%','${shelf_config_id}','%'))
+			</if>
+		</where>
+	</select>
+
+	<select id="selectbyId" parameterType="com.ssitcloud.shelfmgmt.entity.ShelfConfigEntity" resultType="com.ssitcloud.shelfmgmt.entity.ShelfConfigEntity">
+		SELECT * FROM `shelf_config` where `shelf_config_id` = #{shelf_config_id} 
+	</select>
+	
+	<update id="update" parameterType="com.ssitcloud.shelfmgmt.entity.ShelfConfigEntity">
+		UPDATE `shelf_config` SET 
+			`shelf_config_id` = #{shelf_config_id},
+			`shelf_config_name` = #{shelf_config_name},
+			`shelf_ip` = #{shelf_ip},
+			`shelf_port` = #{shelf_port},
+			version_stamp=version_stamp+1
+			WHERE `shelf_config_idx` = #{shelf_config_idx} 
+			<if test="version_stamp !=null and version_stamp !='' ">
+				AND version_stamp = #{version_stamp}
+			</if>
+	</update>
+</mapper>

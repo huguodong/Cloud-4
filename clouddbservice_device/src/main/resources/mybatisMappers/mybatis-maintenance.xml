@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="maintenance">
+
+<select id="queryOperatorMaintenanceCard" resultType="com.ssitcloud.entity.OperatorMaintenanceInfoEntity">
+	SELECT 
+	  * 
+	FROM
+	  `operator_maintenance_info` 
+	WHERE operator_idx = #{operator_idx}
+</select>
+<select id="queryOperatorMaintenanceCardByTypeIdxs" resultType="com.ssitcloud.entity.OperatorMaintenanceInfoEntity">
+	SELECT 
+	  * 
+	FROM
+	  `operator_maintenance_info` 
+	WHERE maintenance_idx in 
+	<foreach collection="list" item="item" open="(" close=")" separator=",">
+		#{item}
+	</foreach>
+</select>
+
+<delete id="deleteMaintenanceByOperatorIdx">
+	DELETE FROM `operator_maintenance_info` WHERE operator_idx = #{operator_idx}
+</delete>
+
+
+<insert id="addMaintenance" parameterType="com.ssitcloud.entity.OperatorMaintenanceInfoEntity" >
+INSERT INTO `operator_maintenance_info` (
+  `operator_idx`,
+  `maintenance_idx`
+) VALUES (#{operator_idx},#{maintenance_idx})
+	
+</insert>
+
+
+<select id="countCardByCardIdAndLibIdx" resultType="java.lang.Integer">
+	select count(*) from maintenance_card where lib_idx = #{lib_idx} and card_id = #{card_id}
+	<if test="maintenance_idx!=null">
+		AND maintenance_idx != #{maintenance_idx}
+	</if>
+</select>
+
+
+<insert id="insertMaintenanceCard" parameterType="com.ssitcloud.entity.MaintenanceCardEntity" useGeneratedKeys="true" keyProperty="maintenance_idx">
+	INSERT INTO maintenance_card (
+	  card_type,
+	  lib_idx,
+	  card_id,
+	  card_pwd,
+	  opercmds
+	) 
+	VALUES
+	(
+	  #{card_type},
+	  #{lib_idx},
+	  #{card_id},
+	  #{card_pwd},
+	  #{opercmds}
+	)
+</insert>
+
+<update id="updateMaintenanceCard" parameterType="com.ssitcloud.entity.MaintenanceCardEntity">
+	UPDATE maintenance_card 
+	<set>
+		card_type = #{card_type},
+		lib_idx = #{lib_idx},
+		card_id = #{card_id},
+		card_pwd = #{card_pwd},
+		opercmds = #{opercmds}
+	</set>
+	<where>
+		maintenance_idx = #{maintenance_idx}
+	</where>
+</update>
+
+<delete id="deleteMaintenanceCard" parameterType="com.ssitcloud.entity.MaintenanceCardEntity">
+	DELETE from maintenance_card WHERE maintenance_idx = #{maintenance_idx}
+</delete>
+
+
+<select id="queryMaintenanceCardByFuzzy" resultType="java.util.Map">
+	<if test="whetherPaging==true">
+		<include refid="paging.head"/>
+	</if>
+		SELECT 
+		 *
+		FROM
+		  `maintenance_card` 
+		<where>
+			<if test="card_id != null and card_id !='' ">
+				AND `card_id` like CONCAT('%','${card_id}','%') 
+			</if>
+			<if test="lib_idxs != null ">
+				AND `lib_idx` IN 
+				<foreach collection="lib_idxs" item="idx" open="(" close=")" separator=",">
+					#{idx}
+				</foreach>
+			</if>
+		</where> 
+	<if test="whetherPaging==true">
+		<include refid="paging.tail"/>
+	</if>
+</select>
+
+<select id="selMaintenaceCard" resultType="com.ssitcloud.entity.MaintenanceCardEntity">
+	SELECT 
+	  * 
+	FROM
+	  `maintenance_card` 
+	WHERE lib_idx = #{library_idx}
+	ORDER BY card_id 
+</select>
+
+<select id="queryMaintenanceCardInfo" resultType="com.ssitcloud.system.entity.MaintenanceInfoRemoteEntity">
+	SELECT 
+	  card_type, 
+	  card_id,
+	  card_pwd,
+	  opercmds
+	FROM
+	  `maintenance_card` 
+	WHERE lib_idx = #{lib_idx}
+</select>
+
+</mapper>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="deviceDBSyncConf">
+	<!-- 
+		device_dbsync_id	int(11) NOT NULL模板ID或设备ID
+		library_idx	int(11) NOT NULL馆ID
+		device_tpl_type	int(11) NOT NULL模板区分 0模板 1数据
+		db_name	varchar(50) NOT NULL数据库名
+		table_name	varchar(50) NOT NULL数据库表名
+		issync	int(11) NULL是否同步
+		sync_cycle	int(11) NULL同步周期
+		last_sync_time	timestamp NULL最后同步时间
+		last_modify_time	timestamp NULL最后修改时间
+	 -->
+	<select id="selectDeviceDBSyncConf" resultType="com.ssitcloud.entity.DeviceDBSyncConfigEntity" parameterType="com.ssitcloud.entity.DeviceDBSyncConfigEntity">
+		SELECT * FROM device_dbsync_config
+		WHERE 1=1
+		<if test="device_dbsync_id!=null">AND  device_dbsync_id like CONCAT('%','${device_dbsync_id}','%')</if>
+		<if test="library_idx!=null">AND  library_idx like CONCAT('%','${library_idx}','%')</if>
+		<if test="device_tpl_type!=null">AND  device_tpl_type like CONCAT('%','${device_tpl_type}','%')</if>
+		<if test="db_name!=null">AND  db_name like CONCAT('%','${db_name}','%')</if>
+		<if test="table_name!=null">AND  table_name like CONCAT('%','${table_name}','%')</if>
+		<if test="issync!=null">AND  issync like CONCAT('%','${issync}','%')</if>
+		<if test="sync_cycle!=null">AND  sync_cycle like CONCAT('%','${sync_cycle}','%')</if>
+		<if test="sync_type!=null">AND  sync_type like CONCAT('%','${sync_type}','%')</if>
+		<if test="last_sync_time!=null">AND  last_sync_time like CONCAT('%','${last_sync_time}','%')</if>
+		<if test="last_modify_time!=null">AND  last_modify_time like CONCAT('%','${last_modify_time}','%')</if>
+	</select>
+	
+	<select id="selectDeviceDBSyncConfExcatly" resultType="com.ssitcloud.entity.DeviceDBSyncConfigEntity" parameterType="com.ssitcloud.entity.DeviceDBSyncConfigEntity">
+		SELECT * FROM device_dbsync_config
+		WHERE 1=1
+		<if test="device_dbsync_id!=null and device_dbsync_id!=''">AND  device_dbsync_id=#{device_dbsync_id}</if>
+		<if test="library_idx!=null and library_idx!=''">AND  library_idx=#{library_idx}</if>
+		<if test="device_tpl_type!=null and device_tpl_type!=''">AND  device_tpl_type=#{device_tpl_type}</if>
+		<if test="db_name!=null and db_name!=''">AND  db_name=#{db_name}</if>
+		<if test="table_name!=null and table_name!=''">AND  table_name=#{table_name}</if>
+		<if test="issync!=null and issync!=''"> AND issync = #{issync}</if>
+		<if test="sync_cycle!=null and sync_cycle!=''">AND  sync_cycle = #{sync_cycle}</if>
+		<if test="sync_type!=null and sync_type!=''">AND  sync_type = #{sync_type}</if>
+	</select>
+	<select id="selectListByRemoteDeviceSync" resultType="com.ssitcloud.system.entity.DeviceDBSyncConfigRemoteEntity" parameterType="com.ssitcloud.entity.DeviceDBSyncConfigEntity">
+		SELECT db_name,table_name,sync_field_list,issync,sync_cycle,sync_type FROM device_dbsync_config
+		WHERE 1=1
+		AND device_dbsync_id=#{device_dbsync_id}
+		<if test="library_idx!=null and library_idx!=''">
+			AND library_idx=#{library_idx}
+		</if>
+		AND device_tpl_type=#{device_tpl_type}
+	</select>
+	<insert id="insertDeviceDBSyncConf" parameterType="com.ssitcloud.entity.DeviceDBSyncConfigEntity">
+		INSERT INTO device_dbsync_config 
+		(
+			device_dbsync_id,library_idx,device_tpl_type,db_name,table_name,sync_field_list,issync,sync_cycle,sync_type,last_modify_time
+		) 
+		VALUES 
+		(
+			#{device_dbsync_id},
+			#{library_idx},
+			#{device_tpl_type},
+			#{db_name},
+			#{table_name},
+			#{sync_field_list},
+			#{issync},
+			#{sync_cycle},
+			#{sync_type},
+			NOW()
+		)
+	</insert>
+	<!-- 更新同步配置 -->
+	<update id="updateDeviceDBSyncConf" parameterType="com.ssitcloud.entity.DeviceDBSyncConfigEntity">
+		UPDATE device_dbsync_config
+		<set>
+			<if test="sync_cycle !=null ">
+				`sync_cycle`=#{sync_cycle},
+			</if>
+			<if test="sync_type !=null ">
+				`sync_type`=#{sync_type},
+			</if>
+			<if test="issync !=null ">
+				`issync`=#{issync},
+			</if>
+			<if test="sync_field_list !=null ">
+				`sync_field_list`=#{sync_field_list},
+			</if>
+			<if test="library_idx !=null ">
+				`library_idx`=#{library_idx},
+			</if>
+			last_modify_time=NOW()
+		</set>
+		WHERE 1=1
+		AND device_dbsync_id=#{device_dbsync_id}
+		AND device_tpl_type= #{device_tpl_type}
+		AND db_name=#{db_name}
+		AND table_name = #{table_name}
+	</update>
+	<delete id="deleteDeviceDBSyncConf" parameterType="com.ssitcloud.entity.DeviceDBSyncConfigEntity">
+		DELETE FROM device_dbsync_config
+		WHERE 1=1
+		AND device_dbsync_id=#{device_dbsync_id}
+		AND device_tpl_type=#{device_tpl_type}
+	</delete>
+	<!-- 
+	 device_tpl_idx	int(11) NOT NULL
+	device_tpl_ID	varchar(10) NULL模板ID
+	device_tpl_desc	varchar(100) NULL模板描述
+	device_type	varchar(100) NULL设备类型
+	 -->
+	 <select id="selectDeviceDBSyncTemp" resultType="com.ssitcloud.entity.DeviceDBSyncTempEntity" parameterType="com.ssitcloud.entity.DeviceDBSyncTempEntity">
+	 	SELECT * FROM device_dbsync_template
+	 	WHERE 1=1
+	 	<if test="device_tpl_idx!=null">AND device_tpl_idx like CONCAT('%','${device_tpl_idx}','%')</if>
+	 	<if test="device_tpl_ID!=null">AND device_tpl_ID like CONCAT('%','${device_tpl_ID}','%')</if>
+	 	<if test="device_tpl_desc!=null">AND device_tpl_desc like CONCAT('%','${device_tpl_desc}','%')</if>
+	 	<if test="device_type!=null">AND device_type like CONCAT('%','${device_type}','%')</if>
+	 </select>
+	 <select id="selectDeviceDBSyncTempByDeviceType" resultType="com.ssitcloud.entity.DeviceDBSyncTempEntity" parameterType="com.ssitcloud.entity.DeviceDBSyncTempEntity">
+	 	SELECT * FROM device_dbsync_template
+	 	WHERE 1=1
+	 	<if test="device_type!=null">AND device_type = #{device_type}</if>
+	 </select>
+	 <select id="selectDeviceDBSyncTempById" resultType="com.ssitcloud.entity.DeviceDBSyncTempEntity" parameterType="com.ssitcloud.entity.DeviceDBSyncTempEntity">
+	 	SELECT * FROM device_dbsync_config
+	 	WHERE 1=1
+	 	<if test="device_tpl_idx!=null">AND device_tpl_idx=#{device_tpl_idx}</if>
+	 </select>
+	 <select id="selDbsyncDetailListByIdx" resultType="java.util.Map">
+	 	SELECT * FROM device_dbsync_config
+	 	WHERE  device_dbsync_id = #{ dbsyncid }
+	 </select>
+	<insert id="insertDeviceDBSyncTemp" parameterType="com.ssitcloud.entity.DeviceDBSyncTempEntity"
+	useGeneratedKeys="true" keyProperty="device_tpl_idx">
+		INSERT INTO device_dbsync_template 
+		(
+			device_tpl_ID,device_tpl_desc,device_type
+		) 
+		VALUES 
+		(
+			#{device_tpl_ID},#{device_tpl_desc},#{device_type}
+		)
+	</insert>
+	<insert id="insertDeviceDBSyncTempWithIdx" parameterType="com.ssitcloud.entity.DeviceDBSyncTempEntity">
+		INSERT INTO device_dbsync_template 
+		(
+			device_tpl_idx,device_tpl_ID,device_tpl_desc,device_type
+		) 
+		VALUES 
+		(
+			#{device_tpl_idx},#{device_tpl_ID},#{device_tpl_desc},#{device_type}
+		)
+	</insert>
+	
+	<update id="updateDeviceDBSyncTemp" parameterType="com.ssitcloud.entity.DeviceDBSyncTempEntity">
+		UPDATE device_dbsync_template
+		<set>
+			<if test="device_tpl_ID!=null">device_tpl_ID=#{device_tpl_ID},</if>
+			<if test="device_tpl_desc!=null">device_tpl_desc=#{device_tpl_desc},</if>
+			<if test="device_type!=null">device_type=#{device_type},</if>
+		</set>
+		WHERE device_tpl_idx=#{device_tpl_idx}
+	</update>
+	<delete id="deleteDeviceDBSyncTemp" parameterType="Integer">
+		DELETE FROM device_dbsync_template
+		WHERE device_tpl_idx=#{device_tpl_idx}
+	</delete>
+	
+	 <select id="selDbsynctempconfigByIdx" parameterType="Integer" resultType="com.ssitcloud.entity.DeviceDBSyncConfigEntity">
+	 	SELECT * FROM device_dbsync_config
+	 	WHERE  device_dbsync_id = #{idx}
+	 	AND device_tpl_type = 0
+	 </select>
+	 <!-- <select id="selDBSyncTempByidx" resultType="com.ssitcloud.entity.DeviceDBSyncTempEntity" parameterType="Integer">
+	 	SELECT * FROM device_dbsync_template
+	 	WHERE device_tpl_idx =#{idx}
+	 </select> -->
+	 <select id="selDBSyncid" resultType="com.ssitcloud.entity.page.DBSyncTempPageEntity" parameterType="com.ssitcloud.entity.page.DBSyncTempPageEntity">
+	 	<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+	<!--  	SELECT ddc.device_dbsync_id,ddc.device_tpl_type,ddt.*
+		FROM `device_dbsync_config` ddc,`device_dbsync_template` ddt
+		WHERE ddc.device_tpl_type = 0
+		AND ddc.device_dbsync_id = ddt.device_tpl_idx -->
+		SELECT ddt.* FROM `device_dbsync_template` ddt
+		WHERE 1=1
+		<if test="device_tpl_ID !=null and device_tpl_ID!=''">
+			AND ddt.device_tpl_ID  like CONCAT('%','${device_tpl_ID}','%')
+		</if>
+		<if test="device_tpl_desc !=null and device_tpl_desc!=''">
+			AND ddt.device_tpl_desc like CONCAT('%','${device_tpl_desc}','%')
+		</if>
+		<!-- GROUP BY device_dbsync_id -->
+		<if test="whetherPaging==false">
+			limit 50
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	 </select>
+	 <select id="selectDataTypeCount" parameterType="com.ssitcloud.entity.DeviceDBSyncConfigEntity" resultType="Integer">
+	 	SELECT COUNT(*) FROM device_dbsync_config 
+		where 1=1
+		and device_dbsync_id=#{device_dbsync_id} 
+		and device_tpl_type=#{device_tpl_type}
+		and library_idx=#{library_idx}
+	 </select>
+	 
+	 <select id="countDeviceDBSyncTempById" resultType="java.lang.Integer">
+		SELECT 
+		  COUNT(*) 
+		FROM
+		  `device_dbsync_template` 
+		WHERE device_tpl_ID =  #{device_tpl_ID}
+		<if test="device_tpl_idx!=null and device_tpl_idx!=''">
+		AND device_tpl_idx!=#{device_tpl_idx}
+		</if>
+	 </select>
+	 
+	 <select id="countDeviceDBSyncTempByName" resultType="java.lang.Integer">
+		SELECT 
+		  COUNT(*) 
+		FROM
+		  `device_dbsync_template` 
+		WHERE device_tpl_desc =  #{device_tpl_desc}
+		<if test="device_tpl_idx!=null and device_tpl_idx!=''">
+		AND device_tpl_idx!=#{device_tpl_idx}
+		</if>
+	 </select>
+	 
+	 <select id="countUsingDBSyncTempplate"  resultType="java.lang.Integer">
+	 	SELECT COUNT(*) FROM device_config WHERE device_dbsync_tpl_idx = #{device_tpl_idx} 
+	 </select>
+	 
+	 <update id="updateDeviceDBsyncLibrary">
+		UPDATE 
+		  device_dbsync_config de 
+		SET
+		  de.`library_idx` = #{newLibIdx}
+		WHERE de.`device_tpl_type` = 1 
+		  AND de.`device_dbsync_id` IN 
+		  <foreach collection="deviceList" item="deviceIdx" open="(" close=")" separator=",">
+			#{deviceIdx}
+		</foreach>
+	</update>
+	  <!--
+	  	device_dbsync_tpl_flg==1是模板 
+	  	AND ddc.`device_tpl_type`=0
+	  	device_config中及时没有用模板，但是也要备份
+	  -->
+	 <select id="selectDeviceDBSyncModalByLibraryIdx" parameterType="Map" resultType="com.ssitcloud.entity.DeviceDBSyncConfigEntity">
+	 	SELECT * FROM device_dbsync_config ddc  WHERE ddc.`device_dbsync_id` IN 
+		(
+			SELECT dc.`device_dbsync_tpl_idx` FROM device_config dc WHERE dc.`library_idx`=#{library_idx}
+		)
+		AND ddc.`device_tpl_type`=0
+	 </select>
+	 <select id="seldbsyncTempModalByLibraryIdx" parameterType="Map" resultType="com.ssitcloud.entity.DeviceDBSyncTempEntity">
+	 	SELECT * FROM device_dbsync_template ddt WHERE ddt.`device_tpl_idx` IN 
+		(
+			SELECT dc.`device_dbsync_tpl_idx` FROM device_config dc WHERE dc.`library_idx`=#{library_idx}
+		) 
+	 </select>
+</mapper>

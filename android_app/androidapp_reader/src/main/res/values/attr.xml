@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SlidingMenu">
+        <attr name="menu_critical" format="float" />
+        <!--显示菜单比例（0.1-0.9），滑动时，菜单显示宽度 > 屏幕宽度*showMenuScale，则显示菜单，否则显示主界面-->
+        <attr name="show_Menu_scale" format="float" />
+        <!-- 菜单以抽屉模式拉出来 -->
+        <attr name="drawer_menu" format="boolean" />
+        <!--主界面蒙版最大不透明度-->
+        <attr name="content_foreground_alpha" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="RefreshScrollView">
+        <!--刷新菜单高-->
+        <attr name="refresh_height" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="SwitchImageButton">
+        <attr name="open_img"  format="reference"/>
+        <attr name="close_img" format="reference"/>
+        <attr name="android:checked"/>
+    </declare-styleable>
+
+    <declare-styleable name="FlowLayout">
+        <attr name="horizontalSpacing" format="dimension"/>
+        <attr name="verticalSpacing" format="dimension"/>
+        <attr name="orientation" format="enum">
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+        </attr>
+        <attr name="debugDraw" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="FlowLayout_LayoutParams">
+        <attr name="layout_newLine" format="boolean"/>
+        <attr name="layout_horizontalSpacing" format="dimension"/>
+        <attr name="layout_verticalSpacing" format="dimension"/>
+    </declare-styleable>
+</resources>

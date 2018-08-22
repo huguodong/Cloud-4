@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="operatordevicegroup">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.RelOperatorDeviceGroupEntity"
+		useGeneratedKeys="true" keyProperty="rel_oper_dev_idx">
+		INSERT INTO
+		rel_operator_device_group (operator_group_idx,
+		device_group_idx,library_idx)
+		VALUES
+		(#{operator_group_idx},#{device_group_idx},#{library_idx})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.RelOperatorDeviceGroupEntity">
+		UPDATE
+		rel_operator_device_group
+		<set>
+			<if test="operator_group_idx !=null and operator_group_idx !=''">
+				operator_group_idx = #{operator_group_idx},
+			</if>
+			<if test="device_group_idx !=null and device_group_idx !=''">
+				device_group_idx = #{device_group_idx},
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				library_idx = #{library_idx}
+			</if>
+		</set>
+		WHERE rel_oper_dev_idx = #{rel_oper_dev_idx}
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.RelOperatorDeviceGroupEntity">
+		DELETE FROM
+		rel_operator_device_group
+		WHERE  rel_oper_dev_idx = #{rel_oper_dev_idx}
+		
+	</delete>
+	<delete id="deleteByOperGroupIdx" parameterType="com.ssitcloud.entity.RelOperatorDeviceGroupEntity">
+		DELETE FROM
+		rel_operator_device_group
+		WHERE operator_group_idx=#{operator_group_idx}
+	</delete>
+	<select id="selectByidx" parameterType="com.ssitcloud.entity.RelOperatorDeviceGroupEntity"
+		resultType="com.ssitcloud.entity.RelOperatorDeviceGroupEntity">
+		SELECT * FROM rel_operator_device_group
+		<where>
+			<if test="rel_oper_dev_idx !=null and rel_oper_dev_idx !=''">
+				and rel_oper_dev_idx = #{rel_oper_dev_idx}
+			</if>
+			<if test="operator_group_idx !=null and operator_group_idx !=''">
+				and operator_group_idx = #{operator_group_idx}
+			</if>
+			<if test="device_group_idx !=null and device_group_idx !=''">
+				and device_group_idx = #{device_group_idx}
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectAll" resultType="com.ssitcloud.entity.RelOperatorDeviceGroupEntity">
+		SELECT * FROM
+		rel_operator_device_group
+	</select>
+	
+	<select id="queryLibraryServiceGroup" resultType="java.util.Map">
+		SELECT *  FROM operator_group WHERE library_idx = #{library_idx}
+	</select>
+	<select id="selectByIdxArr" parameterType="List" resultType="com.ssitcloud.entity.RelOperatorDeviceGroupEntity">
+		select * from 
+		rel_operator_device_group
+		where device_group_idx in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	<select id="selectByDeviceGroupLibraryIdx" parameterType="Map" resultType="com.ssitcloud.entity.RelOperatorDeviceGroupEntity">
+		SELECT * FROM rel_operator_device_group rodg  
+		INNER JOIN device_group dg ON dg.`device_group_idx`=rodg.`device_group_idx`
+		WHERE dg.`library_idx`=#{library_idx}
+	</select>
+</mapper>

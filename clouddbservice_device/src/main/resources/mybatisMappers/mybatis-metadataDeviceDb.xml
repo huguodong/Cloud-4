@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="metadevicedb">
+	
+	<select id="select" parameterType="com.ssitcloud.entity.MetadataDeviceDbEntity"
+		resultType="com.ssitcloud.entity.MetadataDeviceDbEntity">
+		SELECT * FROM metadata_device_db
+		<where>
+			<if test="meta_device_db_idx !=null and meta_device_db_idx !=''">
+				and meta_device_db_idx = #{meta_device_db_idx}
+			</if>
+			<if test="db_name !=null and db_name !=''">
+				and db_name = #{db_name}
+			</if>
+			<if test="db_name_desc !=null and db_name_desc !=''">
+				and db_name_desc = #{db_name_desc}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectDbAndTableInfo" parameterType="com.ssitcloud.entity.MetadataDeviceDbEntity"
+		resultType="com.ssitcloud.entity.MetadataDeviceDbAndTableInfoEntity">
+		SELECT db.*,tab.table_name,tab.table_name_desc,tab.table_field_list
+		FROM metadata_device_db db left join metadata_device_table tab on db.meta_device_db_idx = tab.meta_device_db_idx
+		<where>
+			<if test="db_name !=null and db_name !=''">
+				db_name = #{db_name}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

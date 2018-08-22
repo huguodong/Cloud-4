@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deviceSelfCheckConf">
+	
+	<insert id="insertSelfCheckConf">
+		INSERT INTO metadata_library_selfcheck_protocol
+		(
+			protocol_idx,device_tpl_type,library_idx,
+			protocol_type,protocol_show,protocol_library_idx,
+			protocol_start,protocol_end,protocol_code,
+			protocol_defalut,operator_idx,createtime
+		)
+		VALUES
+		(
+			#{protocol_idx},#{device_tpl_type},#{library_idx},
+			#{protocol_type},#{protocol_show},#{protocol_library_idx},
+			#{protocol_start},#{protocol_end},#{protocol_code},
+			#{protocol_defalut},#{operator_idx},NOW()
+		)
+	</insert>
+	
+	<update id="updateSelfCheckConf" parameterType="com.ssitcloud.entity.SelfCheckProtocolEntity">
+		UPDATE   metadata_library_selfcheck_protocol
+		<set>
+			<if test="protocol_show!=null">protocol_show=#{protocol_show},</if>
+			<if test="protocol_start!=null">protocol_start=#{protocol_start},</if>
+			<if test="protocol_end!=null">protocol_end=#{protocol_end},</if>
+			<if test="protocol_code!=null">protocol_code=#{protocol_code},</if>
+			<if test="protocol_defalut!=null">protocol_defalut=#{protocol_defalut},</if>
+			<if test="operator_idx!=null">operator_idx=#{operator_idx},</if>
+			updatetime=NOW()
+		</set>
+		WHERE 1=1
+		AND  protocol_idx=#{protocol_idx}
+		AND library_idx=#{library_idx}
+		AND protocol_library_idx=#{protocol_library_idx}
+		AND device_tpl_type=#{device_tpl_type}
+	</update>
+	<!-- 
+		protocol_idx		int(11) NOT NULL模板ID号或设备ID号
+		device_tpl_type		int(11) NOT NULL模板区分 0模板 1数据
+		library_idx			int(11) NOT NULL馆ID
+		protocol_type		int(11) NOT NULL指令类型 1SIP2 2NCIP
+		protocol_show		varchar(50) NOT NULL指令代码 63、64等
+		protocol_library_idx	int(11) NOT NULL指令字段描述，外关连library_selfcheck_protocol_config
+		protocol_start		int(11) NULL指令起始位置
+		protocol_end		int(11) NULL指令结束位置
+		protocol_code		varchar(50) NULL指令标识符
+		protocol_defalut	varchar(50) NULL默认值
+		operator_idx		int(11) NOT NULL操作员ID
+		createtime			timestamp NOT NULL创建时间
+		updatetime			timestamp NOT NULL更新时间
+	
+	 -->
+	<delete id="deleteSelfCheckConf" parameterType="com.ssitcloud.entity.SelfCheckProtocolEntity">
+		DELETE FROM metadata_library_selfcheck_protocol
+		WHERE 1=1
+		AND  protocol_idx=#{protocol_idx}
+		AND library_idx=#{library_idx}
+		AND protocol_library_idx=#{protocol_library_idx}
+		AND device_tpl_type=#{device_tpl_type}
+	</delete>
+	
+	<select id="querySelfCheckConf" parameterType="com.ssitcloud.entity.SelfCheckProtocolEntity" resultType="com.ssitcloud.entity.SelfCheckProtocolEntity">
+		SELECT * FROM metadata_library_selfcheck_protocol
+		<if test="protocol_idx!=null">AND protocol_idx like CONCAT('%','${protocol_idx}','%')</if>
+		<if test="device_tpl_type!=null">AND device_tpl_type like CONCAT('%','${device_tpl_type}','%')</if>
+		<if test="library_idx!=null">AND library_idx like CONCAT('%','${library_idx}','%')</if>
+		<if test="protocol_type!=null">AND protocol_type like CONCAT('%','${protocol_type}','%')</if>
+		<if test="protocol_show!=null">AND protocol_show like CONCAT('%','${protocol_show}','%')</if>
+		<if test="protocol_library_idx!=null">AND protocol_library_idx like CONCAT('%','${protocol_library_idx}','%')</if>
+		<if test="protocol_start!=null">AND protocol_start like CONCAT('%','${protocol_start}','%')</if>
+		<if test="protocol_end!=null">AND protocol_end like CONCAT('%','${protocol_end}','%')</if>
+		<if test="protocol_code!=null">AND protocol_code like CONCAT('%','${protocol_code}','%')</if>
+		<if test="protocol_defalut!=null">AND protocol_defalut like CONCAT('%','${protocol_defalut}','%')</if>
+		<if test="operator_idx!=null">AND operator_idx like CONCAT('%','${operator_idx}','%')</if>
+		<if test="createtime!=null">AND createtime like CONCAT('%','${createtime}','%')</if>
+		<if test="updatetime!=null">AND updatetime like CONCAT('%','${updatetime}','%')</if>
+	</select>
+	
+	<select id="querySelfCheckConfExactly" parameterType="com.ssitcloud.entity.SelfCheckProtocolEntity" resultType="com.ssitcloud.entity.SelfCheckProtocolEntity">
+		SELECT * FROM metadata_library_selfcheck_protocol
+		WHERE 1=1
+		<if test="protocol_idx!=null">AND protocol_idx=#{protocol_idx}</if>
+		<if test="device_tpl_type!=null">AND device_tpl_type=#{device_tpl_type}</if>
+		<if test="library_idx!=null">AND library_idx=#{library_idx}</if>
+		<if test="protocol_type!=null">AND protocol_type=#{protocol_type}</if>
+		<if test="protocol_show!=null">AND protocol_show=#{protocol_show}</if>
+		<if test="protocol_library_idx!=null">AND protocol_library_idx=#{protocol_library_idx}</if>
+		<if test="protocol_start!=null">AND protocol_start=#{protocol_start}</if>
+		<if test="protocol_end!=null">AND protocol_end=#{protocol_end}</if>
+		<if test="protocol_code!=null">AND protocol_code=#{protocol_code}</if>
+		<if test="protocol_defalut!=null">AND protocol_defalut=#{protocol_defalut}</if>
+		<if test="operator_idx!=null">AND operator_idx=#{operator_idx}</if>
+		<if test="createtime!=null">AND createtime=#{createtime}</if>
+		<if test="updatetime!=null">AND updatetime=#{updatetime}</if>
+	</select>	
+	
+</mapper> 

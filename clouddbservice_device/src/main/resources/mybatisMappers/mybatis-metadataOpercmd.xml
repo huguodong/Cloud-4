@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="metaopercmd">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.MetadataOpercmdEntity"
+		useGeneratedKeys="true" keyProperty="meta_opercmd_idx">
+		INSERT INTO metadata_opercmd
+		(opercmd, opercmd_desc,opercmd_typeinfo,operbusinesstype,opercmd_url)
+		VALUES
+		(#{opercmd},#{opercmd_desc},#{opercmd_typeinfo},#{operbusinesstype},#{opercmd_url})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.MetadataOpercmdEntity">
+		UPDATE metadata_opercmd
+		<set>
+			<if test="opercmd !=null and opercmd !='' ">
+				opercmd = #{opercmd},
+			</if>
+			<if test="opercmd_desc !=null and opercmd_desc !='' ">
+				opercmd_desc = #{opercmd_desc}
+			</if>
+			<if test="opercmd_typeinfo !=null and opercmd_typeinfo !='' ">
+				opercmd_typeinfo = #{opercmd_typeinfo}
+			</if>
+			<if test="operbusinesstype !=null and operbusinesstype !='' ">
+				operbusinesstype = #{operbusinesstype}
+			</if>
+			<if test="opercmd_url !=null and opercmd_url !='' ">
+				opercmd_url = #{opercmd_url}
+			</if>
+		</set>
+		WHERE meta_opercmd_idx = #{meta_opercmd_idx}
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.MetadataOpercmdEntity">
+		DELETE FROM metadata_opercmd
+		WHERE meta_opercmd_idx = #{meta_opercmd_idx}
+		
+	</delete>
+
+	<select id="selectByidx" parameterType="com.ssitcloud.entity.MetadataOpercmdEntity"
+		resultType="com.ssitcloud.entity.MetadataOpercmdEntity">
+		SELECT * FROM metadata_opercmd
+		<where>
+			<if test="meta_opercmd_idx != null and meta_opercmd_idx !='' ">
+				and meta_opercmd_idx = #{meta_opercmd_idx}
+			</if>
+			<if test="opercmd != null and opercmd !='' ">
+				and opercmd = #{opercmd}
+			</if>
+			<if test="opercmd_desc != null and opercmd_desc !='' ">
+				and opercmd_desc = #{opercmd_desc}
+			</if>
+			<if test="opercmd_typeinfo != null and opercmd_typeinfo !='' ">
+				and opercmd_typeinfo = #{opercmd_typeinfo}
+			</if>
+			<if test="operbusinesstype != null and operbusinesstype !='' ">
+				and opercmd = #{opercmd}
+			</if>
+			<if test="opercmd_url != null and opercmd_url !='' ">
+				and opercmd_desc = #{opercmd_desc}
+			</if>
+		</where>
+		order by opercmd
+	</select>
+	<select id="selectListByRemoteDevice" parameterType="com.ssitcloud.entity.MetadataOpercmdEntity" resultType="com.ssitcloud.system.entity.MetaOpercmdRemoteEntity">
+		SELECT opercmd,opercmd_desc as opercmddesc FROM metadata_opercmd
+		WHERE 1=1 
+		AND opercmd_typeinfo=#{opercmd_typeinfo}
+	</select>
+
+	<select id="selectAll" resultType="com.ssitcloud.entity.MetadataOpercmdEntity">
+		SELECT * FROM metadata_opercmd
+	</select>
+	<!-- 取得 一级 权限 -->
+	<select id="selectCmdType" resultType="com.ssitcloud.entity.MetadataOpercmdEntity">
+			SELECT * FROM metadata_opercmd mo 
+			WHERE mo.`opercmd` REGEXP '[0]{6}$'
+			UNION 
+		    SELECT * FROM metadata_opercmd mo 
+		    GROUP BY mo.`operbusinesstype`
+	</select>
+	<!-- 取得 一级 权限 -->
+	<select id="selectCardCmdType" resultType="com.ssitcloud.entity.MetadataOpercmdEntity">
+		    SELECT * FROM metadata_opercmd mo WHERE `opercmd_typeinfo` = 3
+		    GROUP BY mo.`operbusinesstype`
+	</select>
+	<!-- 权限分组页面 分页查询 -->
+	<select id="queryServgroupByparam" resultType="com.ssitcloud.entity.page.OperCmdMgmtPageEntity" parameterType="com.ssitcloud.entity.page.OperCmdMgmtPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT sg.`service_group_idx`,sg.`service_group_id`,sg.`library_idx`,sg.`service_group_name`,sg.`service_group_desc`,sg.`version_stamp`,
+		GROUP_CONCAT(mo.`opercmd`) AS opercmd_str,
+		GROUP_CONCAT(mo.`meta_opercmd_idx`) AS meta_opercmd_idx_str,
+		GROUP_CONCAT(mo.`opercmd_desc`) AS opercmd_desc_str
+		 FROM service_group sg
+		LEFT JOIN rel_service_group rsg ON sg.`service_group_idx`=rsg.`service_group_idx`
+		LEFT JOIN metadata_opercmd mo ON mo.`meta_opercmd_idx`=rsg.`meta_opercmd_idx`
+		GROUP BY sg.`service_group_idx`
+		HAVING 1=1
+		<if test="library_idx!=null and library_idx!=0">
+			AND sg.library_idx=#{library_idx}
+		</if>
+		<if test="service_group_name!=null and service_group_name!=''">
+			AND sg.`service_group_name` LIKE CONCAT("%","${service_group_name}","%")
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	<!-- 因为判断一级菜单是根据命令码的前6位，所以将原来判断四位的改成六位(表名由rel_operator_group改为rel_operator_service_group) modify by huanghuang 20170217 -->
+	<select id="getBussinessTypeByGroupId" resultType="java.util.Map">
+		SELECT DISTINCT 
+		  (mo.`operbusinesstype`),
+		  LEFT(mo.`opercmd`, 6) `opercmd` 
+		FROM
+		  metadata_opercmd mo,
+		  rel_service_group rsg1 
+		WHERE mo.`meta_opercmd_idx` = rsg1.`meta_opercmd_idx` 
+		  AND mo.`meta_opercmd_idx` IN 
+		  (SELECT 
+		    rsg.meta_opercmd_idx 
+		  FROM
+		    rel_service_group rsg 
+		  WHERE rsg.`service_group_idx` IN 
+		    (SELECT 
+		      rosg.`service_group_idx` 
+		    FROM
+		      rel_operator_service_group rosg 
+		    WHERE rosg.`operator_group_idx` IN 
+		      (SELECT 
+		        rog.`operator_group_idx` 
+		      FROM
+		        rel_operator_service_group rog 
+		      WHERE rog.`operator_group_idx` = #{group_idx}))) 
+		ORDER BY mo.`opercmd` 
+	</select>
+	<!-- 因为判断一级菜单是根据命令码的前6位，所以将原来判断四位的改成六位(表名由rel_operator_group改为rel_operator_service_group) modify by huanghuang 20170217 -->
+	<select id="getOpercmdListByOpercmd" resultType="java.util.Map">
+		SELECT DISTINCT 
+		  mo.`meta_opercmd_idx`,
+		  mo.`opercmd`,
+		  mo.`opercmd_desc` 
+		FROM
+		  metadata_opercmd mo,
+		  rel_service_group rsg1 
+		WHERE mo.`meta_opercmd_idx` = rsg1.`meta_opercmd_idx` 
+		  AND LEFT(mo.`opercmd`, 6) = #{opercmd}  
+		  AND mo.`meta_opercmd_idx` IN 
+		  (SELECT 
+		    rsg.meta_opercmd_idx 
+		  FROM
+		    rel_service_group rsg 
+		  WHERE rsg.`service_group_idx` IN 
+		    (SELECT 
+		      rosg.`service_group_idx` 
+		    FROM
+		      rel_operator_service_group rosg 
+		    WHERE rosg.`operator_group_idx` IN 
+		      (SELECT 
+		        rog.`operator_group_idx` 
+		      FROM
+		        rel_operator_service_group rog 
+		      WHERE rog.`operator_group_idx` = #{group_idx}))) 
+		ORDER BY mo.`opercmd` 
+	</select>
+	<select id="selectDevAllFunction" resultType="com.ssitcloud.entity.MetadataOpercmdEntity">
+		SELECT * FROM metadata_opercmd WHERE opercmd_url IS NOT NULL AND opercmd_typeinfo=4
+	</select>
+	
+	
+	<!-- 馆员App:根据馆员idx查出对应的权限 add by shuangjunjie -->
+	<select id="selectOpercmdByOperatorIdx" parameterType="Map" resultType="com.ssitcloud.entity.MetadataOpercmdEntity">
+		select m.opercmd,m.opercmd_desc from `metadata_opercmd` m 
+			where m.meta_opercmd_idx in 
+				(select rsg.meta_opercmd_idx from `rel_service_group` rsg where rsg.service_group_idx in 
+					(select rosg.service_group_idx from `rel_operator_service_group` rosg where rosg.operator_group_idx in 
+						(select rog.operator_group_idx from `rel_operator_group` rog 
+						where rog.operator_idx = #{operator_idx}))) and m.opercmd like CONCAT(#{opercmd},'%');
+	</select>
+	
+	
+	<select id="selectDeviceOperLogCmd" resultType="com.ssitcloud.entity.MetadataOpercmdEntity">
+		    SELECT * FROM metadata_opercmd mo WHERE `opercmd_typeinfo` = 3 or `opercmd_typeinfo` = 4
+	</select>
+</mapper>

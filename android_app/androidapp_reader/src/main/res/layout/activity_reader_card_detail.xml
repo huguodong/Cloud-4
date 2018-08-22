@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_hight"
+        android:background="@color/orange"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/back"
+            android:layout_width="@dimen/title_bar_left_button_width"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back_white" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="读者证信息"
+            android:textColor="@color/white"
+            android:textSize="@dimen/large_text" />
+
+        <RelativeLayout
+            android:layout_width="@dimen/title_bar_left_button_width"
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F1F1F1"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fillViewport="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:text="读者证号"
+                        android:textColor="#888888"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/card_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:textColor="#F6A623"
+                        android:textSize="30sp"
+                        tools:text="123456789" />
+
+                    <ImageView
+                        android:id="@+id/barcode"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_below="@+id/card_no"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/gray_barcode" />
+
+                    <RelativeLayout
+                        android:id="@+id/nameLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/barcode"
+                        android:background="@drawable/border_line"
+                        android:paddingLeft="20dp">
+
+                        <TextView
+                            android:id="@+id/readerTV"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:text="读者"
+                            android:textColor="#888888"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/readerName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/readerTV"
+                            android:layout_alignBottom="@+id/readerTV"
+                            android:layout_toEndOf="@+id/readerTV"
+                            android:layout_toRightOf="@+id/readerTV"
+                            android:textColor="#333333"
+                            android:textSize="14sp"
+                            tools:text="王" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/libLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/nameLayout"
+                        android:background="@drawable/border_line"
+                        android:paddingLeft="20dp">
+
+                        <TextView
+                            android:id="@+id/libTV"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:text="图书馆"
+                            android:textColor="#888888"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/libraryName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/libTV"
+                            android:layout_alignBottom="@+id/libTV"
+                            android:layout_toEndOf="@+id/libTV"
+                            android:layout_toRightOf="@+id/libTV"
+                            android:textColor="#333333"
+                            android:textSize="14sp"
+                            tools:text="深圳图书馆" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/depositLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/libLayout"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/border_line"
+                        android:paddingLeft="20dp">
+
+                        <TextView
+                            android:id="@+id/depositTV"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:text="押金"
+                            android:textColor="#888888"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/deposit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/depositTV"
+                            android:layout_alignBottom="@+id/depositTV"
+                            android:layout_toEndOf="@+id/depositTV"
+                            android:layout_toRightOf="@+id/depositTV"
+                            android:textColor="#333333"
+                            android:textSize="14sp"
+                            tools:text="0元" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/advanceChargeLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/depositLayout"
+                        android:background="@drawable/border_line"
+                        android:paddingLeft="20dp">
+
+                        <TextView
+                            android:id="@+id/advanceChargeTV"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:text="预付款"
+                            android:textColor="#888888"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/advanceCharge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/advanceChargeTV"
+                            android:layout_alignBottom="@+id/advanceChargeTV"
+                            android:layout_toEndOf="@+id/advanceChargeTV"
+                            android:layout_toRightOf="@+id/advanceChargeTV"
+                            android:textColor="#333333"
+                            android:textSize="14sp"
+                            tools:text="0" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/arrearageLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/advanceChargeLayout"
+                        android:background="@drawable/border_line"
+                        android:paddingLeft="20dp">
+
+                        <TextView
+                            android:id="@+id/arrearageTV"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:text="欠款"
+                            android:textColor="#888888"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/arrearage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/arrearageTV"
+                            android:layout_alignBottom="@+id/arrearageTV"
+                            android:layout_toEndOf="@+id/arrearageTV"
+                            android:layout_toRightOf="@+id/arrearageTV"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/canBorrowLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/arrearageLayout"
+                        android:background="@drawable/border_line"
+                        android:paddingLeft="20dp">
+
+                        <TextView
+                            android:id="@+id/canBorrowTV"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:text="可借阅图书"
+                            android:textColor="#888888"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/alreadyNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/canBorrowTV"
+                            android:layout_alignBottom="@+id/canBorrowTV"
+                            android:layout_toEndOf="@+id/canBorrowTV"
+                            android:layout_toRightOf="@+id/canBorrowTV"
+                            android:textColor="#333333"
+                            android:textSize="14sp"
+                            tools:text="111" />
+
+                        <TextView
+                            android:id="@+id/allNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/alreadyNum"
+                            android:layout_alignBottom="@+id/alreadyNum"
+                            android:layout_marginLeft="3px"
+                            android:layout_toEndOf="@+id/alreadyNum"
+                            android:layout_toRightOf="@+id/alreadyNum"
+                            android:textColor="#333333"
+                            android:textSize="12sp"
+                            tools:text="/1" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/orange"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/preferCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="设为常用卡"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/unbind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="解绑"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <include
+            android:id="@+id/waitView"
+            layout="@layout/sub_wait_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </FrameLayout>
+</LinearLayout>

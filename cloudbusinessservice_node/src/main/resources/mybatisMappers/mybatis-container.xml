@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="container">
+
+	<insert id="addContainer" parameterType="com.ssitcloud.node.entity.ContainerEntity" useGeneratedKeys="true" keyProperty="container_idx">
+		INSERT INTO `container` (
+			`container_id`,
+			`container_name`,
+			`host_idx`,
+			`protocol_type`,
+			`container_port`,
+			`save_path`,
+			`is_disable`
+		) VALUES (
+			#{container_id},
+			#{container_name},
+			#{host_idx},
+			#{protocol_type},
+			#{container_port},
+			#{save_path},
+			#{is_disable}
+		)
+	</insert>
+
+	<delete id="deleteContainerById" parameterType = "java.util.List">
+		<![CDATA[  
+			DELETE FROM `container` WHERE `container_idx` in
+	    ]]>  
+	    <foreach collection="list" item = "container_idx" open="(" separator="," close=")">
+	   		#{container_idx}
+	    </foreach>
+	</delete>
+
+	<select id="queryContainerByPage" resultType="com.ssitcloud.node.entity.ContainerEntity">
+		SELECT `container_idx`,`container_id`,`container_name`,`host_idx`,`container_port`,`save_path`,`is_disable`,`protocol_type` FROM `container`
+	</select>
+
+	<select id="queryContainerByParam" parameterType="com.ssitcloud.node.entity.page.ContainerPageEntity"  resultType="com.ssitcloud.node.entity.page.ContainerPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT c.*,h.host_name,h.host_ip1 FROM `container` c LEFT JOIN `host` h ON c.`host_idx`=h.`host_idx`
+		<where>
+			<if test="container_idx != null and container_idx != 0 ">
+				AND c.`container_idx` = #{container_idx}
+			</if>
+			<if test="container_id != null and container_id != ''">
+				AND c.`container_id` LIKE  CONCAT('%', #{container_id}, '%')
+			</if>
+			<if test="container_name != null and container_name != ''">
+				AND c.`container_name` LIKE  CONCAT('%', #{container_name}, '%')
+			</if>
+			<if test="protocol_type != null and protocol_type != ''">
+				AND c.`protocol_type` = #{protocol_type}
+			</if>
+			<if test="host_idx != null and host_idx != 0 ">
+				AND c.`host_idx` = #{host_idx}
+			</if>
+			<if test="container_port != null and container_port != 0">
+				AND c.`container_port` = #{container_port}
+			</if>
+			<if test="save_path != null and save_path != ''">
+				AND c.`save_path` = #{save_path}
+			</if>
+			<if test="is_disable != null and is_disable != 0 ">
+				AND c.`is_disable` = #{is_disable}
+			</if>
+		</where>
+		ORDER BY c.`container_idx`
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+
+	<select id="queryContainerById" resultType="com.ssitcloud.node.entity.ContainerEntity">
+		SELECT * FROM `container`
+		<where>
+			<choose>
+				<when test="_parameter!=null">
+					AND `container_idx` = #{container_idx}
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+	<update id="updateContainer" parameterType="com.ssitcloud.node.entity.ContainerEntity">
+		UPDATE `container`
+		<set>
+			<if test="container_id !=null ">
+			`container_id` = #{container_id},
+			</if>
+			<if test="container_name !=null ">
+			`container_name` = #{container_name},
+			</if>
+			<if test="host_idx !=null ">
+			`host_idx` = #{host_idx},
+			</if>
+			<if test="protocol_type !=null ">
+			`protocol_type` = #{protocol_type},
+			</if>
+			<if test="container_port !=null ">
+			`container_port` = #{container_port},
+			</if>
+			<if test="save_path !=null ">
+			`save_path` = #{save_path},
+			</if>
+			<if test="is_disable !=null ">
+			`is_disable` = #{is_disable},
+			</if>
+		</set>
+		WHERE container_idx = #{container_idx}
+	</update>
+
+</mapper>

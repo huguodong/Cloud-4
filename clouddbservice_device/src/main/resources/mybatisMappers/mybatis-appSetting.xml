@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="app_setting">
+
+	<insert id="insertAppSetting" parameterType="com.ssitcloud.entity.AppSettingEntity" useGeneratedKeys="true" keyProperty="setting_idx">
+		insert into app_setting
+		(		
+            user_type,image_url,lib_idx,service_id,setting_desc
+            <if test="setting_sort != null">,setting_sort</if>
+            
+		)
+		values
+		(
+            #{user_type},#{image_url},#{lib_idx},#{service_id},#{setting_desc}
+            <if test="setting_sort != null">,#{setting_sort}</if>
+		)
+	</insert>
+	
+	<update id="updateAppSetting" parameterType="com.ssitcloud.entity.AppSettingEntity">
+		update app_setting
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="user_type!=null">
+				user_type=#{user_type},
+			</if>
+			<if test="image_url!=null">
+				image_url=#{image_url},
+			</if>
+			<if test="lib_idx!=null">
+				lib_idx=#{lib_idx},
+			</if>
+			<if test="service_id!=null">
+				service_id=#{service_id},
+			</if>
+			<if test="setting_desc!=null">
+				setting_desc=#{setting_desc},
+			</if>
+			<if test="setting_sort != null">
+				setting_sort=#{setting_sort}
+			</if>
+		</set>
+		   WHERE 1=1 
+	    <if test="setting_idx!=null">
+			and setting_idx=#{setting_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteAppSetting" parameterType="com.ssitcloud.entity.AppSettingEntity">
+		delete from app_setting where setting_idx=#{setting_idx}
+	</delete>
+	
+	<select id="selectAppSetting" parameterType="com.ssitcloud.entity.AppSettingEntity" resultType="com.ssitcloud.entity.AppSettingEntity">
+		SELECT setting_idx,user_type,image_url,lib_idx,service_id,setting_desc,setting_sort FROM app_setting 
+	    where 1=1
+		<if test="setting_idx!=null">
+			AND setting_idx=#{setting_idx}
+		</if>
+	</select>
+	<select id="selectAppSettings" parameterType="com.ssitcloud.entity.page.AppSettingPageEntity" resultType="com.ssitcloud.entity.AppSettingEntity">
+		SELECT setting_idx,user_type,image_url,lib_idx,service_id,setting_desc,setting_sort FROM app_setting 
+	    where 1=1 
+	    <if test="lib_idx != null">
+	    	AND lib_idx = #{lib_idx} 
+	    </if>
+	    <if test="user_type != null">
+	    	AND user_type = #{user_type} 
+	    </if>
+	    <if test="image_url != null">
+	    	AND image_url = #{image_url} 
+	    </if>
+	    <if test="service_id != null">
+	    	AND service_id = #{service_id} 
+	    </if>
+	    <!-- 排序 -->
+	    <if test="setting_sort == null">
+	    	order by setting_sort ASC
+	    </if>
+	    <if test="setting_sort != null">
+	    	order by setting_sort DESC 
+	    </if>
+	    <if test="pageSize != null and pageCurrent != null">
+	    limit #{limitIndex},#{limitOffset}
+	    </if>
+	</select>
+	
+	<!-- 根据馆idx分页查询 lqw 2017/3/20 -->
+	<select id="selectAppSettingByPage" parameterType="com.ssitcloud.entity.page.AppSettingPage2Entity" resultType="com.ssitcloud.entity.page.AppSettingPage2Entity">
+	<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT
+			a.lib_idx,
+			a.user_type,
+			a.image_url,
+			a.setting_desc,
+			GROUP_CONCAT(
+				DISTINCT a.service_id
+				ORDER BY
+					a.setting_sort
+			) `service_id`,
+			GROUP_CONCAT(
+				DISTINCT mms.sub_menu_name
+				ORDER BY
+					a.setting_sort
+			) `sub_menu_name`,
+			GROUP_CONCAT(
+				DISTINCT a.setting_sort
+				ORDER BY
+					a.setting_sort
+			) `setting_sort_str`
+        <if test="user_type == '2'.toString()">
+            ,GROUP_CONCAT(DISTINCT am.sys_name) `sys_name`
+        </if>
+		FROM
+			app_setting a,
+			metadata_menu_sub mms
+        <if test="user_type == '2'.toString()">
+            ,appconn_metadata am,
+            appconn_setting ac
+        </if>
+	    where a.service_id = mms.sub_menu_code
+        <if test="user_type == '2'.toString()">
+            AND ac.lib_idx = a.lib_idx
+            AND ac.meta_idx = am.meta_idx
+        </if>
+	    <if test="lib_idx_str != null">
+	    	AND a.lib_idx in(${lib_idx_str}) 
+	    </if>
+	    <if test="user_type != null">
+	    	AND a.user_type = #{user_type} 
+	    </if>
+	    <if test="image_url != null">
+	    	AND a.image_url = #{image_url} 
+	    </if>
+	    <if test="service_id != null">
+	    	AND a.service_id = #{service_id} 
+	    </if>
+	    GROUP BY a.lib_idx
+	    <!-- 排序 -->
+	    ORDER BY
+	      a.lib_idx ASC
+	    <if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	<!-- 根据馆idx删除  lqw 2017/3/20 -->
+	<delete id="deleteAppSettingBylib_idx" parameterType="com.ssitcloud.entity.AppSettingEntity">
+		delete from app_setting where lib_idx=#{lib_idx} and user_type=#{user_type}
+	</delete>
+	
+	<!-- 根据 多个service_id查出 多条记录  add by shuangjunjie 2017/3/27-->
+	<select id="selectMenuNamesByServiceIds" parameterType="Map" resultType="Map">
+		select m.sub_menu_code,m.sub_menu_name,a.image_url from metadata_menu_sub m,app_setting a 
+			where m.sub_menu_code=a.service_id 
+			<if test="service_ids!=null">
+				and service_id in
+		        <foreach collection="service_ids" index="index" item="serviceIdx" open="(" separator="," close=")">
+		                #{serviceIdx,jdbcType=VARCHAR}       
+		        </foreach>    
+			</if>
+			and user_type=#{user_type} and lib_idx=#{lib_idx}
+	</select>
+</mapper>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8 oldie"><![endif]-->
+<!--[if IE 9]><html class="ie9 oldie"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<title>维护卡管理</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/common.js" ></script>
+<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+<![endif]-->
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="js/html5.js" ></script>
+	<script type="text/javascript" src="js/ie.js" ></script>
+<![endif]-->
+
+</head>
+<body>
+<div class="system-readertype">
+<div class="g-loading"></div>
+	<div class="g-header">
+		<a href="main.html" class="logo"></a>
+		<a class="exit" href="index.html"><span class="icon"></span>退出</a>
+		<div class="status"><span class="icon"></span>系统管理员</div>
+		<div class="g-select language">
+			<span class="icon"></span>
+			<select>
+				<option value="" selected>中文</option>
+				<option value="">英文</option>
+			</select>
+			<span class="arr-icon"></span>
+		</div>
+	</div>
+	<div class="main-content">
+	<div class="left-side">
+		<div class="control-btn"></div>
+		<div class="absolute-wrap">
+			<div class="title">菜单</div>
+			<div class="item">
+				<div class="t icon1"><a href="main.html">首页</a></div>
+			</div>
+			<div class="item">
+				<div class="t icon2">用户管理<span class="arr-icon"></span></div>
+				<ul>
+					<li><a href="user-manage.html">操作员管理</a></li>
+					<li><a href="usergroup-manage.html">操作员分组管理</a></li>
+					<li><a href="config-password.html">用户鉴权模板配置</a></li>
+					<li><a href="authority-fenzu.html">权限分组</a></li>
+				</ul>
+			</div>
+			<div class="item active">
+				<div class="t icon3">图书馆管理<span class="arr-icon"></span></div>
+				<ul>
+					<li><a href="library-guanli.html">图书馆管理</a></li>
+					<li><a href="config-tushuguan.html">图书馆模板配置</a></li>
+					<li><a href="config-ACS.html">ACS服务模板配置</a></li>
+					<li><a href="system-readertype.html">读者流通类型管理</a></li>
+					<li class="active"><a href="system-card.html">维护卡管理</a></li>
+				</ul>
+			</div>
+			<div class="item">
+				<div class="t icon4">设备管理<span class="arr-icon"></span></div>
+					<ul>
+					<li><a href="equipment-guanli.html">设备管理</a></li>
+					<li><a href="equipment-leixing.html">设备类型</a></li>
+					<li><a href="equipment-fenzu.html">设备分组</a></li>
+					<li><a href="config-monitoring.html">设备监控模板配置</a></li>
+					<li><a href="config-yingjian.html">硬件与逻辑名模板配置</a></li>
+					<li><a href="config-yunxing.html">运行模板配置</a></li>
+					<li><a href="config-shujuku.html">数据库同步模板配置</a></li>
+					</ul>
+			</div>
+			<div class="item">
+				<div class="t icon5">系统管理<span class="arr-icon"></span></div>
+					<ul>
+						<li><a href="system-databackup.html">数据库备份</a></li>
+						<li><a href="system-log.html">系统日志</a></li>
+					</ul>
+			</div>
+			<div class="item">
+				<div class="t icon6">升级管理<span class="arr-icon"></span></div>
+					<ul>
+						<li><a href="config-shengji.html">升级模板配置</a></li>
+					</ul>
+			</div>
+		</div>
+	</div>
+		<div class="page-title-bar">
+			<span class="title">维护卡管理<a href="help-page.html" target="_blank" class="g-help"></a></span>
+			<div class="form-wrap fr">
+				<span class="fl">图书馆</span>
+				<input type="text" name="" id="" class="input g-input" placeholder="输入关键词" />
+				<span class="fl">流通类型ID</span>
+				<input type="text" name="" id="" class="input g-input" placeholder="输入关键词" />
+				<div class="btn search">查询</div>
+				<div class="btn increase g-btn-green">新增</div>
+				<div class="btn delete">删除</div>
+			</div>
+		</div>
+		<div class="main">
+			<table class="g-table">
+				<thead>
+					<tr>
+						<th class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></th>
+						<th class="col2">编号</th>
+						<th class="col3">图书馆</th>
+						<th class="col4">维护卡号</th>
+						<th class="col5">维护卡名</th>
+						<th class="col7">备注</th>
+						<th class="col8">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+					<td class="col2">0001</td>
+					<td class="col3">朝阳区图书馆</td>
+					<td class="col4">0001</td>
+					<td class="col5">物流卡</td>
+					<td class="col7"></td>
+					<td class="col8">
+						<span class="btn-a edit">编辑</span>
+						<span class="btn-a delete">删除</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+					<td class="col2">0001</td>
+					<td class="col3">朝阳区图书馆</td>
+					<td class="col4">0001</td>
+					<td class="col5">物流卡</td>
+					<td class="col7"></td>
+					<td class="col8">
+						<span class="btn-a edit">编辑</span>
+						<span class="btn-a delete">删除</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+					<td class="col2">0001</td>
+					<td class="col3">朝阳区图书馆</td>
+					<td class="col4">0001</td>
+					<td class="col5">物流卡</td>
+					<td class="col7"></td>
+					<td class="col8">
+						<span class="btn-a edit">编辑</span>
+						<span class="btn-a delete">删除</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+					<td class="col2">0001</td>
+					<td class="col3">朝阳区图书馆</td>
+					<td class="col4">0001</td>
+					<td class="col5">物流卡</td>
+					<td class="col7"></td>
+					<td class="col8">
+						<span class="btn-a edit">编辑</span>
+						<span class="btn-a delete">删除</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+					<td class="col2">0001</td>
+					<td class="col3">朝阳区图书馆</td>
+					<td class="col4">0001</td>
+					<td class="col5">物流卡</td>
+					<td class="col7"></td>
+					<td class="col8">
+						<span class="btn-a edit">编辑</span>
+						<span class="btn-a delete">删除</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+					<td class="col2">0001</td>
+					<td class="col3">朝阳区图书馆</td>
+					<td class="col4">0001</td>
+					<td class="col5">物流卡</td>
+					<td class="col7"></td>
+					<td class="col8">
+						<span class="btn-a edit">编辑</span>
+						<span class="btn-a delete">删除</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+					<td class="col2">0001</td>
+					<td class="col3">朝阳区图书馆</td>
+					<td class="col4">0001</td>
+					<td class="col5">物流卡</td>
+					<td class="col7"></td>
+					<td class="col8">
+						<span class="btn-a edit">编辑</span>
+						<span class="btn-a delete">删除</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+					<td class="col2">0001</td>
+					<td class="col3">朝阳区图书馆</td>
+					<td class="col4">0001</td>
+					<td class="col5">物流卡</td>
+					<td class="col7"></td>
+					<td class="col8">
+						<span class="btn-a edit">编辑</span>
+						<span class="btn-a delete">删除</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+					<td class="col2">0001</td>
+					<td class="col3">朝阳区图书馆</td>
+					<td class="col4">0001</td>
+					<td class="col5">物流卡</td>
+					<td class="col7"></td>
+					<td class="col8">
+						<span class="btn-a edit">编辑</span>
+						<span class="btn-a delete">删除</span>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="paging-bar">
+			<div class="left">
+				<span class="t fl">选择</span>
+				<div class="btn g-chooseAll">全选</div>
+				<div class="btn g-noChooseAll">反选</div>
+				<span class="t2 fl">显示</span>
+				<div class="g-select refresh">
+					<select>
+						<option value="" selected>30</option>
+						<option value="">60</option>
+					</select>
+					<span class="arr-icon"></span>
+				</div>
+				<span class="t2 fl">已选中7个</span>
+			</div>
+			<div class="right">
+				<div class="prev-page">上一页</div>
+				<ul>
+					<li class="active">1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+					<li>...</li>
+					<li>50</li>
+					<li>120</li>
+				</ul>
+				<div class="next-page">下一页</div>
+			</div>
+			<span class="total-page fr">共500</span>
+		</div>
+	</div>
+</div>
+<div class="g-delete-dialog">
+	<span class="line"></span>
+	<div class="word">
+		当前选择了 <span class="font-red">7</span> 个项目<br>
+		是否要删除选择的配置？
+	</div>
+	<div class="form-btn cancel g-btn-gray">取消</div>
+	<div class="form-btn remove g-btn-red">删除</div>
+</div>
+<div class="form-dialog">
+	<div class="title">新增分组</div>
+	<div class="form-wrap">
+		<ul>
+			<li>
+				<div class="left">图书馆</div>
+				<div class="right">
+					<input type="text" name="" id="" class="g-input" placeholder="请输入"  />
+				</div>
+			</li>
+			<li class="">
+				<div class="left">维护卡号</div>
+				<div class="right">
+					<input type="text" name="" id="" class="g-input" placeholder="请输入"  />
+					<span class="error-msg">错误信息</span>
+				</div>
+			</li>
+			<li class="short-input">
+				<div class="left">维护卡名</div>
+				<div class="right">
+					<input type="text" name="" id="" class="g-input" placeholder="请输入"  />元
+					<span class="error-msg">错误信息</span>
+				</div>
+			</li>
+			<li>
+				<div class="left">备注</div>
+				<div class="right">
+					<textarea class="g-textarea"></textarea>
+				</div>
+			</li>
+			<li>
+				<div class="left">&nbsp;</div>
+				<div class="right">
+					<input type="submit" value="新增" class="submit g-btn-green" />
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<script src="plugins/layer/layer.js"></script>
+<script type="text/javascript">
+$(function(){
+	(function mainHeightController(){
+		var winH = $(window).height();
+		var headerH = $(".g-header").outerHeight();
+		var pageTitleBar = $(".page-title-bar").outerHeight();
+		var pagingBarH = $(".paging-bar").outerHeight();
+
+		$(".main").css({
+			"min-height":winH - headerH - pagingBarH -pageTitleBar
+		});
+	})();
+	var delLayer = null;
+	$(".delete").on("click",function(){
+		delLayer = layer.open({
+			type: 1,
+			shade: false,
+			title: false, //不显示标题
+			scrollbar :false,
+			closeBtn :0,
+			shade:0.5,
+			shadeClose :true,
+			area:["400px"],
+			offset :["195px"],
+			content: $('.g-delete-dialog')
+		});
+		
+	});
+
+	$(".edit").on("click",function(){
+		layerOpen({
+			"title":"编辑类型",
+			"btnText":"保存",
+			"btnColorClass":"g-btn-blue"
+		});
+	});
+	$(".increase").on("click",function(){
+		layerOpen({
+			"title":"新增类型",
+			"btnText":"新增",
+			"btnColorClass":"g-btn-green"
+		});
+	});
+
+	function layerOpen(options){
+		var defaults = {
+			title:"",
+			btnText : "新增"
+		}
+		options = $.extend(defaults,options);
+
+		var $submit = $(".form-dialog .submit");
+		$(".form-dialog .title").text(options.title);
+		$submit.val(options.btnText);
+		$submit.removeClass("g-btn-green").removeClass(".g-btn-blue");
+		$submit.addClass(options.btnColorClass);
+		layer.open({
+			type: 1,
+			shade: false,
+			title: false, //不显示标题
+			scrollbar :false,
+			closeBtn :1,
+			shade:0.5,
+			shadeClose :true,
+			area:["600px"],
+			offset :["130px"],
+			content: $('.form-dialog')
+		});
+	}
+
+	$(".form-btn.cancel").on("click",function(){
+		if (delLayer) {
+			layer.close(delLayer);
+		}
+	});
+	$(".form-btn.remove").on("click",function(){
+		/*执行删除操作*/
+		
+		alert("这里执行删除操作");
+	});
+
+});
+</script>
+</body>
+</html>
+
+

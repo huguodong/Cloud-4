@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="statistics_group">
+
+	<insert id="insertStatisticsGroup" parameterType="com.ssitcloud.entity.StatisticsGroupEntity" useGeneratedKeys="true" keyProperty="statistics_group_idx">
+		insert into statistics_group
+		(		
+           statistics_group_id,statistics_group_name,statistics_group_desc
+		)
+		values
+		(
+             #{statistics_group_id},#{statistics_group_name},#{statistics_group_desc}
+		)
+	</insert>
+	
+	<update id="updateStatisticsGroup" parameterType="com.ssitcloud.entity.StatisticsGroupEntity">
+		update statistics_group
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="statistics_group_id!=null">
+				statistics_group_id=#{statistics_group_id},
+			</if>
+			<if test="statistics_group_name!=null">
+				statistics_group_name=#{statistics_group_name},
+			</if>
+			<if test="statistics_group_desc!=null">
+				statistics_group_desc=#{statistics_group_desc},
+			</if>
+			
+		</set>
+		   WHERE 1=1 
+	   <if test="statistics_group_idx!=null">
+			and statistics_group_idx=#{statistics_group_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteStatisticsGroup" parameterType="com.ssitcloud.entity.StatisticsGroupEntity">
+		delete from statistics_group where statistics_group_idx=#{statistics_group_idx}
+	</delete>
+	
+	<select id="selectStatisticsGroup" parameterType="com.ssitcloud.entity.StatisticsGroupEntity" resultType="com.ssitcloud.entity.StatisticsGroupEntity">
+		SELECT statistics_group_idx,statistics_group_id,statistics_group_name,statistics_group_desc FROM statistics_group 
+	    where 1=1
+		<if test="statistics_group_idx!=null">
+			AND statistics_group_idx=#{statistics_group_idx}
+		</if>
+	</select>
+	
+	<select id="selectStatisticsGroups" parameterType="com.ssitcloud.entity.StatisticsGroupEntity" resultType="com.ssitcloud.entity.StatisticsGroupEntity">
+		SELECT statistics_group_idx,statistics_group_id,statistics_group_name,statistics_group_desc FROM statistics_group 
+	    where 1=1
+	</select>
+	
+	<select id="selectStatisticsGroupByPage" parameterType="com.ssitcloud.entity.page.StatisticsGroupMgmtPageEntity" resultType="com.ssitcloud.entity.page.StatisticsGroupMgmtPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT statistics_group_idx,statistics_group_id,statistics_group_name,statistics_group_desc FROM statistics_group 
+	    where 1=1
+	    <if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<select id="queryStatisticsGroupByPage" parameterType="com.ssitcloud.entity.page.StatisticsGroupMgmtPageEntity" resultType="com.ssitcloud.entity.page.StatisticsGroupMgmtPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT sg.`statistics_group_idx`,sg.`statistics_group_id`,sg.`statistics_group_name`,sg.`statistics_group_desc`,
+		GROUP_CONCAT(rsg.`statistics_idx`) AS statistics_idx_str
+		FROM statistics_group sg
+		LEFT JOIN rel_statistics_group rsg ON sg.`statistics_group_idx`=rsg.`statistics_group_idx`
+		GROUP BY sg.`statistics_group_idx`
+		HAVING 1=1
+		<if test="statistics_group_name!=null and statistics_group_name!=''">
+			AND sg.`statistics_group_name` LIKE CONCAT("%","${statistics_group_name}","%")
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	
+	
+</mapper>

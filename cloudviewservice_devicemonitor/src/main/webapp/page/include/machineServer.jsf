@@ -1,0 +1,867 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+
+<title>海恒智能</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<script type="text/javascript">
+	var itemsCount=0;
+	var bookShelfLayerCount=0;
+	var bookShelfCount=0;
+	var service_id;
+	var debugFlag = 0;
+	var machine2={};
+	var library2={};/**ID library_idx**/
+	
+	//机器状态使用颜色进行标注（如红色、灰色、黄色、绿色  等）
+	//library_idx 换成lib_id
+	var drawRow2=function(rows){
+		/**加载页面**/
+		$itemWrap2=$("#server_mechine");
+		if(!rows)return;
+		if(debugFlag==1)
+			console.info("获取所有服务器:",rows);
+		$itemWrap2.html("");
+		//将所有设备id放入为查询Moogodb服务设备状态准备
+ 		var deviceIds = [];
+		var navArr = [];
+		var rllArr = [];
+ 		
+		for(var i=0;i<rows.length;i++){
+			var device=rows[i];
+			var libIdAndServId = device.library_id+'_'+device.service_id;
+			
+			 	///navigationHtml = item;
+		 	//现在只有自助借还图书馆显示以下信息
+		 	if(device.service_type_id.toUpperCase()=="RLLSERVER"){//
+		 		deviceIds.push(libIdAndServId);
+		 		rllArr.push(libIdAndServId);
+		 		var device_names = [];
+		 		if(device.device_names!=null){
+		 			device_names = device.device_names.split(",");
+			 		device_ids = device.device_ids.split(",");
+			 		
+			 		var navigationHtml = '<div class="item2 gray" style="border:3px solid #AAAAAA;border-radius:15px">'
+						+'<input type="hidden" name="cardbin_amount"/>'
+						+'<input type="text" name="_service_id" class="_service_id" hidden="hidden" value="'+device.service_id+'"/>'
+					 	+'<input type="text" name="_library_id" class="_library_id" hidden="hidden" value="'+device.library_id+'"/>'
+					 	+'<input type="text" name="_library_id" class="_library_idx" hidden="hidden" value="'+device.library_idx+'"/>'
+					 	+'<div class="sec1">'
+					 	/* +'<div class="g-checkbox"><input type="checkbox" name="'+device.device_ids+'" id=""></div>'
+					 	 */
+					 	+'<a alt="这是提示" title="'+device.service_name+'"><span class="machine-name2" style="display:block;width:150px;height:27px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;float:left;">'+device.service_name+'</span></a>'
+					 	+'<span class="status2" id="'+libIdAndServId+'" style="float:right;">无状态<b></b></span>'
+					 	+'</div>';
+			 		navigationHtml+='<div class="sec2">';
+				 	
+				 	navigationHtml+='<ul class="device_state">'
+						+'	<li class="left">设备数量：<span class="right level1">'+parseInt(device_names.length-1)+'</span></li>'
+						+'</ul>';
+				 	navigationHtml+='</div>';
+				 	navigationHtml+='<div class="sec3">'
+					 	+'<span></span>'
+					 	+'<div class="check-detail2" device_type="'+device.device_type+'">查看详情</div>'
+					 	+'</div>'
+					 	+'</div>';
+		 		}else{
+		 			var navigationHtml = '<div class="item2 gray" style="border:3px solid #AAAAAA;border-radius:15px">'
+						+'<input type="hidden" name="cardbin_amount"/>'
+						+'<input type="text" name="_service_id" class="_service_id" hidden="hidden" value="'+device.service_id+'"/>'
+					 	+'<input type="text" name="_library_id" class="_library_id" hidden="hidden" value="'+device.library_id+'"/>'
+					 	+'<input type="text" name="_library_id" class="_library_idx" hidden="hidden" value="'+device.library_idx+'"/>'
+					 	+'<div class="sec1">'
+					 	/* +'<div class="g-checkbox"><input type="checkbox" name="'+device.device_ids+'" id=""></div>'
+					 	 */
+					 	+'<a alt="这是提示" title="'+device.service_name+'"><span class="machine-name2" style="display:block;width:150px;height:27px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;float:left;">'+device.service_name+'</span></a>'
+					 	+'<span class="status2" id="'+libIdAndServId+'" style="float:right;">无状态<b></b></span>'
+					 	+'</div>';
+			 		navigationHtml+='<div class="sec2">';
+				 	
+				 	navigationHtml+='<ul class="device_state">'
+						+'	<li class="left">设备数量：<span class="right level1">0</span></li>'
+						+'</ul>';
+				 	navigationHtml+='</div>';
+		 		}
+			 	$itemWrap2.append(navigationHtml);
+				navigationHtml = "";
+		 	}else if(device.service_type_id.toUpperCase()=="DHSERVER"){
+		 		service_id = device.service_id;
+				//alert(library_id+"  "+library_idx+"  "+service_id+"  "+a);
+				deviceIds.push(device.library_id+'_'+device.service_id);
+				navArr.push(device.library_id+'_'+device.service_id);
+		 		var param = {
+		 				library_idx:device.library_idx,
+		 				library_id:device.library_id
+		 		}
+		 		$.ajax({
+					url:"${ctx}/device/queryBookItemTotal",
+					data:{req:JSON.stringify(param)},
+					async: false,//设置成同步
+					type:"GET"
+				}).done(function(data){
+					//馆藏书本数量
+			 		itemsCount = data.result;
+			 		if(debugFlag==1)
+			 			console.info("馆藏书本：",itemsCount);
+			 		$.ajax({
+						url:"${ctx}/device/queryBookShelfLayerTotal",
+						data:{req:JSON.stringify(param)},
+						async: false,//设置成同步
+						type:"GET"
+					}).done(function(data){
+						//层架标总数量
+						bookShelfLayerCount = data.result;
+						if(debugFlag==1)
+							console.info("层架标总数量：",bookShelfLayerCount);
+						$.ajax({
+							url:"${ctx}/device/queryBookShelfTotal",
+							data:{req:JSON.stringify(param)},
+							async: false,//设置成同步
+							type:"GET"
+						}).done(function(data){
+							//书架数量
+							bookShelfCount = data.result;
+							if(debugFlag==1)
+								console.info("书架数量：",bookShelfCount);
+							
+							/**加载页面**/
+							$itemWrap2=$("div.main2").find(".item-wrap2");
+							var navigationHtml2='<div class="item2 gray" style="border:3px solid #AAAAAA;border-radius:15px">'
+											+'<input type="hidden" name="cardbin_amount"/>'
+											+'<input type="text" name="_service_id" class="_service_id" hidden="hidden" value="'+device.service_id+'"/>'
+											+'<input type="text" name="_library_id" class="_library_id" hidden="hidden" value="'+device.library_id+'"/>'
+											+'<div class="sec1">'
+											/* +'<div class="g-checkbox"><input type="checkbox" name="'+device.device_ids+'" id=""></div>'
+											 */
+											+'<a alt="这是提示" title="'+device.service_name+'"><span class="machine-name2" style="display:block;width:150px;height:27px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;float:left;">'+device.service_name+'</span></a>'
+											+'<span class="status2" id="'+libIdAndServId+'" style="float:right;">无状态<b></b></span>'
+											+'</div>'
+											+'<div class="sec2">'
+											+'<ul class="device_state">'
+											+'	<li  class="left" style="line-height: 1.4">书籍馆藏数：<span class="right level1"> '+itemsCount+' 本</span>'
+											+'	<li  class="left" style="line-height: 1.4">层架标总数：<span class="right level2"> '+bookShelfLayerCount+' 张</span>'
+											+'	<li  class="left" style="line-height: 1.4">书架总数：<span class="right level3"> '+bookShelfCount+' 个</span></li>'
+											+'</ul>'
+											+'</div>';
+							$itemWrap2.append(navigationHtml2);
+							navigationHtml2 = "";
+						});
+					});
+			 	});
+		 	}
+		};
+		if(debugFlag==1)
+			console.info("需要查询服务设备Ids:",deviceIds);
+		//循环遍历后，设置服务器设备的状态
+		$.ajax({
+			url:"${ctx}/device/selectSoftState",
+			data:{req:JSON.stringify(deviceIds)},
+			async: false,//设置成同步
+			type:"GET"
+		}).done(function(data){
+			if(debugFlag==1){
+				console.info("所有人流量服务设备:",rllArr);
+				console.info("所有3D导航服务设备:",navArr);
+				console.info("获取所有服务设备软件状态：",data);
+			}
+			
+			var deviceStatus = data.result;
+			//如果服务设备不为空
+			if(deviceStatus){
+				var flag;
+				for (var deviceIndex in deviceStatus) {
+					//初始假定为3D导航服务器
+					flag = true;
+					for (var rllIndex in rllArr) {
+						if (rllArr[rllIndex].indexOf(deviceIndex) > -1) {
+							console.info("此设备",deviceIndex+"是人流量服务器");
+							//对服务设备的状态数据进行分析
+							console.info("状态如右:",deviceStatus[deviceIndex]);
+							var devStatus =  deviceStatus[deviceIndex];
+							//1 判断通过createtime判断超时或者正常运行
+							for(var dbIndex in devStatus){
+								if(deviceStatus[deviceIndex]){
+									if(dbIndex=="createTime"){
+										var createTime = devStatus[dbIndex];
+										var lastHeartBeatTime_=new Date(createTime.substring(0,4),createTime.substring(4,6)-1,createTime.substring(6,8),createTime.substring(8,10),createTime.substring(10,12),createTime.substring(12,14)).getTime();
+										//如果lastHeartBeatTime不为空
+										if(lastHeartBeatTime_){
+											if(debugFlag==1){
+												console.info("实时时间：",new Date().getTime());
+												console.info("上次心跳时间：",lastHeartBeatTime_);
+												console.info("时间差：",new Date().getTime() - lastHeartBeatTime_ -12*1000);
+												console.info("是否小于12s：",new Date().getTime() - lastHeartBeatTime_ < 12*1000);
+											}
+											//小于10s接收到数据，显示正常
+											if(new Date().getTime() - lastHeartBeatTime_ < 12*1000){
+												$("#"+deviceIndex).parent().parent()
+												.removeClass("alert")
+												.removeClass("gray")
+												.removeClass("error").removeClass("blue");
+												$("#"+deviceIndex).text("正常");
+												//2 如果正常运行，需要取出相应状态
+												for(var funIndex in devStatus){
+													if(funIndex=="Function"){
+														if(debugFlag==1)
+															console.info("Function",devStatus[funIndex]);
+													
+														var jsonObj = devStatus[funIndex];
+														for(var jsonIndex in jsonObj){
+															if(debugFlag==1){
+																console.info("jsonIndex",jsonIndex);
+																console.info("jsonObj[jsonIndex]",jsonObj[jsonIndex]);
+															}
+															if(jsonIndex=="00040104"){
+																if(jsonObj[jsonIndex]=="0"){
+																	console.info("此人流量服务设备为空闲状态");
+																	$("#"+deviceIndex).parent().parent()
+																		.removeClass("alert")
+																		.removeClass("gray")
+																		.removeClass("error")
+																		.removeClass("blue");
+																	$("#"+deviceIndex).text("空闲");
+																}
+															}else if(jsonIndex=="00040103"){
+																if(jsonObj[jsonIndex]=="1"){
+																	console.info("此人流量服务设备为报警状态");
+																	$("#"+deviceIndex).parent().parent()
+																		.removeClass("blue")
+																		.removeClass("gray")
+																		.removeClass("alert").addClass("error");
+																	$("#"+deviceIndex).text("报警");
+																}else{
+																	console.info("此人流量服务设备为正常状态");
+																	$("#"+deviceIndex).parent().parent()
+																		.removeClass("error")
+																		.removeClass("gray")
+																		.removeClass("alert")
+																		.removeClass("blue");
+																	$("#"+deviceIndex).text("正常");
+																}
+															}
+														}
+													}
+												}
+											}else{
+												$("#"+deviceIndex).parent().parent()
+												.removeClass("alert")
+												.removeClass("gray")
+												.removeClass("error").addClass("blue");
+												$("#"+deviceIndex).text("超时");
+												continue;
+											}
+										}
+									}
+								}
+							}
+							//服务设备不是3D导航设备
+							flag = true;
+							continue;
+						}
+					}
+					if(flag){
+						for (var navIndex in navArr) {
+							if (navArr[navIndex].indexOf(deviceIndex) > -1) {
+								if(debugFlag==1){
+									console.info("此设备",deviceIndex+"是3D导航服务器");
+									//对服务设备的状态数据进行分析
+									console.info("状态如右:",deviceStatus[deviceIndex]);
+								}
+								if(deviceStatus[deviceIndex]){
+									var devStatus =  deviceStatus[deviceIndex];
+									var navFlag = false;
+									for(var dbIndex in devStatus){
+										if(dbIndex=="createTime"){
+											var createTime = devStatus[dbIndex];
+											var lastHeartBeatTime_=new Date(createTime.substring(0,4),createTime.substring(4,6)-1,createTime.substring(6,8),createTime.substring(8,10),createTime.substring(10,12),createTime.substring(12,14)).getTime();
+											//如果lastHeartBeatTime不为空
+											if(lastHeartBeatTime_){
+												if(debugFlag==1){
+													console.info("实时时间：",new Date().getTime());
+													console.info("上次心跳时间：",lastHeartBeatTime_);
+													console.info("时间差：",new Date().getTime() - lastHeartBeatTime_ -300*1000);
+													console.info("是否小于5分钟：",new Date().getTime() - lastHeartBeatTime_ < 300*1000);
+												}
+												//小于三分钟未接收到数据，显示超时
+												if(new Date().getTime() - lastHeartBeatTime_ < 300*1000){
+													$("#"+deviceIndex).parent().parent()
+													.removeClass("alert")
+													.removeClass("gray")
+													.removeClass("error").removeClass("blue");
+													$("#"+deviceIndex).text("正常");
+													continue;
+												}else{
+													$("#"+deviceIndex).parent().parent()
+													.removeClass("alert")
+													.removeClass("gray")
+													.removeClass("error").addClass("blue");
+													$("#"+deviceIndex).text("超时");
+												}
+											}
+										}
+									} 
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+	};
+	/**
+	点击图书馆名事件 （需要加上主馆 的 用户查询）
+	<div class="choose-lib">
+	<div class="select-btn">
+		<span class="current-libName">选择图书馆</span>
+		<span class="icon"></span>
+	</div>
+	**/
+	//$(".drop-down2").on("click",".item",function(){
+	$(document).on("click",".drop-down2 .item2",function(){
+		$(".drop-down2").hide();
+		var libIdx=$(this).attr("lib-idx");
+		var libName=$(this).html();
+		//console.log(libIdx);
+		$(".choose-lib2").find(".current-libName2").html("<input type='text' class='item2 place2' lib-idx='"+libIdx+"' value='"+libName+"'>");
+		//$(".total-choosen-num2").text("0");
+		//if(libIdx>0){//==0表示查询所有
+			//当做一个查询条件传参处理
+			machine2.curSelLibIdx=libIdx;
+			var Page=makeQueryParam2(1,12);
+			selectPage2(Page);
+		//}
+	});
+	
+	/**
+	切屏
+	**/
+	var changeScreen2=function(){
+		var lib_idx=$(".choose-lib2").find(".current-libName2").children().attr("lib-idx");
+		if(typeof(lib_idx)!='undefined'){
+			var items=$(".choose-lib2").find(".drop-down2").children();
+			$(items).each(function(){
+				var anthor_idx=$(this).attr("lib-idx");
+				if(typeof(anthor_idx)!='undefined' && lib_idx==anthor_idx){
+					lib_idx=$(this).attr("lib-idx");
+					lib_name=$(this).text();
+					$(".choose-lib2").find(".current-libName2").html("<input type='text' class='item2 place2' lib-idx='"+lib_idx+"' value='"+lib_name+"'>");
+					//服务设备通过这进行刷新装
+					machine2.curSelLibIdx=lib_idx;
+					var Page=makeQueryParam2(1,12);
+					selectPage2(Page);//查询
+					return false;//跳出循环
+				}
+			});
+		}
+	}; 
+
+	
+	/**
+		获取所有的没有不是子馆的馆、和一级子馆
+		管理员使用此方法
+	**/
+	var proposals2=new Array;//图书馆列表自动提示
+	var queryAllMasterLibAndSlaveLib2=function(library_idx){
+		if(debugFlag==1)
+			console.info("服务设备主馆idx:",library_idx);
+		if(library_idx){
+			var library2={"library_idx":library_idx};
+			$.ajax({
+				type:"POST",
+				url:"${ctx}/librarylocal/querySlaveLibraryByMasterIdx",
+				data:{"req":JSON.stringify(library2)},
+			}).then(function(data){
+				if(debugFlag==1){
+					console.info("(服务设备)通过主机id查询子图书馆",data);
+				}
+				if(data&&data.state==true){
+					var masterLibAndSlaveLibs=data.result;
+					if(masterLibAndSlaveLibs){
+						var masterLibrary=masterLibAndSlaveLibs.masterLibrary;
+						$(".choose-lib2").find(".current-libName2").html('<input type="text" class="item place" lib-idx="'+masterLibrary.library_idx+'" value="'+masterLibrary.lib_name+'">');
+					}
+				}
+				return $.ajax({
+					url:"${ctx}/librarylocal/queryAllMasterLibAndSlaveLib",
+					type:"GET",
+					data:{"req":JSON.stringify()}
+				});
+			}).then(function(data){
+					if(debugFlag==1){
+						console.log("(服务设备)查询所有主机和子图书馆:",data);
+					}
+					if(data&&data.state){
+						proposals2.length = 0;//清空一下数组
+						var libList=data.result;
+						$("div.page-title-bar2").find(".drop-down2").html("");
+						//选择图书馆
+						var dropDownHtml='<div class="item2 place2" lib-idx="0">------显示全部------</div>';
+						for(var i=0;i<libList.length;i++){
+							var msLibAndSlaveLib=libList[i];
+							var masterLibrary=msLibAndSlaveLib.masterLibrary;
+							var slaveLibraryArr=msLibAndSlaveLib.slaveLibrary;
+							
+							if(masterLibrary.library_idx==0){//云平台屏蔽
+								continue;
+							}
+							//屏蔽虚拟馆
+							if(masterLibrary.lib_type==0){
+								proposals2.push(masterLibrary.lib_name);
+								//console.log(masterLibrary);
+								dropDownHtml+='<div class="item2 place2" lib-idx="'+masterLibrary.library_idx+'">';
+								dropDownHtml+=masterLibrary.lib_name+'</div>';
+								/* for(var j=0;j<slaveLibraryArr.length;j++){
+									dropDownHtml+='<div class="item2 room2" lib-idx="'+slaveLibraryArr[j].library_idx+'">'+slaveLibraryArr[j].lib_name+'</div>';
+									proposals2.push(slaveLibraryArr[j].lib_name);
+								} */
+							}
+						}
+						$("div.page-title-bar2").find(".drop-down2").html(dropDownHtml);
+					}else if(data.message="NO_PERMESSION"){<%--不是系统管理员的情况下 只能查看当前馆或以下--%>
+						checkQuerySlaveLibraryByMasterIdx(library_idx);
+						
+					}
+			});
+		}
+	};
+	
+	/**
+	 *	检查当前登录用户是不是主馆用户,不是执行 setLibraryName函数，
+	 **/
+	function  checkQuerySlaveLibraryByMasterIdx(library_idx){
+		if(library_idx){
+			var library2={"library_idx":library_idx};
+			$.ajax({
+				type:"POST",
+				url:"${ctx}/librarylocal/querySlaveLibraryByMasterIdx",
+				data:{"req":JSON.stringify(library2)}
+			}).then(function(data){
+				if(data&&data.state==true){
+					var masterLibAndSlaveLibs=data.result;
+					
+					//console.info("****** masterLibAndSlaveLibs 2. ********",masterLibAndSlaveLibs);
+					
+					if(masterLibAndSlaveLibs){
+						var masterLibrary=masterLibAndSlaveLibs.masterLibrary;
+						$(".choose-lib2").find(".current-libName2").html('<input type="text" class="item2 place2" lib-idx="'+masterLibrary.library_idx+'" value="'+masterLibrary.lib_name+'">');
+					}
+				}
+				return $.ajax({
+					url:"${ctx}/librarylocal/checkQuerySlaveLibraryByMasterIdx",
+					data:{},
+					type:"POST",
+					success:function(data){
+						if(data){
+							if(data.state){
+								isMaster=true;
+								var masterLibAndSlaveLibs=data.result;
+								if(masterLibAndSlaveLibs){
+									var masterLibrary=masterLibAndSlaveLibs.masterLibrary;
+									var slaveLibraryArr=masterLibAndSlaveLibs.slaveLibrary;
+									
+									if(masterLibrary&&slaveLibraryArr){
+										$("div.page-title-bar2").find(".drop-down2").html("");
+										//选择图书馆
+										var dropDownHtml='<div class="item2 place2" lib-idx="0">---请选择----</div>'
+										+'<div class="item2 place2" lib-idx="'+masterLibrary.library_idx+'">'
+										+masterLibrary.lib_name+'</div>';
+										//$(".choose-lib").find(".current-libName").html('<div class="item place" lib-idx="'+masterLibrary.library_idx+'">'+masterLibrary.lib_name+'</div>');
+										for(var i=0;i<slaveLibraryArr.length;i++){
+											isMaster=true;
+											dropDownHtml+='<div class="item2 room2" lib-idx="'+slaveLibraryArr[i].library_idx+'">'+slaveLibraryArr[i].lib_name+'</div>';
+										}
+										$("div.page-title-bar2").find(".drop-down2").html(dropDownHtml);
+									}
+								}else{
+									//错误信息
+									console.log(data);
+								}
+							}
+						}
+						if(!isMaster){
+							setLibraryName(library_idx);
+						}
+					}
+				});
+			});
+		}
+	}
+	
+	/**
+	根据library_idx得到 Library数据
+	非管理员使用此方法
+	**/
+	//设置图书馆名称函数
+	/* var setLibraryName=function(library_idx){
+		if(library_idx){
+			var library2={"library_idx":library_idx};
+			$.ajax({
+				type:"POST",
+				url:"${ctx}/librarylocal/querySlaveLibraryByMasterIdx",
+				data:{"req":JSON.stringify(library2)},
+			}).done(function(data){
+				//console.log("setLibraryName",data);
+				if(data&&data.state==true){
+					var masterLibAndSlaveLibs=data.result;
+					if(masterLibAndSlaveLibs){
+						var masterLibrary=masterLibAndSlaveLibs.masterLibrary;
+						var slaveLibraryArr=masterLibAndSlaveLibs.slaveLibrary;
+						
+						console.info("****** masterLibrary 3 ********",masterLibrary);
+						console.info("****** slaveLibraryArr 3 ********",slaveLibraryArr);
+					    
+						if(masterLibrary&&slaveLibraryArr){
+							$("div.page-title-bar2").find(".drop-down2").html("");
+							//选择图书馆
+							var dropDownHtml='<div class="item2 place2" lib-idx="0">选择图书馆</div>'
+							+'<div class="item2 place2" lib-idx="'+masterLibrary.library_idx+'">'
+							+masterLibrary.lib_name+'</div>';
+							
+							$(".choose-lib2").find(".current-libName2").html("<input type='text' class='item place' lib-idx='"+masterLibrary.library_idx+"' value='"+masterLibrary.lib_name+"'>");
+							
+							for(var i=0;i<slaveLibraryArr.length;i++){
+								dropDownHtml+='<div class="item2 room2" lib-idx="'+slaveLibraryArr[i].library_idx+'">'+slaveLibraryArr[i].lib_name+'</div>';
+							}
+							$("div.page-title-bar2").find(".drop-down2").html(dropDownHtml);
+						}
+					}else{
+						//错误信息
+						console.log(data);
+					}
+				}
+			});
+		}
+	}; */
+	
+	//组装 翻页和查询 参数
+	var makeQueryParam2=function(page,pageSize){
+	 	$inputText=$("div.page-title-bar2").find("input[name=keyWord]");
+	    //var machineType=$("select#machineType").val();
+		//var machineState=$("select#machineState").val();
+		//var keyWord=$inputText.val();
+		var Page ={
+			"page":page,
+			"pageSize":pageSize,
+			//"machineType":machineType,
+			//"machineState":machineState,
+			//"keyWord":keyWord,
+		};
+		if(machine2.curSelLibIdx!=0){
+			Page.library_idx=machine2.curSelLibIdx;
+		}
+		return Page;
+	};
+	
+	//var _interval=null;
+	var changeScreenInterval2=null;
+	var pageSize=12;//每页显示的条数
+	$(document).on("click",".btn2.search2",function(){
+	    //获取当前页
+//		 var currentpage = $("li.active").html();
+//		 if(!currentpage){
+//			 currentpage=1;
+//		 }
+		 //查询条件 设备类型 设备状态 关键字（device_name）
+		 var Page=makeQueryParam2(1, 12);
+		 console.info("Page-----",Page);
+		 selectPage2(Page);
+	});
+	var deviceRows;
+	//翻页函数 包括查询参数  selectPage
+	var selectPage2=function(obj){
+			$.ajax({
+				url:"${ctx}/librarylocal/getLibIdAndLibIdx",
+				data:{req:""},
+				type:"GET"
+			}).then(function(data){
+				if(debugFlag==1)
+					console.log("(服务设备)获取所有图书馆:",data);
+				
+				if(data&&data.state){
+					library2=data.result;
+					$.ajax({
+						url:"${ctx}/device/queryServiceDeviceByParam",
+						data:{req:""},
+						type:"GET",
+						data:{"req":JSON.stringify(obj)}
+					}).done(function(data){
+						if(debugFlag==1)
+							console.info("查询服务设备ServiceDevice",data);
+						if(data){
+							var page=data.result;
+							if(page){
+								if(page.rows){
+									drawRow2(page.rows);
+									if(debugFlag==1){
+										console.info("page",page);
+										console.info("machineServiceRows",page.rows);
+									}
+									deviceRows = page.rows;
+									if(page.rows[0]){
+										//setLibraryName(page.rows[0].library_idx);获取当前馆的library_idx
+										queryAllMasterLibAndSlaveLib2(page.rows[0].library_idx);
+									}
+									//$(".machine-info").html("<span>设备总数："+page.total+"</span>").show();
+									
+								}else{
+			 						//$(".machine-info2").empty().hide();
+			 						$(".machine-list2").find(".item-wrap").html("没有查询到匹配的设备");
+								}
+							 	$.pagination(page);
+							}
+						}
+						//每次选择页码结束，执行获取设备状态函数
+						var seconds=30000;//$(".g-select.refresh select").val();//切屏频率
+						clearInterval(changeScreenInterval2);
+						if(seconds!="-1"){
+							changeScreenInterval2=setInterval(changeScreen2,seconds);
+						}
+						/* clearInterval(_interval);
+						_interval=setInterval(setStatusProxy,50000); *///周期 暂时注释掉 2016年5月10日08:47:33
+						//setDeviceBinState();//设置箱子信息
+						//setBookrackState();//设置在架书
+					});
+				}
+			});
+    };
+	
+    /**
+	根据library_idx得到 Library数据
+	非管理员使用此方法
+	**/
+	//设置图书馆名称函数
+	var setLibraryName=function(library_idx){
+		if(library_idx){
+			var library={"library_idx":library_idx};
+			$.ajax({
+				type:"POST",
+				url:"${ctx}/librarylocal/querySlaveLibraryByMasterIdx",
+				data:{"req":JSON.stringify(library)},
+			}).done(function(data){
+				//console.log("setLibraryName",data);
+				if(data&&data.state==true){
+					var masterLibAndSlaveLibs=data.result;
+					if(masterLibAndSlaveLibs){
+						var masterLibrary=masterLibAndSlaveLibs.masterLibrary;
+						var slaveLibraryArr=masterLibAndSlaveLibs.slaveLibrary;
+					
+						if(masterLibrary&&slaveLibraryArr){
+							$("div.page-title-bar2").find(".drop-down2").html("");
+							//选择图书馆
+							var dropDownHtml='<div class="item2 place2" lib-idx="0">---请选择----</div>'
+							+'<div class="item2 place2" lib-idx="'+masterLibrary.library_idx+'">'
+							+masterLibrary.lib_name+'</div>';
+							
+							//$(".choose-lib").find(".current-libName").html('<div class="item place" lib-idx="'+masterLibrary.library_idx+'">'+masterLibrary.lib_name+'</div>');
+							$(".choose-lib2").find(".current-libName2").html("<input type='text' class='item2 place2' lib-idx='"+masterLibrary.library_idx+"' value='"+masterLibrary.lib_name+"'>");
+							
+							for(var i=0;i<slaveLibraryArr.length;i++){
+								dropDownHtml+='<div class="item2 room2" lib-idx="'+slaveLibraryArr[i].library_idx+'">'+slaveLibraryArr[i].lib_name+'</div>';
+							}
+							$("div.page-title-bar2").find(".drop-down2").html(dropDownHtml);
+						}
+					}else{
+						//错误信息
+						console.log(data);
+					}
+				}
+			});
+		}
+	}; 
+	
+	var pageObj ={"page":1,"pageSize":12};
+	selectPage2(pageObj);
+	
+	//收起左边下拉
+	$(document).on("click","div.main2",function(){
+		$(".drop-down2").hide();
+	});
+    
+	$(document).on("click",".choose-lib2 .select-btn2",function(){
+		$(this).next(".drop-down2").toggle();
+	});
+	
+	$(document).on("click",".choose-lib2 .drop-down2 .item2",function(){
+		$(this).parents(".drop-down2").hide();
+	});
+
+	
+    /**
+	详细页面
+	**/
+$(document).on("click",".check-detail2",function(event){
+	
+		//获取到IDX
+        $item=$(this).parent().parent();
+        var service_id=$item.find("._service_id").val();
+        var library_id =$item.find("._library_id").val();
+        var library_idx = $item.find("._library_idx").val();
+        
+        data = {
+				data:deviceRows,
+				a:this.itemActive
+		};
+        var url="${ctx}/device/serviceDeviceDetail?service_id="+encodeURIComponent(service_id)+"&library_idx="+encodeURIComponent(library_idx)+"&library_id="+encodeURIComponent(library_id);
+		
+        //这里先判断以下session有没有过期，过期则跳转到登陆页面
+		$.getJSON("${ctx}/login/checkSession",{},function(data){
+			if(data&&data.checkSession){
+					layer.open({
+						type: 2, 
+						content: [url],
+						title :false,
+						//closeBtn :1,
+						//offset :["20px"],
+						area :["860px",'98%'],
+						shade:0.5,
+						shadeClose :true,
+						scrollbar :true,	
+						move:false,
+						//skin:false,
+						success :function(layero, index){
+							//var body = layer.getChildFrame('body', index);
+							 // var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+							 // console.log(body.html()) //得到iframe页的body内容
+						 	///body.find("div.head").find(".name").prepend('<span>'+device_name+'</span>');
+						    //body.find("div.head").prepend('<input hidden="hidden" class="dev_id" value='+device_id+'></input>');
+						}
+					});
+			}
+		});
+	});
+		
+	$(document).on("click",".choose-lib2 .select-btn2",function(){
+		old_lib_name=$(this).find("input").val();
+		$(this).find("input").val("");
+		$(this).find("input").focus();
+		$(this).next(".drop-down2").toggle();
+		clearInterval(changeScreenInterval2);
+	});
+		
+	$(document).on("keyup",".choose-lib2 .select-btn2",function(e){
+		if(e.which != 13 && e.which != 27 && e.which != 38 && e.which != 40){	
+			var word = "^" + $(this).find("input").val() + ".*";
+			console.info("word",word,"proposals2",proposals2);
+			for(var i in proposals2){
+				var txt = proposals2[i];
+				//alert(txt);
+				if(txt.match(word)){
+					var selectItem=$(this).next(".drop-down2").find(".item2:contains("+txt+"):first");
+					if(selectItem){
+						selectItem.siblings().css({"background-color":"#FFF","color":"#888888"});
+						selectItem.css({"background-color":"#00a2e9","color":"#FFF"});
+						$(this).next(".drop-down2").animate({scrollTop:$(selectItem).offset().top-$(this).next(".drop-down2").offset().top});
+						return false;
+					}
+				}else{
+					$(this).next(".drop-down2").find(".item").css({"background-color":"#FFF","color":"#888888"});
+				}
+			}
+		}else if(e.which == 13){
+			var $that=$(this);
+			$that.next(".drop-down2").find(".item2").each(function() {
+				if($(this).css("color")=="rgb(255, 255, 255)"){
+					$(this).trigger("click");
+					$(this).parents(".drop-down2").hide();
+				}
+			});
+			var seconds=$(".g-select.refresh select").val();//切屏频率
+			if(seconds!="-1"){
+				clearInterval(changeScreenInterval2);
+				changeScreenInterval2=setInterval(changeScreen2,seconds);
+			}
+		}
+	});	
+	
+	//点击输入后刷新
+	$(document).on("click",".choose-lib2 .select-btn2 input",function(){
+		var seconds=$(".g-select.refresh select").val();//切屏频率
+		if(seconds!="-1"){
+			clearInterval(changeScreenInterval2);
+			changeScreenInterval2=setInterval(changeScreen2,seconds);
+		}
+	}); 
+	
+	//选择好图书馆后隐藏下拉框
+	$(document).on("click",".choose-lib2 .drop-down2 .item2",function(){
+		$(this).parents(".drop-down2").hide();
+	});
+	//鼠标移出输入框，隐藏下拉框
+	$(document).on("mouseout",".select-btn2",function(){
+		$(this).next().hide();
+	}); 
+	//鼠标移到输入框，显示下拉框
+	$(document).on("mouseover",".select-btn2",function(){
+		$(this).next().show();
+	}); 
+	//鼠标移到下拉框，显示下拉框本身
+	$(document).on("mouseover",".drop-down2",function(){
+		$(this).show();
+	}); 
+    //鼠标移除下拉item，将鼠标移到的位置item，显示到当前的current-name，并显示下拉框(很重要)
+	$(document).on("mouseover",".drop-down2 .item2",function(){
+		$(".drop-down2").show();
+		lib_name=$(this).text();
+		lib_idx=$(this).attr("lib-idx");
+		$(".choose-lib2").find(".current-libName2 input").val(lib_name);//html("<input type='text' class='item2 place2' lib-idx='"+lib_idx+"' value='"+lib_name+"'>");
+	});
+	//鼠标移出下拉框(并未点击)，将input中原始值的设置到输入框
+	$(document).on("mouseout",".drop-down2",function(){
+		var lib_idx=$(".choose-lib2").find(".current-libName2").children().attr("lib-idx");
+		if(typeof(lib_idx)!='undefined'){
+			var items=$(".choose-lib2").find(".drop-down2").children();
+			$(items).each(function(){
+				var anthor_idx=$(this).attr("lib-idx");
+				if(typeof(anthor_idx)!='undefined' && lib_idx==anthor_idx){
+					lib_idx=$(this).attr("lib-idx");
+					lib_name=$(this).text();
+					$(".choose-lib2").find(".current-libName2").find("input").attr("initValue",lib_name);//html("<input type='text' class='item2 place2' lib-idx='"+lib_idx+"' value='"+initVal+"'>");
+					$(".choose-lib2").find(".current-libName2").find("input").attr("initLibidx",lib_idx);
+				}
+			});
+		}
+	}); 
+	$(document).on("mouseout",".drop-down2",function(){
+		var lib_idx = $(".choose-lib2").find(".current-libName2").find("input").attr("initLibidx");
+		var initval = $(".choose-lib2").find(".current-libName2").find("input").attr("initValue");
+		//alert(lib_idx+initval);
+		$(".choose-lib2").find(".current-libName2").html("<input type='text' class='item2 place2' lib-idx='"+lib_idx+"' value='"+initval+"'>");
+		$(this).hide();
+	}); 
+	
+	$(document).on("click",".machine-name2",function(){
+		var curCheckbox = $(this).siblings(".g-checkbox").find("input");
+
+		if(curCheckbox.is(":checked")){
+			curCheckbox.prop("checked",false);
+		}else{
+			curCheckbox.prop("checked",true);
+		}
+
+		var $parentItem = $(this).parents(".item2");
+		if(curCheckbox.is(":checked")){
+			$parentItem.addClass("active").find(".g-checkbox").addClass("on");
+		}else{
+			$parentItem.removeClass("active").find(".g-checkbox").removeClass("on");
+		}
+		var num=$(".machine-list2").find("input[type=checkbox]:checked").length;
+		//$("#ChooseNum2").find(".total-choosen-num2").html(num);
+	});
+	
+	
+	$(document).on("change",":checkbox",function(){
+		var $parentItem = $(this).parents(".item2");
+		if($(this).is(":checked")){
+			$parentItem.addClass("active");
+		}else{
+			$parentItem.removeClass("active");
+		}
+	});
+</script>

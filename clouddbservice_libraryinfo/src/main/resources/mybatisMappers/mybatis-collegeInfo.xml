@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="collegeInfo">
+
+	<insert id="addCollegeInfo" parameterType="com.ssitcloud.readermgmt.entity.CollegeInfoEntity">
+		insert into collegeinfo(lib_idx,actual_card_no,id_card,profession
+		,education,academy,department,schoolingLength,grade,admission_date,graduation_date,reader_type) 
+		values(#{lib_idx},#{actual_card_no},#{id_card},#{profession},#{education},#{academy}
+		,#{department},#{schoolingLength},#{grade},#{admission_date},#{graduation_date},#{reader_type})
+	</insert>
+	
+	<select id="queryCollegeInfo" parameterType="com.ssitcloud.readermgmt.entity.CollegeInfoEntity" 
+	resultType="com.ssitcloud.readermgmt.entity.CollegeInfoEntity">
+		SELECT * FROM collegeinfo WHERE 1=1
+		<if test="actual_card_no != null and actual_card_no !=''">
+			and actual_card_no = #{actual_card_no}
+		</if>
+	</select>
+</mapper>

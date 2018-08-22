@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="specialDeviceType">
+
+	<select id="querySpecialDeviceTypeByParams" parameterType="map" resultType="com.ssitcloud.devmgmt.entity.SpecialDeviceTypeEntity">
+		SELECT * FROM special_device_type where 1=1
+		
+		<if test="device_type_idx != null and device_type_idx != ''">
+			and device_type_idx = #{device_type_idx}
+		</if>
+	</select>
+	
+	<select id="querySpecialDeviceTypeByPage" parameterType="com.ssitcloud.devmgmt.entity.SpecialDeviceTypePageEntity" resultType="com.ssitcloud.devmgmt.entity.SpecialDeviceTypePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT * FROM special_device_type where 1=1
+		<if test="device_type_desc != null and device_type_desc != ''">
+			and device_type_desc like concat('%','${device_type_desc}','%')
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<insert id="addSpecialDeviceType" parameterType="com.ssitcloud.devmgmt.entity.SpecialDeviceTypeEntity"
+	useGeneratedKeys="true" keyProperty="device_type_idx">
+		insert into special_device_type(device_type_id,device_type_desc,device_type_db) 
+		values(#{device_type_id},#{device_type_desc},#{device_type_db})
+	</insert>
+	
+	<delete id="deleteSpecialDeviceType" parameterType="map">
+		delete from special_device_type where 1=1
+		<if test="device_type_id != null and device_type_id != '' ">
+			and device_type_id = #{device_type_id}
+		</if>
+	</delete>
+	
+	<update id="editSpecialDeviceType" parameterType="com.ssitcloud.devmgmt.entity.SpecialDeviceTypeEntity">
+		update special_device_type set device_type_id = #{device_type_id}
+		,device_type_desc=#{device_type_desc},device_type_db = #{device_type_db}
+		 where device_type_idx = #{device_type_idx}
+	</update>
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book_mediatype">
+
+	<insert id="insertBookMediatype" parameterType="com.ssitcloud.entity.BookMediatypeEntity" useGeneratedKeys="true" keyProperty="media_idx">
+		insert into book_mediatype
+		(		
+            lib_idx,media_code,media_name,media_mark
+		)
+		values
+		(
+             #{lib_idx},#{media_code},#{media_name},#{media_mark}
+		)
+	</insert>
+	
+	<update id="updateBookMediatype" parameterType="com.ssitcloud.entity.BookMediatypeEntity">
+		update book_mediatype
+		<set>
+			
+			<if test="lib_idx!=null">
+				lib_idx=#{lib_idx},
+			</if>
+			<if test="media_code!=null">
+				media_code=#{media_code},
+			</if>
+			<if test="media_name!=null">
+				media_name=#{media_name},
+			</if>
+			<if test="media_mark!=null">
+				media_mark=#{media_mark},
+			</if>
+			
+		</set>
+		   WHERE 1=1 
+	   <if test="media_idx!=null">
+			and media_idx=#{media_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteBookMediatype" parameterType="com.ssitcloud.entity.BookMediatypeEntity">
+		delete from book_mediatype where media_idx=#{media_idx}
+	</delete>
+	
+	<select id="selectBookMediatype" parameterType="com.ssitcloud.entity.BookMediatypeEntity" resultType="com.ssitcloud.entity.BookMediatypeEntity">
+		SELECT media_idx,lib_idx,media_code,media_name,media_mark FROM book_mediatype 
+	    where 1=1
+		<if test="media_idx!=null">
+			AND media_idx=#{media_idx}
+		</if>
+	</select>
+	<select id="selectBookMediatypes" parameterType="com.ssitcloud.entity.BookMediatypeEntity" resultType="com.ssitcloud.entity.BookMediatypeEntity">
+		SELECT media_idx,lib_idx,media_code,media_name,media_mark FROM book_mediatype 
+	    where 1=1
+	</select>
+	
+	
+	
+	
+</mapper>

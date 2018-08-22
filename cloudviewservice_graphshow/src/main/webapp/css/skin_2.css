@@ -1,0 +1,187 @@
+body {
+	width:100%;
+	height:100%;
+	margin:0px;
+	padding:0;
+	min-width:450px;
+	/* width:1280px;
+	height:1024px; */
+	background: #000 url(../img/bg.jpg) no-repeat fixed top;
+	-moz-background-size:100% 100%; /*老版本的 Firefox*/
+	background-size:100% 100%;
+}
+.row{
+	margin-bottom: 10px;
+}
+.bg{
+	background-color: #222D33;
+}
+.patron-div{
+	padding:10px;
+	height: 215px;
+	margin-bottom: 10px;
+	color: #23FFBB;
+	font-size:30px;
+}
+.patron-div p{
+	wihte-space:nowrap;
+	height: 100px;
+	line-height: 100px;
+	vertical-align:middle;
+	width: 90%;
+	margin: 0 auto;
+}
+.circulate-div{
+	background-color: #222D33;
+	padding:5px;
+	height: 225px;
+	margin-bottom:5px;
+}
+.tab{
+	font-size:25px;
+	color: #FFD54E;
+	border: 0;
+	width: 100%;
+}
+.tab th,tr{
+	line-height: 50px;
+	height: 50px;
+	vertical-align: middle;
+	text-align: center;
+}
+.tab .txt{
+	color:#FFEDB3;
+}
+#reader_hot_chart,#book_hot_chart{
+	height: 90%;
+	width: 100%;
+	padding: 20px;
+	margin-bottom:5px; 
+}
+.book_hot{
+	height: 550px;
+	width: 100%;
+	padding: 20px;
+	margin-bottom:5px;
+}
+.reader_hot{
+	height: 800px;
+	width: 100%;
+	padding: 10px;
+	margin-bottom:5px;
+}
+.hot table td:not(:first-child){
+	text-align: left;
+}
+.hot_title{
+	vertical-align: middle;
+	color:#FFD54E;
+	wihte-space:nowrap;
+	font-size: 28px;
+	line-height: 60px;
+	height: 60px;
+	vertical-align: middle;
+	width: 100%;
+	text-align: center;
+}
+.hot_title b{
+	font-size: 35px;
+	margin-right: 5px;
+}
+.book_hot_list{
+	width: 90%;
+	margin: 0 auto;
+	color: #23FFBB;
+	font-size:20px;
+}
+.book_hot_list tr{
+    overflow: hidden;
+   	text-overflow: ellipsis;
+   	white-space: nowrap;
+	line-height: 60px;
+	height: 60px;
+	vertical-align: middle;
+}
+.book_hot_list tr td{
+	padding:10px; 
+}
+.book_hot_list tr td:nth-child(2){
+	min-width:300px;
+	max-width: 650px
+}
+.long_txt{
+    width:500px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.reader_hot_list{
+	width: 90%;
+	margin: 0 auto;
+	color: #23FFBB;
+	font-size:20px;
+}
+.reader_hot_list tr{
+	overflow: hidden;
+   	text-overflow: ellipsis;
+   	white-space: nowrap;
+	line-height: 65px;
+	height: 65px;
+	vertical-align: middle;
+}
+.top1{
+	width:35px;
+	height:35px;
+	line-height:35px;
+	font-size:20px;
+	border-radius:50% 50%;
+	background-color:#EE2C2C; 
+	color:#FFFFFF;
+	margin:auto;
+}
+.top2{
+	width:30px;
+	height:30px;
+	line-height:30px;
+	border-radius:50% 50%;
+	background-color:#FF6A6A; 
+	color:#FFFFFF;
+	margin:auto;
+}
+.top_other{
+	width:30px;
+	height:30px;
+	line-height:30px;
+	border-radius:50% 50%;
+	background-color:#BFEFFF; 
+	color:#999999;
+	margin:auto;
+}
+
+@media (max-height:1024px){
+	
+}
+
+@media (min-width: 1400px) and (max-width: 1600px){
+	.long_txt{
+	    width:450px;
+	}
+}
+
+@media (min-width: 970px) and (max-width: 1400px){
+	.long_txt{
+	    width:300px;
+	}
+}
+
+@media (max-width: 985px){
+	#reader_hot_chart,#book_hot_chart{
+		display: none;
+	}
+}
+
+@media (max-width: 660px){
+	.long_txt{
+	    width:300px;
+	}
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="display">
+	<!-- 办证 -->
+	<select id="countCertificate" resultType="com.ssit.Entity.CertificateEntity">
+		<choose>  
+            <when test="forDay">  
+                SELECT 'today' type, 
+            </when>  
+            <when test="forWeek">  
+                SELECT 'week' type,
+            </when>  
+            <when test="forMonth">  
+                SELECT 'month' type,
+            </when>  
+            <when test="forYear">  
+                SELECT 'year' type,
+            </when>  
+            <otherwise>  
+                SELECT 'today' type,
+            </otherwise>  
+        </choose> 
+		COUNT(1) total FROM `ssit`.`card_log` sr LEFT JOIN ssit.`cir_fin` cf ON sr.`cardNo`=cf.`cardNo` WHERE sr.result=1 AND cf.`finType`='CW' AND cf.`cardNo` IS NOT NULL
+		<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+			AND cf.`tradeDate` BETWEEN #{startTime} AND #{endTime}
+		</if>
+		 <!-- <if test="isUnion!=null and isUnion=='true'">
+		 	UNION
+		 	SELECT 'total' type,COUNT(1) total FROM `ssit`.`card_log` sr LEFT JOIN ssit.`cir_fin` cf ON sr.`cardNo`=cf.`cardNo`
+		 	<where>
+		 		sr.result=1 AND cf.`finType`='CW' AND cf.`cardNo` IS NOT NULL
+				<if test="startDay!=null and endDay!=null">
+					AND cf.`tradeDate` BETWEEN #{startDay} AND #{endDay}
+				</if>
+			</where>
+		 </if> -->
+	</select>
+	
+	<!-- 流通 -->
+	<select id="countCirculate" resultType="com.ssit.Entity.CirculateEntity">
+		<choose>  
+            <when test="forDay">  
+                SELECT 'today' type, 
+            </when>  
+            <when test="forWeek">  
+                SELECT 'week' type,
+            </when>  
+            <when test="forMonth">  
+                SELECT 'month' type,
+            </when>  
+            <when test="forYear">  
+                SELECT 'year' type,
+            </when>  
+            <otherwise>  
+                SELECT 'today' type,
+            </otherwise>  
+        </choose>  
+		tb.time,SUM(CASE tb.TYPE WHEN '1' THEN tb.total ELSE 0 END ) type1_total,SUM(CASE tb.TYPE WHEN '2' THEN tb.total ELSE 0 END ) type2_total,SUM(CASE tb.TYPE WHEN '3' THEN tb.total ELSE 0 END ) type3_total FROM(
+		SELECT SUBSTRING(IFNULL(ll.`loandate`,ll.`returndate`),12,2) TIME,ll.`loanflg` TYPE,COUNT(*) total FROM  loan_log ll
+		<where>
+			ll.`loanflg`=1 and ll.`controlflg` = 1
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND (left(ll.`loandate`,10) BETWEEN #{startTime} AND #{endTime} OR left(ll.`returndate`,10) BETWEEN #{startTime} AND #{endTime}) 
+			</if>
+		</where>
+		  GROUP BY TYPE,TIME ORDER BY TIME,TYPE )tb 
+		 <if test="isUnion!=null and isUnion=='false'">
+			 GROUP BY tb.time
+		 </if>
+		<!--  <if test="isUnion!=null and isUnion=='true'">
+		 	UNION
+		 	SELECT 'total' type,tb.time,SUM(CASE tb.TYPE WHEN '1' THEN tb.total ELSE 0 END)type1_total,SUM(CASE tb.TYPE WHEN '2' THEN tb.total ELSE 0 END ) type2_total,SUM(CASE tb.TYPE WHEN '3' THEN tb.total ELSE 0 END ) type3_total FROM(
+		 	SELECT SUBSTRING(IFNULL(ll.`loandate`,ll.`returndate`),12,2) TIME,ll.`loanflg` TYPE,COUNT(*) total FROM  loan_log ll 
+		 	<where>
+				<if test="startDay!=null and endDay!=null">
+					AND left(ll.`loandate`,10) BETWEEN #{startDay} AND #{endDay} OR left(ll.`returndate`,10) BETWEEN #{startDay} AND #{endDay} 
+				</if>
+			</where>
+			GROUP BY TYPE,TIME ORDER BY TIME,TYPE)tb
+		 </if> -->
+	</select>
+	
+	<!-- 财经 -->
+	<select id="countFinance" resultType="com.ssit.Entity.FinanceEntity">
+		SELECT dm.`dm_name` NAME,cf.`finType`,SUM(cf.`money`) total FROM cir_fin cf JOIN card_log ri ON cf.`cardNo` = ri.`cardNo` JOIN `device_maininfo` dm ON dm.`dm_id`=cf.`dmId` JOIN para_cirrdrpar pc ON ri.`cirType`=pc.`cirid`
+		<where>
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND cf.`tradeDate` BETWEEN #{startTime} AND #{endTime}
+			</if>
+		</where>
+		  GROUP BY cf.`finType`,dm.`dm_name`
+	</select>
+	
+	<!-- 图书排行榜 -->
+	<select id="bookRank" resultType="com.ssit.Entity.BookEntity">
+		SELECT bi.`title` name,COUNT(1) total FROM `loan_log` ll join book_info bi on ll.`barno` = bi.`BarCode`
+		<where>
+			ll.`loanflg`=1 and ll.`controlflg` = 1 and bi.`title`!=''
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND (left(ll.`loandate`,10) BETWEEN #{startTime} AND #{endTime} OR left(ll.`returndate`,10) BETWEEN #{startTime} AND #{endTime})
+			</if>
+		</where>
+		 GROUP BY name ORDER BY total DESC LIMIT 5
+	</select>
+	
+	<!-- 读者排行榜 -->
+	<select id="readerRank" resultType="com.ssit.Entity.ReaderEntity">
+		SELECT ri.`name`,ri.cardNo,COUNT(1) total FROM `loan_log` ll JOIN `reader_info` ri ON ll.`cardno`=ri.`cardNo`
+		<where>
+			ll.`loanflg`=1 and ll.`controlflg` = 1
+			<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+				AND (left(ll.`loandate`,10) BETWEEN #{startTime} AND #{endTime} OR left(ll.`returndate`,10) BETWEEN #{startTime} AND #{endTime})
+			</if>
+		</where>
+		  GROUP BY `name` ORDER BY total DESC LIMIT 10
+	</select>
+</mapper>

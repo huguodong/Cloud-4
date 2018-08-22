@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="servicegroup">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.ServiceGroupEntity"
+		useGeneratedKeys="true" keyProperty="service_group_idx">
+		INSERT INTO service_group
+		(library_idx,service_group_id, service_group_name,service_group_desc)
+		VALUES
+		(#{library_idx},#{service_group_id},#{service_group_name},#{service_group_desc})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.ServiceGroupEntity">
+		UPDATE service_group
+		<set>
+			<if test="service_group_id!=null and service_group_id!=''">
+				service_group_id=#{service_group_id},
+			</if>
+			<if test="service_group_desc !=null and service_group_desc !=''">
+				service_group_desc = #{service_group_desc},
+			</if>
+			<if test="service_group_name !=null and service_group_name !=''">
+				service_group_name = #{service_group_name},
+			</if>
+			<if test="library_idx !=null">
+				library_idx = #{library_idx},
+			</if>
+			version_stamp=version_stamp+1
+		</set>
+		WHERE service_group_idx = #{service_group_idx} 
+		<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+		</if>
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.ServiceGroupEntity">
+		DELETE FROM service_group
+		WHERE service_group_idx = #{service_group_idx} 
+		<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+		</if>
+	</delete>
+
+	<select id="selectByidx" parameterType="com.ssitcloud.entity.ServiceGroupEntity"
+		resultType="com.ssitcloud.entity.ServiceGroupEntity">
+		SELECT * FROM service_group
+		<where>
+			<if test="service_group_idx !=null and service_group_idx !=''">
+				and service_group_idx = #{service_group_idx}
+			</if>
+			<if test="service_group_desc !=null and service_group_desc !=''">
+				and service_group_desc = #{service_group_desc}
+			</if>
+			<if test="service_group_name !=null and service_group_name !=''">
+				and service_group_name = #{service_group_name}
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectAll" resultType="com.ssitcloud.entity.ServiceGroupEntity">
+		SELECT * FROM service_group
+	</select>
+</mapper>

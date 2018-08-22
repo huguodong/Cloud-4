@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<!--  project_name约定唯一-->
+		<project projectName="cloudbusinessservice_device" baseURL="http://127.0.0.1:8080">
+			<!-- 查询权限 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/permission/SelPermissionbyOperIdx" id="SelPermissionByOperIdx"/>
+			<!-- 表metaopercmd -->
+			<RequestUrl id="SelectMetaOperCmd" requestMapping="/cloudbusinessservice_device/metaopercmd/SelectMetaOperCmd"/>
+			
+			<!-- 云平台管理员获取所有权限 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/permission/SelPermissionBySsitCloudAdmin" id="SelPermissionBySsitCloudAdmin"/>
+		
+			
+			<!-- 检查系统中是否有deviceCode的设备  -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/hasDeviceCode" id="hasDeviceCode"/>
+			<!-- 根据设备号查询设备信息，如果有这个设备，返回设备的设备类型 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/queryDeviceByDeviceCode" id="queryDeviceByDeviceCode"/>
+			<!-- 获取所有设备类型 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/SelAllMetadataDeviceType" id="SelAllMetadataDeviceType"/>
+			<!-- 获取所有的硬件与逻辑配置模板 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/SelAllExtTempList" id="SelAllExtTempList"/>
+			<!-- 获取所有运行配置模板信息 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/SelAllRunTempList" id="SelAllRunTempList"/>
+			<!-- 获取所有的机器监控配置模板 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/SelAllMonitorTempList" id="SelAllMonitorTempList"/>
+			<!-- 获取所有数据同步配置模板 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/SelAllDBSyncTempList" id="SelAllDBSyncTempList"/>
+			<!-- 设备注册 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/deviceRegister" id="deviceRegister"/>
+			<!-- 海洋设备注册 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/hydeviceRegister" id="hydeviceRegister"/>
+			<!-- 获取所有的外设逻辑部件 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/metalogic/SelectMetadataLogicObj" id="SelectMetadataLogicObj"/>
+			<!-- 获取所有的外设extmodel -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/extmodel/SelMetadataExtModel" id="SelMetadataExtModel"/>
+			<!-- 获取所有的logic_obj和ext_model的元数据 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/selAllExtModelAndLogicObj" id="selAllExtModelAndLogicObj"/>
+			<!-- 根据id或者idx查询图书馆的信息 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/selLibraryByIdxOrId" id="selLibraryByIdxOrId"/>
+			<!-- 根据id或者idx判断设备是否存在 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/isExistDeviceWithIdOrIdx" id="isExistDeviceWithIdOrIdx"/>
+			<!-- 根据图书馆idx查询图书馆的模板信息，以及所有 有效的设备用户的id {library_idx:"1"}-->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/selLibraryTempAndDeviceIds" id="selLibraryTempAndDeviceIds"/>
+			<!-- 查询图书馆的模板信息，以及所有 有效的设备用户的id -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/selDeviceCountByIds" id="selDeviceCountByIds"/>
+			<!-- 查询acs模板信息 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devreg/getAscTempList" id="getAscTempList"/>
+			
+			<!-- 根据id来查询设备显示类型  -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/devicedisplay/findByTypeId" id="getDisplayByTypeId"/>
+			<!-- 查找设备类型 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/metadevicetype/queryDeviceTypeByName" id="queryDeviceTypeByName"/>
+			<!-- 将图书馆的设备转移到另一个图书馆 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/device/transferToNewLib" id="transferToNewLib"/>
+			<!-- 查询所有的地区信息 -->
+			<RequestUrl requestMapping="/cloudbusinessservice_device/device/queryAllRegion" id="queryAllRegion"/>
+			
+		</project>
+		
+		<!-- 验证 -->
+		<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+			<RequestUrl requestMapping="/clouddbservice_authentication/operator/loginCheck" id="loginCheck"/>
+			
+			<!-- 根据设备用户id 查询设备的ip -->
+			<RequestUrl requestMapping="/clouddbservice_authentication/operator/queryDeviceIps" id="queryDeviceIps"/>
+			<!-- 根据图书馆idx 查询父馆 -->
+			<RequestUrl requestMapping="/clouddbservice_authentication/library/queryMasterLibraryBySlaveIdx" id="queryMasterLibraryBySlaveIdx"/>
+		</project>
+		<project projectName="cloudbusinessservice_datasyn" baseURL="http://127.0.0.1:8080">
+			<RequestUrl requestMapping="/cloudbusinessservice_datasyn/sync/transferToBusinessDatasync" id="transferToBusinessDatasync" />
+			<RequestUrl requestMapping="/cloudbusinessservice_datasyn/issue2device/send" id="send" />
+		</project>
+		<!-- 心跳数据 -->
+		<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+			<RequestUrl requestMapping="/cloudbusinessservice_node/hearbeat/saveData" id="HEARBEAT_URL" />
+			<RequestUrl requestMapping="/cloudbusinessservice_node/fileManager/uploadFileToFastDfs" id="uploadFile" />
+		</project>
+		
+</RequestUrlList>

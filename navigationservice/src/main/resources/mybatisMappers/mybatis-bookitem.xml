@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bookitem">
+
+	<insert id="add" parameterType="com.ssitcloud.shelfmgmt.entity.BookitemEntity" useGeneratedKeys="true" keyProperty="bookitem_idx">
+		INSERT INTO `bookitem` (
+			`book_barcode`,
+			`book_uid`,
+			`ISBN`,
+			`title`,
+			`author`,
+			`publish`,
+			`callNo`,
+			`shelflayer_barcode`,
+			`update_uid_flag`,
+			`state`,
+			`updatetime`,
+			`statemodcount`,
+			`location`,
+			`subsidiary`,
+			`uploadtime`,
+			`device_id`
+			
+		) VALUES (
+			#{book_barcode},
+			#{book_uid},
+			#{ISBN},
+			#{title},
+			#{author},
+			#{publish},
+			#{callNo},
+			#{shelflayer_barcode},
+			#{update_uid_flag},
+			#{state},
+			NOW(),
+			#{statemodcount},
+			#{location},
+			#{subsidiary},
+			NOW(),
+			#{device_id}
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="java.util.List">
+		<![CDATA[  
+			DELETE FROM `bookitem` WHERE `book_barcode` in
+	    ]]>  
+	    <foreach collection="list" item = "bookitem" open="(" separator="," close=")">
+	   		#{bookitem.book_barcode}
+	    </foreach>
+	</delete>
+	
+	<select id="selectByCode" parameterType="com.ssitcloud.shelfmgmt.entity.BookitemEntity" resultType="com.ssitcloud.shelfmgmt.entity.BookitemEntity">
+		SELECT * FROM `bookitem` where `book_barcode` = #{book_barcode}
+	</select>
+	
+	<update id="update" parameterType="com.ssitcloud.shelfmgmt.entity.BookitemEntity">
+		update `bookitem` set  
+			<!-- `book_uid` = #{book_uid}, -->
+			`ISBN` = #{ISBN},
+			`title` = #{title},
+			`author` = #{author},
+			`publish` = #{publish},
+			`callNo` = #{callNo},
+			<!-- `shelflayer_barcode` = #{shelflayer_barcode}, -->
+			`update_uid_flag` = #{update_uid_flag},
+			<!-- `state` = #{state}, -->
+			`updatetime` = NOW(),
+			`statemodcount` = #{statemodcount},
+			`location` = #{location},
+			`subsidiary` = #{subsidiary},
+			`uploadtime` = #{uploadtime}
+			<!-- `device_id` = #{device_id} -->
+			 where `book_barcode` = #{book_barcode} 
+	</update>
+	
+	<select id="count" parameterType="com.ssitcloud.shelfmgmt.entity.BookitemEntity" resultType="int">
+		SELECT count(1) FROM `bookitem` 
+		<where>
+			<if test="book_barcode !=null and book_barcode !='' ">
+				`book_barcode` like concat('%','${book_barcode}','%')
+			</if>
+			<if test="ISBN !=null and ISBN !='' ">
+				`ISBN` like concat('%','${ISBN}','%')
+			</if>
+			<if test="title !=null and title !='' ">
+				`title` like concat('%','${title}','%')
+			</if>
+			<if test="author !=null and author !='' ">
+				`author` like concat('%','${author}','%')
+			</if>
+			<if test="publish !=null and publish !='' ">
+				`publish` like concat('%','${publish}','%')
+			</if>
+			<if test="callNo !=null and callNo !='' ">
+				`callNo` like concat('%','${callNo}','%')
+			</if>
+		</where>
+	</select>
+
+	<select id="select" parameterType="com.ssitcloud.shelfmgmt.entity.BookitemEntity" resultType="com.ssitcloud.shelfmgmt.entity.BookitemEntity">
+		SELECT * FROM `bookitem` 
+		<where>
+			<if test="book_barcode !=null and book_barcode !='' ">
+				`book_barcode` = #{book_barcode}
+			</if>
+			<if test="ISBN !=null and ISBN !='' ">
+				`ISBN` = #{ISBN}
+			</if>
+			<if test="title !=null and title !='' ">
+				`title` like concat('%','${title}','%') order by length(replace(title,'${title}','')) ASC,`shelflayer_barcode` DESC;
+			</if>
+			<if test="author !=null and author !='' ">
+				`author` like concat('%','${author}','%') order by length(replace(author,'${author}','')) ASC,`shelflayer_barcode` DESC;
+			</if>
+			<if test="publish !=null and publish !='' ">
+				`publish` like concat('%','${publish}','%') order by length(replace(publish,'${publish}','')) ASC,`shelflayer_barcode` DESC;
+			</if>
+			<if test="callNo !=null and callNo !='' ">
+				`callNo` = #{callNo} 
+			</if>
+		</where>
+	</select>
+	
+</mapper>

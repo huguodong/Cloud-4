@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="configfield">
+<select id="listConfigFieldCollection" resultType="java.util.Map">
+	SELECT 
+	  config_table,
+	  GROUP_CONCAT(config_field  SEPARATOR '#') `field`,
+	  GROUP_CONCAT(config_field_desc  SEPARATOR '#') `field_desc`
+	FROM
+	  configfield 
+	WHERE config_field IS NOT NULL 
+	  AND config_field != '' 
+	GROUP BY config_table 
+</select>
+
+<select id="selectConfigFieldList" parameterType="com.ssitcloud.entity.ConfigFieldEntity" resultType="com.ssitcloud.entity.ConfigFieldEntity">
+   SELECT 
+     `config_table`,
+	 `config_field`,
+	 `config_field_desc`,
+	 `ref_statistics`
+   FROM configfield
+</select>
+<insert id="insertImportTemplate" parameterType="com.ssitcloud.entity.ImportTemplateEntity" useGeneratedKeys="true" keyProperty="import_tpl_idx">
+		insert into import_template
+		(	
+			import_tpl_id,	
+            import_tpl_desc
+		)
+		values
+		(
+			 #{import_tpl_id},
+             #{import_tpl_desc}
+		)
+</insert>
+<insert id="insertImportConfig" parameterType="com.ssitcloud.entity.ImportConfigEntity" useGeneratedKeys="true" keyProperty="import_tpl_idx">
+		insert into import_config
+		(		
+            import_tpl_idx,import_tpl_type,lib_id,library_idx,lib_name,import_tpl_value
+		)
+		values
+		(
+             #{import_tpl_idx},#{import_tpl_type},#{lib_id},#{library_idx},#{lib_name},#{import_tpl_value}
+		)
+</insert>	
+<select id="selectAllImportTemplatePage" parameterType="com.ssitcloud.entity.page.ImportTemplatePageEntity" resultType="com.ssitcloud.entity.page.ImportTemplatePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT
+	    sc.import_tpl_idx,
+	    sc.import_tpl_type,
+	    sc.lib_id,
+	    sc.lib_name,
+	    sc.import_tpl_value,
+	    st.import_tpl_id,
+	    st.import_tpl_desc
+		FROM
+			import_config sc,
+			import_template st
+		WHERE
+			sc.import_tpl_idx = st.import_tpl_idx
+		<if test="import_tpl_type ==1">
+			AND sc.import_tpl_type IN(1,2)   
+		</if>
+		<if test="import_tpl_type ==3">
+			AND sc.import_tpl_type IN(3,4)   
+		</if>
+		<if test="lib_id != null">
+			AND sc.lib_id = #{lib_id}   
+		</if>
+		<if test="import_tpl_desc !=null">
+			AND (sc.lib_name LIKE CONCAT('%',#{import_tpl_desc}, '%') OR st.import_tpl_id LIKE CONCAT('%',#{import_tpl_desc}, '%'))
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+</select>
+<select id="selectImportTemplatePage" parameterType="com.ssitcloud.entity.page.ImportTemplatePageEntity" resultType="com.ssitcloud.entity.page.ImportTemplatePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT
+	    sc.import_tpl_idx,
+	    sc.import_tpl_type,
+	    sc.lib_id,
+	    sc.lib_name,
+	    sc.import_tpl_value,
+	    st.import_tpl_id,
+	    st.import_tpl_desc
+		FROM
+			import_config sc,
+			import_template st
+		WHERE
+			sc.import_tpl_idx = st.import_tpl_idx
+		<if test="import_tpl_type !=null">
+			AND sc.import_tpl_type = #{import_tpl_type}   
+		</if>
+		<if test="import_tpl_desc !=null">
+			AND (sc.lib_name LIKE CONCAT('%',#{import_tpl_desc}, '%') OR st.import_tpl_id LIKE CONCAT('%',#{import_tpl_desc}, '%'))
+		</if>
+		<if test="lib_id != null">
+			AND sc.lib_id = #{lib_id}   
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+</select>
+<select id="selectImportConfig" parameterType="com.ssitcloud.entity.ImportConfigEntity" resultType="com.ssitcloud.entity.ImportConfigEntity">
+		SELECT import_tpl_idx,import_tpl_type,lib_id,lib_name,import_tpl_value,library_idx FROM import_config 
+	    where 1=1
+		<if test="import_tpl_idx!=null">
+			AND import_tpl_idx=#{import_tpl_idx}
+		</if>
+</select>
+<update id="updateImportTemplate" parameterType="com.ssitcloud.entity.ImportTemplateEntity">
+		update import_template
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="import_tpl_id!=null">
+				import_tpl_id=#{import_tpl_id},
+			</if>
+			<if test="import_tpl_desc!=null">
+				import_tpl_desc=#{import_tpl_desc},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="import_tpl_idx!=null">
+			and import_tpl_idx=#{import_tpl_idx}
+		</if>
+</update>
+<update id="updateImportConfig" parameterType="com.ssitcloud.entity.ImportConfigEntity">
+		update import_config
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="lib_id!=null">
+				lib_id=#{lib_id},
+			</if>
+			<if test="library_idx">
+				library_idx=#{library_idx},
+			</if>
+			<if test="lib_name!=null">
+				lib_name=#{lib_name},
+			</if>
+			<if test="import_tpl_type!=null">
+				import_tpl_type=#{import_tpl_type},
+			</if>
+			<if test="import_tpl_value!=null">
+				import_tpl_value=#{import_tpl_value},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="import_tpl_idx!=null">
+			and import_tpl_idx=#{import_tpl_idx}
+		</if>
+</update>
+<delete id="deleteImportTemplate" parameterType="com.ssitcloud.entity.ImportTemplateEntity">
+		delete from import_template where import_tpl_idx=#{import_tpl_idx}
+</delete>
+<delete id="deleteImportConfig" parameterType="com.ssitcloud.entity.ImportConfigEntity">
+		delete from import_config where import_tpl_idx=#{import_tpl_idx}
+</delete>
+</mapper>

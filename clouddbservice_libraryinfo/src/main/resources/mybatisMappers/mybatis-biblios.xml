@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="biblios">
+
+<insert id="insertBiblios" parameterType="com.ssitcloud.dblib.entity.BibliosEntity"
+ useGeneratedKeys="true" keyProperty="bib_idx">
+	INSERT INTO biblios (
+	  `ISBN`,
+	  `title`,
+	  `author`,
+	  `classNo`,
+	  `publish`,
+	  `pubAddress`,
+	  `pubDate`,
+	  `price`,
+	  `subject`,
+	  `book_page`,
+	  `book_size`,
+	  `contents`,
+	  `seriesBook`,
+	  `lang`,
+	  `version`,
+	  `bookimage_url`
+	) 
+	VALUES (
+		#{ISBN},	
+		#{title},	
+		#{author},	
+		#{classNo},	
+		#{publish},	
+		#{pubAddress},	
+		#{pubDate},	
+		#{price},	
+		#{subject},	
+		#{book_page},	
+		#{book_size},	
+		#{contents},	
+		#{seriesBook},	
+		#{lang},	
+		#{version},	
+		#{bookimage_url}
+	)
+</insert>
+
+<insert id="insertBibliosBatch" parameterType="com.ssitcloud.dblib.entity.BibliosEntity">
+	INSERT INTO biblios (
+	  `ISBN`,
+	  `title`,
+	  `author`,
+	  `classNo`,
+	  `publish`,
+	  `pubAddress`,
+	  `pubDate`,
+	  `price`,
+	  `subject`,
+	  `book_page`,
+	  `book_size`,
+	  `contents`,
+	  `seriesBook`,
+	  `lang`,
+	  `version`,
+	  `bookimage_url`
+	) 
+	VALUES 
+	<foreach collection="list" item="item" separator=",">
+		(
+			#{item.ISBN},	
+			#{item.title},	
+			#{item.author},	
+			#{item.classNo},	
+			#{item.publish},	
+			#{item.pubAddress},	
+			#{item.pubDate},	
+			#{item.price},	
+			#{item.subject},	
+			#{item.book_page},	
+			#{item.book_size},	
+			#{item.contents},	
+			#{item.seriesBook},	
+			#{item.lang},	
+			#{item.version},	
+			#{item.bookimage_url}
+		)
+	</foreach>
+</insert>
+
+<delete id="deleteBiblios" parameterType="com.ssitcloud.dblib.entity.BibliosEntity">
+	DELETE FROM biblios WHERE `bib_idx` = #{bib_idx} 
+</delete>
+
+<update id="updateBiblios" parameterType="com.ssitcloud.dblib.entity.BibliosEntity">
+	UPDATE biblios 
+	<set>
+		<if test="ISBN != null ">
+		  `ISBN` = #{ISBN},
+		</if>
+		<if test="title !=null ">
+		  `title` = #{title},
+		</if>
+		<if test="author !=null ">
+		  `author` = #{author},
+		</if>
+		<if test="classNo !=null ">
+		  `classNo` = #{classNo},
+		</if>
+		<if test="publish !=null ">
+		  `publish` = #{publish},
+		</if>
+		<if test="pubAddress !=null ">
+		  `pubAddress` = #{pubAddress},
+		</if>
+		<if test="pubDate !=null">
+		  `pubDate` = #{pubDate},
+		</if>
+		<if test="price !=null ">
+		  `price` = #{price},
+		</if>
+		<if test="subject !=null ">
+		  `subject` = #{subject},
+		</if>
+		<if test="book_page !=null ">
+		  `book_page` = #{book_page},
+		</if>
+		<if test="book_size !=null ">
+		  `book_size` = #{book_size},
+		</if>
+		<if test="contents !=null ">
+		  `contents` = #{contents},
+		</if>
+		<if test="seriesBook !=null ">
+		  `seriesBook` = #{seriesBook},
+		</if>
+		<if test="lang !=null ">
+		  `lang` = #{lang},
+		</if>
+		<if test="version !=null ">
+		  `version` = #{version},
+		</if>
+		<if test="bookimage_url !=null ">
+		  `bookimage_url` = #{bookimage_url},
+		</if>
+	</set>
+	where `bib_idx` = #{bib_idx}
+</update>
+
+<!-- mybatis执行多条sql -->
+<update id="updateBibliosBatch" >
+	<foreach collection="list" separator=";" item="item">
+		UPDATE biblios 
+		<set>
+			<if test="item.ISBN != null ">
+			  `ISBN` = #{item.ISBN},
+			</if>
+			<if test="item.title !=null ">
+			  `title` = #{item.title},
+			</if>
+			<if test="item.author !=null ">
+			  `author` = #{item.author},
+			</if>
+			<if test="item.classNo !=null ">
+			  `classNo` = #{item.classNo},
+			</if>
+			<if test="item.publish !=null ">
+			  `publish` = #{item.publish},
+			</if>
+			<if test="item.pubAddress !=null ">
+			  `pubAddress` = #{item.pubAddress},
+			</if>
+			<if test="item.pubDate !=null">
+			  `pubDate` = #{item.pubDate},
+			</if>
+			<if test="item.price !=null ">
+			  `price` = #{item.price},
+			</if>
+			<if test="item.subject !=null ">
+			  `subject` = #{item.subject},
+			</if>
+			<if test="item.book_page !=null ">
+			  `book_page` = #{item.book_page},
+			</if>
+			<if test="item.book_size !=null ">
+			  `book_size` = #{item.book_size},
+			</if>
+			<if test="item.contents !=null ">
+			  `contents` = #{item.contents},
+			</if>
+			<if test="item.seriesBook !=null ">
+			  `seriesBook` = #{item.seriesBook},
+			</if>
+			<if test="item.lang !=null ">
+			  `lang` = #{item.lang},
+			</if>
+			<if test="item.version !=null ">
+			  `version` = #{item.version},
+			</if>
+			<if test="item.bookimage_url !=null ">
+			  `bookimage_url` = #{item.bookimage_url},
+			</if>
+		</set>
+		where `bib_idx` = #{item.bib_idx}
+	</foreach>
+</update>
+
+<select id="queryBiblios" resultType="com.ssitcloud.dblib.entity.BibliosEntity">
+	SELECT * FROM biblios WHERE `bib_idx` = #{bib_idx}
+</select>
+
+<select id="selectbyISBN" parameterType="com.ssitcloud.dblib.entity.BibliosEntity" resultType="com.ssitcloud.dblib.entity.BibliosEntity">
+		SELECT * FROM `biblios` where `ISBN` = #{ISBN} limit 1;
+</select>
+
+<select id="queryBibliosByIsbnMultiCondition" resultType="com.ssitcloud.dblib.entity.BibliosEntity">
+
+	SELECT 
+	  * 
+	FROM
+	  biblios 
+	  where isbn = #{ISBN}
+<!-- 	WHERE IF( -->
+<!-- 	    LENGTH(REPLACE(ISBN, '-', '')) = 13, -->
+<!-- 	    RIGHT(REPLACE(ISBN, '-', ''), 10) = REPLACE(#{ISBN}, '-', ''), -->
+<!-- 	    '' -->
+<!-- 	  )  -->
+<!-- 	  OR REPLACE(ISBN, '-', '') = REPLACE(#{ISBN}, '-', '')   -->
+	LIMIT 1 
+</select>
+
+<select id="queryBibliosByTitleAuthorPublish" resultType="com.ssitcloud.dblib.entity.BibliosEntity">
+
+	SELECT 
+	  * 
+	FROM
+	  biblios 
+	WHERE title = #{title}
+	<choose>
+		<when test="author !=null">
+			and author = #{author}
+		</when>
+		<otherwise>
+			and author is null
+		</otherwise>
+	</choose>
+	<choose>
+		<when test="publish !=null">
+			and publish = #{publish}
+		</when>
+		<otherwise>
+			and publish is null
+		</otherwise>
+	</choose>
+	<choose>
+		<when test="pubDate !=null">
+			and pubDate = #{pubDate}
+		</when>
+		<otherwise>
+			and pubDate is null
+		</otherwise>
+	</choose>
+	limit 1
+</select>
+
+<select id="queryBibliosByTitleAndAuthor" parameterType="com.ssitcloud.dblib.entity.BibliosEntity" resultType="com.ssitcloud.dblib.entity.BibliosEntity">
+		SELECT * FROM `biblios` where `title` = #{title} and `author` = #{author} limit 1;
+</select>
+
+<delete id="deleteByISBN" parameterType="java.util.List">
+		<![CDATA[  
+			DELETE FROM `biblios` WHERE `ISBN` in
+	    ]]>  
+	    <foreach collection="list" item = "biblios" open="(" separator="," close=")">
+	   		#{biblios.ISBN}
+	    </foreach>
+</delete>
+	
+<update id="update" parameterType="com.ssitcloud.dblib.entity.BibliosEntity">
+		update `biblios` set  `bookimage_url` = #{bookimage_url} where `ISBN` = #{ISBN} 
+</update>
+
+<select id="queryBibliosList" resultType="com.ssitcloud.dblib.entity.BibliosEntity">
+	SELECT * FROM biblios 
+</select>
+
+<select id="queryBibliosListByPage" resultType="com.ssitcloud.dblib.entity.page.BibliosPageEntity">
+	<if test="whetherPaging==true">
+		<include refid="paging.head"/>
+	</if>
+	
+	SELECT * FROM biblios
+	
+	<if test="whetherPaging==true">
+		<include refid="paging.tail"/>
+	</if>
+</select>
+<!-- 通过lib_id和b_code查询图书信息 -->
+<select id="queryBibliosForBCAndLib" resultType="com.ssitcloud.dblib.entity.BibliosEntity">
+	SELECT bo.* FROM biblios AS bo
+		INNER JOIN bookitem ON bookitem.bib_idx = bo.bib_idx
+		WHERE
+			bookitem.book_barcode = #{book_barcode} 
+		AND
+			bookitem.lib_id = #{lib_id} 
+</select>
+
+<update id="updateBibliosByISBN" parameterType="com.ssitcloud.dblib.entity.BibliosEntity">
+	UPDATE biblios 
+	<set>
+		<if test="title !=null ">
+		  `title` = #{title},
+		</if>
+		<if test="author !=null ">
+		  `author` = #{author},
+		</if>
+		<if test="classNo !=null ">
+		  `classNo` = #{classNo},
+		</if>
+		<if test="publish !=null ">
+		  `publish` = #{publish},
+		</if>
+		<if test="pubAddress !=null ">
+		  `pubAddress` = #{pubAddress},
+		</if>
+		<if test="pubDate !=null">
+		  `pubDate` = #{pubDate},
+		</if>
+		<if test="price !=null ">
+		  `price` = #{price},
+		</if>
+		<if test="subject !=null ">
+		  `subject` = #{subject},
+		</if>
+		<if test="book_page !=null ">
+		  `book_page` = #{book_page},
+		</if>
+		<if test="book_size !=null ">
+		  `book_size` = #{book_size},
+		</if>
+		<if test="contents !=null ">
+		  `contents` = #{contents},
+		</if>
+		<if test="seriesBook !=null ">
+		  `seriesBook` = #{seriesBook},
+		</if>
+		<if test="lang !=null ">
+		  `lang` = #{lang},
+		</if>
+		<if test="version !=null ">
+		  `version` = #{version},
+		</if>
+		<if test="bookimage_url !=null ">
+		  `bookimage_url` = #{bookimage_url},
+		</if>
+	</set>
+	<where>
+		`ISBN` = #{ISBN}
+	</where>
+</update>
+<insert id="insertBiblios2" parameterType="com.ssitcloud.dblib.entity.BibliosAndBook"
+ useGeneratedKeys="true" keyProperty="bib_idx">
+	INSERT INTO biblios (
+	  `ISBN`,
+	  `title`,
+	  `author`,
+	  `classNo`,
+	  `publish`,
+	  `pubAddress`,
+	  `pubDate`,
+	  `price`,
+	  `subject`,
+	  `book_page`,
+	  `book_size`,
+	  `contents`,
+	  `seriesBook`,
+	  `lang`,
+	  `version`,
+	  `bookimage_url`
+	) 
+	VALUES (
+		#{ISBN},	
+		#{title},	
+		#{author},	
+		#{classNo},	
+		#{publish},	
+		#{pubAddress},	
+		#{pubDate},	
+		#{price},	
+		#{subject},	
+		#{book_page},	
+		#{book_size},	
+		#{contents},	
+		#{seriesBook},	
+		#{lang},	
+		#{version},	
+		#{bookimage_url}
+	)
+</insert>
+</mapper>

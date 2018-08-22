@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="operationLog">
+
+<insert id="addOperationLog" parameterType="com.ssitcloud.dbauth.entity.OperationLogEntity"
+ useGeneratedKeys="true" keyProperty="opreation_log_idx">
+ INSERT INTO `operation_log` (
+  operation_time,
+  operator_idx,
+  client_ip,
+  client_port,
+  operation_cmd,
+  operation_result,
+  operation,
+  error_code
+) 
+VALUES
+  (
+    NOW(),
+    #{operator_idx},
+    #{client_ip},
+    #{client_port},
+    #{operation_cmd},
+    #{operation_result},
+    #{operation},
+    #{error_code}
+  )
+</insert>
+
+<select id="selectOperator" parameterType="com.ssitcloud.dbauth.entity.OperatorEntity"
+resultType="com.ssitcloud.dbauth.entity.OperatorEntity">
+SELECT operator_id,operator_name,operator_idx
+FROM `operator`
+WHERE 1=1 
+<if test="library_idx !=null ">
+	AND library_idx = #{library_idx}
+</if>
+	AND operator_idx IN (SELECT operator_idx FROM `operation_log`
+			GROUP BY operator_idx)
+
+</select>
+
+<select id="selectOperationLogs" parameterType="com.ssitcloud.dbauth.entity.page.SystemLogPageEntity"
+resultType= "com.ssitcloud.dbauth.entity.page.SystemLogPageEntity">
+<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+</if>
+SELECT ol.*,oper.`operator_id`,oper.`operator_name`, lm.`log_desc`,lm.`log_code`
+FROM `operation_log` ol,`operator` oper,`log_message` lm
+WHERE ol.`operator_idx` = oper.`operator_idx`
+AND ol.operation_cmd = lm.log_code
+<if test="library_idx!=null">
+	AND oper.library_idx=#{library_idx}
+</if>
+<if test="operator_idx!=null">
+	AND ol.operator_idx=#{operator_idx}
+</if>
+<if test="begin_time !=null and end_time !=null">
+	AND ol.operation_time &gt;= #{begin_time}
+	AND ol.operation_time &lt;= #{end_time}
+</if>
+<if test="log_code!=null and log_code!=''">
+	AND lm.`log_code`=#{log_code}
+</if>
+ORDER BY ol.`operation_time` DESC
+<if test="whetherPaging==true">
+	<include refid="paging.tail"/>
+</if>
+</select>
+
+<select id="getOperationLogType" parameterType="com.ssitcloud.dbauth.entity.LogMessageEntity" resultType="com.ssitcloud.dbauth.entity.LogMessageEntity">
+	select log_code,log_desc from log_message
+</select>
+
+</mapper>

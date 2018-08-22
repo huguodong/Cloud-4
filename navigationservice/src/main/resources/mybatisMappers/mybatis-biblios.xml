@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biblios">
+
+	<insert id="add" parameterType="com.ssitcloud.shelfmgmt.entity.BibliosBean" useGeneratedKeys="true" keyProperty="bib_idx">
+		INSERT INTO `biblios` (
+			`bib_idx`,
+			`ISBN`,
+			`price`,
+			`itemCtrlNum`,
+			`lang`,
+			`title`,
+			`titleen`,
+			`author`,
+			`translator`,
+			`callNo`,
+			`pubAddress`,
+			`publish`,
+			`pubDate`,
+			`book_page`,
+			`book_size`
+			
+		) VALUES (
+			#{bib_idx},
+			#{ISBN},
+			#{price},
+			#{itemCtrlNum},
+			#{lang},
+			#{title},
+			#{titleen},
+			#{author},
+			#{translator},
+			#{callNo},
+			#{pubAddress},
+			#{publish},
+			#{pubDate},
+			#{book_page},
+			#{book_size}
+		)
+	</insert>
+	
+	<select id="selectByByItemCtrlNum" parameterType="com.ssitcloud.shelfmgmt.entity.BibliosBean" resultType="com.ssitcloud.shelfmgmt.entity.BibliosBean">
+		SELECT * FROM `biblios` where `itemCtrlNum` = #{itemCtrlNum} limit 1
+	</select>
+	
+</mapper>

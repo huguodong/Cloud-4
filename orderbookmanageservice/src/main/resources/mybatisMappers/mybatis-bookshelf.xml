@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bookshelf">
+
+	<insert id="add" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfEntity" useGeneratedKeys="true" keyProperty="shelf_idx">
+		INSERT INTO `bookshelf` (
+			`lib_id`,
+			`shelf_id`,
+			`shelf_name`,
+			`layercount`,
+			`layersort`,
+			`floorimage_url`,
+			`shelfimage_url`,
+			`shelfpoint`,
+			`issmartshelf`
+		) VALUES (
+			#{lib_id},
+			#{shelf_id},
+			#{shelf_name},
+			#{layercount},
+			#{layersort},
+			#{floorimage_url},
+			#{shelfimage_url},
+			#{shelfpoint},
+			#{issmartshelf}
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="java.util.List">
+		<![CDATA[  
+			DELETE FROM `bookshelf` WHERE `shelf_idx` in
+	    ]]>  
+	    <foreach collection="list" item = "bookshelf" open="(" separator="," close=")">
+	   		${bookshelf.shelf_idx}
+	    </foreach>
+	  
+	</delete>
+	
+	<select id="count" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfEntity" resultType="int">
+		SELECT count(1) FROM `bookshelf` 
+		<where>
+			<if test="lib_id !=null and lib_id !='' ">
+				and `lib_id` = #{lib_id} 
+			</if>
+			<if test="shelf_id !=null and shelf_id !='' ">
+				and (`shelf_id`like concat('%','${shelf_id}','%')) or `shelf_name` like concat('%','${shelf_id}','%'))
+			</if>
+		</where>
+	</select>
+
+	<select id="select" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfEntity" resultType="com.ssitcloud.shelfmgmt.entity.BookshelfEntity">
+		SELECT * FROM `bookshelf` 
+		<where>
+			<if test="lib_id !=null and lib_id !='' and lib_id != 0 ">
+				and `lib_id` = #{lib_id} 
+			</if>
+			<if test="shelf_id !=null and shelf_id !='' ">
+				and (`shelf_id` like concat('%','${shelf_id}','%')) or `shelf_name`  like concat('%','${shelf_id}','%'))
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectById" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfEntity" resultType="com.ssitcloud.shelfmgmt.entity.BookshelfEntity">
+		SELECT b.*,r.shelf_group_idx FROM bookshelf b left join rel_shelf_group r on b.shelf_idx = r.shelf_idx
+		<where>
+			<if test="shelf_idx !=null and shelf_idx !='' ">
+				and b.shelf_idx = #{shelf_idx} 
+			</if>
+			<if test="lib_id !=null and lib_id !='' ">
+				and b.lib_id = #{lib_id} 
+			</if>
+			<if test="shelf_id !=null and shelf_id !='' ">
+				and b.shelf_id = #{shelf_id} 
+			</if>
+		</where>
+	</select>
+	
+	<update id="update" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfEntity">
+		UPDATE `bookshelf` SET 
+			`lib_id` = #{lib_id},
+			`shelf_id` = #{shelf_id},
+			`shelf_name` = #{shelf_name},
+			`layercount` = #{layercount},
+			`layersort` = #{layersort},
+			`floorimage_url` = #{floorimage_url},
+			`shelfimage_url` = #{shelfimage_url},
+			`shelfpoint` = #{shelfpoint},
+			`issmartshelf` = #{issmartshelf},
+			version_stamp=version_stamp+1
+			WHERE `shelf_idx` = #{shelf_idx} 
+			<if test="version_stamp !=null and version_stamp !='' ">
+				and version_stamp = #{version_stamp} 
+			</if>
+	</update>
+	
+	<insert id="addRel" parameterType="com.ssitcloud.shelfmgmt.entity.RelShelfGroupEntity" useGeneratedKeys="true" keyProperty="rel_shelf_idx">
+		INSERT INTO `rel_shelf_group` (
+			`shelf_group_idx`,
+			`shelf_idx`,
+			`library_idx`
+		) VALUES (
+			#{shelf_group_idx},
+			#{shelf_idx},
+			#{library_idx}
+		)
+	</insert>
+	
+	<update id="updateRel" parameterType="com.ssitcloud.shelfmgmt.entity.RelShelfGroupEntity">
+		UPDATE `rel_shelf_group` SET 
+			`shelf_group_idx` = #{shelf_group_idx},
+			`library_idx` = #{library_idx}
+			WHERE `shelf_idx` = #{shelf_idx} 
+	</update>
+	
+	<update id="updateShelfimage" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfEntity">
+		UPDATE `bookshelf` SET 
+			`shelfimage_url` = #{shelfimage_url}
+			WHERE `layercount` = #{layercount}
+	</update>
+	
+	<update id="updateFloorimage" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfEntity">
+	update bookshelf inner join bookshelfinfo on bookshelf.shelf_id = bookshelfinfo.shelf_id and bookshelfinfo.info_type = 1
+ 			set bookshelf.floorimage_url = #{floorimage_url}
+		 where bookshelfinfo.info_value = #{layercount}
+	</update>
+	
+	<update id="updatePoint" parameterType="com.ssitcloud.shelfmgmt.entity.BookshelfEntity">
+		UPDATE `bookshelf` SET 
+			`shelfpoint` = #{shelfpoint}
+			WHERE  `shelf_id` = #{shelf_id}
+	</update>
+	
+	
+	<select id="selectbiblios" resultType="com.ssitcloud.shelfmgmt.entity.BibliosEntity">
+		SELECT * FROM `biblios` 
+	</select>
+	
+	<select id="selectbookitem" resultType="com.ssitcloud.shelfmgmt.entity.BookitemEntity">
+		SELECT * FROM `bookitem` 
+	</select>
+	
+	<delete id="deletebiblios" parameterType="com.ssitcloud.shelfmgmt.entity.BibliosEntity">
+		<![CDATA[  
+			DELETE FROM `biblios` WHERE `bib_idx` =#{bib_idx}
+	    ]]>  
+	</delete>
+	
+</mapper>

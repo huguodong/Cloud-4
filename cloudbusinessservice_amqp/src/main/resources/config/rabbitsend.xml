@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/rabbit
+    http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <!-- 连接服务配置 -->
+	<rabbit:connection-factory id="connectionFactory" connection-factory="rabbitConnectionFactoryBean"
+	 host="${rabbitmq.host}" port="${rabbitmq.port}"
+	 virtual-host="${rabbitmq.vhost}" username="${rabbitmq.username}" password="${rabbitmq.password}" />
+	 <!-- SSL配置 -->
+	<bean id="rabbitConnectionFactoryBean"
+		class="org.springframework.amqp.rabbit.connection.RabbitConnectionFactoryBean">
+		<property name="useSSL" value="true" />
+		<property name="sslAlgorithm" value="TLSv1.2" />
+		<property name="sslPropertiesLocation" value="classpath:config/rabbitssl.properties" />
+	</bean>
+
+	<!-- 创建rabbitAdmin 代理类 -->
+	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory" />
+	<rabbit:admin connection-factory="connectionFactory" />
+    <!-- 定义队列，在下面的交换机中引用次队列，实现绑定     --> 
+    <rabbit:queue id="rabbitmq.test321queue" name="rabbitmq.test321queue" durable="true"
+        auto-delete="false" exclusive="false" >
+        <rabbit:queue-arguments>
+			<entry key="x-message-ttl">
+				<value type="java.lang.Long">100</value>
+			</entry>
+			<entry key="x-ha-policy" value="all" />
+		</rabbit:queue-arguments>
+    </rabbit:queue>
+                          
+    <!--路由设置 将队列绑定，属于topic类型     -->
+	<rabbit:topic-exchange id="topicExchange" name="topicExchange"
+		durable="true" auto-delete="false">
+		<rabbit:bindings>
+			<rabbit:binding queue="rabbitmq.test321queue" pattern="*.*.test123" />
+			<rabbit:binding queue="rabbitmq.test321queue" pattern="test321.#" />
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+
+</beans>

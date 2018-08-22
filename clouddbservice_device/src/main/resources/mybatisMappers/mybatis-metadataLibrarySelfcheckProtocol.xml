@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="metadataLibrarySelfcheckProtocol">
+	<select id="queryAcsConfigByparam" parameterType="com.ssitcloud.entity.page.LibSelfcheckProtocolPageEntity" resultType="com.ssitcloud.entity.page.LibSelfcheckProtocolPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT 
+		pct.`protocol_tpl_idx` as protocol_idx,
+		pct.`protocol_type`,
+		pct.`protocol_tpl_desc`,
+		pct.`library_idx`,
+		GROUP_CONCAT(mlsp.`protocol_library_idx`) AS protocol_library_idx,
+		GROUP_CONCAT(DISTINCT mlsp.`protocol_show`) AS protocol_show,
+		GROUP_CONCAT(lspc.`protocol_field_desc`) AS protocol_field_desc,
+	<!--GROUP_CONCAT(mlsp.`protocol_start`) AS protocol_start,
+		GROUP_CONCAT(mlsp.`protocol_end`) AS protocol_end, -->
+		GROUP_CONCAT(DISTINCT mlsp.`protocol_code`) AS protocol_code
+		FROM protocol_config_template pct
+			LEFT JOIN metadata_library_selfcheck_protocol mlsp ON mlsp.`protocol_idx`=pct.`protocol_tpl_idx`
+			INNER JOIN library_selfcheck_protocol_config lspc ON lspc.`protocol_field_idx`= mlsp.`protocol_library_idx`
+		<if test="protocol_type!=null and protocol_type!=''">
+			AND pct.`protocol_type`=#{protocol_type}
+		</if>
+		<if test="protocol_tpl_desc!=null and protocol_tpl_desc!=''">
+			AND pct.`protocol_tpl_desc`=#{protocol_tpl_desc}
+		</if>
+		<if test="library_idx!=null and library_idx!=''">
+			AND pct.`library_idx`=#{library_idx}
+		</if>
+		GROUP BY pct.`protocol_tpl_idx`
+		
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	<!-- 需要增加library_idx -->
+	<!-- 废除 -->
+	<select id="queryAcsConfigByparam_bak" parameterType="com.ssitcloud.entity.page.LibSelfcheckProtocolPageEntity" resultType="com.ssitcloud.entity.page.LibSelfcheckProtocolPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT 
+		mlsp.`protocol_idx`,
+		mlsp.`library_idx`,
+		mlsp.`protocol_type`,
+		mlsp.`protocol_show`,
+		mlsp.`protocol_library_idx`,
+		lspc.`protocol_field_name`,
+		lspc.`protocol_field_desc`,
+		mlsp.`protocol_start`,
+		mlsp.`protocol_end`,
+		mlsp.`protocol_code`,
+		mlsp.`protocol_defalut`
+		 FROM metadata_library_selfcheck_protocol mlsp 
+		 INNER JOIN library_selfcheck_protocol_config lspc ON lspc.`protocol_field_idx`=mlsp.`protocol_library_idx`
+		WHERE 1=1
+		<if test="protocol_type!=null and protocol_type!=''">
+			AND mlsp.`protocol_type`=#{protocol_type}
+		</if>
+		<if test="protocol_field_desc!=null and protocol_field_desc!=''">
+			AND lspc.`protocol_field_desc` like CONCAT('%','${protocol_field_desc}','%')
+		</if>		
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	<select id="queryProtocolConfigByTplIdx" resultType="com.ssitcloud.entity.SelfCheckProtocolEntity" parameterType="com.ssitcloud.entity.SelfCheckProtocolEntity">
+		SELECT * FROM metadata_library_selfcheck_protocol
+		<where>
+			1=1
+			<if test="protocol_idx!=null and protocol_idx!=''">
+				AND protocol_idx=#{protocol_idx}
+			</if>
+			<if test="library_idx!=null and library_idx!=''">
+				AND library_idx=#{library_idx}
+			</if>
+			<if test="protocol_show!=null and protocol_show!=''">
+				AND protocol_show=#{protocol_show}
+			</if>
+			<if test="protocol_type!=null and protocol_type!=''">
+				AND protocol_type=#{protocol_type}
+			</if>
+			<if test="protocol_start!=null and protocol_start!=''">
+				AND protocol_start=#{protocol_start}
+			</if>
+			<if test="protocol_end!=null and protocol_end!=''">
+				AND protocol_end=#{protocol_end}
+			</if>
+			<if test="protocol_code!=null and protocol_code!=''">
+				AND protocol_code=#{protocol_code}
+			</if>
+			<if test="protocol_defalut!=null and protocol_defalut!=''">
+				AND protocol_defalut=#{protocol_defalut}
+			</if>
+		</where>
+	</select>
+	<select id="queryAllProtocolConfig" parameterType="com.ssitcloud.entity.LibSelfcheckProtocolConfigEntity" resultType="com.ssitcloud.entity.LibSelfcheckProtocolConfigEntity">
+		SELECT * FROM library_selfcheck_protocol_config
+		<if test="protocol_field_idx!=null and protocol_field_idx!=''">
+			and protocol_field_idx=#{protocol_field_idx}
+		</if>
+		<if test="protocol_field_name!=null and protocol_field_name!=''">
+			and protocol_field_name=#{protocol_field_name}
+		</if>
+		<if test="protocol_field_desc!=null and protocol_field_desc!=''">
+			and protocol_field_desc=#{protocol_field_desc}
+		</if>
+		<if test="protocol_field_mark!=null and protocol_field_mark!=''">
+			and protocol_field_mark=#{protocol_field_mark}
+		</if>
+	</select>
+	
+	  <!--   protocol_idx		int(11) NOT NULL模板ID号或设备ID号
+		device_tpl_type		int(11) NOT NULL模板区分 0模板 1数据
+		library_idx			int(11) NOT NULL馆ID
+		protocol_type		int(11) NOT NULL指令类型 1SIP2 2NCIP
+		protocol_show		varchar(50) NOT NULL指令代码 63、64等
+		protocol_library_idx	int(11) NOT NULL指令字段描述，外关连library_selfcheck_protocol_config
+		protocol_start		int(11) NULL指令起始位置
+		protocol_end		int(11) NULL指令结束位置
+		protocol_code		varchar(50) NULL指令标识符
+		protocol_defalut	varchar(50) NULL默认值
+		operator_idx		int(11) NOT NULL操作员ID
+		createtime			timestamp NOT NULL创建时间
+		updatetime			timestamp NOT NULL更新时间
+	-->
+	<insert id="addProtocolConfig" useGeneratedKeys="true" keyProperty="protocol_idx" parameterType="com.ssitcloud.entity.SelfCheckProtocolEntity">
+		insert into metadata_library_selfcheck_protocol
+		(
+			device_tpl_type,library_idx,protocol_type,protocol_show,
+			protocol_library_idx,protocol_start,protocol_end,protocol_code,
+			protocol_defalut,operator_idx,createtime
+		)
+		values
+		(
+			#{device_tpl_type},#{library_idx},#{protocol_type},
+			#{protocol_show},#{protocol_library_idx},#{protocol_start},#{protocol_end},
+			#{protocol_code},#{protocol_defalut},#{operator_idx},NOW()
+		)
+	</insert>
+	<insert id="addProtocolConfigBatch" parameterType="List">
+		insert into metadata_library_selfcheck_protocol
+		(
+			protocol_idx,
+			device_tpl_type,library_idx,protocol_type,protocol_show,
+			protocol_library_idx,protocol_start,protocol_end,protocol_code,
+			protocol_defalut,operator_idx,createtime
+		)
+		values
+	    <foreach collection="list" item="item" index="index" separator="," > 
+	    (
+	    	#{item.protocol_idx},
+			#{item.device_tpl_type},#{item.library_idx},#{item.protocol_type},
+			#{item.protocol_show},#{item.protocol_library_idx},#{item.protocol_start},#{item.protocol_end},
+			#{item.protocol_code},#{item.protocol_defalut},#{item.operator_idx},NOW()
+		)
+	    </foreach> 
+	
+	</insert>
+	<!-- 新增模板 返回主键 -->
+	<insert id="addProtocolConfigTemplate" useGeneratedKeys="true" keyProperty="protocol_tpl_idx" parameterType="com.ssitcloud.entity.ProtocolConfigTemplateEntity">
+		insert into protocol_config_template
+		(
+			protocol_type,library_idx,protocol_tpl_desc
+		)
+		values
+		(
+			#{protocol_type},#{library_idx},#{protocol_tpl_desc}
+		)
+	</insert>
+	<select id="selProtocolConfigByIdx" resultType="com.ssitcloud.entity.SelfCheckProtocolEntity">
+		SELECT * FROM metadata_library_selfcheck_protocol
+		WHERE protocol_idx=#{protocol_idx}
+	</select>
+	<!-- 通过模板IDX删除模板数据 -->
+	<delete id="delProtocolConfig" parameterType="com.ssitcloud.entity.SelfCheckProtocolEntity">
+		DELETE FROM metadata_library_selfcheck_protocol where protocol_idx=#{protocol_idx}
+	</delete>
+	<!-- 删除模板 -->
+	<delete id="delProtocolConfigTemplate" parameterType="com.ssitcloud.entity.ProtocolConfigTemplateEntity">
+		DELETE FROM protocol_config_template WHERE protocol_tpl_idx=#{protocol_tpl_idx}
+		<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+		</if>
+	</delete>
+	<update id="updProtocolConfig" parameterType="com.ssitcloud.entity.SelfCheckProtocolEntity">
+		UPDATE metadata_library_selfcheck_protocol
+		<set>
+			<if test="library_idx!=null and library_idx!=''">
+				library_idx=#{library_idx},
+			</if>
+			<if test="protocol_show!=null and protocol_show!=''">
+				protocol_show=#{protocol_show},
+			</if>
+			<if test="protocol_type!=null and protocol_type!=''">
+				protocol_type=#{protocol_type},
+			</if>
+			<if test="protocol_start!=null and protocol_start!=''">
+				protocol_start=#{protocol_start},
+			</if>
+			<if test="protocol_end!=null and protocol_end!=''">
+				protocol_end=#{protocol_end},
+			</if>
+			<if test="protocol_code!=null and protocol_code!=''">
+				protocol_code=#{protocol_code},
+			</if>
+			<if test="protocol_defalut!=null and protocol_defalut!=''">
+				protocol_defalut=#{protocol_defalut},
+			</if>
+			updatetime=NOW()
+		</set>
+		WHERE protocol_idx=#{protocol_idx}
+	</update>
+	<update id="updProtocolConfigTemplate" parameterType="com.ssitcloud.entity.ProtocolConfigTemplateEntity">
+		UPDATE protocol_config_template
+		<set>
+			<if test="protocol_type!=null">
+				protocol_type=#{protocol_type},
+			</if>
+			<if test="library_idx!=null">
+				library_idx=#{library_idx},
+			</if>
+			<if test="protocol_tpl_desc!=null">
+				protocol_tpl_desc=#{protocol_tpl_desc},
+			</if>
+			version_stamp=version_stamp+1
+		</set>
+		<where>
+		  protocol_tpl_idx=#{protocol_tpl_idx} 
+		  <if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+			</if>
+		</where>
+	</update>
+	
+	
+	<select id="getAscTempList" resultType="com.ssitcloud.entity.ProtocolConfigTemplateEntity">
+		SELECT * FROM protocol_config_template WHERE library_idx = #{library_idx}
+	</select>
+</mapper>

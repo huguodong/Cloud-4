@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="appconn_setting">
+
+	<insert id="insertAppconnSetting" parameterType="com.ssitcloud.entity.AppconnSettingEntity" useGeneratedKeys="true" keyProperty="conn_id">
+		insert into appconn_setting
+		(		
+            lib_idx,meta_idx,meta_value
+            
+		)
+		values
+		(
+            #{lib_idx},#{meta_idx},#{meta_value}
+		)
+	</insert>
+	
+	<update id="updateAppconnSetting" parameterType="com.ssitcloud.entity.AppconnSettingEntity">
+		update appconn_setting
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="lib_idx != null">
+				lib_idx=#{lib_idx},
+			</if>
+			<if test="meta_idx != null">
+				meta_idx=#{meta_idx},
+			</if>
+			<if test="meta_value != null">
+				meta_value=#{meta_value}
+			</if>
+		</set>
+		   WHERE 1=1 
+	    <if test="conn_id!=null">
+			and conn_id=#{conn_id}
+		</if>
+	</update>
+	
+     <delete id="deleteAppconnSetting" parameterType="com.ssitcloud.entity.AppconnSettingEntity">
+		delete from appconn_setting 
+		<where>
+		    <if test="lib_idx != null">
+	    	    AND lib_idx = #{lib_idx} 
+		    </if>
+		    <if test="conn_id != null">
+		    	AND conn_id = #{conn_id}  
+		    </if>
+		</where>
+	</delete>
+	
+	<select id="selectAppconnSetting" parameterType="com.ssitcloud.entity.AppconnSettingEntity" resultType="com.ssitcloud.entity.AppconnSettingEntity">
+		SELECT ac.lib_idx,ac.meta_idx,ac.meta_value,am.meta_name,am.sys_name FROM appconn_setting ac,appconn_metadata am
+	    where ac.meta_idx=am.meta_idx
+		<if test="conn_id!=null">
+			AND conn_id=#{conn_id}
+		</if>
+		<if test="lib_idx!=null">
+			AND lib_idx=#{lib_idx}
+		</if>
+	</select>
+	
+	
+	<select id="selectAppconnSettingByPage" parameterType="com.ssitcloud.entity.AppconnSettingEntity" resultType="com.ssitcloud.entity.AppconnSettingEntity">
+	<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT
+			*
+		FROM
+			appconn_setting
+	    where 1=1
+	    <if test="conn_id != null">
+	    	AND conn_id in(${conn_id}) 
+	    </if>
+	    <if test="lib_idx != null">
+	    	AND lib_idx = #{lib_idx} 
+	    </if>
+	    <if test="lib_idx_str != null">
+	    	AND lib_idx in(${lib_idx_str}) 
+	    </if>
+	    GROUP BY lib_idx
+	    <if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+		
+	</select>
+	
+	<delete id="deleteAppconnSettingBylib_idx" parameterType="com.ssitcloud.entity.AppconnSettingEntity">
+		delete from appconn_setting where lib_idx=#{lib_idx}
+	</delete>
+	
+	<select id="selectRealValue" 
+		resultType="java.util.Map" 
+		parameterType="com.ssitcloud.entity.AppconnSettingEntity">
+		SELECT
+			appconn_setting.lib_idx as lib_idx,
+			appconn_metadata.meta_name as meta_name,
+			appconn_setting.meta_value as meta_value,
+			appconn_metadata.sys_type as sys_type 
+		FROM
+			appconn_metadata
+		INNER JOIN appconn_setting ON appconn_setting.meta_idx = appconn_metadata.meta_idx
+		<where>
+			<if test="lib_idx != null">
+				appconn_setting.lib_idx = #{lib_idx}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectSysName" resultType="com.ssitcloud.entity.AppconnMetadata">
+	  select DISTINCT sys_name from appconn_metadata
+	</select>
+	<select id="selectAppconnDataBySysName" resultType="com.ssitcloud.entity.AppconnMetadata" parameterType="com.ssitcloud.entity.AppconnMetadata">
+	  select * from appconn_metadata where sys_name = #{sys_name}
+	</select>
+</mapper>

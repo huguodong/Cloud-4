@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="statistics_config">
+
+	<insert id="insertStatisticsConfig" parameterType="com.ssitcloud.entity.StatisticsConfigEntity" useGeneratedKeys="true" keyProperty="statistics_tpl_idx">
+		insert into statistics_config
+		(		
+            statistics_tpl_idx,statistics_tpl_type,statistics_tpl_value
+		)
+		values
+		(
+             #{statistics_tpl_idx},#{statistics_tpl_type},#{statistics_tpl_value}
+		)
+	</insert>
+	
+	<update id="updateStatisticsConfig" parameterType="com.ssitcloud.entity.StatisticsConfigEntity">
+		update statistics_config
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="statistics_tpl_type!=null">
+				statistics_tpl_type=#{statistics_tpl_type},
+			</if>
+			<if test="statistics_tpl_value!=null">
+				statistics_tpl_value=#{statistics_tpl_value},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="statistics_tpl_idx!=null">
+			and statistics_tpl_idx=#{statistics_tpl_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteStatisticsConfig" parameterType="com.ssitcloud.entity.StatisticsConfigEntity">
+		delete from statistics_config where statistics_tpl_idx=#{statistics_tpl_idx}
+	</delete>
+	
+	<select id="selectStatisticsConfig" parameterType="com.ssitcloud.entity.StatisticsConfigEntity" resultType="com.ssitcloud.entity.StatisticsConfigEntity">
+		SELECT statistics_tpl_idx,statistics_tpl_type,statistics_tpl_value FROM statistics_config 
+	    where 1=1
+		<if test="statistics_tpl_idx!=null">
+			AND statistics_tpl_idx=#{statistics_tpl_idx}
+		</if>
+	</select>
+	<select id="selectStatisticsConfigs" parameterType="com.ssitcloud.entity.StatisticsConfigEntity" resultType="com.ssitcloud.entity.StatisticsConfigEntity">
+		SELECT statistics_tpl_idx,statistics_tpl_type,statistics_tpl_value FROM statistics_config 
+	    where 1=1
+	</select>
+	
+	
+	
+</mapper>

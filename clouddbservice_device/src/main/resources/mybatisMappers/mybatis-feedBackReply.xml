@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="feedback_reply">
+
+	<insert id="insertFeedbackReply" parameterType="com.ssitcloud.entity.FeedbackReplyEntity" useGeneratedKeys="true" keyProperty="reply_idx">
+		insert into feedback_reply
+		(		
+            feedback_idx,operator_idx,reply_value,createtime
+		)
+		values
+		(
+             #{feedback_idx},#{operator_idx},#{reply_value},#{createtime}
+		)
+	</insert>
+	
+	<update id="updateFeedbackReply" parameterType="com.ssitcloud.entity.FeedbackReplyEntity">
+		update feedback_reply
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="feedback_idx!=null">
+				feedback_idx=#{feedback_idx},
+			</if>
+			<if test="operator_idx!=null">
+				operator_idx=#{operator_idx},
+			</if>
+			<if test="reply_value!=null">
+				reply_value=#{reply_value},
+			</if>
+			<if test="createtime!=null">
+				createtime=#{createtime},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="reply_idx!=null">
+			and reply_idx=#{reply_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteFeedbackReply" parameterType="com.ssitcloud.entity.FeedbackReplyEntity">
+		delete from feedback_reply where reply_idx=#{reply_idx}
+	</delete>
+	
+	<select id="selectFeedbackReply" parameterType="com.ssitcloud.entity.FeedbackReplyEntity" resultType="com.ssitcloud.entity.FeedbackReplyEntity">
+		SELECT reply_idx,feedback_idx,operator_idx,reply_value,createtime FROM feedback_reply 
+	    where 1=1
+		<if test="reply_idx!=null">
+			AND reply_idx=#{reply_idx}
+		</if>
+	</select>
+	<select id="selectFeedbackReplys" parameterType="com.ssitcloud.entity.page.FeedbackReplyPageEntity" resultType="com.ssitcloud.entity.FeedbackReplyEntity">
+		SELECT reply_idx,feedback_idx,operator_idx,reply_value,createtime FROM feedback_reply 
+	    where 1=1 
+	    <if test="feedback_idx != null">
+	    	and feedback_idx = #{feedback_idx} 
+	    </if>
+	    <if test="operator_idx != null">
+	    	and operator_idx = #{operator_idx} 
+	    </if>
+	    <if test="reply_value != null">
+	    	and reply_value like '%${reply_value}%' 
+	    </if>
+	    order by createtime asc  
+	    <if test="pageCurrent != null and pageSize != null" >
+	    limit #{limitIndex},#{limitOffset} 
+	    </if>
+	    
+	</select>
+	
+	
+	
+</mapper>

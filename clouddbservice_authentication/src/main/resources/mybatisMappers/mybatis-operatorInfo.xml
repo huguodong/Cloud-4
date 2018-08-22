@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="operatorInfo">
+
+
+<insert id="addOperatorInfo" parameterType="com.ssitcloud.dbauth.entity.OperatorInfoEntity" >
+	INSERT INTO `operator_info` ( 
+		`operator_idx`,
+		`infotype_idx`,
+		`info_value`
+	) VALUES (
+		#{operator_idx},
+		#{infotype_idx},
+		#{info_value}
+	)
+	
+</insert>
+
+<delete id="deleteInfoByOperIdx" parameterType="com.ssitcloud.dbauth.entity.OperatorInfoEntity">
+	DELETE FROM `operator_info` WHERE `operator_idx` = #{operator_idx}
+</delete>
+
+<!-- 查询要发送的邮件集合	add by huanghuang 20170313 -->
+<select id="selectOperatorInfo" parameterType="Map" resultType="com.ssitcloud.dbauth.entity.OperatorInfoEntity">
+	select operator_idx,infotype_idx,info_value from operator_info where 1=1
+	<if test="library_idx!=null">
+		and operator_idx in (select operator_idx from operator where library_idx=#{library_idx} and isActive = '1' AND operator_type != '5')
+	</if>
+	<if test="infotype_idx!=null">
+		and infotype_idx=#{infotype_idx}
+	</if>
+</select>
+
+</mapper>

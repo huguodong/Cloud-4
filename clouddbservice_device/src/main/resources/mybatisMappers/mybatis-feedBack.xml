@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="feedback">
+
+	<insert id="insertFeedBack" parameterType="com.ssitcloud.entity.FeedBackEntity" useGeneratedKeys="true" keyProperty="feedback_idx">
+		insert into feedback
+		(		
+            reader_idx,feedback_type,user_type,feedback_value,createtime
+		)
+		values
+		(
+             #{reader_idx},#{feedback_type},#{user_type},#{feedback_value},#{createtime}
+		)
+	</insert>
+	
+	<update id="updateFeedBack" parameterType="com.ssitcloud.entity.FeedBackEntity">
+		update feedback
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if>
+			<if test="feedback_type!=null">
+				feedback_type=#{feedback_type},
+			</if>
+			<if test="user_type!=null">
+				user_type=#{user_type},
+			</if>
+			<if test="feedback_value!=null">
+				feedback_value=#{feedback_value},
+			</if>
+			<if test="createtime!=null">
+				createtime=#{createtime},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="feedback_idx!=null">
+			and feedback_idx=#{feedback_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteFeedBack" parameterType="com.ssitcloud.entity.FeedBackEntity">
+		delete from feedback where feedback_idx=#{feedback_idx}
+	</delete>
+	
+	<select id="selectFeedBack" parameterType="com.ssitcloud.entity.FeedBackEntity" resultType="com.ssitcloud.entity.FeedBackEntity">
+		SELECT feedback_idx,reader_idx,feedback_type,user_type,feedback_value,createtime FROM feedback 
+	    where 1=1
+		<if test="feedback_idx!=null">
+			AND feedback_idx=#{feedback_idx}
+		</if>
+	</select>
+	<select id="selectFeedBacks" parameterType="com.ssitcloud.entity.page.FeedBackPageEntity" resultType="com.ssitcloud.entity.FeedBackEntity">
+		SELECT feedback_idx,reader_idx,feedback_type,user_type,feedback_value,createtime FROM feedback 
+	    where feedback_idx in ( 
+		    SELECT feedback_idx FROM  (<!-- 双层，使mysql子查询支持limit -->
+			    SELECT feedback_idx FROM feedback 
+			    where 1=1 
+			    <if test="reader_idx != null">
+			    	and reader_idx = #{reader_idx} 
+			    </if>
+			    <if test="feedback_type != null">
+			    	and feedback_type = #{feedback_type} 
+			    </if>
+			    <if test="user_type != null">
+			    	and user_type = #{user_type} 
+			    </if>
+			    <if test="feedback_value != null">
+			    	and feedback_value like '%${feedback_value}%' 
+			    </if>
+			    <if test="pageCurrent != null and pageSize != null">
+			    order by createtime desc 
+			    limit #{limitIndex},#{limitOffset} 
+			    </if>
+		    ) as t 
+	    ) 
+	    order by createtime desc 
+	</select>
+	
+	
+	
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="specialDevice">
+
+	<insert id="addSpecialDevice" parameterType="com.ssitcloud.devmgmt.entity.SpecialDeviceEntity"
+		useGeneratedKeys="true" keyProperty="idx">
+		INSERT INTO special_device
+		(
+		idx,library_idx, device_type_id, device_name,zone,passage,extpath,needshift,device_id,
+		device_desc,constring,library_id,service_idx,service_id
+		)
+		VALUES
+		(
+		#{idx},#{library_idx},#{device_type_id},#{device_name},#{zone},#{passage}
+		,#{extpath},#{needshift},#{device_id},#{device_desc},#{constring},#{library_id}
+		,#{service_idx},#{service_id}
+		
+		)
+	</insert>
+	
+	<select id="querySpecialDeviceByPage" parameterType="com.ssitcloud.devmgmt.entity.SpecialDevicePageEntity" resultType="com.ssitcloud.devmgmt.entity.SpecialDevicePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT sd.*,md.device_type_desc FROM special_device sd left join special_device_type md on md.device_type_id = sd.device_type_id where 1=1 
+		<if test="library_idx != null and library_idx != ''">
+			and library_idx=#{library_idx}
+		</if>
+		<if test="device_type_id != null and device_type_id !=''">
+			and sd.device_type_id =#{device_type_id}
+		</if>
+		<if test="device_name != null and device_name !='' ">
+			and device_name like concat('%','${device_name}','%')
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<select id="querySpecialDeviceByParams" parameterType="map" resultType="com.ssitcloud.devmgmt.entity.SpecialDeviceEntity">
+		SELECT * FROM special_device where 1=1
+		<if test=" idx != null and idx != ''">
+			and idx = #{idx};
+		</if>
+		<if test="device_id != null and device_id != ''">
+			and device_id = #{device_id}
+		</if>
+	</select>
+	
+	<update id="editSpecialDevice" parameterType="com.ssitcloud.devmgmt.entity.SpecialDeviceEntity">
+		update special_device set device_type_id = #{device_type_id}
+		,library_idx=#{library_idx},device_name=#{device_name}
+		,device_desc=#{device_desc}, zone=#{zone},passage=#{passage},
+		extpath=#{extpath},needshift=#{needshift},device_id=#{device_id}
+		,constring=#{constring},service_idx=#{service_idx},service_id=#{service_id}
+		where idx=#{idx}
+	</update>
+	
+	<delete id="deleteSpecialDevice" parameterType="map">
+		delete from special_device where 1=1
+		<if test="idx != null and idx != ''">
+			and idx = #{idx}
+		</if>
+		
+	</delete>
+	<select id="querySpecialDeviceIdbyServiceIdx" resultType="Map">
+		SELECT service_idx ,GROUP_CONCAT(device_id) AS device_ids  
+		FROM special_device  GROUP BY service_idx	
+	</select>
+	<select id="querySpecialDeviceInfobyServiceIdxAndDeviceId" parameterType="map" resultType="com.ssitcloud.devmgmt.entity.SpecialDeviceEntity">
+		SELECT
+			idx,library_idx,device_type_id,device_name,zone,passage,extpath,needshift,device_id,constring,device_desc,library_id,service_idx,service_id
+		FROM
+			special_device 
+		WHERE
+			service_id = #{service_id}
+	</select>
+	
+	<select id="selectCountSpecialDevice" parameterType="map" resultType="int">
+		SELECT COUNT(*) AS totalNum from special_device where 1=1
+		<if test="device_type_id != null and device_type_id != '' ">
+			AND device_type_id = #{device_type_id}	
+		</if>
+	</select>
+</mapper>

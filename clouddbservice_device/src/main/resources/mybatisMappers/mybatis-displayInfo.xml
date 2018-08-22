@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="displayInfo">
+
+	<select id="queryDisplayInfo" parameterType="map" resultType="com.ssitcloud.entity.DisplayInfoEntity">
+		SELECT display_info_idx,index_page,display_title,weather_city,library_idx,patron_door,logo_img FROM display_info
+		<where>
+			<if test="display_info_idx != null and display_info_idx != ''">
+				AND display_info_idx = #{display_info_idx}
+			</if>
+			<if test="index_page != null and index_page != ''">
+				AND index_page = #{index_page}
+			</if>
+			<if test="display_title != null and display_title != ''">
+				AND display_title = #{display_title}
+			</if>
+			<if test="library_idx != null and library_idx != '' or library_idx==0">
+				AND library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryDisplayInfoList" parameterType="com.ssitcloud.entity.page.DisplayInfoPageEntity" resultType="com.ssitcloud.entity.page.DisplayInfoPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT display_info_idx,index_page,display_title,weather_city,library_idx,patron_door,logo_img FROM display_info
+		<where>
+			<if test="library_idx != null and library_idx != '' or library_idx==0">
+				AND library_idx = #{library_idx}
+			</if>
+		</where>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<delete id="deleteDisplayInfo" parameterType="int">
+		DELETE FROM display_info WHERE display_info_idx in
+		<foreach item="display_info_idx" collection="array" open="(" separator="," close=")">
+           #{display_info_idx}
+        </foreach>
+	</delete>
+	
+	<insert id="addDisplayInfo" parameterType="com.ssitcloud.entity.DisplayInfoEntity" useGeneratedKeys="true" keyProperty="display_info_idx">
+		<selectKey keyProperty='display_info_idx' resultType='int' order='AFTER'  >  
+	        select LAST_INSERT_ID() AS display_info_idx;  
+	    </selectKey>  
+		INSERT INTO display_info(
+			index_page,
+			display_title,
+			weather_city,
+			library_idx,
+			patron_door,
+			logo_img
+		)VALUES(
+			#{index_page},
+			#{display_title},
+			#{weather_city},
+			#{library_idx},
+			#{patron_door},
+			#{logo_img}
+		)
+	</insert>
+	
+	<update id="editDisplayInfo" parameterType="com.ssitcloud.entity.DisplayInfoEntity">
+		UPDATE display_info
+		<set>
+			<if test="index_page !=null and index_page !=''">
+				`index_page` = #{index_page},
+			</if>
+			<if test="display_title !=null and display_title !=''">
+				`display_title` = #{display_title},
+			</if>
+			<if test="weather_city !=null and weather_city !=''">
+				`weather_city` = #{weather_city},
+			</if>
+			<if test="patron_door !=null and patron_door !=''">
+				`patron_door` = #{patron_door},
+			</if>
+			<if test="logo_img !=null and logo_img !='' or logo_img==0">
+				`logo_img` = #{logo_img},
+			</if>
+		</set>
+		 WHERE display_info_idx = #{display_info_idx}
+	</update>
+	
+</mapper>

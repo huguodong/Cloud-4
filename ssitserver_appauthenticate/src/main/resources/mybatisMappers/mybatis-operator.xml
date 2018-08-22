@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="operator">
+
+<select id="logincheck" parameterType="com.ssitcloud.common.entity.UserEntity"  resultType="com.ssitcloud.common.entity.Operator">
+SELECT o.* FROM operator o WHERE o.operator_id = #{operator_id} AND o.operator_pwd = #{operator_pwd}
+</select>
+
+<update id="changePassword" parameterType="com.ssitcloud.common.entity.UserEntity">
+		UPDATE `operator`
+		<set>
+			<if test="operator_pwd !=null ">
+			`operator_pwd` = #{operator_pwd},
+			</if>
+		</set>
+		WHERE operator_id = #{operator_id}
+	</update>
+</mapper>

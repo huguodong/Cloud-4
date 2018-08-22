@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+	<!--  project_name约定唯一，devicedb层-->
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl id="getAllDeviceByLibidx" requestMapping="/clouddbservice_device/device/getAllDeviceByLibidx"></RequestUrl>
+		<RequestUrl requestMapping="/clouddbservice_device/device/SelectDevice" id="selectDevice"/>
+		<RequestUrl requestMapping="/clouddbservice_device/region/selRegionByDeviceidx" id="selRegionByDeviceidx"/>
+	</project>
+	
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl id="getAllLibraryList" requestMapping="/clouddbservice_authentication/library/getAllLibraryList"></RequestUrl>
+		<RequestUrl requestMapping="/clouddbservice_authentication/library/selLibraryByIdxOrId" id="selLibraryByIdxOrId"/>
+		<RequestUrl requestMapping="/clouddbservice_authentication/rellibs/selectRelLibsByidx" id="selectRelLibsByidx"/>
+		 <RequestUrl id="selectAutBySql" requestMapping="/clouddbservice_authentication/dynamicsql/selectBySql"/>
+		 <RequestUrl requestMapping="/clouddbservice_authentication/rellibs/selmasterLibsByIdx" id="selmasterLibsByIdx"/>
+	</project>
+	
+	
+	<!-- mongodb数据层 -->
+	<project projectName="clouddbservice_devicemonitor" baseURL="http://127.0.0.1:8080">
+		<RequestUrl id="queryAllLoanLogFromMongodb" requestMapping="/clouddbservice_devicemonitor/loanlog/queryAllLoanLogFromMongodb"></RequestUrl>
+		<RequestUrl id="queryLoanLogFromMongodb" requestMapping="/clouddbservice_devicemonitor/loanlog/queryLoanLogFromMongodb"></RequestUrl>
+		<RequestUrl id="queryAllCardissueLogFromMongodb" requestMapping="/clouddbservice_devicemonitor/cardissuelog/queryAllCardiLogFromMongodb"></RequestUrl>
+		<RequestUrl id="queryAllFinanceLogFromMongodb" requestMapping="/clouddbservice_devicemonitor/financelog/queryAllFinanceLogFromMongodb"></RequestUrl>
+		<RequestUrl id="queryLoanLogByPage" requestMapping="/clouddbservice_devicemonitor/loanlog/queryLoanLogByPage"></RequestUrl>
+		
+	</project>
+	
+	<!-- 连接clouddbservice_statistics -->
+	<project projectName="clouddbservice_statistics" baseURL="http://127.0.0.1:8080">
+		<!-- 22大类和操作结果 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/statisticsMaintype/queryStatisticsMaintypeList" id="queryStatisticsMaintypeList" /> 
+		<RequestUrl requestMapping="/clouddbservice_statistics/stattype/queryStaticsTypeList" id="selectStaticsType" />
+		<RequestUrl requestMapping="/clouddbservice_statistics/statisticsReltype/queryReltype" id="queryReltype" />
+		<RequestUrl requestMapping="/clouddbservice_statistics/statisticsReltype/queryReltypeList" id="queryReltypeList" />
+		
+		<!-- 获取所有的日统计数据   流通-->
+		<RequestUrl requestMapping="/clouddbservice_statistics/cirday/getAllCirculationDay" id="getAllCirculationDay" /> 
+		<!-- 获取所有的周统计数据 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/cirweek/getAllCirculationWeek" id="getAllCirculationWeek" /> 
+		<!-- 获取所有的月统计数据 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/cirmonth/getAllCirculationMonth" id="getAllCirculationMonth" /> 
+		<!-- 获取所有的年统计数据 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/ciryear/getAllCirculationYear" id="getAllCirculationYear" /> 
+		
+		<!-- 获取所有的日统计数据   财经-->
+		<RequestUrl requestMapping="/clouddbservice_statistics/fineday/getAllFinanceDay" id="getAllFinanceDay" /> 
+		<!-- 获取所有的周统计数据 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/fineWeekData/getAllFinanceWeek" id="getAllFinanceWeek" /> 
+		<!-- 获取所有的月统计数据 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/finemonth/getAllFinanceMonth" id="getAllFinanceMonth" /> 
+		<!-- 获取所有的年统计数据 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/fineYearData/getAllFinanceYear" id="getAllFinanceYear" /> 
+		
+		<!-- 获取所有的日统计数据  办证-->
+		<RequestUrl requestMapping="/clouddbservice_statistics/newCardDayData/getAllNewCardDay" id="getAllNewCardDay" /> 
+		<!-- 获取所有的周统计数据 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/newCardWeekData/getAllNewCardWeek" id="getAllNewCardWeek" /> 
+		<!-- 获取所有的月统计数据 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/newCardMonthData/getAllNewCardMonth" id="getAllNewCardMonth" /> 
+		<!-- 获取所有的年统计数据 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/newCardYearData/getAllNewCardYear" id="getAllNewCardYear" />
+
+        <RequestUrl requestMapping="/clouddbservice_statistics/mfextend/selectByMfid" id="selectByMfid" />
+        
+        <!-- 基础统计项 -->
+		<RequestUrl id="countCardissueLog" requestMapping="/clouddbservice_statistics/mainPage/countCardissueLog"/>
+		<RequestUrl id="countLoanLog" requestMapping="/clouddbservice_statistics/mainPage/countLoanLog"/>
+		<RequestUrl id="countFinanceLog" requestMapping="/clouddbservice_statistics/mainPage/countFinanceLog"/>
+		<RequestUrl id="countVisitorLog" requestMapping="/clouddbservice_statistics/mainPage/countVisitorLog"/>
+		
+		<!-- 图书推荐规则 -->
+		<RequestUrl id="editRankRole" requestMapping="/clouddbservice_statistics/recommend/editRankRole"/>
+		<RequestUrl id="deleteRankRole" requestMapping="/clouddbservice_statistics/recommend/deleteRankRole"/>
+		<RequestUrl id="findRankRoleByIdx" requestMapping="/clouddbservice_statistics/recommend/findRankRoleByIdx"/>
+		<RequestUrl id="findRankRoleByParam" requestMapping="/clouddbservice_statistics/recommend/findRankRoleByParam"/>
+		<RequestUrl id="findRankRoleList" requestMapping="/clouddbservice_statistics/recommend/findRankRoleList"/>
+		
+		
+	</project>
+	
+	<!-- 连接到clouddbservice_libraryinfo -->
+	<project projectName="clouddbservice_libraryinfo" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/bookitem/queryBookItemAndBibliosInfo" id="queryBookItemAndBibliosInfo" />
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/readercard/selectReaderCardByParams" id="selectReaderCardByParams" />
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/readercard/insertReaderCard" id="insertReaderCard"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/collegeInfo/queryCollegeInfo" id="queryCollegeInfo"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/bookitem/queryBookItemByUnion" id="queryBookItemByUnion"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/bookitem/queryBookInfoForRecommend" id="queryBookInfoForRecommend"/>
+		
+	</project>
+	
+</RequestUrlList>

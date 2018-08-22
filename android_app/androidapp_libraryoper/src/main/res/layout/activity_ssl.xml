@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@color/white_normal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="3dp"
+                        android:onClick="finish"
+                        android:src="@drawable/back" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/device_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:gravity="center"
+                    android:text="24小时自助图书馆"
+                    android:textColor="#FF555555"
+                    android:textSize="19sp" />
+
+                <LinearLayout
+                    android:id="@+id/deviceMaintain"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/maintain" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/line_view" />
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fillViewport="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/binState"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white_normal"
+                                android:orientation="vertical">
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="44dp"
+                                android:gravity="center|left"
+                                android:paddingLeft="15dp"
+                                android:text="@string/device_monitor_ext_state"
+                                android:textColor="@color/title"
+                                android:textSize="15sp" />
+                            <!--plc-->
+                            <LinearLayout
+                                android:id="@+id/plcState"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/white_normal"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="9"
+                                        android:padding="15dp"
+                                        android:text="@string/device_monitor_plc_state"
+                                        android:textColor="@color/content_color"
+                                        android:textSize="15sp" />
+
+                                    <TextView
+                                        android:id="@+id/plc_state_desc"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.5"
+                                        android:gravity="end"
+                                        android:text=""
+                                        android:textColor="@color/content_color"
+                                        android:textSize="15sp" />
+
+                                    <ImageView
+                                        android:id="@+id/plc_image"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.5"
+                                        android:scaleType="fitCenter" />
+
+                                    <ImageView
+                                        android:id="@+id/plcRight"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.5"
+                                        android:scaleType="fitCenter"
+                                        android:src="@drawable/right" />
+                                </LinearLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/bottom"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#EEEEEE" />
+
+                            </LinearLayout>
+                            <!--plc-->
+                            <LinearLayout
+                                android:id="@+id/extState"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="44dp"
+                                android:gravity="center|left"
+                                android:paddingLeft="15dp"
+                                android:text="@string/device_monitor_soft_state"
+                                android:textColor="@color/title"
+                                android:textSize="15sp" />
+
+                            <LinearLayout
+                                android:id="@+id/softState"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical" />
+
+                        </LinearLayout>
+
+                    </ScrollView>
+                </LinearLayout>
+
+                <include
+                    android:id="@+id/waitView"
+                    layout="@layout/wait_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <FrameLayout
+                    android:id="@+id/netWorkLost"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF"
+                    android:visibility="gone">
+
+                    <include
+                        layout="@layout/sub_network_lost"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
+
+                <RelativeLayout
+                    android:id="@+id/messageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="暂无监控数据"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

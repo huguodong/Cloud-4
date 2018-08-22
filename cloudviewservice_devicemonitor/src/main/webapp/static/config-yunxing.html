@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8 oldie"><![endif]-->
+<!--[if IE 9]><html class="ie9 oldie"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<title>运行模板配置</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/common.js" ></script>
+<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+<![endif]-->
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="js/html5.js" ></script>
+	<script type="text/javascript" src="js/ie.js" ></script>
+<![endif]-->
+
+</head>
+<body>
+<div class="config-yingjian">
+<div class="g-loading"></div>
+	<div class="g-header">
+		<a href="main.html" class="logo"></a>
+		<a class="exit" href="index.html"><span class="icon"></span>退出</a>
+		<div class="status"><span class="icon"></span>系统管理员</div>
+		<div class="g-select language">
+			<span class="icon"></span>
+			<select>
+				<option value="" selected>中文</option>
+				<option value="">英文</option>
+			</select>
+			<span class="arr-icon"></span>
+		</div>
+	</div>
+	<div class="main-content">
+	<div class="left-side">
+		<div class="control-btn"></div>
+		<div class="absolute-wrap">
+			<div class="title">菜单</div>
+			<div class="item">
+				<div class="t icon1"><a href="main.html">首页</a></div>
+			</div>
+			<div class="item">
+				<div class="t icon2">用户管理<span class="arr-icon"></span></div>
+				<ul>
+					<li><a href="user-manage.html">操作员管理</a></li>
+					<li><a href="usergroup-manage.html">操作员分组管理</a></li>
+					<li><a href="config-password.html">用户鉴权模板配置</a></li>
+					<li><a href="authority-fenzu.html">权限分组</a></li>
+				</ul>
+			</div>
+			<div class="item">
+				<div class="t icon3">图书馆管理<span class="arr-icon"></span></div>
+				<ul>
+					<li><a href="library-guanli.html">图书馆管理</a></li>
+					<li><a href="config-tushuguan.html">图书馆模板配置</a></li>
+					<li><a href="config-ACS.html">ACS服务模板配置</a></li>
+					<li><a href="system-readertype.html">读者流通类型管理</a></li>
+					<li><a href="system-card.html">维护卡管理</a></li>
+				</ul>
+			</div>
+			<div class="item active">
+				<div class="t icon4">设备管理<span class="arr-icon"></span></div>
+					<ul>
+					<li><a href="equipment-guanli.html">设备管理</a></li>
+					<li><a href="equipment-leixing.html">设备类型</a></li>
+					<li><a href="equipment-fenzu.html">设备分组</a></li>
+					<li><a href="config-monitoring.html">设备监控模板配置</a></li>
+					<li><a href="config-yingjian.html">硬件与逻辑名模板配置</a></li>
+					<li class="active"><a href="config-yunxing.html">运行模板配置</a></li>
+					<li><a href="config-shujuku.html">数据库同步模板配置</a></li>
+					</ul>
+			</div>
+			<div class="item">
+				<div class="t icon5">系统管理<span class="arr-icon"></span></div>
+					<ul>
+						<li><a href="system-databackup.html">数据库备份</a></li>
+						<li><a href="system-log.html">系统日志</a></li>
+					</ul>
+			</div>
+			<div class="item">
+				<div class="t icon6">升级管理<span class="arr-icon"></span></div>
+					<ul>
+						<li><a href="config-shengji.html">升级模板配置</a></li>
+					</ul>
+			</div>
+		</div>
+	</div>
+		<div class="page-title-bar">
+			<span class="title">运行模板配置<a href="help-page.html" target="_blank" class="g-help"></a></span>
+			<div class="form-wrap fr">
+				<div class="g-select">
+					<select>
+						<option value="-1" selected>选择类型</option>
+						<option value="">类型1</option>
+					</select>
+					<span class="arr-icon"></span>
+				</div>
+				<input type="text" name="" id="" class="input g-input" placeholder="输入关键词" />
+				<div class="btn search">查询</div>
+				<div class="btn increase">新增</div>
+				<div class="btn delete">删除</div>
+			</div>
+		</div>
+		<div class="main">
+			<table class="g-table">
+				<thead>
+					<tr>
+						<th class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></th>
+						<th class="col2">模板ID</th>
+						<th class="col3">名称</th>
+						<th class="col4">模板模块</th>
+						<th class="col5">模板内容</th>
+						<th class="col6">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还运行配置</td>
+						<td>基本配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还运行配置</td>
+						<td>功能配置</td>
+						<td>分拣方式：设备分拣;读者服务：允许办证，借书，还书，续借；密码输入：数据密码软键盘；密码长度：最小6个，最大8个；密码输入次数：3次；密码输入方式：键盘输入；</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还运行配置</td>
+						<td>超时配置</td>
+						<td>显示时钟：是;显示错误时间：一般错误10秒，严重错误20秒，提问超时5秒，咨询ACS状态2秒；启用自动换屏：是；</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还运行配置</td>
+						<td>定时任务配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还运行配置</td>
+						<td>打印机配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还运行配置</td>
+						<td>办证配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还运行配置</td>
+						<td>本地数据库配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还运行配置</td>
+						<td>云中心配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还运行配置</td>
+						<td>ACS配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+										<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借书机运行配置</td>
+						<td>基本配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借书机运行配置</td>
+						<td>功能配置</td>
+						<td>分拣方式：设备分拣;读者服务：允许办证，借书，还书，续借；密码输入：数据密码软键盘；密码长度：最小6个，最大8个；密码输入次数：3次；密码输入方式：键盘输入；</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借书机运行配置</td>
+						<td>超时配置</td>
+						<td>显示时钟：是;显示错误时间：一般错误10秒，严重错误20秒，提问超时5秒，咨询ACS状态2秒；启用自动换屏：是；</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借书机运行配置</td>
+						<td>定时任务配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借书机配置</td>
+						<td>打印机配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借书机运行配置</td>
+						<td>办证配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借书机运行配置</td>
+						<td>本地数据库配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借书机运行配置</td>
+						<td>云中心配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借书机运行配置</td>
+						<td>ACS配置</td>
+						<td>系统语言：简体中文；运行日志级别：error；运行日志保存方式：数据库；运行日志文件大小：100MB</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="paging-bar">
+			<div class="left">
+				<span class="t fl">选择</span>
+				<div class="btn g-chooseAll">全选</div>
+				<div class="btn g-noChooseAll">反选</div>
+				<span class="t2 fl">显示</span>
+				<div class="g-select refresh">
+					<select>
+						<option value="" selected>30</option>
+						<option value="">60</option>
+					</select>
+					<span class="arr-icon"></span>
+				</div>
+				<span class="t2 fl">已选中7个</span>
+			</div>
+			<div class="right">
+				<div class="prev-page">上一页</div>
+				<ul>
+					<li class="active">1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+					<li>...</li>
+					<li>50</li>
+					<li>120</li>
+				</ul>
+				<div class="next-page">下一页</div>
+			</div>
+			<span class="total-page fr">共500</span>
+		</div>
+	</div>
+</div>
+<div class="form-dialog-fix w-900">
+	<div class="shade"></div>
+	<div class="form-dialog">
+		<div class="title">
+			新增配置
+			<input type="reset" value="取消" class="g-cancel2 g-btn-gray">
+			<input type="submit" placeholder="" class="g-submit2 g-btn-green" value="保存">
+		</div>
+		<div class="left-tab">
+			<ul>
+				<li class="active">基本配置</li>
+				<li>功能配置</li>
+				<li>超时配置</li>
+				<li>定时任务配置</li>
+				<li>打印机配置</li>
+				<li>办证配置</li>
+				<li>本地数据库配置</li>
+				<li>云中心配置</li>
+				<li>ACS服务配置</li>
+			</ul>
+		</div>
+		<div class="right-form">
+			<div class="right-content">
+				<div class="form-wrap form-wrap2">
+					<ul>
+						<li>
+							<div class="left">类型</div>
+							<div class="right">
+								<span class="btn active">模板</span>
+								<span class="btn">数据</span>
+							</div>
+						</li>
+						
+						<li class="error">
+							<div class="left">模板ID</div>
+							<div class="right">
+								<input type="text" name="" id="" class="g-input" placeholder="请输入" />
+								<span class="error-msg">错误提示</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="segmentation">
+					<div class="t">语言版本</div>
+				</div>
+				<div class="form-wrap form-wrap2">
+					<ul>
+						<li>
+							<div class="left">系统语言</div>
+							<div class="right">
+								<div class="g-select">
+									<select id="tongxun" class="need-change">
+										<option value="-1">选择系统语言</option>
+										<option value="1"  selected>简体中文</option>
+										<option value="2">NET22</option>
+									</select>
+									<span class="arr-icon"></span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="segmentation"><div class="t">运行日志级别</div></div>
+
+				<div class="com-item">
+					<div class="g-radio disabled"><input type="radio" disabled name="jibie" id="jibie1"></div><label for="jibie1">不记录</label>
+				</div>
+				<div class="com-item">
+					<div class="g-radio"><input type="radio" name="jibie" id="jibie2"></div><label for="jibie2">error</label>
+				</div>
+				<div class="com-item">
+					<div class="g-radio"><input type="radio" name="jibie" id="jibie3"></div><label for="jibie3">info</label>
+				</div>
+				<div class="com-item">
+					<div class="g-radio"><input type="radio" name="jibie" id="jibie4"></div><label for="jibie4">warning</label>
+				</div>
+				<div class="com-item">
+					<div class="g-radio"><input type="radio" name="jibie" id="jibie5"></div><label for="jibie5">debug</label>
+				</div>
+
+				<div class="segmentation"><div class="t">运行日志保存方式</div></div>
+
+				<div class="com-item">
+					<div class="g-checkbox"><input type="checkbox" name="fangshi" id="fangshi1"></div><label for="fangshi1">DB</label>
+				</div>
+				<div class="com-item">
+					<div class="g-checkbox"><input type="checkbox" name="fangshi" id="fangshi2"></div><label for="fangshi2">DB</label>
+				</div>
+				
+				<div class="segmentation"><div class="t">运行日志文件大小</div></div>
+				<div class="com-item">
+					文件大小
+					<div class="g-select">
+						<select>
+							<option value="">1024</option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					MB	
+				</div>
+			</div>
+
+			<div class="right-content hide">
+				<div class="com-item">
+					本设备单日限借次数
+					<input type="text" placeholder="" class="w50 g-input">
+				</div>
+				<div class="segmentation"><div class="t">分拣方式</div></div>
+				<div class="com-item">
+					<div class="g-radio"><input type="radio" name="fenjian" id="fenjian1"></div><label for="fenjian1">设备分拣（满箱自动切换）</label>
+				</div>
+				<div class="com-item">
+					<div class="g-radio"><input type="radio" name="fenjian" id="fenjian2"></div><label for="fenjian2">系统分拣控制（按类分拣）</label>
+				</div>
+				<div class="segmentation"><div class="t">读者服务</div></div>
+				<ul class="w13li">
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="duzhe1"></div><label for="duzhe1">允许办证</label>
+					</li>
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="duzhe2"></div><label for="duzhe2">允许借书</label>
+					</li>
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="duzhe3"></div><label for="duzhe3">允许还书</label>
+					</li>
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="duzhe4"></div><label for="duzhe4">允许续借</label>
+					</li>
+				</ul>
+				<div class="segmentation"><div class="t">PIN类型</div></div>
+				<ul class="w13li">
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="PIN1"></div><label for="PIN1">不启用PIN码</label>
+					</li>
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="PIN2"></div><label for="PIN2">PIN码必备</label>
+					</li>
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="PIN3"></div><label for="PIN3">PIN码可选</label>
+					</li>
+				</ul>
+				<div class="segmentation"><div class="t">PIN输入设备</div></div>
+				<div class="com-item">
+					<div class="com-item">
+						<div class="g-radio"><input type="radio" name="shuru" id="shuru1"></div><label for="shuru1">数字密码软键盘</label>
+					</div>
+					<div class="com-item">
+						<div class="g-radio"><input type="radio" name="shuru" id="shuru2"></div><label for="shuru2">字母数字密码软键盘</label>
+					</div>
+					<div class="com-item">
+						<div class="g-radio"><input type="radio" name="shuru" id="shuru3"></div><label for="shuru3">数字密码键盘</label>
+					</div>
+					<div class="com-item">
+						<div class="g-radio"><input type="radio" name="shuru" id="shuru4"></div><label for="shuru4">字母数字密码键盘</label>
+					</div>
+				</div>
+				<div class="segmentation"><div class="t">PIN长度</div></div>
+				<div class="com-item">
+					最小字符
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					个字符
+				</div>
+				<div class="com-item">
+					最大字符
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					个字符
+				</div>
+
+				<div class="segmentation"><div class="t">PIN输入次数</div></div>
+				<div class="com-item">
+					允许读者输入
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					次
+				</div>
+				<div class="com-item">
+					<div class="g-radio"><input type="radio" name="yunxushuru" id="yunxushuru1"></div><label for="yunxushuru1">自动退出</label>
+				</div>
+				<div class="com-item">
+					<div class="g-radio"><input type="radio" name="yunxushuru" id="yunxushuru2"></div><label for="yunxushuru2">锁定读者</label>
+				</div>
+				<div class="segmentation"><div class="t">读者证阅读器</div></div>
+				<ul class="w22li">
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="yueduzheng1"></div><label for="yueduzheng1">允许键盘输入</label>
+					</li>
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="yueduzheng2"></div><label for="yueduzheng2">使用 RFID 读者证</label>
+					</li>
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="yueduzheng3"></div><label for="yueduzheng3">条形码阅读器扫描</label>
+					</li>
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="yueduzheng4"></div><label for="yueduzheng4">使用身份证</label>
+					</li>
+				</ul>
+				<div class="segmentation"><div class="t">图书阅读器</div></div>
+
+				<div class="com-item">
+					<div class="g-checkbox"><input type="checkbox" name="" id="tushuyuedu1"></div><label for="tushuyuedu1">条形码阅读器</label>
+				</div>
+				<div class="com-item">
+					<div class="g-checkbox"><input type="checkbox" name="" id="tushuyuedu2"></div><label for="tushuyuedu2">RFID 阅读器</label>
+				</div>
+				<div class="change-box">
+					<div class="com-item">
+						<div class="g-checkbox"><input type="checkbox" name="yueduqi" id="yueduqi1"></div><label for="yueduqi1">允许多本阅读</label>
+					</div>
+					<div class="com-item">
+						<div class="g-checkbox"><input type="checkbox" name="yueduqi" id="yueduqi2"></div><label for="yueduqi2">需要经过扫描确认</label>
+					</div>
+				</div>
+			</div>
+			<div class="right-content hide">
+				<ul class="w13li">
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="shizhong1"></div><label for="shizhong1">显示等待时钟</label>
+					</li>
+					<li>
+						<div class="g-checkbox"><input type="checkbox" id="shizhong2"></div><label for="shizhong2">打开时钟声音</label>
+					</li>
+				</ul>
+				<div class="segmentation"><div class="t">显示错误时间</div></div>
+				<div class="com-item">
+					一般错误
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒
+				</div>
+				<div class="com-item">
+					严重错误
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒
+				</div>
+				<div class="com-item">
+					提问超时
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒
+				</div>
+				<div class="com-item">
+					咨询ACS状态&nbsp;&nbsp;&nbsp;&nbsp;
+					每隔
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒
+				</div>
+				<div class="com-item">
+					<div class="g-checkbox"><input type="checkbox" id="huanping1"></div><label for="huanping1">启用自动换屏功能</label>
+				</div>
+				<div class="com-item">
+					每隔
+					<div class="g-select">
+						<select>
+							<option value="" selected>10</option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					分钟自动换屏
+				</div>
+				<div class="com-item">
+					等待换屏时间
+					<div class="g-select">
+						<select>
+							<option value="" selected>10</option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒
+				</div>
+				<div class="segmentation"><div class="t">等待操作</div></div>
+				<div class="com-item">
+					每
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒尝试登录一次
+				</div>
+				<div class="com-item">
+					显示读者信息
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒
+				</div>
+				<div class="com-item">
+					等待选择功能/密码输入时间
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒后自动退出
+				</div>
+				<div class="com-item">
+					等待下一本图书时间
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒后自动退出
+				</div>
+				<div class="com-item">
+					等待出书时间
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒后自动退出
+				</div>
+				<div class="com-item">
+					显示借还时间/处理结果时间
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒后自动退出
+				</div>
+				<div class="com-item">
+					等待收款时间
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒后自动退出
+				</div>
+				<div class="com-item">
+					等待弹出新证时间
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒后自动退出
+				</div>
+				<div class="com-item">
+					等待取证/取书时间（超时回收）
+					<div class="g-select">
+						<select>
+							<option value=""></option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+					秒后自动退出
+				</div>
+				<!-- <div class="segmentation"><div class="t">ACS系统</div></div> -->
+				
+			</div>
+			<div class="right-content hide">
+				<div class="g-checkbox"><input type="checkbox" id="kaiji1"></div><label for="kaiji1">启用开关机时间表</label>
+				<div class="date-table">
+					<div class="item">
+						<div class="float-item sec1"></div>
+						<div class="float-item sec2">开机时间</div>
+						<div class="float-item sec3">关机时间</div>
+						<div class="float-item sec4"></div>
+					</div>
+					<div class="item">
+						<div class="float-item sec1">星期一</div>
+						<div class="float-item sec2">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec3">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec4">
+							<div class="g-checkbox"><input type="checkbox" id="guanji1"></div><label for="guanji1">关机</label>
+						</div>
+					</div>
+					<div class="item">
+						<div class="float-item sec1">星期二</div>
+						<div class="float-item sec2">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec3">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec4">
+							<div class="g-checkbox"><input type="checkbox" id="guanji1"></div><label for="guanji1">关机</label>
+						</div>
+					</div>
+					<div class="item">
+						<div class="float-item sec1">星期三</div>
+						<div class="float-item sec2">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec3">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec4">
+							<div class="g-checkbox"><input type="checkbox" id="guanji1"></div><label for="guanji1">关机</label>
+						</div>
+					</div>
+					<div class="item">
+						<div class="float-item sec1">星期四</div>
+						<div class="float-item sec2">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec3">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec4">
+							<div class="g-checkbox"><input type="checkbox" id="guanji1"></div><label for="guanji1">关机</label>
+						</div>
+					</div>
+					<div class="item">
+						<div class="float-item sec1">星期五</div>
+						<div class="float-item sec2">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec3">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec4">
+							<div class="g-checkbox"><input type="checkbox" id="guanji1"></div><label for="guanji1">关机</label>
+						</div>
+					</div>
+					<div class="item">
+						<div class="float-item sec1">星期六</div>
+						<div class="float-item sec2">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec3">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec4">
+							<div class="g-checkbox"><input type="checkbox" id="guanji1"></div><label for="guanji1">关机</label>
+						</div>
+					</div>
+					<div class="item">
+						<div class="float-item sec1">星期日</div>
+						<div class="float-item sec2">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec3">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+						</div>
+						<div class="float-item sec4">
+							<div class="g-checkbox"><input type="checkbox" id="guanji1"></div><label for="guanji1">关机</label>
+						</div>
+					</div>
+				</div>
+				<div class="com-item">
+					<div class="g-checkbox"><input type="checkbox" id="jiesuan1"></div><label for="jiesuan1">定时财经结算</label>
+					<div class="pl26">
+						<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+					</div>
+				</div>
+				<div class="com-item">
+					<div class="g-checkbox"><input type="checkbox" id="jiesuan2"></div><label for="jiesuan2">定时重启机器</label>
+					<div class="pl26">
+						<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+					</div>
+				</div>
+				<div class="com-item">
+					<div class="g-checkbox"><input type="checkbox" id="jiesuan3"></div><label for="jiesuan3">自动关机</label>
+					<div class="pl26">
+						<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+					</div>
+				</div>
+			</div>
+			<div class="right-content hide">
+				<div class="com-form">
+					<div class="item">
+						<div class="left">
+							凭据头字体
+						</div>
+						<div class="right">
+							<div class="g-select w22">
+								<select>
+									<option value="-1">选择字体</option>
+								</select>
+								<span class="arr-icon"></span>
+							</div>
+							<div class="g-select w10">
+								<select>
+									<option value="-1">选择字号</option>
+								</select>
+								<span class="arr-icon"></span>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							凭据尾字体
+						</div>
+						<div class="right">
+							<div class="g-select w22">
+								<select>
+									<option value="-1">选择字体</option>
+								</select>
+								<span class="arr-icon"></span>
+							</div>
+							<div class="g-select w10">
+								<select>
+									<option value="-1">选择字号</option>
+								</select>
+								<span class="arr-icon"></span>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							数据内容字体
+						</div>
+						<div class="right">
+							<div class="g-select w22">
+								<select>
+									<option value="-1">选择字体</option>
+								</select>
+								<span class="arr-icon"></span>
+							</div>
+							<div class="g-select w10">
+								<select>
+									<option value="-1">选择字号</option>
+								</select>
+								<span class="arr-icon"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="segmentation"><div class="t">还书凭据</div></div>
+				<div class="com-form">
+					<div class="item">
+						<div class="left">
+							&nbsp;
+						</div>
+						<div class="right">
+							<div class="g-radio"><input type="radio" name="dayin1" id="dayin1"></div><label for="dayin1">打印</label>
+							<div class="g-radio"><input type="radio" name="dayin1" id="dayin2"></div><label for="dayin2">询问读者</label>
+							<div class="g-radio"><input type="radio" name="dayin1" id="dayin3"></div><label for="dayin3">不打印</label>
+							<div class="fr">
+								<div class="g-checkbox disabled"><input type="checkbox" name="" disabled id="dayin4"></div><label for="dayin4">超时打印</label>
+							</div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							日期
+						</div>
+						<div class="right">
+							<div class="g-inputdate"><input type="text" placeholder="输入时间" class="g-input datepicker"><span class="icon"></span></div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							时间
+						</div>
+						<div class="right">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							<div class="g-checkbox disabled"><input type="checkbox" disabled id="dayin-f1"></div><label for="dayin-f1"></label>打印数量
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" disabled class="g-input disabled w18 w10">张
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							<div class="g-checkbox"><input type="checkbox" id="dayin-f2"></div><label for="dayin-f2">备注</label>
+						</div>
+						<div class="right">
+							<textarea class="g-textarea disabled" disabled placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据头
+						</div>
+						<div class="right">
+							<textarea class="g-textarea "  placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据尾
+						</div>
+						<div class="right">
+							<textarea class="g-textarea" placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+				</div>
+
+				<div class="segmentation"><div class="t">借书凭据</div></div>
+				<div class="com-form">
+					<div class="item">
+						<div class="left">
+							&nbsp;
+						</div>
+						<div class="right">
+							<div class="g-radio"><input type="radio" name="dayin2" id="dayin21"></div><label for="dayin21">打印</label>
+							<div class="g-radio"><input type="radio" name="dayin2" id="dayin22"></div><label for="dayin22">询问读者</label>
+							<div class="g-radio"><input type="radio" name="dayin2" id="dayin23"></div><label for="dayin23">不打印</label>
+							<div class="fr">
+								<div class="g-checkbox"><input type="checkbox" name="" id="dayin24"></div><label for="dayin24">超时打印</label>
+							</div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							日期
+						</div>
+						<div class="right">
+							<div class="g-inputdate"><input type="text" placeholder="输入时间" class="g-input datepicker"><span class="icon"></span></div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							时间
+						</div>
+						<div class="right">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							<div class="g-checkbox"><input type="checkbox" id="dayin-f3"></div><label for="dayin-f3">读者姓名</label>
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							<div class="g-checkbox"><input type="checkbox" id="dayin-f4"></div><label for="dayin-f4">打印数量</label>
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18 w10">张
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							读者证
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							<div class="g-checkbox"><input type="checkbox" id="dayin-f5"></div><label for="dayin-f5">打印费用</label>
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18 w10">元
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							条形码
+						</div>
+						<div class="right">
+							<input type="text" placeholder="输入关键词" class="g-input">
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							书名
+						</div>
+						<div class="right">
+							<input type="text" placeholder="输入关键词" class="g-input">
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据头
+						</div>
+						<div class="right">
+							<textarea class="g-textarea" placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据尾
+						</div>
+						<div class="right">
+							<textarea class="g-textarea" placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+				</div>
+
+				<div class="segmentation"><div class="t">续借凭据</div></div>
+				<div class="com-form">
+					<div class="item">
+						<div class="left">
+							&nbsp;
+						</div>
+						<div class="right">
+							<div class="g-radio"><input type="radio" name="dayin3" id="dayin31"></div><label for="dayin31">打印</label>
+							<div class="g-radio"><input type="radio" name="dayin3" id="dayin32"></div><label for="dayin32">询问读者</label>
+							<div class="g-radio"><input type="radio" name="dayin3" id="dayin33"></div><label for="dayin33">不打印</label>
+							<div class="fr">
+								<div class="g-checkbox"><input type="checkbox" name="" id="dayin34"></div><label for="dayin34">超时打印</label>
+							</div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							<div class="g-checkbox"><input type="checkbox" id="dayin-f6"></div><label for="dayin-f6">续借书目</label>
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							<div class="g-checkbox"><input type="checkbox" id="dayin-f7"></div><label for="dayin-f7">续借数</label>
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18 w10">
+							本
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							<div class="g-checkbox"><input type="checkbox" id="dayin-f8"></div><label for="dayin-f8">未续借书目</label>
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18 ">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							<div class="g-checkbox"><input type="checkbox" id="dayin-f9"></div><label for="dayin-f9">未续借数</label>
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18 w10">
+							本
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							条形码
+						</div>
+						<div class="right">
+							<input type="text" placeholder="输入关键词" class="g-input">
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							书名
+						</div>
+						<div class="right">
+							<input type="text" placeholder="输入关键词" class="g-input">
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据头
+						</div>
+						<div class="right">
+							<textarea class="g-textarea" placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据尾
+						</div>
+						<div class="right">
+							<textarea class="g-textarea" placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+				</div>
+
+				<div class="segmentation"><div class="t">收款凭据</div></div>
+				<div class="com-form">
+					<div class="item">
+						<div class="left">
+							&nbsp;
+						</div>
+						<div class="right">
+							<div class="g-radio"><input type="radio" name="dayin4" id="dayin41"></div><label for="dayin41">打印</label>
+							<div class="g-radio"><input type="radio" name="dayin4" id="dayin42"></div><label for="dayin42">询问读者</label>
+							<div class="g-radio"><input type="radio" name="dayin4" id="dayin43"></div><label for="dayin43">不打印</label>
+							<div class="fr">
+								<div class="g-checkbox"><input type="checkbox" name="" id="dayin44"></div><label for="dayin44">超时打印</label>
+							</div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							日期
+						</div>
+						<div class="right">
+							<div class="g-inputdate"><input type="text" placeholder="输入时间" class="g-input datepicker"><span class="icon"></span></div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							时间
+						</div>
+						<div class="right">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							读者证号
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							读者姓名
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							身份证号
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							收款金额
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							读者证类型
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							扣款金额
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							押金余额
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							预付款余额
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据头
+						</div>
+						<div class="right">
+							<textarea class="g-textarea" placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据尾
+						</div>
+						<div class="right">
+							<textarea class="g-textarea" placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+				</div>
+
+				<div class="segmentation"><div class="t">取钱箱凭据</div></div>
+				<div class="com-form">
+					<div class="item">
+						<div class="left">
+							&nbsp;
+						</div>
+						<div class="right">
+							<div class="g-radio"><input type="radio" name="dayin5" id="dayin51"></div><label for="dayin51">打印</label>
+							<div class="g-radio"><input type="radio" name="dayin5" id="dayin52"></div><label for="dayin52">询问读者</label>
+							<div class="g-radio"><input type="radio" name="dayin5" id="dayin53"></div><label for="dayin53">不打印</label>
+							<div class="fr">
+								<div class="g-checkbox"><input type="checkbox" name="" id="dayin54"></div><label for="dayin54">超时打印</label>
+							</div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							日期
+						</div>
+						<div class="right">
+							<div class="g-inputdate"><input type="text" placeholder="输入时间" class="g-input datepicker"><span class="icon"></span></div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							时间
+						</div>
+						<div class="right">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							操作员卡号
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							金额
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据头
+						</div>
+						<div class="right">
+							<textarea class="g-textarea" placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据尾
+						</div>
+						<div class="right">
+							<textarea class="g-textarea" placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+				</div>
+
+				<div class="segmentation"><div class="t">取书箱凭据</div></div>
+				<div class="com-form">
+					<div class="item">
+						<div class="left">
+							&nbsp;
+						</div>
+						<div class="right">
+							<div class="g-radio"><input type="radio" name="dayin6" id="dayin61"></div><label for="dayin61">打印</label>
+							<div class="g-radio"><input type="radio" name="dayin6" id="dayin62"></div><label for="dayin62">询问读者</label>
+							<div class="g-radio"><input type="radio" name="dayin6" id="dayin63"></div><label for="dayin63">不打印</label>
+							<div class="fr">
+								<div class="g-checkbox"><input type="checkbox" name="" id="dayin64"></div><label for="dayin64">超时打印</label>
+							</div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							日期
+						</div>
+						<div class="right">
+							<div class="g-inputdate"><input type="text" placeholder="输入时间" class="g-input datepicker"><span class="icon"></span></div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							时间
+						</div>
+						<div class="right">
+							<div class="g-inputtime"><input type="text" placeholder="输入时间" class="g-input timepicker"><span class="icon"></span></div>
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							操作员
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							箱号
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							数量
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="small-item">
+						<div class="left">
+							总数
+						</div>
+						<div class="right">
+							<input type="text" placeholder="" class="g-input w18">
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据头
+						</div>
+						<div class="right">
+							<textarea class="g-textarea" placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+					<div class="item">
+						<div class="left">
+							票据尾
+						</div>
+						<div class="right">
+							<textarea class="g-textarea" placeholder="输入内容"></textarea>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="right-content hide">
+				<div class="segmentation"><div class="t">办证</div></div>
+				<div class="com-item">
+					<div class="g-checkbox"><input type="checkbox" id="banzheng1"></div><label for="banzheng1">允许办理读者证</label>
+				</div>
+				<div class="change-box">
+					<div class="com-item">
+						<div class="g-checkbox"><input type="checkbox" id="banzheng2"></div><label for="banzheng2">用身份证做读者证</label>
+					</div>
+				</div>
+				<br>
+				<div class="com-item">
+					<div class="g-checkbox"><input type="checkbox" id="yueduqi3"></div><label for="yueduqi3">服务器支持临时读者证</label>
+				</div>
+				<div class="change-box">
+					<div class="com-item">
+						临时证类型标识
+						<input type="text" placeholder="" class="w10 g-input">
+					</div>
+				</div>
+			</div>
+
+			<div class="right-content hide">
+
+				<div class="com-item">
+					<div class="fl">
+						服务器IP <input type="text" placeholder="" class="g-input w18 ">
+					</div>
+					<div class="fl ml30">
+						端口 <input type="text" placeholder="" class="g-input w10">
+					</div>
+				</div>
+
+				<div class="com-item">
+					<span class="w50">用户ID</span><input type="text" class="g-input w18">
+				</div>
+				<div class="com-item">
+					<span class="w50">密码</span><input type="text" class="g-input w18">
+				</div>
+			</div>
+			<div class="right-content hide">
+				<div class="com-item">
+					<div class="fl">
+						服务器IP <input type="text" placeholder="" class="g-input w18 ">
+					</div>
+					<div class="fl ml30">
+						端口 <input type="text" placeholder="" class="g-input w10 ">
+					</div>
+				</div>
+			</div>
+			<div class="right-content hide">
+				<div class="form-wrap form-wrap2">
+					<ul>
+						<li class="error">
+							<div class="left w-auto">协议版本</div>
+							<div class="right">
+								<div class="g-radio"><input type="radio" name="ver" id="ver1"></div><label for="ver1">ver.1</label>
+								<div class="g-radio"><input type="radio" name="ver" id="ver2"></div><label for="ver2">ver.2</label>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="com-item">
+					<div class="g-checkbox"><input type="checkbox" id="denglu1"></div><label for="denglu1">要求登录</label>
+				</div>
+				<div class="com-item">
+					<span class="w50">用户ID</span><input type="text" class="g-input w18">
+				</div>
+				<div class="com-item">
+					<span class="w50">密码</span><input type="text" class="g-input w18">
+				</div>
+				<div class="com-item">
+					ACS系统所使用的字符集
+					<div class="g-select w18">
+						<select>
+							<option value="" selected>UTF-8</option>
+						</select>
+						<span class="arr-icon"></span>
+					</div>
+				</div>
+				<div class="segmentation">
+					<div class="t">消息</div>
+				</div>
+				<div>
+					<div class="g-checkbox"><input type="checkbox" id="xiaoxi1"></div>
+					<label for="xiaoxi1">使用缺省消息字段分隔符 （HEX 7C）</label>
+					<input type="text" placeholder="输入" class="min g-input">
+					（HEX : 00--FF ,如7C）
+				</div>
+				<div>
+					<div class="g-checkbox"><input type="checkbox" id="xiaoxi2"></div>
+					<label for="xiaoxi2">支持消息请求</label>
+				</div>
+				<div class="segmentation"></div>
+				<div class="com-item">
+					本设备流通地点
+					<input type="text" placeholder="" class="min g-input">
+				</div>
+				<div class="com-item">
+					货币代码
+					<input type="text" placeholder="" class="w50 g-input">
+					RMB,USD,ETC
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<div class="g-delete-dialog">
+	<span class="line"></span>
+	<div class="word">
+		当前选择了 <span class="font-red">7</span> 个项目<br>
+		是否要删除选择的配置？
+	</div>
+	<div class="form-btn cancel g-btn-gray">取消</div>
+	<div class="form-btn remove g-btn-red">删除</div>
+</div>
+<link rel="stylesheet" href="css/jqueryui.css">
+<link rel="stylesheet" href="css/theme.css">
+<script src="js/jqueryui.js"></script>
+<script src="js/jqueryuitimepicker.js"></script>
+<script src="plugins/layer/layer.js"></script>
+<script type="text/javascript">
+$(function(){
+	(function mainHeightController(){
+		var winH = $(window).height();
+		var headerH = $(".g-header").outerHeight();
+		var pageTitleBar = $(".page-title-bar").outerHeight();
+		var pagingBarH = $(".paging-bar").outerHeight();
+
+		$(".main").css({
+			"min-height":winH - headerH - pagingBarH -pageTitleBar
+		});
+	})();
+	var delLayer = null;
+	$(".delete").on("click",function(){
+		delLayer = layer.open({
+			type: 1,
+			shade: false,
+			title: false, //不显示标题
+			scrollbar :false,
+			closeBtn :0,
+			shade:0.5,
+			shadeClose :true,
+			area:["400px"],
+			offset :["195px"],
+			content: $('.g-delete-dialog')
+		});
+	});
+	$(".form-btn.cancel").on("click",function(){
+		if (delLayer) {
+			layer.close(delLayer);
+		}
+	});
+	$(".form-btn.remove").on("click",function(){
+		/*执行删除操作*/
+		
+		alert("这里执行删除操作");
+	});
+
+	$(".datepicker" ).datepicker({
+		numberOfMonths:1,//显示几个月  
+		showButtonPanel:false,//是否显示按钮面板  
+		dateFormat: 'yy-mm-dd',//日期格式  
+		clearText:"清除",//清除日期的按钮名称  
+		closeText:"关闭",//关闭选择框的按钮名称  
+		yearSuffix: '', //年的后缀  
+		showMonthAfterYear:true,//是否把月放在年的后面  
+		defaultDate:'2016-04-19',//默认日期  
+		//minDate:'2011-03-05',//最小日期  
+		//maxDate:'2011-03-20',//最大日期  
+		monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],  
+		dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],  
+		dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],  
+		dayNamesMin: ['日','一','二','三','四','五','六'],  
+		onSelect: function(selectedDate) {//选择日期后执行的操作  
+	
+		}  
+	});
+	$(".timepicker").timepicker({
+		controlType: 'select',
+		oneLine: true,
+		timeFormat: 'hh:mm tt',
+		currentText:"现在",
+		closeText:"完成",
+		timeOnlyTitle:"",
+		amNames:["AM"],
+		pmNames:["PM"],
+		timetext:"时间",
+		hourText:"时",
+		minuteText:"分",
+		secondText:"秒"
+	});
+
+
+	$(".increase,.edit").on("click",function(){
+		$(".form-dialog-fix").fadeIn(100);
+		$(".form-dialog-fix").find(".form-dialog").animate({
+			"right":0
+		});
+		$("body").css("overflow","hidden");
+	});
+
+	$(".form-dialog .form-wrap  .btn").on("click",function(){
+		$(this).addClass("active").siblings(".btn").removeClass("active");
+	});
+
+
+	$(".need-change").on("change",function(){
+		/*
+			每个需要交换显示的select框，都必须有
+			类名need-change，
+			唯一的ID名 对应着 将需要显示的那个DIV的date-id属性，
+			select框 的value值 对应着 DIV的val属性
+			如示例
+		 */
+		var thisId =  $(this).attr("id");
+		var thisVal = $(this).val();
+
+		var $lei = $("[date-id='"+thisId+"']");
+
+		$lei.each(function(){
+			var boxVal = $(this).attr("val");
+
+			if(boxVal===thisVal){
+				$(this).show();
+			}else{
+				$(this).hide();
+			}
+		});
+	});
+
+	function selectChange(){
+		/*页面加载后，若select已经有值，先将对应的DIV显示*/
+		$(".need-change").each(function(){
+			var thisId =  $(this).attr("id");
+			var thisVal = $(this).val();
+
+			var $lei = $("[date-id='"+thisId+"']");
+
+			$lei.each(function(){
+				var boxVal = $(this).attr("val");
+
+				if(boxVal===thisVal){
+					$(this).show();
+				}else{
+					$(this).hide();
+				}
+			});
+		});
+	}
+	selectChange();
+
+	$(".left-tab").on("click","li",function(){
+		var thisIndex = $(this).index();
+		$(this).addClass("active").siblings("li").removeClass("active");
+		
+		$(".right-content").hide().eq(thisIndex).show();
+	});
+	
+	$(".g-submit2").on("click",function(){
+		var thisDom = $(this);
+		if(true){
+			showMsg({
+				timeout : 1000,
+				showText : '添加配置成功',
+				status : true,
+				callback:function(){
+					/*应该是成功的时候收回吧，酌情处理*/
+					var thisRight =  thisDom.parents(".form-dialog-fix").find(".form-dialog").attr("date-right");
+
+					thisDom.parents(".form-dialog-fix").find(".form-dialog").animate({
+						"right":thisRight
+					},function(){
+						thisDom.parents(".form-dialog-fix").fadeOut(100);
+					});
+				}
+
+			});
+		}
+		/*
+		提交成功  showMsg("添加配置成功",1000,true);
+		提交失败  showMsg("添加配置失败",1000,false);
+		 */
+		
+	});
+
+	function showMsg(option){
+		var defaults = {
+			timeout : option.timeout || 1000,
+			showText : option.showText || '添加配置成功',
+			backgroundColor : option.status === true ? "#2ab65b" :"#ff3d3d",
+			callback:function(){
+
+			}
+		};
+		defaults = $.extend(defaults,option);
+		layer.msg(defaults.showText, {
+			area:["240px"],
+			offset:["110px"],
+		  	time: defaults.timeout,
+		  	success: function(layero, index){
+		  	    $(".layui-layer-hui").css("background-color",defaults.backgroundColor);
+		  	}
+		}, function(){
+			defaults.callback();
+		});  
+	}
+});
+</script>
+</body>
+</html>
+
+

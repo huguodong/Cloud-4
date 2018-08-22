@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="metaRunConfig">
+
+	<select id="selectListByDeviceRunConfig" resultType="com.ssitcloud.system.entity.MetaRunConfigRemoteEntity" parameterType="com.ssitcloud.entity.DeviceRunConfigEntity">
+	SELECT 
+	mrc.run_conf_type,
+	mrc.`run_conf_type_desc` 
+	FROM device_run_config drc
+	INNER JOIN metadata_run_config mrc ON drc.run_config_idx=mrc.meta_run_cfg_idx
+	WHERE  1=1
+	<if test="library_idx!=null and library_idx!=''">
+		AND drc.library_idx=#{library_idx}
+	</if>
+		AND drc.device_run_id=#{device_run_id}
+	<if test="device_tpl_type!=null and device_tpl_type!=''">
+		AND drc.device_tpl_type=#{device_tpl_type}
+	</if>
+	</select>
+
+
+	<select id="selMetaRunConfigEntityByConfType" resultType="com.ssitcloud.entity.MetaRunConfigEntity">
+		SELECT * FROM `metadata_run_config` WHERE `run_conf_type` = #{run_conf_type} LIMIT 1
+	</select>
+	<select id="selOneByIdx" parameterType="com.ssitcloud.entity.MetaRunConfigEntity" resultType="com.ssitcloud.entity.MetaRunConfigEntity">
+		SELECT * FROM metadata_run_config WHERE meta_run_cfg_idx=#{meta_run_cfg_idx}
+	</select>
+	<update id="updateByMap" parameterType="Map">
+		update metadata_run_config
+		<set>
+			<if test="run_conf_type!=null">
+				run_conf_type=#{run_conf_type},
+			</if>
+			<if test="run_conf_type_desc!=null">
+				run_conf_type_desc=#{run_conf_type_desc},
+			</if>
+			<if test="updatetime!=null">
+				updatetime=#{updatetime}
+			</if>
+		</set>
+		where meta_run_cfg_idx=#{meta_run_cfg_idx}
+	</update>
+	<insert id="insertMapWithIdx" parameterType="Map" useGeneratedKeys="false">
+		insert into metadata_run_config
+		(meta_run_cfg_idx,run_conf_type,run_conf_type_desc,updatetime)
+		values
+		(#{meta_run_cfg_idx},#{run_conf_type},#{run_conf_type_desc},#{updatetime})
+	</insert>
+</mapper>

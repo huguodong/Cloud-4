@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/border_line_corlor"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_bar_hight"
+            android:background="@color/orange"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/back"
+                android:layout_width="@dimen/title_bar_left_button_width"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitXY"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back_white" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="修改个人信息"
+                android:textColor="@color/white"
+                android:textSize="@dimen/large_text" />
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="@dimen/title_bar_right_button_width"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:text="@string/register_button"
+                android:textColor="@color/white"
+                android:textSize="@dimen/standard_text" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@drawable/border_line"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="95dp"
+                android:layout_height="match_parent"
+                android:gravity="center|right"
+                android:padding="3dp"
+                android:text="@string/register_name"
+                android:textColor="#888888"
+                android:textSize="@dimen/standard_text"
+                tools:ignore="RtlHardcoded" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/register_name_tip"
+                android:inputType="textPersonName"
+                android:padding="3dp"
+                android:textColorHint="#BBBBBB"
+                android:textSize="@dimen/standard_text" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@drawable/border_line"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="95dp"
+                android:layout_height="match_parent"
+                android:gravity="center|right"
+                android:padding="3dp"
+                android:text="@string/register_sex"
+                android:textColor="#888888"
+                android:textSize="@dimen/standard_text"
+                tools:ignore="RtlHardcoded" />
+
+            <RadioGroup
+                android:id="@+id/sex_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/boy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:button="@drawable/normal_checkbox"
+                    android:checked="true"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
+                    android:text="@string/register_sex_boy"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/standard_text"
+                    tools:ignore="RtlHardcoded" />
+
+                <RadioButton
+                    android:id="@+id/girl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:button="@drawable/normal_checkbox"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
+                    android:text="@string/register_sex_girl"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/standard_text"
+                    tools:ignore="RtlHardcoded" />
+            </RadioGroup>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/waitView"
+        layout="@layout/sub_wait_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</FrameLayout>
+

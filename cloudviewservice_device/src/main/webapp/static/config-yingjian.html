@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8 oldie"><![endif]-->
+<!--[if IE 9]><html class="ie9 oldie"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<title>硬件与逻辑名模板配置</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/common.js" ></script>
+<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+<![endif]-->
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="js/html5.js" ></script>
+	<script type="text/javascript" src="js/ie.js" ></script>
+<![endif]-->
+
+</head>
+<body>
+<div class="config-yingjian">
+<div class="g-loading"></div>
+	<div class="g-header">
+		<a href="main.html" class="logo"></a>
+		<a class="exit" href="index.html"><span class="icon"></span>退出</a>
+		<div class="status"><span class="icon"></span>系统管理员</div>
+		<div class="g-select language">
+			<span class="icon"></span>
+			<select>
+				<option value="" selected>中文</option>
+				<option value="">英文</option>
+			</select>
+			<span class="arr-icon"></span>
+		</div>
+	</div>
+	<div class="main-content">
+	<div class="left-side">
+		<div class="control-btn"></div>
+		<div class="absolute-wrap">
+			<div class="title">菜单</div>
+			<div class="item">
+				<div class="t icon1"><a href="main.html">首页</a></div>
+			</div>
+			<div class="item">
+				<div class="t icon2">用户管理<span class="arr-icon"></span></div>
+				<ul>
+					<li><a href="user-manage.html">操作员管理</a></li>
+					<li><a href="usergroup-manage.html">操作员分组管理</a></li>
+					<li><a href="config-password.html">用户鉴权模板配置</a></li>
+					<li><a href="authority-fenzu.html">权限分组</a></li>
+				</ul>
+			</div>
+			<div class="item">
+				<div class="t icon3">图书馆管理<span class="arr-icon"></span></div>
+				<ul>
+					<li><a href="library-guanli.html">图书馆管理</a></li>
+					<li><a href="config-tushuguan.html">图书馆模板配置</a></li>
+					<li><a href="config-ACS.html">ACS服务模板配置</a></li>
+					<li><a href="system-readertype.html">读者流通类型管理</a></li>
+					<li><a href="system-card.html">维护卡管理</a></li>
+				</ul>
+			</div>
+			<div class="item active">
+				<div class="t icon4">设备管理<span class="arr-icon"></span></div>
+					<ul>
+					<li><a href="equipment-guanli.html">设备管理</a></li>
+					<li><a href="equipment-leixing.html">设备类型</a></li>
+					<li><a href="equipment-fenzu.html">设备分组</a></li>
+					<li><a href="config-monitoring.html">设备监控模板配置</a></li>
+					<li class="active"><a href="config-yingjian.html">硬件与逻辑名模板配置</a></li>
+					<li><a href="config-yunxing.html">运行模板配置</a></li>
+					<li><a href="config-shujuku.html">数据库同步模板配置</a></li>
+					</ul>
+			</div>
+			<div class="item">
+				<div class="t icon5">系统管理<span class="arr-icon"></span></div>
+					<ul>
+						<li><a href="system-databackup.html">数据库备份</a></li>
+						<li><a href="system-log.html">系统日志</a></li>
+					</ul>
+			</div>
+			<div class="item">
+				<div class="t icon6">升级管理<span class="arr-icon"></span></div>
+					<ul>
+						<li><a href="config-shengji.html">升级模板配置</a></li>
+					</ul>
+			</div>
+		</div>
+	</div>
+		<div class="page-title-bar">
+			<span class="title">硬件与逻辑名模板配置<a href="help-page.html" target="_blank" class="g-help"></a></span>
+			<div class="form-wrap fr">
+				<div class="g-select">
+					<select>
+						<option value="-1" selected>选择类型</option>
+						<option value="">类型1</option>
+					</select>
+					<span class="arr-icon"></span>
+				</div>
+				<input type="text" name="" id="" class="input g-input" placeholder="输入关键词" />
+				<div class="btn search">查询</div>
+				<div class="btn increase">新增</div>
+				<div class="btn delete">删除</div>
+			</div>
+		</div>
+		<div class="main">
+			<table class="g-table">
+				<thead>
+					<tr>
+						<th class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></th>
+						<th class="col2">模板ID</th>
+						<th class="col3">名称</th>
+						<th class="col4">模板模块</th>
+						<th class="col5">模板内容</th>
+						<th class="col6">操作</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还机</td>
+						<td>读者证阅读器</td>
+						<td>读者证阅读器为荣瑞高频阅读器</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还机</td>
+						<td>发卡机</td>
+						<td>发卡机为天冀发卡机；</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还机</td>
+						<td>收钞机</td>
+						<td>收钞机为创自收钞机；收钞类型：5元、10元、20元、50元、100元</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还机</td>
+						<td>身份证阅读器</td>
+						<td>身份证阅读器为华视阅读器；通讯方式COM口；COM口为4；波特率：9600</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还机</td>
+						<td>补书阅读器</td>
+						<td>补书阅读器：荣瑞高频阅读器；</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还机</td>
+						<td>图书阅读器</td>
+						<td>图书阅读器：博伟UHF阅读器</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还机</td>
+						<td>设备PLC</td>
+						<td>自助图书馆PLC：上层134个，中层134个，下层134个，特型书盒6个，还书箱4个</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还机</td>
+						<td>打印机</td>
+						<td>打印机：研科打印机</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00001</td>
+						<td>24小时自助借还机</td>
+						<td>注册阅读器</td>
+						<td>注册阅读器：荣瑞高频阅读器</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借还机</td>
+						<td>读者证阅读器</td>
+						<td>读者证阅读器为荣瑞高频阅读器</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借还机</td>
+						<td>身份证阅读器</td>
+						<td>身份证阅读器为华视阅读器；通讯方式COM口；COM口为4；波特率：9600</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借还机</td>
+						<td>图书阅读器</td>
+						<td>图书阅读器：博伟UHF阅读器</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+
+					<tr>
+						<td class="col1"><div class="g-checkbox"><input type="checkbox" name="" id="" /></div></td>
+						<td>00002</td>
+						<td>借还机</td>
+						<td>打印机</td>
+						<td>打印机：研科打印机</td>
+						<td>
+							<span class="btn-a edit">编辑</span>
+							<span class="btn-a delete">删除</span>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="paging-bar">
+			<div class="left">
+				<span class="t fl">选择</span>
+				<div class="btn g-chooseAll">全选</div>
+				<div class="btn g-noChooseAll">反选</div>
+				<span class="t2 fl">显示</span>
+				<div class="g-select refresh">
+					<select>
+						<option value="" selected>30</option>
+						<option value="">60</option>
+					</select>
+					<span class="arr-icon"></span>
+				</div>
+				<span class="t2 fl">已选中7个</span>
+			</div>
+			<div class="right">
+				<div class="prev-page">上一页</div>
+				<ul>
+					<li class="active">1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+					<li>...</li>
+					<li>50</li>
+					<li>120</li>
+				</ul>
+				<div class="next-page">下一页</div>
+			</div>
+			<span class="total-page fr">共500</span>
+		</div>
+	</div>
+</div>
+<div class="form-dialog-fix w-900">
+	<div class="shade"></div>
+	<div class="form-dialog">
+		<div class="title">
+			新增配置
+			<input type="reset" value="取消" class="g-cancel2 g-btn-gray">
+			<input type="submit" placeholder="" class="g-submit2 g-btn-green" value="保存">
+		</div>
+		<div class="left-tab">
+			<ul>
+				<li class="active">读者证条码枪</li>
+				<li>读者证阅读器</li>
+				<li>发卡机</li>
+				<li>收钞机</li>
+				<li>身份证阅读器</li>
+				<li>图书条码枪</li>
+				<li>补书阅读器</li>
+				<li>图书阅读器</li>
+				<li>还书机PLC</li>
+				<li>分拣机PLC</li>
+				<li>自助图书馆PLC</li>
+				<li>打印机</li>
+				<li>注册阅读器</li>
+			</ul>
+		</div>
+		<div class="right-form">
+			<ul>
+				<li>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="g-delete-dialog">
+	<span class="line"></span>
+	<div class="word">
+		当前选择了 <span class="font-red">7</span> 个项目<br>
+		是否要删除选择的配置？
+	</div>
+	<div class="form-btn cancel g-btn-gray">取消</div>
+	<div class="form-btn remove g-btn-red">删除</div>
+</div>
+<script src="plugins/layer/layer.js"></script>
+<script type="text/javascript">
+$(function(){
+	(function mainHeightController(){
+		var winH = $(window).height();
+		var headerH = $(".g-header").outerHeight();
+		var pageTitleBar = $(".page-title-bar").outerHeight();
+		var pagingBarH = $(".paging-bar").outerHeight();
+
+		$(".main").css({
+			"min-height":winH - headerH - pagingBarH -pageTitleBar
+		});
+	})();
+	var delLayer = null;
+	$(".delete").on("click",function(){
+		delLayer = layer.open({
+			type: 1,
+			shade: false,
+			title: false, //不显示标题
+			scrollbar :false,
+			closeBtn :0,
+			shade:0.5,
+			shadeClose :true,
+			area:["400px"],
+			offset :["195px"],
+			content: $('.g-delete-dialog')
+		});
+	});
+	$(".form-btn.cancel").on("click",function(){
+		if (delLayer) {
+			layer.close(delLayer);
+		}
+	});
+	$(".form-btn.remove").on("click",function(){
+		/*执行删除操作*/
+		
+		alert("这里执行删除操作");
+	});
+
+
+	$(".increase,.edit").on("click",function(){
+		$(".form-dialog-fix").fadeIn(100);
+		$(".form-dialog-fix").find(".form-dialog").animate({
+			"right":0
+		});
+	});
+
+	$(".form-dialog .form-wrap  .btn").on("click",function(){
+		$(this).addClass("active").siblings(".btn").removeClass("active");
+	});
+
+
+	$(".need-change").on("change",function(){
+		/*
+			每个需要交换显示的select框，都必须有
+			类名need-change，
+			唯一的ID名 对应着 将需要显示的那个DIV的date-id属性，
+			select框 的value值 对应着 DIV的val属性
+			如示例
+		 */
+		var thisId =  $(this).attr("id");
+		var thisVal = $(this).val();
+
+		var $lei = $("[date-id='"+thisId+"']");
+
+		$lei.each(function(){
+			var boxVal = $(this).attr("val");
+
+			if(boxVal===thisVal){
+				$(this).show();
+			}else{
+				$(this).hide();
+			}
+		});
+	});
+
+	function selectChange(){
+		/*页面加载后，若select已经有值，先将对应的DIV显示*/
+		$(".need-change").each(function(){
+			var thisId =  $(this).attr("id");
+			var thisVal = $(this).val();
+
+			var $lei = $("[date-id='"+thisId+"']");
+
+			$lei.each(function(){
+				var boxVal = $(this).attr("val");
+
+				if(boxVal===thisVal){
+					$(this).show();
+				}else{
+					$(this).hide();
+				}
+			});
+		});
+	}
+	selectChange();
+
+	$(".g-submit2").on("click",function(){
+		var thisDom = $(this);
+		if(true){
+			showMsg({
+				timeout : 1000,
+				showText : '添加配置成功',
+				status : true,
+				callback:function(){
+					/*应该是成功的时候收回吧，酌情处理*/
+					var thisRight =  thisDom.parents(".form-dialog-fix").find(".form-dialog").attr("date-right");
+
+					thisDom.parents(".form-dialog-fix").find(".form-dialog").animate({
+						"right":thisRight
+					},function(){
+						thisDom.parents(".form-dialog-fix").fadeOut(100);
+					});
+				}
+
+			});
+		}
+		/*
+		提交成功  showMsg("添加配置成功",1000,true);
+		提交失败  showMsg("添加配置失败",1000,false);
+		 */
+		
+	});
+
+	function showMsg(option){
+		var defaults = {
+			timeout : option.timeout || 1000,
+			showText : option.showText || '添加配置成功',
+			backgroundColor : option.status === true ? "#2ab65b" :"#ff3d3d",
+			callback:function(){
+
+			}
+		};
+		defaults = $.extend(defaults,option);
+		layer.msg(defaults.showText, {
+			area:["240px"],
+			offset:["110px"],
+		  	time: defaults.timeout,
+		  	success: function(layero, index){
+		  	    $(".layui-layer-hui").css("background-color",defaults.backgroundColor);
+		  	}
+		}, function(){
+			defaults.callback();
+		});  
+	}
+});
+</script>
+</body>
+</html>
+
+

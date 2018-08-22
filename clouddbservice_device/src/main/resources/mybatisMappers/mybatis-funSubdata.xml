@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="function_subdata">
+	
+	<select id="selectFunSubdata" parameterType="com.ssitcloud.entity.FunSubdataEntity" resultType="com.ssitcloud.entity.FunSubdataEntity">
+		SELECT sub_idx,main_idx,sub_value,sub_desc FROM function_subdata 
+	    where 1=1
+		<if test="main_idx!=null">
+			AND main_idx=#{main_idx}
+		</if>
+	</select>
+	<select id="selectFunSubdatas" parameterType="com.ssitcloud.entity.FunSubdataEntity" resultType="com.ssitcloud.entity.FunSubdataEntity">
+		SELECT sub_idx,main_idx,sub_value,sub_desc FROM function_subdata 
+	    where 1=1
+	</select>
+	
+</mapper>

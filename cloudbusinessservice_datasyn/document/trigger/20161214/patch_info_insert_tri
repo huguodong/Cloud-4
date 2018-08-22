@@ -1,0 +1,17 @@
+DELIMITER $$
+
+USE `ssitcloud_device`$$
+
+DROP TRIGGER /*!50032 IF EXISTS */ `patch_info_insert_tri`$$
+
+CREATE
+    /*!50017 DEFINER = 'root'@'%' */
+    TRIGGER `patch_info_insert_tri` AFTER INSERT ON `patch_info` 
+    FOR EACH ROW BEGIN
+	IF NOT EXISTS(SELECT 1 FROM table_change_tri WHERE data_idx=new.patch_idx AND requestTime IS NULL AND table_name='patch_info' AND change_state='I') THEN
+		INSERT INTO table_change_tri (table_name,data_idx,data_type,change_state) VALUES('patch_info',new.patch_idx,new.patch_type,'I');
+	END IF;
+    END;
+$$
+
+DELIMITER ;

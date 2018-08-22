@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!--  project_name约定唯一-->
+	<project projectName="cloudviewservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/cloudviewservice_device/device/controlResult" id="controlResult"/>
+		<RequestUrl requestMapping="/cloudviewservice_device/device/uploadRunLog" id="uploadRunLog"/>
+	</project>
+	<!-- <project projectName="cloudbusinessservice_device" baseURL="http://127.0.0.1:8080"> -->
+		<!--<RequestUrl requestMapping="/cloudbusinessservice_device/data/uploadcfgSyn" id="uploadcfgSyn"/> -->
+		<!--<RequestUrl requestMapping="/cloudbusinessservice_device/data/downloadCfgSync" id="downloadCfgSync"/> -->
+		<!-- 		 
+			<RequestUrl requestMapping="/cloudbusinessservice_device/data/askVersion" id="askVersion"/>
+		 -->			 
+		<!--  
+			<RequestUrl requestMapping="/cloudbusinessservice_device/tablechange/SelTableChangeTri" id="SelTableChangeTri"/>
+			<RequestUrl requestMapping="/cloudbusinessservice_device/tablechange/SelTableChangeTriPatchInfo" id="SelTableChangeTriPatchInfo"/>		
+			<RequestUrl requestMapping="/cloudbusinessservice_device/tablechange/setRequestTimeByTriIdxs" id="setRequestTimeByTriIdxs"></RequestUrl>
+			<RequestUrl requestMapping="/cloudbusinessservice_device/tablechange/updateRequestTimeByTriTableName" id="updateRequestTimeByTriTableName"/>
+			<RequestUrl requestMapping="/cloudbusinessservice_device/device/QueryDevIdxByDevId" id="QueryDevIdxByDevId"/>
+			<RequestUrl requestMapping="/cloudbusinessservice_device/device/queryDeviceIdbyLibIdx" id="queryDeviceIdbyLibIdx"/>
+			<RequestUrl requestMapping="/cloudbusinessservice_device/permission/SelUserCmdsByIdxAndRestriDevice" id="SelUserCmdsByIdxAndRestriDevice"/>
+		 -->
+		 <!-- 		
+		 	<RequestUrl requestMapping="/cloudbusinessservice_device/deviceconf/queryDeviceConfigByDeviceIdx" id="queryDeviceConfigByDeviceIdx"/>
+			<RequestUrl requestMapping="/cloudbusinessservice_device/deviceconf/queryDeviceConfigNewAndOldByDeviceIdx" id="queryDeviceConfigNewAndOldByDeviceIdx"/>
+	 	-->	
+	<!-- </project> -->
+	
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		    <RequestUrl requestMapping="/clouddbservice_device/patchinfo/askVersion" id="askVersion"/>
+			<RequestUrl requestMapping="/clouddbservice_device/devconf/uploadcfgSyn" id="uploadcfgSyn"/>
+			<RequestUrl requestMapping="/clouddbservice_device/devconf/downloadCfgSync" id="downloadCfgSync"/>
+			<RequestUrl requestMapping="/clouddbservice_device/tablechange/SelTableChangeTri" id="SelTableChangeTri"/>
+			<RequestUrl requestMapping="/clouddbservice_device/tablechange/SelTableChangeTriPatchInfo" id="SelTableChangeTriPatchInfo"/>		
+			<RequestUrl requestMapping="/clouddbservice_device/tablechange/setRequestTimeByTriIdxs" id="setRequestTimeByTriIdxs"></RequestUrl>
+			<RequestUrl requestMapping="/clouddbservice_device/tablechange/updateRequestTimeByTriTableName" id="updateRequestTimeByTriTableName"/>
+			<RequestUrl requestMapping="/clouddbservice_device/device/QueryDevIdxByDevId" id="QueryDevIdxByDevId"/>
+			<RequestUrl requestMapping="/clouddbservice_device/device/queryDeviceIdbyLibIdx" id="queryDeviceIdbyLibIdx"/>
+			<!-- 检查Ncip文件是否有更新检测 -->
+			<RequestUrl requestMapping="/clouddbservice_device/device/checkFileUploadFlag" id="checkFileUploadFlag"/>
+			<RequestUrl requestMapping="/clouddbservice_device/metaopercmd/SelUserCmdsByIdxAndRestriDevice" id="SelUserCmdsByIdxAndRestriDevice"/>
+			<RequestUrl requestMapping="/clouddbservice_device/devconf/queryDeviceConfigByDeviceIdx" id="queryDeviceConfigByDeviceIdx"/>
+			<RequestUrl requestMapping="/clouddbservice_device/devconf/queryDeviceConfigNewAndOldByDeviceIdx" id="queryDeviceConfigNewAndOldByDeviceIdx"/>
+	
+			<RequestUrl requestMapping="/clouddbservice_device/devconf/queryDevIdsByModelAndModelIdx" id="queryDevIdsByModelAndModelIdx"/>
+	
+			<RequestUrl requestMapping="/clouddbservice_device/patchinfo/SetDeviceIdsLibDistinctInHeartBeatByPathInfoIdx" id="SetDeviceIdsLibDistinctInHeartBeatByPathInfoIdx"/>
+			<RequestUrl requestMapping="/clouddbservice_device/patchinfo/SetDeviceIdsDevTypeDistinctInHeartBeatByPathInfoIdx" id="SetDeviceIdsDevTypeDistinctInHeartBeatByPathInfoIdx"/>
+			
+			<RequestUrl requestMapping="/clouddbservice_device/device/selectDeviceCode" id="selectDeviceCode"/>
+			<RequestUrl requestMapping="/clouddbservice_device/device/selDeviceIdx" id="selDeviceIdx"/>
+			<RequestUrl requestMapping="/clouddbservice_device/mainfield/getMainfieldCollection" id="getMainfieldCollection"/>
+			<RequestUrl requestMapping="/clouddbservice_device/mainfield/additionalMainfieldList" id="additionalMainfieldList"/>
+			
+			<!-- 获取所有的命令码与表对照数据 -->
+			<RequestUrl requestMapping="/clouddbservice_device/metaopercmdtable/queryAllOpercmdTable" id="queryAllOpercmdTable"/>
+			
+			<!-- 获取所有的app私钥版本信息 -->
+			<RequestUrl requestMapping="/clouddbservice_device/appinfo/getAllUsefulAppVersionInfo" id="getAllUsefulAppVersionInfo"/>
+			<!-- 通过设备id获取设备信息 -->
+			<RequestUrl requestMapping="/clouddbservice_device/device/selDeviceById" id="selDeviceById"/>
+			<!-- 根据libidx获取特殊设备（3D导航、人流量、智能家具） 分组 -->
+			<RequestUrl requestMapping="/clouddbservice_device/device/queryServiceIdbyLibIdx" id="queryServiceIdbyLibIdx"/>
+			<RequestUrl requestMapping="/clouddbservice_device/device/queryServiceIdbyLibId" id="queryServiceIdbyLibId"/>
+			
+			<!-- 根据serviceid获取特殊设备（3D导航、人流量、智能家具） 名称分组 -->
+			<RequestUrl requestMapping="/clouddbservice_device/device/queryServiceIdbyServiceIdx" id="queryServiceIdbyServiceIdx"/>
+			<!-- <RequestUrl requestMapping="/clouddbservice_device/device/queryDeviceServiceByParams" id="queryDeviceServiceByParams"/> -->
+			
+			<!-- 保存Ncip、Acs的xml文件,更新时间 -->
+			<RequestUrl id="insertFileUploadFlag" requestMapping="/clouddbservice_device/device/insertFileUploadFlag"></RequestUrl>
+	</project>
+	
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl id="getLibIdAndLibIdx" requestMapping="/clouddbservice_authentication/library/getLibIdAndLibIdx"></RequestUrl>
+	
+		<RequestUrl id="queryLibraryByIdxOrId" requestMapping="/clouddbservice_authentication/library/selLibraryByIdxOrId"></RequestUrl>
+		
+	</project>
+	
+	<project projectName="cloudbusinessservice_authentication" baseURL="http://127.0.0.1:8080">
+			<RequestUrl requestMapping="/cloudbusinessservice_authentication/operator/deviceLoginCheck" id="deviceLoginCheck"/>
+			<!-- 根据id或者idx查询图书馆信息 -->
+			<RequestUrl id="selLibraryByIdxOrId" requestMapping="/cloudbusinessservice_authentication/library/selLibraryByIdxOrId"></RequestUrl>
+			<RequestUrl id="selLibraryByIdxsOrIds" requestMapping="/cloudbusinessservice_authentication/library/selLibraryByIdxsOrIds"></RequestUrl>
+			<!-- 根据operator_id查询operator_idx -->
+			<RequestUrl id="selOperatorByOperIdOrIdx" requestMapping="/cloudbusinessservice_authentication/operator/selOperatorByOperIdOrIdx"></RequestUrl>
+	</project>
+	<!-- 这个接口调用 频繁 需要单独使用 -->
+	<project projectName="clouddbservice_devicemonitor" baseURL="http://127.0.0.1:8080">
+		<!-- 设备端上传设备状态 操作日志 接口 -->
+		<RequestUrl id="transData" requestMapping="/clouddbservice_devicemonitor/devicelog/transData"/>
+		<RequestUrl id="transOperationLog" requestMapping="/clouddbservice_devicemonitor/devicelog/transOperationLog"/>
+	</project>	
+	
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/cloudbusinessservice_node/hearbeat/saveData" id="HEARBEAT_URL" />
+		<!--文件服务器-->
+		<RequestUrl id="uploadFileToFastDfs" requestMapping="/cloudbusinessservice_node/fileManager/uploadFileToFastDfs"/>
+		<RequestUrl id="queryFileManagerByEntity" requestMapping="/cloudbusinessservice_node/fileManager/queryFileManagerByEntity"/>
+
+	</project>
+	
+	<!-- clouddbservice_libraryinfo -->
+	<project projectName="clouddbservice_libraryinfo" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/electronicCertificate/addElectronicCertificateWithoutSame" id="addElectronicCertificateWithoutSame" />
+		
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/bookitem/queryAllBookitemByLibId" id="queryAllBookitemByLibId"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/bookitem/updateBookitemByCodeAndLibId" id="updateBookitemByCodeAndLibId"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/bookitem/addBookitem" id="addBookitem"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/bookitem/queryBookItemByLibIdxAndBookBarcode" id="queryBookItemByLibIdxAndBookBarcode"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/bookitem/queryAllBookitemAndBookInfo" id="queryAllBookitemAndBookInfo"/>
+		
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/biblios/updateBibliosByISBN" id="updateBibliosByISBN"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/biblios/addBiblios" id="addBiblios"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/biblios/queryBibliosByISBN" id="queryBibliosByISBN"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/biblios/queryBibliosByTitleAndAuthor" id="queryBibliosByTitleAndAuthor"/>
+		
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/readercard/queryReaderCards" id="queryReaderCards"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/readercard/insertReaderCard" id="addReaderCard"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/readercard/uptReaderCard" id="updateReaderCard"/>
+		
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/library/uploadLibraryInfo" id="uploadLibraryInfo"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/library/downloadLibraryInfo" id="downloadLibraryInfo"/>
+		
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/devicereader/saveDeviceReaderInfo" id="saveDeviceReaderInfo"/>
+		
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/syncconfig/SelSyncConfig" id="SelLibraryInfoSyncConfig"/>
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/syncconfig/downloadLibraryInfoCfgSync" id="downloadLibraryInfoCfgSync"/>
+		
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/library/queryAllLibraryInfo" id="queryAllLibraryInfo"/>
+		
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/common/uploadLibraryInfoFile" id="uploadLibraryInfoFile"/>
+		
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/library/notifyDoUploadLibraryInfoFile" id="notifyDoUploadLibraryInfoFile"/>
+	</project>
+</RequestUrlList>

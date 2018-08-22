@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="libraryTemplate">
+
+
+
+<insert id="addLibraryTemplate" parameterType="com.ssitcloud.dbauth.entity.LibraryServiceTemplateEntity"
+  useGeneratedKeys="true" keyProperty="lib_service_tpl_id">
+	INSERT INTO `library_service_template` ( 
+		`lib_service_tpl_desc`,
+		`service_cycle`,
+		`max_device_count`,
+		`max_operator_count`,
+		`max_sublib_count`
+	) VALUES (
+		#{lib_service_tpl_desc},
+		#{service_cycle},
+		#{max_device_count},
+		#{max_operator_count},
+		#{max_sublib_count}
+	)
+</insert>
+<insert id="addLibraryTemplateFully" parameterType="com.ssitcloud.dbauth.entity.LibraryServiceTemplateEntity"
+  useGeneratedKeys="true" keyProperty="lib_service_tpl_id">
+	INSERT INTO `library_service_template` ( 
+		`lib_service_tpl_id`,
+		`lib_service_tpl_desc`,
+		`service_cycle`,
+		`max_device_count`,
+		`max_operator_count`,
+		`max_sublib_count`
+	) VALUES (
+		#{lib_service_tpl_id},
+		#{lib_service_tpl_desc},
+		#{service_cycle},
+		#{max_device_count},
+		#{max_operator_count},
+		#{max_sublib_count}
+	)
+</insert>
+<delete id="delLibraryTemplateById">
+ DELETE FROM `library_service_template` WHERE `lib_service_tpl_id` = #{lib_service_tpl_id} 
+ <if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+	</if>
+</delete>
+
+<select id="selLibraryTempList" resultType="com.ssitcloud.dbauth.entity.LibraryServiceTemplateEntity">
+	SELECT * FROM `library_service_template`
+	<where>
+		<if test="lib_service_tpl_id!=null and lib_service_tpl_id!=''">
+		 AND `lib_service_tpl_id` LIKE CONCAT('%','${lib_service_tpl_id}','%')
+		</if>
+		<if test="lib_service_tpl_desc !=null and lib_service_tpl_desc !=''">
+		 AND `lib_service_tpl_desc` LIKE CONCAT('%','${lib_service_tpl_desc}','%')
+		</if>
+		<if test="service_cycle !=null and service_cycle !=''">
+		 AND `service_cycle` LIKE CONCAT('%','${service_cycle}','%')
+		</if>
+		<if test="max_device_count !=null and max_device_count !=''">
+		 AND `max_device_count` LIKE CONCAT('%','${max_device_count}','%')
+		</if>
+		<if test="max_operator_count !=null and max_operator_count !=''">
+		 AND `max_operator_count` LIKE CONCAT('%','${max_operator_count}','%')
+		</if>
+		<if test="max_sublib_count !=null and max_sublib_count !=''">
+		 AND `max_sublib_count` LIKE CONCAT('%','${max_sublib_count}','%')
+		</if>
+	</where>
+
+</select>
+
+<select id="selectBypage" parameterType="com.ssitcloud.dbauth.entity.page.LibraryServiceTemplatePageEntity"
+resultType="com.ssitcloud.dbauth.entity.page.LibraryServiceTemplatePageEntity">
+	<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+	</if>
+	SELECT * FROM `library_service_template`
+	WHERE 1=1 AND lib_service_tpl_id != 0
+		<if test="lib_service_tpl_desc !=null and lib_service_tpl_desc !=''">
+		 AND `lib_service_tpl_desc` LIKE CONCAT('%','${lib_service_tpl_desc}','%')
+		</if>
+		<if test="service_cycle !=null and service_cycle !=''">
+		 AND `service_cycle` LIKE CONCAT('%','${service_cycle}','%')
+		</if>
+		<if test="whetherPaging==false">
+			limit 50
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+</select>
+
+
+
+<select id="selLibraryServiceTemplateEntity" resultType="com.ssitcloud.dbauth.entity.LibraryServiceTemplateEntity">
+	SELECT * FROM `library_service_template`
+	WHERE `lib_service_tpl_id` = #{lib_service_tpl_id}
+
+</select>
+
+
+<update id="updLibraryTemplate" parameterType="com.ssitcloud.dbauth.entity.LibraryServiceTemplateEntity">
+UPDATE `library_service_template` 
+<set>
+	<if test="lib_service_tpl_desc != null and lib_service_tpl_desc != ''">
+		`lib_service_tpl_desc` = #{lib_service_tpl_desc},
+	</if>
+	<if test="service_cycle != null and service_cycle != ''">
+		`service_cycle` = #{service_cycle},
+	</if>
+	<if test="max_device_count != null and max_device_count != ''">
+		`max_device_count` = #{max_device_count},
+	</if>
+	<if test="max_operator_count != null and max_operator_count != ''">
+		`max_operator_count` = #{max_operator_count},
+	</if>
+	<if test="max_sublib_count != null and max_sublib_count != ''">
+		`max_sublib_count` = #{max_sublib_count},
+	</if>
+	version_stamp=version_stamp+1
+</set> 
+WHERE `lib_service_tpl_id` = #{lib_service_tpl_id} 
+	<if test="version_stamp != null and version_stamp != ''">
+		AND `version_stamp` = #{version_stamp}
+	</if>
+	
+</update>
+
+<select id="selTempByLibraryIdx" resultType="com.ssitcloud.dbauth.entity.LibraryServiceTemplateEntity">
+	SELECT 
+	  * 
+	FROM
+	  library_service_template 
+	WHERE lib_service_tpl_id = 
+	  (SELECT 
+	    l.lib_service_tpl_id 
+	  FROM
+	    library l 
+	  WHERE l.library_idx = #{library_idx})
+</select>
+
+
+</mapper>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+id="WebApp_ID" version="3.1" metadata-complete="true">
+  <display-name>cloudbusinessservice_mobile</display-name>
+ <servlet>
+		<servlet-name>springMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath*:/springMVC.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<!-- 配置ContextLoaderListerner -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>classpath:/applicationContext.xml</param-value>
+	</context-param>
+	<!-- 字符串乱码 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- app用户状态识别，确定用户已经登陆 -->
+	<filter>
+		<filter-name>readerAuthFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>readerAuthFilter</param-value>
+		</init-param>
+		<init-param>
+		    <param-name>commonMode</param-name>
+			<param-value>/readerSetting/index</param-value>
+		</init-param>
+	</filter>
+    <filter>
+        <filter-name>resultEntityAuthFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>resultEntityAuthFilter</param-value>
+        </init-param>
+        <init-param>
+            <param-name>commonMode</param-name>
+            <param-value>/readerSetting/index</param-value>
+        </init-param>
+    </filter>
+	<!-- ReaderInfoController -->
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/readerInfo/obtainReader</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/readerInfo/update</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/readerInfo/changePwd</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/readerInfo/insertReaderSubInfo</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/readerInfo/selectReaderSubInfo</url-pattern>
+	</filter-mapping>
+	<!-- LibraryControler -->
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/library/readerLib</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/library/sendBarcode</url-pattern>
+	</filter-mapping>
+	<!-- BookController -->
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/book/renew</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/book/reservation</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/book/inReservation</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/book/reservationList</url-pattern>
+	</filter-mapping>
+	<!-- ElectronicCertificateController -->
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/electronicCertificate/*</url-pattern>
+	</filter-mapping>
+	<!-- ReadCardController -->
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/readerCard/cardInfo</url-pattern>
+	</filter-mapping>
+    <filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/readerCard/bind</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/readerCard/unbind</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>readerAuthFilter</filter-name>
+		<url-pattern>/readerCard/queryReardCardBook</url-pattern>
+	</filter-mapping>
+    <!--websetting index-->
+    <filter-mapping>
+        <filter-name>readerAuthFilter</filter-name>
+        <url-pattern>/readerSetting/index</url-pattern>
+    </filter-mapping>
+
+    <!--setIdcard-->
+    <filter-mapping>
+        <filter-name>resultEntityAuthFilter</filter-name>
+        <url-pattern>/readerSetting/setIdcard</url-pattern>
+    </filter-mapping>
+    <!--setMail-->
+    <filter-mapping>
+        <filter-name>resultEntityAuthFilter</filter-name>
+        <url-pattern>/readerSetting/setMail</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>resultEntityAuthFilter</filter-name>
+        <url-pattern>/readerSetting/vcode</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>resultEntityAuthFilter</filter-name>
+        <url-pattern>/readerSetting/newVcode</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>resultEntityAuthFilter</filter-name>
+        <url-pattern>/readerSetting/setNewMobile</url-pattern>
+    </filter-mapping>
+	<!-- session失效时间,分钟 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+</web-app>

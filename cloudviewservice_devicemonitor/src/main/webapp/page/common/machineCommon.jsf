@@ -1,0 +1,917 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+
+<title>海恒智能</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<script type="text/javascript">
+	var machine={};
+	var library={};/**ID library_idx**/
+	/**加载页面**/
+	$itemWrap=$("div.main").find(".item-wrap");
+	//机器状态使用颜色进行标注（如红色、灰色、黄色、绿色  等）
+	//library_idx 换成lib_id
+	var drawRow=function(rows){
+		if(!rows)return;
+		$itemWrap.html("");
+		var ssls=0,schs=0,stacs=0,stas=0,dlvs=0,pors=0,bdrs=0,regs=0,other=0;
+		for(var i=0;i<rows.length;i++){
+			var device=rows[i];
+			var key=library[device.library_idx].lib_id+"_"+device.device_id;
+			var item='<div class="item gray" style="border:3px solid #AAAAAA;border-radius:15px;">'
+				+'<input type="hidden" name="cardbin_amount"/>'
+				+'<input type="text" name="rel_device_id" class="device_id" hidden="hidden" value="'+device.device_id+'"/>'
+				+'<input type="text" name="_device_type" class="_device_type" hidden="hidden" value="'+device.device_type+'"/>'
+			 	+'<input type="text" name="_device_id" class="_device_id" hidden="hidden" value="'+key+'"/>'
+			 	+'<input type="text" name="_device_idx" class="_device_idx" hidden="hidden" value="'+device.device_idx+'"/>'
+			 	+'<input type="text" name="_library_idx" class="_library_idx" hidden="hidden" value="'+device.library_idx+'"/>'
+			 	+'<div class="sec1">'
+			 	+'<div class="g-checkbox"><input type="checkbox" name="'+device.device_id+'" id=""></div>'
+			 	+'<span class="machine-name">'+device.device_name+'</span>'
+			 	+'<span class="status">无状态<b></b></span>'
+			 	+'</div>';
+			 	//现在只有自助借还图书馆显示以下信息
+			 	if(device.device_type.indexOf("SSL")!=-1){//
+				 	item+='<div class="sec2">'
+					 	+'<ul class="device_state">'
+					 	+'	<li>今日借还量：<span class="center">-</span></li>'
+					 	+'	<li>今日续借量：<span class="center">-</span></li>'
+					 	+'	<li>当月借还量：<span class="center">-</span></li>'
+					 	+'	<li>当月续借量：<span class="center">-</span></li>'
+					 	+'</ul>'
+					 	+'</div>';
+				 	ssls++;
+			 	}else if(device.device_type.indexOf("SCH")!=-1){//自助借还（借还）
+			 		item+='<div class="sec2">'
+					 	+'<ul class="device_state">'
+					 	+'	<li>今日借还量：<span class="center">-</span></li>'
+					 	+'	<li>今日续借量：<span class="center">-</span></li>'
+					 	+'	<li>当月借还量：<span class="center">-</span></li>'
+					 	+'	<li>当月续借量：<span class="center">-</span></li>'
+					 	+'</ul>'
+					 	+'</div>';
+			 		schs++;
+				}else if(device.device_type.indexOf("STA-C")!=-1){//移动点检车（）
+					item+='<div class="sec2">'
+					 	+'<ul class="device_state">'
+					 	+'	<li>当月上架量：<span class="center">-</span></li>'
+					 	+'</ul>'
+					 	+'</div>';
+					stacs++;
+				}else if(device.device_type.indexOf("STA")!=-1){//馆员工作站（）
+					item+='<div class="sec2">'
+					 	+'<ul class="device_state">'
+					 	+'</ul>'
+					 	+'</div>';
+					stas++;
+				}else if(device.device_type.indexOf("DLV")!=-1){//取书柜（）
+					item+='<div class="sec2">'
+					 	+'<ul class="device_state">'
+					 	+'	<li>今日取书量：<span class="center">-</span></li>'
+					 	+'</ul>'
+					 	+'</div>';
+				 	dlvs++;
+				}else if(device.device_type.indexOf("POR")!=-1){//安全门（）
+			 		item+='<div class="sec2">'
+					 	+'<ul class="device_state">'
+					 	+'</ul>'
+					 	+'</div>';
+				 	pors++;
+			 	}else if(device.device_type.indexOf("BDR")!=-1){//还书机（还书统计）
+			 		item+='<div class="sec2">'
+					 	+'<ul class="device_state">'
+					 	+'	<li>今日还书量：<span class="center">-</span></li>'
+					 	+'</ul>'
+					 	+'</div>';
+				 	bdrs++;
+			 	}else if(device.device_type.indexOf("REG")!=-1){//办证机(办证、卡数量)
+			 		item+='<div class="sec2">'
+					 	+'<ul class="device_state">'
+					 	+'	<li>剩余卡数量：<span class="center">-</span></li>'
+					 	+'	<li>今日办证量：<span class="center">-</span></li>'
+					 	+'	<li>当月办证量：<span class="center">-</span></li>'
+					 	+'</ul>'
+					 	+'</div>';
+					 regs++;
+			 	}else {
+			 		item+='<div class="sec2">'
+					 	+'<ul class="device_state">'
+					 	+'</ul>'
+					 	+'</div>';
+			 		other++;
+			 	}
+			 	item+='<div class="sec3">'
+				 	+'ID:'+device.device_id
+				 	+'<div class="check-detail" device_type="'+device.device_type+'">查看详情</div>'
+				 	+'</div>'
+				 	+'</div>';
+				$itemWrap.append(item);
+		};
+		var machine=new Array;
+		if(ssls>0){
+			machine.push("<span>24小时自助图书馆数量："+ssls+"</span>");
+		}
+		if(schs>0){
+			machine.push("<span>自助借还书机数量："+schs+" </span>");
+		}
+		if(stacs>0){
+			machine.push("<span>移动点检车数量："+stacs+" </span>");
+		}
+		if(stas>0){
+			machine.push("<span>馆员工作站数量："+stas+" </span>");
+		}
+		if(dlvs>0){
+			machine.push("<span>取书柜数量："+dlvs+" </span>");
+		}
+		if(pors>0){
+			machine.push("<span>安全门数量："+pors+" </span>");
+		}
+		if(bdrs>0){
+			machine.push("<span>还书机数量："+bdrs+" </span>");
+		}
+		if(regs>0){
+			machine.push("<span>自助办证机数量："+regs+" </span>");
+		}
+		if(other>0){
+			machine.push("<span>其他设备数量："+other+"</span><br/>");
+		}
+		$(".machine-info").append(machine.join(''));
+	};
+	/**
+		获取颜色
+	**/
+	var colorArr=[];
+	var getColorArr=function(func){
+		$.ajax({
+			url:"${ctx}/devicemonconf/queryMonitorColorConf",
+			type:"GET"	
+		}).done(function(data){
+			//console.log("获取颜色",data);
+			if(data&&data.state){
+				colorArr=data.result;
+				if(func){
+					func();
+				}
+			}
+		});
+	};
+	var metadataLogicOBJ={};
+	var GetMetadataLogicOBJ=function(){
+		$.ajax({
+			url:"${ctx}/devicemonconf/SelMetadataLogicObject",
+			type:"GET",
+			data:{"req":"{}"}
+		}).done(function(data){
+			//console.log("GetMetadataLogicOBJ",data);
+			if(data&&data.state&&data.result){
+				for(var i=0;i<data.result.length;i++){
+					var logicObj=data.result[i];
+					metadataLogicOBJ[logicObj.meta_log_obj_idx]=logicObj.logic_obj.toLowerCase();
+				}				
+			}
+		});
+	}; 
+	GetMetadataLogicOBJ();
+	var currentDevColorRetMap={};
+	//获取当前页的设备的监控颜色设置
+	var GetCurrentDevColorSet=function(){
+		var devIdxArr=[];
+		$("input[name=_device_idx]").each(function(index,dom){
+			devIdxArr.push($(dom).val());
+		});
+		$.ajax({
+			url:"${ctx}/device/GetCurrentDevColorSet",
+			type:"GET",
+			data:{"req":JSON.stringify(devIdxArr)}
+		}).done(function(data){
+			if(data){
+				//console.log("GetCurrentDevColorSet",data);
+				currentDevColorRetMap=data.result;
+				if(!metadataLogicOBJ){
+					GetMetadataLogicOBJ();
+				}
+				setStatusProxy();
+			}
+		});
+	};
+	function setStatusProxy(){
+		//getLastHeatBeatTime
+		var rel_device_id_arr=[];
+		$("input[name=rel_device_id]").each(function(index,dom){
+			rel_device_id_arr.push($(dom).val());
+		});
+		$.ajax({
+			url:"${ctx}/device/getLastHeatBeatTime",
+			data:{"req":JSON.stringify(rel_device_id_arr)},//设备ID数组
+			success:function(data){
+				console.log("getLastHeatBeatTime",data);
+				setStatus(data.result);
+			}
+		});
+	}
+	
+	//获取设备状态,定时执行时间timeRefresh
+	var setStatus=function(lastHeatBeatTime){
+		 var arr=new Array();
+		 $(document).find("input._device_id").each(function (index,domEle){
+			var device_id=$(domEle).val();/**实际上是 library_id_device_id**/
+			var a = $(domEle).prev().val();
+			var device_id_;
+			var library_idx;
+			if(a.indexOf("SSL")!=-1){//
+				//alert("SSL-->"+device_id);
+				device_id_ = $(domEle).prev().prev().val();
+				library_idx = $(domEle).next().next().val();
+				
+				console.log("自助图书馆  device_id ",a+" "+device_id_,"library_idx",library_idx);
+				
+				var postData = {"type":"taday","library_idx":library_idx,"device_id":device_id_};
+				var postData1 = {"type":"year","library_idx":library_idx,"device_id":device_id_};
+				//统计当日借还
+				countSSLTodayLoanLog($(domEle),postData);
+				//统计当月借还
+				countSSLYearLoanLog($(domEle),postData1);
+				//统计今日办证
+				countSSLTodayIssCard($(domEle),postData);
+				//统计当月办证
+				countSSLMonthIssCard($(domEle),postData1);
+		 	}else if(a.indexOf("SCH")!=-1){//自助借还（借还）
+				device_id_ = $(domEle).prev().prev().val();
+				library_idx = $(domEle).next().next().val();
+				console.log("自助借还机 device_id ",a+" "+device_id_,"library_idx",library_idx);
+				
+				var postData = {"type":"year","library_idx":library_idx,"device_id":device_id_};
+				countSCHTodayLoanLog($(domEle),postData);
+				
+				var postData1 = {"type":"year","library_idx":library_idx,"device_id":device_id_};
+				countSCHYearLoanLog($(domEle),postData1);
+			}else if(a.indexOf("STA-C")!=-1){//移动点检车（）
+				device_id_ = $(domEle).prev().prev().val();
+				library_idx = $(domEle).next().next().val();
+				console.log("点检车  device_id ",a+" "+device_id_,"library_idx",library_idx);
+				
+				var postData = {"type":"year","library_idx":library_idx,"device_id":device_id_};
+				countSTACYearLoanLog($(domEle),postData);
+			}else if(a.indexOf("STA")!=-1){//馆员工作站（）
+				device_id_ = $(domEle).prev().prev().val();
+				library_idx = $(domEle).next().next().val();
+				console.log("馆员工作站 device_id ",a+" "+device_id_,"library_idx",library_idx);
+			}else if(a.indexOf("DLV")!=-1){//取书柜（）
+				device_id_ = $(domEle).prev().prev().val();
+				library_idx = $(domEle).next().next().val();
+				console.log("取书柜 device_id ",a+" "+device_id_,"library_idx",library_idx);
+			}else if(a.indexOf("POR")!=-1){//安全门（）
+				device_id_ = $(domEle).prev().prev().val();
+				library_idx = $(domEle).next().next().val();
+				console.log("安全门 device_id ",a+" "+device_id_,"library_idx",library_idx);
+		 	}else if(a.indexOf("BDR")!=-1){//还书机（还书统计）
+		 		device_id_ = $(domEle).prev().prev().val();
+				library_idx = $(domEle).next().next().val();
+				console.log("还书机 device_id ",a+" "+device_id_,"library_idx",library_idx);
+				var postData = {"type":"year","library_idx":library_idx,"device_id":device_id_};
+				
+				countBDRLoanLog($(domEle),postData);
+		 	}else if(a.indexOf("REG")!=-1){//办证机(办证、卡数量)
+		 		device_id_ = $(domEle).prev().prev().val();
+				library_idx = $(domEle).next().next().val();
+				console.log("办证机 device_id ",a+" "+device_id_,"library_idx",library_idx);
+				var postData = {"type":"all","library_idx":library_idx,"device_id":device_id_};
+				
+				$.ajax({
+	    			url:"${pageContext.request.contextPath}/device/countCardissueLog",
+	                type:"POST",
+	    			data: {"req":JSON.stringify(postData)},
+	    			dataType: 'json',
+	    			success: function(data){
+	    				if(data.state){
+	    					result = data.result
+	    					console.info("result ********  ",result);
+	    					
+	    				}else{
+	    					console.info("result-----",result);
+	    					
+	    				}
+	    			}
+				  }); 
+		 	}else {
+		 		console.log("我是其他类");
+		 	} 
+			
+			arr.push(device_id);
+		 }); 
+		 
+		 $.ajax({
+			type:"POST",
+			url:"${ctx}/device/selectDeviceState",
+			data:{"req":JSON.stringify(arr)}
+		}).done(function(data){
+			console.log("selectDeviceState",data);
+			if(data&&data.state==true){
+				var device=data.result;// {device_id:state}
+				for(var device_id in device){
+					$thisDev=$(document).find("input[name=_device_id][value="+device_id+"]");
+					var rel_device_id=$thisDev.parent().find("input[name=rel_device_id]").val();
+					var device_idx=$thisDev.parent().find("input[name=_device_idx]").val();
+					var stateObject=device[device_id];
+					if(!stateObject){//没有上传过ext_state数据，认定为没有该设备
+						$thisDev.parent()
+							.removeClass("error")
+							.removeClass("alert")
+							.removeClass("blue").addClass("gray");
+						$thisDev.parent().find("span.status").html("无数据");
+						continue;
+					}
+					var state=stateObject.new_state;         //状态值
+					var alertObj=stateObject.alert_obj;	     //逗号分割的异常部件名称,（报警部件）
+					console.log("DEV_ID:",device_id,"。状态值:",state,"报警部件:",alertObj);
+	                console.log("报警状态颜色",currentDevColorRetMap);
+					var createTime=stateObject.create_time;  //20160823191003
+					var curTimeLong=stateObject.current_time;//long类型的时间
+					var lastHeartBeatTime_=null;
+					if(lastHeatBeatTime){
+						for(var l=0;l<lastHeatBeatTime.length;l++){
+							var inf=lastHeatBeatTime[l];
+							if(inf.devId == rel_device_id){
+								if(inf["lastHeartBeatTime"]){
+									lastHeartBeatTime_=inf["lastHeartBeatTime"];
+								}else{
+	                                lastHeartBeatTime_=new Date(createTime.substring(0,4),createTime.substring(4,6)-1,createTime.substring(6,8),createTime.substring(8,10),createTime.substring(10,12),createTime.substring(12,14));
+								}
+								break;
+							}						
+						}
+					}
+					console.log("lastHeartBeatTime",device_id,lastHeartBeatTime_);
+					if(lastHeartBeatTime_){
+	                    var maxTime = getThresholdTime(currentDevColorRetMap,device_idx);
+	                    if(new Date().getTime() - lastHeartBeatTime_ > maxTime*1000){
+	                        state = "4";//设置报警状态为超时
+	                    }
+					}
+					var s = $("#deviceStatus").text();
+					//console.info("s",s);
+					if(state == "0"){//正常状态
+						$thisDev.parent().css("border","3px solid #00FF33");
+						$thisDev.parent().css("border-radius","15px");
+						$thisDev.parent().removeClass("error").removeClass("alert").removeClass("gray").removeClass("blue");
+						$thisDev.parent().find("span.status").html("正常");
+					}else if(state == "4"){
+						$thisDev.parent().css("border","3px solid #7075B5");
+						$thisDev.parent().css("border-radius","15px");
+	                    $thisDev.parent().removeClass("error").removeClass("alert").removeClass("gray").addClass("blue");
+	                    $thisDev.parent().find("span.status").html("超时");
+	                }else{//判断是否告警
+	                    //报警颜色 如红色、灰色、黄色、绿色  等）//其他值异常
+	                    //green:0:绿色|yellow:1:黄色|red:2:红色|gray:3:灰色|blue:4:蓝色
+	                    //这里需要查询设备配置的报警颜色。[报警的等级]
+	                    if (currentDevColorRetMap) {
+	                        var monitorConfList = currentDevColorRetMap[device_idx];
+	                        if (monitorConfList) {
+	                            var alertObjMap = {};
+	                            if (alertObj && alertObj.indexOf(",") >= 0) {
+	                                var alertObjArr = alertObj.split(",");
+	                                for (var i = 0; i < alertObjArr.length; i++) {
+	                                    var alert = alertObjArr[i].toLowerCase();
+	                                    if (alert) {
+	                                        alertObjMap[alert] = alert;
+	                                    }
+	                                }
+	                            }
+	                            //mongodb(alertObjMap)报警上传的报警的部件，
+	                            //以mysql(currentDevColorRetMap)配置报警部件的为准
+	                            console.log("alertObjMap", alertObjMap);
+	                            
+	                            var maxColor = 1;
+	                            var status_flg = false;//表示有没有状态
+	                            var monitorObjNormal = true;//监控的设备正常
+	                            console.log("metadataLogicOBJ", metadataLogicOBJ);
+	                            console.log("monitorConfList", monitorConfList);
+	                            for (var i = 0; i < monitorConfList.length; i++) {
+	                                var monitorConf = monitorConfList[i];
+	                                if (monitorConf.table_name == "metadata_logic_obj" || monitorConf.table_name == "monitor_logic_obj") {
+	                                    if (metadataLogicOBJ) {
+	                                    	//console.log("monitorConf.meta_log_obj_idx", monitorConf.meta_log_obj_idx);
+	                                        //console.log("metadataLogicOBJ[monitorConf.meta_log_obj_idx]", metadataLogicOBJ[monitorConf.meta_log_obj_idx]);
+	                                    	//console.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",alertObjMap[metadataLogicOBJ[monitorConf.meta_log_obj_idx]]);
+	                                        var logicObj = alertObjMap[metadataLogicOBJ[monitorConf.meta_log_obj_idx].toLowerCase()];
+	                                        //console.log("logicObj",logicObj);
+	                                        //1.如果有报警的部件，则同步，没有则continue
+	                                        //2.这边再加一个判断，如果没有监控到的部件，则continue
+	                                        console.log("logicObj", logicObj);
+	                                        if (!logicObj || logicObj == null || logicObj == "undefined" || logicObj == "") {
+	                                            continue;
+	                                        }
+	                                    }
+	                                    monitorObjNormal = false;//如果能通过上面的检查 表示不正常
+	                                    var color = monitorConf.color;
+	                                    maxColor = getMaxAlertColor(color, maxColor);
+	                                    if (state != "0" && (!colorArr || colorArr.length <= 0)) {
+	                                        getColorArr(function () {
+	                                            var colorOBJ = colorArr[maxColor];
+	                                            if (colorOBJ) {
+	                                                var colorEN = colorOBJ["colorEN"];
+	                                                if (!colorEN || colorEN == "") colorEN = "error";
+	                                                $thisDev.parent()
+	                                                    .removeClass("error")
+	                                                    .removeClass("alert")
+	                                                    .removeClass("gray")
+	                                                    .removeClass("blue").addClass(colorEN);
+	                                                $thisDev.parent().css("border","3px solid #FF3333");
+	                            					$thisDev.parent().css("border-radius","15px");
+	                                                $thisDev.parent().find("span.status").html("告警");
+	                                                status_flg = true;
+	
+	                                            }
+	                                        });
+	                                    } else if (state != "0") {
+	                                        var colorOBJ = colorArr[maxColor];
+	                                        if (colorOBJ) {
+	                                            var colorEN = colorOBJ["colorEN"];
+	                                            if (!colorEN || colorEN == "") colorEN = "error";
+	                                            $thisDev.parent()
+	                                                .removeClass("error")
+	                                                .removeClass("alert")
+	                                                .removeClass("gray")
+	                                                .removeClass("blue").addClass(colorEN);
+	                                            $thisDev.parent().find("span.status").html("告警");
+	                                            $thisDev.parent().css("border","3px solid #FF3333");
+	                        					$thisDev.parent().css("border-radius","15px");
+	                                            status_flg = true;
+	                                        }
+	                                    }
+	                                }
+	                            }
+	                            //上面不是 超时 ，也找不到 但是 state!=0 默认设置
+	                            if (!status_flg && state != "0") {
+	                                $thisDev.parent().removeClass("error").removeClass("alert").removeClass("gray").removeClass("blue").addClass("error");
+	                                $thisDev.parent().find("span.status").html("告警");
+	                                $thisDev.parent().css("border","3px solid #FF3333");
+	            					$thisDev.parent().css("border-radius","15px");
+	                            }
+	                            if (monitorObjNormal) {
+	                                $thisDev.parent().removeClass("error").removeClass("alert").removeClass("gray").removeClass("blue");
+	                                $thisDev.parent().find("span.status").html("正常");
+	                            	$thisDev.parent().css("border","3px solid #00FF33");
+	            					$thisDev.parent().css("border-radius","15px");
+	                            }
+	                        }
+	                    }
+	                }
+				}
+			}
+			var s = $("#deviceStatus").text();
+			if(s==="0"){
+				$(".machine-list").children("div[class='item-wrap']").children("div[class!='item']").css("display","none");
+			}else if(s==="1"){
+				$(".machine-list").children("div[class='item-wrap']").children("div[class!='item alert']").css("display","none");
+			}else if(s==="2"){
+				$(".machine-list").children("div[class='item-wrap']").children("div[class!='item error']").css("display","none");
+			}else if(s==="3"){
+				$(".machine-list").children("div[class='item-wrap']").children("div[class!='item gray']").css("display","none");
+			}else if(s==="4"){
+				$(".machine-list").children("div[class='item-wrap']").children("div[class!='item blue']").css("display","none");
+			}
+			
+		});
+	};
+	/**
+	 * 获取报警时间，若不存在返回300，单位秒
+	 */
+	function getThresholdTime(monitorConf,devIdx) {
+	    monitorConf = monitorConf || {};
+	    var conf = monitorConf[""+devIdx];
+	    if(conf){
+	        for(var i = 0;i < conf.length;i++){
+	            if(conf[i].table_name == "time_out"){
+	                return conf[i].threshold;
+	            }
+	        }
+	    }
+	
+	    return 300;
+	}
+	
+	//获取对应 颜色 
+	var getMaxAlertColor=function(color,maxColor){
+		//0(绿色)正常  <1(提醒) <2(红色)告警 <4(蓝色)超时 <3(灰色) 该部件禁用状态
+		//console.log("color:"+color,"maxColor:"+maxColor);
+		if(color==3){
+			return maxColor;
+		}
+		if(color>maxColor){
+			return color;
+		}
+		return maxColor;
+	};
+	/**
+		切屏
+	**/
+	/* var changeScreen=function(){
+		//获取当前页
+		var currentpage = $("li.active").html();//当前页
+		page = Number(currentpage) + 1;//下一页
+		var maxPage=$("#page").find("li:last").html();//最大页数
+		if(currentpage==maxPage){//最后一页
+			//var Page=makeQueryParam(1, pageSize);
+			//selectPage(Page);
+			$("#page").find("li").each(function(index,dom){
+				if($(dom).html()=="1"){
+					$(dom).trigger("click");
+				}
+			});
+			return;
+		}
+		$("#page").find("li").each(function(index,dom){
+			if($(dom).html()==page){
+				//表示有下一页
+				//var Page=makeQueryParam(page, pageSize);
+				//selectPage(Page);
+				$(dom).trigger("click");
+			}
+		});
+	}; */
+	/**
+	切屏
+	**/
+	var changeScreen=function(){
+		var lib_idx=$(".choose-lib").find(".current-libName").children().attr("lib-idx");
+		if(typeof(lib_idx)!='undefined'){
+			var items=$(".choose-lib").find(".drop-down").children();
+			$(items).each(function(){
+				var anthor_idx=$(this).attr("lib-idx");
+				if(typeof(anthor_idx)!='undefined' && lib_idx==anthor_idx){
+					lib_idx=$(this).next().attr("lib-idx");
+					lib_name=$(this).next().text();
+					$(".choose-lib").find(".current-libName").html("<input type='text' class='item place' lib-idx='"+lib_idx+"' value='"+lib_name+"'>");
+					machine.curSelLibIdx=lib_idx;
+					var Page=makeQueryParam(1,12);
+					selectPage(Page);//查询
+					return false;//跳出循环
+				}
+			});
+		}
+	};
+	/**
+		获取所有的没有不是子馆的馆、和一级子馆
+		管理员使用此方法
+	**/
+	var queryAllMasterLibAndSlaveLib=function(library_idx){
+		if(library_idx){
+			var library={"library_idx":library_idx};
+			$.ajax({
+				type:"POST",
+				url:"${ctx}/librarylocal/querySlaveLibraryByMasterIdx",
+				data:{"req":JSON.stringify(library)},
+			}).then(function(data){
+				if(data&&data.state==true){
+					var masterLibAndSlaveLibs=data.result;
+					if(masterLibAndSlaveLibs){
+						var masterLibrary=masterLibAndSlaveLibs.masterLibrary;
+						$(".choose-lib").find(".current-libName").html('<div class="item place" lib-idx="'+masterLibrary.library_idx+'">'+masterLibrary.lib_name+'</div>');
+					}
+				}
+				return $.ajax({
+					url:"${ctx}/librarylocal/queryAllMasterLibAndSlaveLib",
+					type:"GET",
+					data:{"req":JSON.stringify()}
+				});
+			}).then(function(data){
+					//console.log("queryAllMasterLibAndSlaveLib",data);
+					if(data&&data.state){
+						var libList=data.result;
+						$("div.page-title-bar").find(".drop-down").html("");
+						//选择图书馆
+						var dropDownHtml='<div class="item place" lib-idx="0">显示全部</div>';
+						for(var i=0;i<libList.length;i++){
+							var msLibAndSlaveLib=libList[i];
+							var masterLibrary=msLibAndSlaveLib.masterLibrary;
+							var slaveLibraryArr=msLibAndSlaveLib.slaveLibrary;
+							if(masterLibrary.library_idx==0){//云平台屏蔽
+								continue;
+							}
+							//console.log(masterLibrary);
+							dropDownHtml+='<div class="item place" lib-idx="'+masterLibrary.library_idx+'">';
+							dropDownHtml+=masterLibrary.lib_name+'</div>';
+							for(var j=0;j<slaveLibraryArr.length;j++){
+								dropDownHtml+='<div class="item room" lib-idx="'+slaveLibraryArr[j].library_idx+'">'+slaveLibraryArr[j].lib_name+'</div>';
+							}
+						}
+						$("div.page-title-bar").find(".drop-down").html(dropDownHtml);
+					}else if(data.message="NO_PERMESSION"){<%--不是系统管理员的情况下 只能查看当前馆或以下--%>
+						checkQuerySlaveLibraryByMasterIdx(library_idx);
+						
+					}
+			});
+		}
+	};
+	/**
+	 *	检查当前登录用户是不是主馆用户,不是执行 setLibraryName函数，
+	 **/
+	function  checkQuerySlaveLibraryByMasterIdx(library_idx){
+		if(library_idx){
+			var library={"library_idx":library_idx};
+			$.ajax({
+				type:"POST",
+				url:"${ctx}/librarylocal/querySlaveLibraryByMasterIdx",
+				data:{"req":JSON.stringify(library)}
+			}).then(function(data){
+				if(data&&data.state==true){
+					var masterLibAndSlaveLibs=data.result;
+					if(masterLibAndSlaveLibs){
+						var masterLibrary=masterLibAndSlaveLibs.masterLibrary;
+						$(".choose-lib").find(".current-libName").html('<div class="item place" lib-idx="'+masterLibrary.library_idx+'">'+masterLibrary.lib_name+'</div>');
+					}
+				}
+				return $.ajax({
+					url:"${ctx}/librarylocal/checkQuerySlaveLibraryByMasterIdx",
+					data:{},
+					type:"POST",
+					success:function(data){
+						if(data){
+							if(data.state){
+								isMaster=true;
+								var masterLibAndSlaveLibs=data.result;
+								if(masterLibAndSlaveLibs){
+									var masterLibrary=masterLibAndSlaveLibs.masterLibrary;
+									var slaveLibraryArr=masterLibAndSlaveLibs.slaveLibrary;
+									if(masterLibrary&&slaveLibraryArr){
+										$("div.page-title-bar").find(".drop-down").html("");
+										//选择图书馆
+										var dropDownHtml='<div class="item place" lib-idx="0">选择图书馆</div>'
+										+'<div class="item place" lib-idx="'+masterLibrary.library_idx+'">'
+										+masterLibrary.lib_name+'</div>';
+										//$(".choose-lib").find(".current-libName").html('<div class="item place" lib-idx="'+masterLibrary.library_idx+'">'+masterLibrary.lib_name+'</div>');
+										for(var i=0;i<slaveLibraryArr.length;i++){
+											isMaster=true;
+											dropDownHtml+='<div class="item room" lib-idx="'+slaveLibraryArr[i].library_idx+'">'+slaveLibraryArr[i].lib_name+'</div>';
+										}
+										$("div.page-title-bar").find(".drop-down").html(dropDownHtml);
+									}
+								}else{
+									//错误信息
+									console.log(data);
+								}
+							}
+						}
+						if(!isMaster){
+							setLibraryName(library_idx);
+						}
+					}
+				});
+			});
+		}
+	}
+	
+	/**
+		根据library_idx得到 Library数据
+		非管理员使用此方法
+	**/
+	//设置图书馆名称函数
+	var setLibraryName=function(library_idx){
+		if(library_idx){
+			var library={"library_idx":library_idx};
+			$.ajax({
+				type:"POST",
+				url:"${ctx}/librarylocal/querySlaveLibraryByMasterIdx",
+				data:{"req":JSON.stringify(library)},
+			}).done(function(data){
+				//console.log("setLibraryName",data);
+				if(data&&data.state==true){
+					var masterLibAndSlaveLibs=data.result;
+					if(masterLibAndSlaveLibs){
+						var masterLibrary=masterLibAndSlaveLibs.masterLibrary;
+						var slaveLibraryArr=masterLibAndSlaveLibs.slaveLibrary;
+					
+						if(masterLibrary&&slaveLibraryArr){
+							$("div.page-title-bar").find(".drop-down").html("");
+							//选择图书馆
+							var dropDownHtml='<div class="item place" lib-idx="0">选择图书馆</div>'
+							+'<div class="item place" lib-idx="'+masterLibrary.library_idx+'">'
+							+masterLibrary.lib_name+'</div>';
+							
+							$(".choose-lib").find(".current-libName").html('<div class="item place" lib-idx="'+masterLibrary.library_idx+'">'+masterLibrary.lib_name+'</div>');
+							
+							for(var i=0;i<slaveLibraryArr.length;i++){
+								dropDownHtml+='<div class="item room" lib-idx="'+slaveLibraryArr[i].library_idx+'">'+slaveLibraryArr[i].lib_name+'</div>';
+							}
+							$("div.page-title-bar").find(".drop-down").html(dropDownHtml);
+						}
+					}else{
+						//错误信息
+						console.log(data);
+					}
+				}
+			});
+		}
+	};
+	//设置书架信息 参数为：device_id数组
+	var setBookrackState=function(){
+		var arr=new Array();
+		 $(document).find("input._device_id").each(function (index,domEle){
+			var device_id=$(domEle).val();
+			arr.push(device_id);
+		}); 
+	
+		$.ajax({
+			type:"POST",
+			url:"${ctx}/device/selectBookrackState",
+			data:{"req":JSON.stringify(arr)}	
+		}).done(function(data){
+			if(data&&data.state==true){
+				var result=data.result;
+				for(var device_id in result){
+					$thisDev=$(document).find("input[name=_device_id][value="+device_id+"]");
+					var bookrack=result[device_id];
+					var level1=bookrack.Level1||bookrack.level1;
+					var level2=bookrack.Level2||bookrack.level2;
+					var level3=bookrack.Level3||bookrack.level3;
+					//var precheckout=result.precheckout;
+					var exbox=bookrack.Exbox||(bookrack.exbox || '0/0');
+					var level1Books= Number(level1.split("/")[1]);
+					var level2Books= Number(level2.split("/")[1]);
+					var level3Books= Number(level3.split("/")[1]);
+					var exboxBooks= Number(exbox.split("/")[1]);
+					//在架书
+					var onRackBooks=level1Books+level2Books+level3Books+exboxBooks;			
+					$thisDev.parent().find("div.sec2").find(".right.level1").html(onRackBooks+"册");
+				}
+			}
+		});
+	};
+	
+	
+	//设置箱子信息
+	var setDeviceBinState=function(){
+		var arr=new Array();
+		 $(document).find("input._device_id").each(function (index,domEle){
+			var device_id=$(domEle).val();
+			arr.push(device_id);
+		}); 
+		
+		$.ajax({
+			type:"POST",
+			url:"${ctx}/device/selectBinState",
+			data:{"req":JSON.stringify(arr)}
+		}).done(function(data){
+			if(data&&data.state==true){
+				console.log("箱子状态："+JSON.stringify(data));
+				var result=data.result;
+				for(var device_id in result){
+					//device_id 现在实际上是 library_id+"_"+device_id
+					$thisDev=$(document).find("input[name=_device_id][value="+device_id+"]");
+					var binState=result[device_id];
+					console.log("device_id",device_id,"binstate",binState);
+					var cardbin=binState.cardbin;//卡箱
+					var cashbin=binState.cashbin;//钱箱
+					var bookbin=binState.bookbin;//书箱
+					console.log("cardbin",cardbin);
+					if(cardbin){
+						$thisDev.parent().find("div.sec2").find(".right.level2").html(cardbin["amount"]+"张");
+						$thisDev.parent().find("input[name=cardbin_amount]").val(cardbin.amount);
+					}
+					var sum=0;
+					if(bookbin){
+						for(var i=0;i<bookbin.length;i++){
+							var amount=Number(bookbin[i].amount);
+							sum+=amount;
+						}
+						$thisDev.parent().find("div.sec2").find(".right.level3").html(bookbin.length+"个/"+sum+"册");
+					}
+				
+				}
+			}
+		});
+	};
+	
+	//组装 翻页和查询 参数
+	var makeQueryParam=function(page,pageSize){
+	 	$inputText=$("div.page-title-bar").find("input[name=keyWord]");
+	    var machineType=$("select#machineType").val();
+		var machineState=$("select#machineState").val();
+		var keyWord=$inputText.val();
+		var Page ={
+			"page":page,
+			"pageSize":pageSize,
+			"machineType":machineType,
+			"machineState":machineState,
+			"keyWord":keyWord,
+		};
+		if(machine.curSelLibIdx!=0 && (keyWord=="" || keyWord==null)){
+			Page.library_idx=machine.curSelLibIdx;
+		}
+		return Page;
+	};
+	
+	var _interval=null;
+	var changeScreenInterval=null;
+	var pageSize=12;//每页显示的条数
+	//翻页函数 包括查询参数  selectPage
+	var selectPage=function(obj){//
+			alert("machineCommon.jsp");
+			$.ajax({
+				url:"${ctx}/librarylocal/getLibIdAndLibIdx",
+				data:{req:""},
+				type:"GET"
+			}).then(function(data){
+				if(data&&data.state){
+					library=data.result;
+					$.ajax({
+						url:"${ctx}/device/queryDeviceByParam",
+						type:"POST",
+						data:{"req":JSON.stringify(obj)}
+					}).done(function(data){
+						//console.info("queryDeviceByParam",data);
+						if(data){
+							var page=data.result;
+							if(page){
+								if(page.rows && page.rows.length>0){
+									if(page.rows[0]){
+										queryAllMasterLibAndSlaveLib(page.rows[0].library_idx);
+									}
+									$(".machine-info").html("<span>设备总数："+page.total+" "+"</span>").show();
+									drawRow(page.rows);
+								}else{
+									$(".machine-info").empty().hide();
+									$(".machine-list").find(".item-wrap").html("没有查询到匹配的设备");
+								}
+								$.pagination(page);
+							}
+						}
+						//翻页 或者 加载之后先执行一次 setStatus
+						//setStatus();
+						GetCurrentDevColorSet();
+						//每次选择页码结束，执行获取设备状态函数
+						var seconds=$(".g-select.refresh select").val();//切屏频率
+						clearInterval(changeScreenInterval);
+						if(seconds=="-1"){
+							//不切屏
+						}else{
+							changeScreenInterval=setInterval(changeScreen,seconds);
+						}
+						clearInterval(_interval);
+						_interval=setInterval(setStatusProxy,50000);//周期 暂时注释掉 2016年5月10日08:47:33
+						setDeviceBinState();//设置箱子信息
+						setBookrackState();//设置在架书
+					});
+				}
+			});
+	};
+	var pageObj ={"page":1,"pageSize":12};
+	function sleep(d){
+			for(var t = Date.now();Date.now() - t <= d;);
+	}
+	//循环调用 获取 执行结果 params =[{device_id:"",control:"",control_info:""},{device_id}]
+	var HAS_RESULT=false;
+	var getControlResult=function(params){
+				$.ajax({
+					url:"${ctx}/device/queryControlResult",
+					type:"POST",
+					data:{"req":JSON.stringify(params)}
+				}).done(function(data){
+					console.log("getControlResult:"+JSON.stringify(data));
+					if(data&&data.state==true&&data.message=="CURRENT_NO_RESULT"){
+						// 暂时没有结果时继续AJAX
+						console.log("CURRENT_NO_RESULT");
+					}
+					if(data&&data.state&&data.message=="HAS_RESULT"){
+						//这里只处理了一台设备有返回的结果的情况,需要作出修改
+						var result=data.result;
+						console.log("HAS_RESULT:"+JSON.stringify(result));
+						if(result){
+							for(var i=0;i<result.length;i++){
+								var controlRes=result[i];
+								var device_id=controlRes.device_id;
+								if(controlRes.controlresult=="1"){//关机
+									layer.alert(device_id+" 关机成功");
+								}else if(controlRes.controlresult=="2"){//重启
+									layer.alert(device_id+" 重启成功");
+								}else if(controlRes.controlresult=="4"){//锁屏
+									layer.alert(device_id+" 锁屏成功");
+								}else if(controlRes.controlresult=="5"){//取消操作
+									layer.alert(device_id+" 取消操作成功");
+								}
+							}
+							HAS_RESULT=true;
+						}
+					}
+				}).fail(function(e){
+					layer.alert(e);
+					HAS_RESULT=true;
+				});
+	};
+	 function minusDate(date,days){ 
+	   var d=new Date(date); 
+	   d.setDate(d.getDate()-days); 
+	   var m=d.getMonth()+1; 
+	   return d.getFullYear()+'-'+m+'-'+d.getDate(); 
+	 } 
+	 var winH = $(window).height();
+		var dialogH = winH-20;
+	</script>

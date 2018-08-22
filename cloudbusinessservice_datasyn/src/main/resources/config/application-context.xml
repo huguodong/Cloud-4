@@ -1,0 +1,160 @@
+<beans
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop" 
+  xmlns:task="http://www.springframework.org/schema/task" 
+  xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context-4.0.xsd
+  http://www.springframework.org/schema/aop 
+  http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+  http://www.springframework.org/schema/mvc
+  http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+  http://www.springframework.org/schema/task 
+  http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+  <context:component-scan base-package="com.ssitcloud"/>
+  
+  <!-- 开启切面编程功能 -->
+  <aop:aspectj-autoproxy proxy-target-class="true"/>
+  <import resource="classpath:config/rabbitProducer.xml" /> 
+  <context:property-placeholder file-encoding="utf-8" location="classpath*:config/config.properties"/>
+  <context:annotation-config/>
+  <task:annotation-driven/><!-- spring 任务开启 -->
+   <!--  <bean id="configs" class="org.springframework.beans.factory.config.PropertiesFactoryBean" >  
+    	<property name="locations">
+    		<list>
+    			<value></value>
+    		</list>
+    	</property>
+    </bean> -->
+    
+
+<mvc:annotation-driven>
+<!--  可不设置，使用默认的超时时间 -->
+    <mvc:async-support task-executor="myThreadPool" default-timeout="50000">
+    	<!-- 异步拦截器 
+    	<mvc:callable-interceptors>
+    		<bean></bean>
+    	</mvc:callable-interceptors> -->
+    </mvc:async-support>
+</mvc:annotation-driven>
+
+<!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <property name="defaultEncoding" value="UTF-8"/>  
+        <!-- 指定所上传文件的总大小不能超过200KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->  
+        <!-- <property name="maxUploadSize" value="200000"/>   -->
+    </bean> 
+    
+    <!-- spring 线程池 -->
+    <bean id="myThreadPool"  class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">  
+        <property name="corePoolSize" value="${myThreadPool.corePoolSize}" /><!--最小线程数 -->  
+        <property name="maxPoolSize" value="${myThreadPool.maxPoolSize}" /><!--最大线程数 -->  
+        <property name="queueCapacity" value="${myThreadPool.queueCapacity}" /><!--缓冲队列大小 -->  
+        <property name="threadNamePrefix" value="${myThreadPool.threadNamePrefix}" /><!--线程池中产生的线程名字前缀 -->  
+        <property name="keepAliveSeconds" value="${myThreadPool.keepAliveSeconds}" /><!--线程池中空闲线程的存活时间单位秒 -->  
+    </bean> 
+    
+    <bean id="beanFactoryHelper" class="com.ssitcloud.common.system.BeanFactoryHelper"/>
+    
+     <!-- 引用ehCache的配置 -->     
+      <!-- <bean id="defaultCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">     
+          <property name="configLocation">     
+            <value>classpath:config/ehcache.xml</value>     
+         </property>     
+      </bean> -->
+	      <!-- 定义ehCache的工厂，并设置所使用的Cache name -->     
+      <!-- <bean id="OPERCMD_CACHE" class="org.springframework.cache.ehcache.EhCacheFactoryBean"> 
+      	  <property name="cacheManager" ref="defaultCacheManager"/>
+          <property name="cacheName">     
+              <value>OPERCMD_CACHE</value>     
+          </property>          
+      </bean> -->            
+      <!-- 用于保存device库中mainfield表的数据 -->
+     <!--  <bean id="MAINFIELD_CACHE" class="org.springframework.cache.ehcache.EhCacheFactoryBean"> 
+      	  <property name="cacheManager" ref="defaultCacheManager"/>
+          <property name="cacheName">     
+              <value>MAINFIELD_CACHE</value>     
+          </property>          
+      </bean> -->       
+      <!-- 用于保存上传数据命令码与mongodb库对照表的数据 -->
+      <!-- <bean id="CMDTABLE_CACHE" class="org.springframework.cache.ehcache.EhCacheFactoryBean"> 
+      	  <property name="cacheManager" ref="defaultCacheManager"/>
+          <property name="cacheName">     
+              <value>CMDTABLE_CACHE</value>     
+          </property>          
+      </bean> -->         
+      <!-- <bean id="LIBRARY_CACHE" class="org.springframework.cache.ehcache.EhCacheFactoryBean"> 
+      	  <property name="cacheManager" ref="defaultCacheManager"/>
+          <property name="cacheName">     
+              <value>LIBRARY_CACHE</value>     
+          </property>          
+      </bean> -->	
+    
+     <!-- MVC3.1之后用以下开启注解 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+	<!-- json -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+					  <property name="supportedMediaTypes">  
+	                    <list>  
+	                        <value>text/html;charset=UTF-8</value>  
+	                        <value>application/json;charset=UTF-8</value>  
+	                    </list>  
+                </property> 
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!-- 定时任务配置 -->
+	<!-- 定时任务 -->
+    
+    <bean id="scheduledLibraryInfoData" class="com.ssitcloud.common.system.ScheduledLibraryInfoData"/>
+	<bean id="scheduledConfig" class="com.ssitcloud.common.system.ScheduledConfig"/>
+	<bean id="sendHearbeat" class="com.ssitcloud.common.util.SendHearbeatUtil" /> 
+	<bean id="checkAndUpdateMainField" class="com.ssitcloud.common.system.ScheduledMainField" />
+	<bean id="scheduledLibrary" class="com.ssitcloud.common.system.ScheduledLibrary" />
+	<bean id="scheduledCmdTable" class="com.ssitcloud.common.system.ScheduledCmdTable" />
+	<bean id="scheduledFileUploadFlag" class="com.ssitcloud.common.system.ScheduledDeviceData" />
+	<bean id="scheduledCloudRequest" class="com.ssitcloud.common.system.ScheduledCloudSyncRequest" />
+	<!-- 时间单位为毫秒 -->
+	<task:scheduled-tasks>
+		<task:scheduled ref="scheduledConfig" method="queryDeviceIdxByIdScheduled" initial-delay="10000" fixed-delay="10000"/>
+		<task:scheduled ref="scheduledConfig" method="storeChangeTableData" initial-delay="10000" fixed-delay="10000" />
+		<task:scheduled ref="scheduledConfig" method="storePatchInfo" initial-delay="10000" fixed-delay="180000" />
+		<!-- <task:scheduled ref="scheduledConfig" method="storeVersionXML" cron="0 0/3 * * * ?" /> -->
+		<task:scheduled ref="sendHearbeat" method="sendData" initial-delay="30000" fixed-delay="1800000" /> 
+		<!-- 启动延迟30000毫秒，启动间隔1800000毫秒，半小时 -->
+		<!-- <task:scheduled ref="sendHearbeat" method="sendData"  initial-delay="10000" fixed-delay="60000" /> -->
+		<task:scheduled ref="scheduledLibraryInfoData" method="storeChangeTableData" initial-delay="10000" fixed-delay="10000" />
+		<task:scheduled ref="scheduledFileUploadFlag" method="checkFileChangeTableData" initial-delay="10000" fixed-delay="10000" />
+	<task:scheduled ref="scheduledCloudRequest" method="consumeCloudSyncRequest" initial-delay="1000" fixed-delay="4000" />
+	
+	</task:scheduled-tasks>
+	
+	<!-- 防止返回jsp页面时候被拦截 -->
+	<mvc:default-servlet-handler />
+	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>    <!-- 拦截的url,不要用/**否则静态文件请求也会拦截 -->
+<!-- 		不拦截的url,解析头spring-mvc-3.2.xsd要3.2版本以上，
+			且<mvc:exclude-mapping/>要写在所有的 <mvc:mapping/>之后， 否则启动报错 -->
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/page/**"/> 
+			<bean class="com.ssitcloud.common.system.GlobalInterceptor"></bean>
+		</mvc:interceptor>
+		 <!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 --> 
+	</mvc:interceptors>
+	<!-- 容器启动时调用方法 -->
+	<bean class="com.ssitcloud.common.system.BeanFactoryHelper"></bean>
+	<bean class="com.ssitcloud.common.system.ApplicationContextHolder"></bean>
+	 <!-- 清应用配置接口 -->
+	<bean id="appConfigService" class="com.ssitcloud.common.service.impl.AppConfigServiceImpl"/>
+</beans>

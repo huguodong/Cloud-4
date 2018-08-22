@@ -1,0 +1,13 @@
+<middleware_upgrade_strategy>
+	<target_version>V1.5</target_version>
+	<upgrade_paths>
+		<upgrade_path>
+			<old_version>V1.4</old_version>
+		</upgrade_path>
+		<upgrade_path>
+			<old_version>V1.2</old_version>
+			<old_version>V1.3</old_version>
+			<old_version>V1.4</old_version>
+		</upgrade_path>
+	</upgrade_paths>
+</middleware_upgrade_strategy>

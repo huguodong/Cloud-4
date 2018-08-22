@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="stattype">
+
+<insert id="insertStaticsType" parameterType="com.ssitcloud.dbstatistics.entity.StaticsTypeEntity"
+useGeneratedKeys="true" keyProperty="statictype_idx">
+	INSERT INTO statistics_subtype(
+	     `data_type`,
+		 `data_key`,
+		 `data_desc`
+	 )VALUES(
+	     #{data_type},
+		 #{data_key},
+		 #{data_desc}
+	 )
+	
+</insert>
+
+<delete id="deleteStaticsType">
+	delete from statistics_subtype where `statictype_idx` = #{statictype_idx}
+</delete>
+
+<update id="updateStaticsType" parameterType="com.ssitcloud.dbstatistics.entity.StaticsTypeEntity">
+	UPDATE statistics_subtype 
+	<set>
+	    <if test="data_type !=null and data_type !=''">
+			`data_type` = #{data_type},
+		</if>
+		<if test="data_key !=null and data_key !=''">
+			`data_key` = #{data_key},
+		</if>
+		<if test="data_desc !=null and data_desc !=''">
+			`data_desc` = #{data_desc},
+		</if>
+	</set>
+	<where>
+		`statictype_idx` = #{statictype_idx}
+	</where>
+</update>
+
+<select id="queryStaticsType" parameterType="com.ssitcloud.dbstatistics.entity.StaticsTypeEntity" resultType="com.ssitcloud.dbstatistics.entity.StaticsTypeEntity">
+	select statictype_idx,data_type,data_key,data_desc from statistics_subtype where `statictype_idx` = #{statictype_idx}
+</select>
+<select id="queryStaticsTypeList" parameterType="com.ssitcloud.dbstatistics.entity.StaticsTypeEntity" resultType="com.ssitcloud.dbstatistics.entity.StaticsTypeEntity">
+	select statictype_idx,data_type,data_key,data_desc from statistics_subtype where 1=1
+		<if test="data_type !=null and data_type !=''">
+			and `data_type` = #{data_type}
+		</if>
+</select>
+
+</mapper>

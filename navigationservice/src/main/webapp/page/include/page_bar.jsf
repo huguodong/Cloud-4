@@ -1,0 +1,25 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%--
+	页码显示
+--%>
+	<div class="paging-bar">
+		<div class="left">
+			<span class="t fl">选择</span>
+			<div class="btn g-chooseAll">全选</div>
+			<div class="btn g-noChooseAll">反选</div>
+			<span class="t2 fl">显示</span>
+			<div class="g-select refresh">
+				<select id="showSize">
+					<option value="10" selected>10</option>
+					<option value="30" >30</option>
+					<option value="60">60</option>
+				</select>
+				<span class="arr-icon"></span>
+			</div>
+			<span class="t2 fl " id="ChooseNum">已选中<span class="total-choosen-num">0</span>个</span>
+		</div>
+		<div id="page" class="right">
+		</div>
+		<span class="total-page fr"></span>
+		<span class="total-num fr"></span>
+	</div>

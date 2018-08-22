@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8 oldie"><![endif]-->
+<!--[if IE 9]><html class="ie9 oldie"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <meta HTTP-EQUIV="expires" CONTENT="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <title>云主机管理</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/common.js" ></script>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="css/ie.css" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="js/html5.js" ></script>
+    <script type="text/javascript" src="js/ie.js" ></script>
+    <![endif]-->
+
+</head>
+<body>
+<div class="equipment-guanli">
+    <div class="g-loading"></div>
+    <div class="g-header">
+        <a href="main.html" class="logo"></a>
+        <a class="exit" href="index.html"><span class="icon"></span>退出</a>
+        <div class="status"><span class="icon"></span>系统管理员</div>
+        <div class="g-select language">
+            <span class="icon"></span>
+            <select>
+                <option value="" selected>中文</option>
+                <option value="">英文</option>
+            </select>
+            <span class="arr-icon"></span>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="left-side">
+            <div class="control-btn"></div>
+            <div class="absolute-wrap">
+                <div class="title">菜单</div>
+                <div class="item">
+                    <div class="t icon1"><a href="main.html">首页</a></div>
+                </div>
+                <div class="item active">
+                    <div class="t icon7">节点管理<span class="arr-icon"></span></div>
+                    <ul>
+                        <li><a href="node-manage.html">节点管理</a></li>
+                        <li><a href="node-type.html">节点类型</a></li>
+                        <li><a href="container-manage.html">容器管理</a></li>
+                        <li class="active"><a href="vps-manager.html">云主机管理</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page-title-bar">
+            <span class="title">节点管理<a href="help-page.html" target="_blank" class="g-help"></a></span>
+            <div class="form-wrap fr">
+                <!--<div class="g-select">
+                    <select>
+                        <option value="-1" selected>选择分组</option>
+                        <option value="">分组1</option>
+                    </select>
+                    <span class="arr-icon"></span>
+                </div>-->
+                <input type="text" name=""  class="input g-input" placeholder="输入关键词" />
+                <div class="btn search">查询</div>
+                <div class="btn increase g-btn-green">新增</div>
+                <div class="btn delete">删除</div>
+            </div>
+        </div>
+        <div class="main">
+            <table class="g-table">
+                <thead>
+                <tr>
+                    <th class="col1"><div class="g-checkbox"><input type="checkbox" name=""/></div></th>
+                    <th class="col3">云主机编号</th>
+                    <th class="col4">云主机名称</th>
+                    <th class="col5">云主机IP</th>
+                    <th class="col7">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col1"><div class="g-checkbox"><input type="checkbox" name=""  /></div></td>
+                    <td class="col3">VPS001</td>
+                    <td class="col4">云主机001</td>
+                    <td class="col5">127.0.0.1</td>
+                    <td class="col7">
+                        <span class="btn-a edit">编辑</span>
+                        <span class="btn-a delete">删除</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col1"><div class="g-checkbox"><input type="checkbox" name=""  /></div></td>
+                    <td class="col3">VPS001</td>
+                    <td class="col4">云主机001</td>
+                    <td class="col5">127.0.0.1</td>
+                    <td class="col7">
+                        <span class="btn-a edit">编辑</span>
+                        <span class="btn-a delete">删除</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col1"><div class="g-checkbox"><input type="checkbox" name=""  /></div></td>
+                    <td class="col3">VPS001</td>
+                    <td class="col4">云主机001</td>
+                    <td class="col5">127.0.0.1</td>
+                    <td class="col7">
+                        <span class="btn-a edit">编辑</span>
+                        <span class="btn-a delete">删除</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col1"><div class="g-checkbox"><input type="checkbox" name=""  /></div></td>
+                    <td class="col3">VPS001</td>
+                    <td class="col4">云主机001</td>
+                    <td class="col5">127.0.0.1</td>
+                    <td class="col7">
+                        <span class="btn-a edit">编辑</span>
+                        <span class="btn-a delete">删除</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="paging-bar">
+            <div class="left">
+                <span class="t fl">选择</span>
+                <div class="btn g-chooseAll">全选</div>
+                <div class="btn g-noChooseAll">反选</div>
+                <span class="t2 fl">显示</span>
+                <div class="g-select refresh">
+                    <select>
+                        <option value="" selected>30</option>
+                        <option value="">60</option>
+                    </select>
+                    <span class="arr-icon"></span>
+                </div>
+                <span class="t2 fl">已选中7个</span>
+            </div>
+            <div class="right">
+                <div class="prev-page">上一页</div>
+                <ul>
+                    <li class="active">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>...</li>
+                    <li>50</li>
+                    <li>120</li>
+                </ul>
+                <div class="next-page">下一页</div>
+            </div>
+            <span class="total-page fr">共500</span>
+        </div>
+    </div>
+</div>
+<div class="g-delete-dialog">
+    <span class="line"></span>
+    <div class="word">
+        当前选择了 <span class="font-red">7</span> 个项目<br>
+        是否要删除选择的配置？
+    </div>
+    <div class="form-btn cancel g-btn-gray">取消</div>
+    <div class="form-btn remove g-btn-red">删除</div>
+</div>
+<div class="form-dialog-1">
+    <div class="title">新增云主机</div>
+    <div class="form-wrap">
+        <ul>
+            <li>
+                <div class="left">主机编号</div>
+                <div class="right">
+                    <input type="text" name=""  id="vps_id" class="g-input" value="VPS001" disabled/>
+                </div>
+            </li>
+            <li>
+                <div class="left">主机名称</div>
+                <div class="right">
+                    <input type="text" name=""  id="vps_name" class="g-input" value="云主机001" disabled/>
+                </div>
+            </li>
+            <li>
+                <div class="left">主机IP</div>
+                <div class="right">
+                    <input type="text" name=""  id="" class="g-input" value="" disabled/>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="" style="text-align: center;padding-bottom: 30px;padding-top: 20px" width="100%">
+        <input type="submit" value="新增" class="submit g-btn-green" />
+    </div>
+</div>
+<script src="plugins/layer/layer.js"></script>
+<script type="text/javascript">
+    $(function(){
+        (function mainHeightController(){
+            var winH = $(window).height();
+            var headerH = $(".g-header").outerHeight();
+            var pageTitleBar = $(".page-title-bar").outerHeight();
+            var pagingBarH = $(".paging-bar").outerHeight();
+
+            $(".main").css({
+                "min-height":winH - headerH - pagingBarH -pageTitleBar
+            });
+        })();
+        var detailLayer = null;
+        var delLayer = null;
+        var editlLayer = null;
+        $(".delete").on("click",function(){
+            delLayer = layer.open({
+                type: 1,
+                shade: false,
+                title: false, //不显示标题
+                scrollbar :false,
+                closeBtn :0,
+                shade:0.5,
+                shadeClose :true,
+                area:["400px"],
+                offset :["195px"],
+                content: $('.g-delete-dialog')
+            });
+
+        });
+
+        $(".detail").on("click",function(){
+            detailLayer = layer.open({
+                type: 1,
+                shade: false,
+                title: false, //不显示标题
+                scrollbar :false,
+                closeBtn :1,
+                shade:0.5,
+                shadeClose :true,
+                area:["600px"],
+                offset :["150px"],
+                content: $('.g-lib-detail-dialog')
+            });
+
+        });
+
+        $(".edit").on("click",function(){
+            layerOpen({
+                "title":"编辑云主机",
+                "btnText":"保存",
+                "btnColorClass":"g-btn-blue",
+                "status" : true
+            });
+        });
+
+        $(".increase").on("click",function(){
+            layerOpen({
+                "title":"新增云主机",
+                "btnText":"新增",
+                "btnColorClass":"g-btn-blue",
+                "status" : false
+            });
+        });
+
+
+        function layerOpen(options){
+            var defaults = {
+                title:"",
+                btnText : "新增"
+            }
+            options = $.extend(defaults,options);
+
+            var $submit = $(".form-dialog-1 .submit");
+            $(".form-dialog-1 .title").text(options.title);
+            if(options.status){
+                $("#node_id").val("VPS001");
+                $("#node_id").attr("disabled")
+                $("#node_name").val("云主机001");
+                $("#node_name").attr("disabled");
+            }
+            else{
+                $("#node_id").val("");
+                $("#node_id").removeAttr("disabled");
+                $("#node_name").val("");
+                $("#node_name").removeAttr("disabled");
+            }
+            $submit.val(options.btnText);
+            $submit.removeClass("g-btn-green").removeClass(".g-btn-blue");
+            $submit.addClass(options.btnColorClass);
+            editlLayer = layer.open({
+                type: 1,
+                shade: false,
+                title: false, //不显示标题
+                scrollbar :false,
+                closeBtn :1,
+                shade:0.5,
+                shadeClose :true,
+                area:["800px"],
+                offset :["150px"],
+                content: $('.form-dialog-1')
+            });
+        }
+
+        $(".form-btn.cancel").on("click",function(){
+            if (delLayer) {
+                layer.close(delLayer);
+            }
+        });
+        $(".form-btn.remove").on("click",function(){
+            /*执行删除操作*/
+            if (delLayer) {
+                layer.close(delLayer);
+            }
+        });
+        $(".submit").on("click",function(){
+            /*执行删除操作*/
+            if(detailLayer){
+                layer.close(editlLayer);
+            }
+
+        });
+    });
+</script>
+</body>
+</html>

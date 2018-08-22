@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:text="二维码扫描"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="250dp"
+                            android:layout_height="250dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="25dp">
+
+
+                            <RelativeLayout
+                                android:id="@+id/messageView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#000000"
+                                android:visibility="invisible">
+
+                                <TextView
+                                    android:id="@+id/message"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_centerVertical="true"
+                                    android:gravity="center"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16sp" />
+                            </RelativeLayout>
+                        </FrameLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView7"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="扫描设备上的二维码,"
+                                    android:textColor="#ffffff"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:paddingTop="5dp"
+                                    android:text="即可快速登录操作借还书机"
+                                    android:textColor="#ffffff"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:src="@drawable/barcode"
+                                    android:onClick="showMyBarcode" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:gravity="center"
+                                    android:paddingTop="8dp"
+                                    android:text="我的二维码"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#33000000" />
+
+                    <LinearLayout
+                        android:layout_width="250dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="69dp"
+                            android:background="#33000000" />
+
+                        <RelativeLayout
+                            android:id="@+id/window"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp">
+
+                            <RelativeLayout
+                                android:id="@+id/line"
+                                android:layout_width="200dp"
+                                android:layout_height="2dp"
+                                android:layout_centerHorizontal="true"
+                                android:background="#EB9C32" />
+                            <!--top left start -->
+                            <RelativeLayout
+                                android:layout_width="21dp"
+                                android:layout_height="3dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="#EB9C32" />
+
+                            <RelativeLayout
+                                android:layout_width="3dp"
+                                android:layout_height="21dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="#EB9C32" />
+                            <!--top left end -->
+
+                            <!--top right start -->
+                            <RelativeLayout
+                                android:layout_width="21dp"
+                                android:layout_height="3dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="#EB9C32" />
+
+                            <RelativeLayout
+                                android:layout_width="3dp"
+                                android:layout_height="21dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="#EB9C32" />
+                            <!--top right end -->
+
+                            <!--bottom left start -->
+                            <RelativeLayout
+                                android:layout_width="21dp"
+                                android:layout_height="3dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:background="#EB9C32" />
+
+                            <RelativeLayout
+                                android:layout_width="3dp"
+                                android:layout_height="21dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:background="#EB9C32" />
+                            <!--bottom left end -->
+
+                            <!--bottom right start -->
+                            <RelativeLayout
+                                android:layout_width="21dp"
+                                android:layout_height="3dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginRight="5dp"
+                                android:background="#EB9C32" />
+
+                            <RelativeLayout
+                                android:layout_width="3dp"
+                                android:layout_height="21dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginRight="5dp"
+                                android:background="#EB9C32" />
+                            <!--bottom right end -->
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="#33000000" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#33000000" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <RelativeLayout
+                android:id="@+id/closeView"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="#221E18">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="关闭"
+                    android:textColor="#F6A623" />
+            </RelativeLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

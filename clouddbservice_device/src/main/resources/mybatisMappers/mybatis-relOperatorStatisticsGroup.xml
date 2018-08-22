@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rel_operator_statistics_group">
+
+	<insert id="insertRelOperatorStatisticsGroup" parameterType="com.ssitcloud.entity.RelOperatorStatisticsGroupEntity" useGeneratedKeys="true" keyProperty="rel_oper_statistics_idx">
+		insert into rel_operator_statistics_group
+		(		
+            operator_group_idx,statistics_group_idx
+		)
+		values
+		(
+             #{operator_group_idx},#{statistics_group_idx}
+		)
+	</insert>
+	
+	<update id="updateRelOperatorStatisticsGroup" parameterType="com.ssitcloud.entity.RelOperatorStatisticsGroupEntity">
+		update rel_operator_statistics_group
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="operator_group_idx!=null">
+				operator_group_idx=#{operator_group_idx},
+			</if>
+			<if test="statistics_group_idx!=null">
+				statistics_group_idx=#{statistics_group_idx},
+			</if>
+			
+		</set>
+		   WHERE 1=1 
+	   <if test="rel_oper_statistics_idx!=null">
+			and rel_oper_statistics_idx=#{rel_oper_statistics_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteRelOperatorStatisticsGroup" parameterType="com.ssitcloud.entity.RelOperatorStatisticsGroupEntity">
+		delete from rel_operator_statistics_group where operator_group_idx=#{operator_group_idx}
+	</delete>
+	
+	<select id="selectRelOperatorStatisticsGroup" parameterType="com.ssitcloud.entity.RelOperatorStatisticsGroupEntity" resultType="com.ssitcloud.entity.RelOperatorStatisticsGroupEntity">
+		SELECT rel_oper_statistics_idx,operator_group_idx,statistics_group_idx FROM rel_operator_statistics_group 
+	    where 1=1
+		<if test="operator_group_idx!=null">
+			AND operator_group_idx=#{operator_group_idx}
+		</if>
+	</select>
+	<select id="selectRelOperatorStatisticsGroups" parameterType="com.ssitcloud.entity.RelOperatorStatisticsGroupEntity" resultType="com.ssitcloud.entity.RelOperatorStatisticsGroupEntity">
+		SELECT rel_oper_statistics_idx,operator_group_idx,statistics_group_idx FROM rel_operator_statistics_group 
+	    where 1=1
+	</select>
+	
+	
+	
+</mapper>

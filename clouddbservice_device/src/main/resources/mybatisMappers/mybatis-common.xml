@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common">
+
+	
+	<select id="select" parameterType="Map" resultType="Map">
+		select * from ${tableName} 
+		where library_idx=${library_idx}
+	</select>
+	<select id="selectBySQL" parameterType="Map" resultType="Map">
+		${value}
+	</select>
+	<select id="deleteBySQL" parameterType="String">
+		${value}
+	</select>
+	<select id="selectCondition" parameterType="Map" resultType="Map">
+		select * from ${tableName} where ${condition}
+	</select>
+	<select id="selectCount" parameterType="Map" resultType="Integer">
+		select count(*) from ${tableName} 
+		where library_idx=${library_idx}
+	</select>
+	<select id="selectAll" parameterType="Map" resultType="Map">
+		select * from ${tableName} 
+	</select>
+	<delete id="deleteTableByLibIdx" parameterType="Map">
+		delete from ${tableName} where library_idx=${library_idx}
+	</delete>
+	<delete id="deleteTableByLibIdxAndCondition" parameterType="Map">
+			delete from ${tableName} where library_idx=${library_idx} and ${condition}
+	</delete>
+	<delete id="deleteByCondition" parameterType="Map">
+		delete from ${tableName} where ${condition}
+	</delete>
+	<select id="getColumsByTable" parameterType="Map" resultType="Map">
+		SHOW COLUMNS FROM ssitcloud_device.${tableName}
+	</select>
+	<insert id="insertBySql" parameterType="String">
+		${value}
+	</insert>
+</mapper>

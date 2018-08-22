@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devicedisplay">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.DeviceDisplayConfig" useGeneratedKeys="true" keyProperty="display_type_idx">
+		INSERT INTO device_display_config (
+			`device_type_idx`,
+			`display_type_id`,
+			`display_type_name`,
+			`display_type_url`,
+			`display_type_desc`
+		)VALUES(
+			#{device_type_idx},
+			#{display_type_id},
+			#{display_type_name},
+			#{display_type_url},
+			#{display_type_desc}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.DeviceDisplayConfig">
+		UPDATE device_display_config
+		<set>
+			<if test="device_type_idx !=null and device_type_idx !=''">
+			`device_type_idx` = #{device_type_idx},
+			</if>
+			<if test="display_type_id !=null and display_type_id !=''">
+			`display_type_id` = #{display_type_id},
+			</if>
+			<if test="display_type_name !=null and display_type_name !=''">
+			`display_type_name` = #{display_type_name},
+			</if>
+			<if test="display_type_url !=null and display_type_url !=''">
+			`display_type_url` = #{display_type_url},
+			</if>
+			<if test="display_type_desc !=null and display_type_desc !=''">
+			`display_type_desc` = #{display_type_desc},
+			</if>
+			version_stamp=version_stamp+1
+		</set>
+		WHERE `display_type_idx` = #{display_type_idx} 
+		<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+	</if>
+	</update>
+
+	<delete id="delete"  parameterType = "java.util.List">
+		<![CDATA[  
+			DELETE FROM device_display_config WHERE `display_type_idx` in
+	    ]]>  
+	    <foreach collection="list" item = "display_type_idx" open="(" separator="," close=")">
+	   		#{display_type_idx}
+	    </foreach>
+	</delete>
+
+	<select id="findById" parameterType="com.ssitcloud.entity.DeviceDisplayConfig" resultType="com.ssitcloud.entity.DeviceDisplayConfig">
+		SELECT `display_type_idx`,`device_type_idx`,`display_type_id`,`display_type_name`,`display_type_url`,`display_type_desc` from device_display_config
+		<where>
+			<choose>
+				<when test="_parameter!=null">
+					AND `display_type_idx` = #{display_type_idx}
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="findByTypeId" parameterType="com.ssitcloud.entity.DeviceDisplayConfig" resultType="com.ssitcloud.entity.DeviceDisplayConfig">
+		SELECT `display_type_idx`,`device_type_idx`,`display_type_id`,`display_type_name`,`display_type_url`,`display_type_desc` from device_display_config
+		<where>
+			<choose>
+				<when test="_parameter!=null">
+					AND `device_type_idx` = #{device_type_idx}
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+	<select id="queryAll" parameterType="com.ssitcloud.entity.page.DeviceDisplayConfigPage" resultType="com.ssitcloud.entity.page.DeviceDisplayConfigPage">
+		<if test="whetherPaging==true">
+			<include refid="paging.head" />
+		</if>
+		SELECT d.`display_type_idx`,d.`device_type_idx`,t.`device_type_desc` device_type_name,d.`display_type_id`,d.`display_type_name`,d.`display_type_url`,d.`display_type_desc`,d.`version_stamp`
+		FROM `device_display_config` d JOIN `metadata_devicetype` t ON d.`device_type_idx`=t.`meta_devicetype_idx`
+		<where>
+			<if test="display_type_idx !=null and display_type_idx !='' ">
+				and `display_type_idx` = #{display_type_idx}
+			</if>
+			<if test="device_type_idx !=null and device_type_idx !=''">
+				and `device_type_idx` = #{device_type_idx}
+			</if>
+			<if test="display_type_id !=null and display_type_id !=''">
+				and `display_type_id` = #{display_type_id}
+			</if>
+			<if test="display_type_name !=null and display_type_name !=''">
+				and `display_type_name` LIKE CONCAT('%', #{display_type_name}, '%')
+			</if>
+			<if test="display_type_url !=null and display_type_url !=''">
+				and `display_type_url` = #{display_type_url}
+			</if>
+			<if test="display_type_desc !=null and display_type_desc !=''">
+				and `display_type_desc` = #{display_type_desc}
+			</if>
+		</where>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail" />
+		</if>
+	</select>
+	
+	<select id="getDeviceTypes" resultType="com.ssitcloud.entity.MetadataDeviceTypeEntity">
+		SELECT m.* FROM `metadata_devicetype` m WHERE NOT EXISTS (SELECT device_type_idx FROM device_display_config d WHERE d.`device_type_idx` = m.meta_devicetype_idx) ORDER BY `device_type`
+	</select>
+	
+	<select id="queryDeviceTypeByName" resultType="com.ssitcloud.entity.MetadataDeviceTypeEntity">
+		SELECT m.* FROM `metadata_devicetype` m
+		<where>
+			<choose>
+				<when test="_parameter!=null">
+					AND m.`device_type` = #{device_type}
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+		</where>	
+	</select>
+
+</mapper>

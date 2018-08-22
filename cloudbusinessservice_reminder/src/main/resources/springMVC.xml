@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+            http://www.springframework.org/schema/context 
+            http://www.springframework.org/schema/context/spring-context-4.0.xsd
+            http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+            http://www.springframework.org/schema/tx 
+            http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+            http://www.springframework.org/schema/mvc 
+            http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+            http://www.springframework.org/schema/context 
+            http://www.springframework.org/schema/context/spring-context-4.0.xsd
+            http://www.springframework.org/schema/task     
+    		http://www.springframework.org/schema/task/spring-task-4.0.xsd ">
+	<!-- 启动包扫描功能，以便注册带有@Controller、@Service、@repository、@Component等注解的类成为spring的bean -->
+	<context:component-scan base-package="com.ssitcloud.business"></context:component-scan>
+
+	<!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射 -->
+	<mvc:annotation-driven />
+	<!-- 开启切面编程功能 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	<!-- 防止返回jsp页面时候被拦截 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 读取jdbc,config配置文件,读取多个配置文件需要加上ignore-unresolvable="true",如果有相同的字段，以第一个扫描到的为准-->
+	<context:property-placeholder file-encoding="UTF-8" location="classpath:config.properties" ignore-unresolvable="true"/>
+	
+	
+	<!-- 容器启动时调用方法 -->
+	<bean class="com.ssitcloud.business.reminder.common.interceptor.InitSystem" /> 
+	<bean class="com.ssitcloud.business.reminder.common.system.BeanFactoryHelper" /> 
+	<bean class="com.ssitcloud.business.reminder.common.system.ApplicationContextHolder" /> 
+	
+<!-- 	<bean class="com.ssitcloud.common.system.BeanFactoryHelper"></bean> -->
+
+	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<!-- <property name="prefix" value="/"/> -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 全局异常处理 -->
+	<bean id="exceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView">
+			<value>/page/error</value>
+		</property>
+		<property name="defaultStatusCode">
+			<value>404</value>
+		</property>
+		<property name="warnLogCategory">
+			<value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver</value>
+		</property>
+	</bean>
+	
+	<!-- 定时任务列表 -->
+   	<bean id="emailTask" class="com.ssitcloud.business.reminder.scheduled.EmailTask" />  
+   	<task:scheduled-tasks>
+  	 	<!-- cron参数:任务启动时间，参照cronexpression规则 -->
+        <task:scheduled ref="emailTask" method="sendEmail" cron="0 0/1 * * * ? " /><!-- 每分钟触发 -->
+    </task:scheduled-tasks>
+    <!-- 定时任务 -->
+	<bean id="sendHearbeat" class="com.ssitcloud.business.reminder.common.system.SendHearbeatUtil" />  
+     <task:scheduled-tasks> 
+    	<!-- cron表达式：*(秒0-59) *(分钟0-59) *(小时0-23) *(日期1-31) *(月份1-12或是JAN-DEC) *(星期1-7或是SUN-SAT)  -->
+         <!--<task:scheduled ref="sendHearbeat" method="sendData"  initial-delay="10000" fixed-delay="60000" /> -->
+        <!-- 表示程序启动1s后调用sendHearbeat类中的sendData方法，然后每隔30秒再调用sendData一次 -->
+        <task:scheduled ref="sendHearbeat" method="sendData" initial-delay="3000" fixed-delay="30000"/>
+    </task:scheduled-tasks> 
+	<!-- 清应用配置接口 -->
+	<bean id="appConfigService" class="com.ssitcloud.common.service.impl.AppConfigServiceImpl"/>
+</beans>

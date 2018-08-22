@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="readercard">
+
+	<insert id="insertReaderCard" parameterType="com.ssitcloud.dblib.entity.ReaderCardEntity">
+		insert into readercard
+		(		
+            reader_idx,lib_idx,card_no,card_password,allown_loancount,surplus_count,advance_charge,deposit,arrearage,create_time,update_time,reader_name
+            ,actual_card_no,birth,mobile,gender,card_type,email,id_card,address
+		)
+		values
+		(
+             #{reader_idx},#{lib_idx},#{card_no},#{card_password},#{allown_loancount},#{surplus_count},#{advance_charge},#{deposit},#{arrearage},#{create_time},#{update_time}
+             ,#{reader_name},#{actual_card_no},#{birth},#{mobile},#{gender},#{card_type},#{email},#{id_card},#{address}
+		)
+	</insert>
+	
+	<update id="updateReaderCard" parameterType="com.ssitcloud.dblib.entity.ReaderCardEntity">
+		update readercard
+		<set>
+			<if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if>
+			<if test="card_password !=null ">
+				card_password = #{card_password},
+			</if>
+			<if test="allown_loancount !=null ">
+				allown_loancount = #{allown_loancount},
+			</if>
+			<if test="surplus_count !=null ">
+				surplus_count = #{surplus_count},
+			</if>
+			<if test="advance_charge !=null ">
+				advance_charge = #{advance_charge},
+			</if>
+			<if test="deposit !=null ">
+				deposit = #{deposit},
+			</if>
+			<if test="arrearage !=null ">
+				arrearage = #{arrearage},
+			</if>
+			<if test="create_time !=null">
+				create_time = #{create_time},
+			</if>
+			<if test="update_time !=null">
+				update_time = #{update_time},
+			</if>
+			<if test="reader_name != null">
+				reader_name = #{reader_name} 
+			</if>
+		</set>
+		   <where>
+			   <if test="reader_idx!=null">
+					reader_idx=#{reader_idx} 
+			   </if>
+			   <if test="card_no!=null">
+					and card_no=#{card_no} 
+			   </if>
+			   <if test="lib_idx!=null">
+					and lib_idx=#{lib_idx} 
+			   </if>
+		   </where>
+	</update>
+	
+     <delete id="deleteReaderCard" parameterType="com.ssitcloud.dblib.entity.ReaderCardEntity">
+		delete from readercard where reader_idx=#{reader_idx} 
+		<if test="lib_idx != null">
+			and lib_idx = #{lib_idx} 
+		</if>
+		<if test="card_no != null">
+			and binary card_no = #{card_no} 
+		</if>
+	</delete>
+	<sql id="baseColumns">
+		reader_idx,lib_idx,card_no,card_password,
+		allown_loancount,surplus_count,advance_charge,
+		deposit,arrearage,create_time,update_time,reader_name 
+	</sql>
+	<select id="selectReaderCard" parameterType="com.ssitcloud.dblib.entity.ReaderCardEntity" resultType="com.ssitcloud.dblib.entity.ReaderCardEntity">
+		SELECT <include refid="baseColumns"/>  FROM readercard 
+	    where 1=1
+		<if test="reader_idx!=null">
+			AND reader_idx=#{reader_idx}
+		</if>
+	</select>
+	<select id="selectReaderCards" parameterType="com.ssitcloud.dblib.entity.ReaderCardEntity" resultType="com.ssitcloud.dblib.entity.ReaderCardEntity">
+		SELECT <include refid="baseColumns"/> FROM readercard 
+	    where 1=1 
+	    <if test="reader_idx != null">
+	    	and reader_idx = #{reader_idx} 
+	    </if>
+	    <if test="lib_idx != null">
+	    	and lib_idx = #{lib_idx} 
+	    </if>
+	    <if test="card_no != null">
+	    	and binary card_no = #{card_no} 
+	    </if>
+	</select>
+	
+	<select id="selectReaderCardByParams" parameterType="com.ssitcloud.dblib.entity.ReaderCardEntity"
+	resultType="com.ssitcloud.dblib.entity.ReaderCardEntity">
+		SELECT * FROM readercard WHERE 1=1
+		<if test="actual_card_no != null and actual_card_no != ''">
+			AND actual_card_no = #{actual_card_no}
+		</if>
+		<if test="lib_idx != null and lib_idx != ''">
+			AND lib_idx = #{lib_idx}
+		</if>
+	</select>
+</mapper>

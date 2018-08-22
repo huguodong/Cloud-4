@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="readertype">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.ReaderTypeEntity"
+		useGeneratedKeys="true" keyProperty="type_idx">
+		INSERT INTO reader_type
+		(type_distinction, type_id,type_name,type_deposit,card_fee,verification_fee,library_idx)
+		VALUES
+		(#{type_distinction},#{type_id},#{type_name},#{type_deposit},#{card_fee},#{verification_fee},#{library_idx})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.ReaderTypeEntity">
+		UPDATE reader_type
+		<set>
+			<if test="type_distinction !=null and type_distinction !=''">
+				type_distinction = #{type_distinction},
+			</if>
+			<if test="type_id !=null and type_id !=''">
+				type_id = #{type_id},
+			</if>
+			<if test="type_name !=null and type_name !=''">
+				type_name = #{type_name},
+			</if>
+			<if test="type_deposit !=null and type_deposit !=''">
+				type_deposit = #{type_deposit},
+			</if>
+			<if test="card_fee !=null and card_fee !=''">
+				card_fee = #{card_fee},
+			</if>
+			<if test="verification_fee !=null and verification_fee !=''">
+				verification_fee = #{verification_fee},
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				library_idx = #{library_idx},
+			</if>
+			version_stamp=version_stamp+1,
+		</set>
+		WHERE type_idx = #{type_idx}
+		<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+		</if>
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.ReaderTypeEntity">
+		DELETE FROM reader_type
+		WHERE  type_idx = #{type_idx}
+		<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+		</if>
+	</delete>
+	<delete id="deleteByCon" parameterType="com.ssitcloud.entity.ReaderTypeEntity">
+		DELETE FROM reader_type
+		WHERE 1=1
+		<if test="library_idx!=null">
+			and library_idx=#{library_idx}
+		</if>
+	</delete>
+	<select id="selectByLibIdx" parameterType="com.ssitcloud.entity.ReaderTypeEntity"
+		resultType="com.ssitcloud.entity.ReaderTypeEntity">
+		SELECT * FROM reader_type where 1=1 
+		<if test="library_idx !=null and library_idx !=''">
+			and type_distinction=1
+		</if>
+		and library_idx=#{library_idx}
+	</select>
+	<select id="select" parameterType="com.ssitcloud.entity.ReaderTypeEntity"
+		resultType="com.ssitcloud.entity.ReaderTypeEntity">
+		SELECT * FROM reader_type
+		<where>
+			<if test="type_idx !=null and type_idx !=''">
+				and type_idx = #{type_idx}
+			</if>
+			<if test="type_distinction !=null and type_distinction !=''">
+				and type_distinction = #{type_distinction}
+			</if>
+			<if test="type_id !=null and type_id !=''">
+				and type_id LIKE CONCAT('%',#{type_id},'%' )
+			</if>
+			<if test="type_name !=null and type_name !=''">
+				and type_name = #{type_name}
+			</if>
+			<if test="type_deposit !=null and type_deposit !=''">
+				and type_deposit = #{type_deposit}
+			</if>
+			<if test="card_fee !=null and card_fee !=''">
+				and card_fee = #{card_fee}
+			</if>
+			<if test="verification_fee !=null and verification_fee !=''">
+				and verification_fee = #{verification_fee}
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+
+	<select id="count" parameterType="com.ssitcloud.entity.ReaderTypeEntity"
+		resultType="int">
+		SELECT COUNT(type_idx) FROM reader_type
+		<where>
+			<if test="type_idx !=null and type_idx !=''">
+				and type_idx = #{type_idx}
+			</if>
+			<if test="type_distinction !=null and type_distinction !=''">
+				and type_distinction = #{type_distinction}
+			</if>
+			<if test="type_id !=null and type_id !=''">
+				and type_id LIKE CONCAT('%',#{type_id},'%' )
+			</if>
+			<if test="type_name !=null and type_name !=''">
+				and type_name = #{type_name}
+			</if>
+			<if test="type_deposit !=null and type_deposit !=''">
+				and type_deposit = #{type_deposit}
+			</if>
+			<if test="card_fee !=null and card_fee !=''">
+				and card_fee = #{card_fee}
+			</if>
+			<if test="verification_fee !=null and verification_fee !=''">
+				and verification_fee = #{verification_fee}
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectByFuzzy" 	resultType="com.ssitcloud.entity.ReaderTypeEntity">
+		SELECT * FROM reader_type
+		WHERE 1=1
+			<if test="type_id !=null ">
+				AND type_id LIKE CONCAT('%',#{type_id},'%' )
+			</if>
+			<if test="type_distinction !=null ">
+				AND type_distinction = #{type_distinction}
+			</if>
+			<if test="library_idx !=null">
+				AND library_idx IN 
+				<foreach collection="library_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+		
+	</select>
+	
+	<select id="countByFuzzy" 	resultType="int">
+		SELECT COUNT(type_idx) FROM reader_type
+		WHERE 1=1
+			<if test="type_id !=null ">
+				AND type_id LIKE CONCAT('%',#{type_id},'%' )
+			</if>
+			<if test="type_distinction !=null ">
+				AND type_distinction = #{type_distinction}
+			</if>
+			<if test="library_idx != null">
+				AND library_idx IN 
+				<foreach collection="library_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+	</select>
+	
+	<select id="selMaintenaceCard" resultType="com.ssitcloud.entity.ReaderTypeEntity">
+		SELECT 
+		  * 
+		FROM
+		  reader_type 
+		WHERE type_distinction = 2 
+		AND library_idx = #{library_idx}
+		ORDER BY type_name 
+	</select>
+	<!-- 通过type_id 查询 读者流通类型 -->
+	<select id="selectReaderTypeByTypeId" parameterType="com.ssitcloud.entity.ReaderTypeEntity" resultType="com.ssitcloud.entity.ReaderTypeEntity">
+		SELECT * FROM reader_type
+		WHERE type_distinction = 1
+		AND type_id=#{type_id}
+	</select>
+	<select id="selectCardByTypeId" parameterType="com.ssitcloud.entity.ReaderTypeEntity" resultType="com.ssitcloud.entity.ReaderTypeEntity">
+		SELECT * FROM reader_type
+		WHERE type_distinction = 2
+		AND type_id=#{type_id}
+	</select>
+	<select id="selectCardByTypeIdAndLibIdx" parameterType="com.ssitcloud.entity.ReaderTypeEntity" resultType="com.ssitcloud.entity.ReaderTypeEntity">
+		select * from reader_type  WHERE type_distinction = 2
+		AND type_id=#{type_id}
+		AND library_idx=#{library_idx}
+	</select>
+	<select id="selectReaderTypeByTypeIdAndLibIdx" parameterType="com.ssitcloud.entity.ReaderTypeEntity" resultType="com.ssitcloud.entity.ReaderTypeEntity">
+		select * from reader_type WHERE type_distinction = 1
+		AND type_id=#{type_id}
+		AND library_idx=#{library_idx}
+	</select>
+</mapper>

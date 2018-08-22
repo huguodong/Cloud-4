@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="statistics_template">
+
+	<insert id="insertStatisticsTemplate" parameterType="com.ssitcloud.entity.StatisticsTemplateEntity" useGeneratedKeys="true" keyProperty="statistics_tpl_idx">
+		insert into statistics_template
+		(	
+			statistics_tpl_id,	
+            statistics_tpl_desc
+		)
+		values
+		(
+			 #{statistics_tpl_id},
+             #{statistics_tpl_desc}
+		)
+	</insert>
+	
+	<update id="updateStatisticsTemplate" parameterType="com.ssitcloud.entity.StatisticsTemplateEntity">
+		update statistics_template
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="statistics_tpl_id!=null">
+				statistics_tpl_id=#{statistics_tpl_id},
+			</if>
+			<if test="statistics_tpl_desc!=null">
+				statistics_tpl_desc=#{statistics_tpl_desc},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="statistics_tpl_idx!=null">
+			and statistics_tpl_idx=#{statistics_tpl_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteStatisticsTemplate" parameterType="com.ssitcloud.entity.StatisticsTemplateEntity">
+		delete from statistics_template where statistics_tpl_idx=#{statistics_tpl_idx}
+	</delete>
+	
+	<select id="selectStatisticsTemplate" parameterType="com.ssitcloud.entity.StatisticsTemplateEntity" resultType="com.ssitcloud.entity.StatisticsTemplateEntity">
+		SELECT statistics_tpl_idx,statistics_tpl_id,statistics_tpl_desc FROM statistics_template 
+	    where 1=1
+		<if test="statistics_tpl_idx!=null">
+			AND statistics_tpl_idx=#{statistics_tpl_idx}
+		</if>
+	</select>
+	<select id="selectStatisticsTemplates" parameterType="com.ssitcloud.entity.StatisticsTemplateEntity" resultType="com.ssitcloud.entity.StatisticsTemplateEntity">
+		SELECT statistics_tpl_idx,statistics_tpl_id,statistics_tpl_desc FROM statistics_template 
+	    where 1=1
+	</select>
+	
+	<select id="selectStatisticsTemplatePage" parameterType="com.ssitcloud.entity.page.StatisticsTemplatePageEntity" resultType="com.ssitcloud.entity.page.StatisticsTemplatePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT
+	    sc.statistics_tpl_idx,
+	    sc.statistics_tpl_type,
+	    sc.statistics_tpl_value,
+	    st.statistics_tpl_id,
+	    st.statistics_tpl_desc
+		FROM
+			statistics_config sc,
+			statistics_template st
+		WHERE
+			sc.statistics_tpl_idx = st.statistics_tpl_idx
+		<if test="statistics_tpl_type !=null">
+			AND sc.statistics_tpl_type=#{statistics_tpl_type}
+		</if>
+		<if test="statistics_tpl_desc !=null">
+			AND (st.statistics_tpl_desc LIKE CONCAT('%',#{statistics_tpl_desc}, '%') OR st.statistics_tpl_id LIKE CONCAT('%',#{statistics_tpl_desc}, '%'))
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	<select id="selectTemplateMenuByOperidx" resultType="com.ssitcloud.entity.StatisticsTemplateEntity" parameterType="int">
+        SELECT
+            *
+        FROM
+            statistics_template
+        WHERE
+            statistics_tpl_idx IN (
+                SELECT
+                    statistics_idx
+                FROM
+                    rel_statistics_group
+                WHERE
+                    statistics_group_idx = (
+                        SELECT
+                            statistics_group_idx
+                        FROM
+                            rel_operator_statistics_group
+                        WHERE
+                            operator_group_idx = (
+                                SELECT
+                                    operator_group_idx
+                                FROM
+                                    rel_operator_group
+                                WHERE
+                                    operator_idx = #{id}
+                            )
+                    )
+            )
+    </select>
+</mapper>

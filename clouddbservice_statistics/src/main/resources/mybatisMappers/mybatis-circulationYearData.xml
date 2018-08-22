@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="ciryear">
+
+<insert id="insertCirculationYearData" parameterType="com.ssitcloud.dbstatistics.entity.CirculationYearDataEntity"
+useGeneratedKeys="true" keyProperty="cir_idx">
+	INSERT INTO circulationyeardata(
+	     `device_idx`,
+		 `lib_idx`,
+		 `circulateCountType`,
+		 `cirsubType`,
+		 `loan_cirYearCount`,
+		 `return_cirYearCount`,
+		 `renew_cirYearCount`,
+		 `circulateDate`,
+		 `createDate`,
+		 `updateDate`
+	 )VALUES(
+	     #{device_idx},
+		 #{lib_idx},
+		 #{circulateCountType},
+		 #{cirsubType},
+		 #{loan_cirYearCount},
+		 #{return_cirYearCount},
+		 #{renew_cirYearCount},
+		 #{circulateDate},
+		 #{createDate},
+		 #{updateDate}
+	 )
+	
+</insert>
+
+<delete id="deleteCirculationYearData">
+	delete from circulationyeardata where `cir_idx` = #{cir_idx}
+</delete>
+
+<update id="updateCirculationYearData" parameterType="com.ssitcloud.dbstatistics.entity.CirculationYearDataEntity">
+	UPDATE circulationyeardata 
+	<set>
+	   <if test="device_idx !=null and device_idx !=''">
+			`device_idx` = #{device_idx},
+		</if>
+		<if test="lib_idx !=null and lib_idx !=''">
+			`lib_idx` = #{lib_idx},
+		</if>
+		<if test="circulateCountType !=null and circulateCountType !=''">
+			`circulateCountType` = #{circulateCountType},
+		</if>
+		<if test="cirsubType !=null and cirsubType !=''">
+			`cirsubType` = #{cirsubType},
+		</if>
+		<if test="loan_cirYearCount !=null and loan_cirYearCount !=''">
+			`loan_cirYearCount` = #{loan_cirYearCount},
+		</if>
+		<if test="return_cirYearCount !=null and return_cirYearCount !=''">
+			`return_cirYearCount` = #{return_cirYearCount},
+		</if>
+		<if test="renew_cirYearCount !=null and renew_cirYearCount !=''">
+			`renew_cirYearCount` = #{renew_cirYearCount},
+		</if>
+		<if test="circulateDate !=null and circulateDate !=''">
+			`circulateDate` = #{circulateDate},
+		</if>
+		<if test="createDate !=null and createDate !=''">
+			`createDate` = #{createDate},
+		</if>
+		<if test="updateDate !=null and updateDate !=''">
+			`updateDate` = #{updateDate},
+		</if>
+	</set>
+	<where>
+		`cir_idx` = #{cir_idx}
+	</where>
+</update>
+
+<select id="queryCirculationYearData" parameterType="com.ssitcloud.dbstatistics.entity.CirculationYearDataEntity" resultType="com.ssitcloud.dbstatistics.entity.CirculationYearDataEntity">
+	select * from circulationyeardata where 1=1
+	<if test="cir_idx !=null and cir_idx !=''">
+		AND `cir_idx` = #{cir_idx}
+	</if>
+	<if test="lib_idx !=null and lib_idx !=''">
+		AND `lib_idx` = #{lib_idx}
+	</if>
+	<if test="device_idx !=null and device_idx !=''">
+		AND `device_idx` = #{device_idx}
+	</if>
+	<if test="circulateCountType !=null and circulateCountType !=''">
+		AND `circulateCountType` = #{circulateCountType}
+	</if>
+	<if test="cirsubType !=null and cirsubType !=''">
+		AND `cirsubType` = #{cirsubType}
+	</if>
+	<if test="circulateDate !=null and circulateDate !=''">
+		AND `circulateDate` = #{circulateDate}
+	</if>
+</select>
+<select id="queryCirculationYearDataList" parameterType="com.ssitcloud.dbstatistics.entity.CirculationYearDataEntity" resultType="com.ssitcloud.dbstatistics.entity.CirculationYearDataEntity">
+	select * from circulationyeardata 
+</select>
+<select id="getAllCirculationYear" parameterType="com.ssitcloud.dbstatistics.entity.CirculationYearDataEntity" resultType="com.ssitcloud.dbstatistics.entity.CirculationYearDataEntity">
+	select * from circulationyeardata 
+</select>
+
+<select id="countLoanLog" parameterType="map" resultType="com.ssitcloud.statistics.entity.StatisticsLoanLogEntity">
+	SELECT 'year' type,sum(loan_cirYearCount) loan_total,sum(return_cirYearCount) return_total,sum(renew_cirYearCount) renew_total,ll.`circulateDate` time from circulationyeardata ll
+	<where>
+		<if test="lib_idx != null and lib_idx.size() >0">
+				AND ll.`lib_idx` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+		<if test="device_idx!=null and device_idx!='' and device_idx!=0">
+			AND ll.`device_idx`=#{device_idx}
+		</if>
+		<if test="circulateCountType!=null and circulateCountType!=''">
+			AND ll.`circulateCountType`=#{circulateCountType}
+		</if>
+		<if test="cirsubType!=null and cirsubType!=''">
+			AND ll.`cirsubType`=#{cirsubType}
+		</if>
+		<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+			AND ll.`circulateDate` BETWEEN #{startTime} AND #{endTime} 
+		</if>
+	</where>
+	 GROUP BY TIME ORDER BY TIME
+</select>
+</mapper>

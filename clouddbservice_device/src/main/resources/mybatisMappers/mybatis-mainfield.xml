@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mainfield">
+
+<insert id="addMainField" parameterType="com.ssitcloud.entity.MainfieldEntity" 
+ useGeneratedKeys="true" keyProperty="mainfield_idx">
+	INSERT INTO mainfield (
+	 `mainfield_table`,
+	 `mainfield_field`,
+	 `mainfield_field_desc`,
+	 `ref_statistics`
+	)VALUES(
+	 #{mainfield_table},
+	 #{mainfield_field},
+	 #{mainfield_field_desc},
+	 #{ref_statistics}
+	)
+</insert>
+
+<delete id="delMainField">
+	DELETE FROM mainfield WHERE `mainfield_idx` = #{mainfield_idx}
+</delete>
+
+
+<update id="updMainField" parameterType="com.ssitcloud.entity.MainfieldEntity">
+ UPDATE mainfield 
+ <set>
+ 	<if test="mainfield_table !=null and mainfield_table !=''">
+ 		`mainfield_table` = #{mainfield_table},
+ 	</if>
+ 	<if test="mainfield_field !=null and mainfield_field !=''">
+ 		`mainfield_field` = #{mainfield_field},
+ 	</if>
+ 	<if test="mainfield_field_desc !=null and mainfield_field_desc !=''">
+ 		`mainfield_field_desc` = #{mainfield_field_desc},
+ 	</if>
+ 	<if test="ref_statistics !=null and ref_statistics !=''">
+ 		`ref_statistics` = #{ref_statistics},
+ 	</if>
+ </set>
+ <where>
+ 	`mainfield_idx` = #{mainfield_idx}
+ </where>
+</update>
+
+<select id="selMainfieldByIdx" resultType="com.ssitcloud.entity.MainfieldEntity">
+	SELECT * FROM mainfield WHERE `mainfield_idx` = #{mainfield_idx}
+</select>
+
+<select id="selectMainFieldByPage" parameterType="com.ssitcloud.entity.page.MainFieldPageEntity" resultType="com.ssitcloud.entity.page.MainFieldPageEntity">
+	<if test="whetherPaging==true">
+		<include refid="paging.head"/>
+	</if>
+	SELECT * FROM mainfield WHERE 1=1
+	<if test="whetherPaging==true">
+		<include refid="paging.tail"/>
+	</if>
+</select>
+
+<select id="listMainfieldCollection" resultType="java.util.Map">
+	SELECT 
+	  mainfield_table,
+	  GROUP_CONCAT(mainfield_field  SEPARATOR '#') `field`,
+	  GROUP_CONCAT(mainfield_field_desc  SEPARATOR '#') `field_desc`
+	FROM
+	  mainfield 
+	WHERE mainfield_field IS NOT NULL 
+	  AND mainfield_field != '' 
+	GROUP BY mainfield_table 
+</select>
+
+<select id="countMainfieldByTableAndField" parameterType="com.ssitcloud.entity.page.MainFieldPageEntity" resultType="java.lang.Integer">
+	SELECT 
+	  COUNT(1) 
+	FROM
+	  mainfield 
+	WHERE mainfield_table = #{mainfield_table}
+	  AND mainfield_field = #{mainfield_field}
+</select>
+<select id="selectMainFieldList" parameterType="com.ssitcloud.entity.MainfieldEntity" resultType="com.ssitcloud.entity.MainfieldEntity">
+   SELECT 
+     `mainfield_table`,
+	 `mainfield_field`,
+	 `mainfield_field_desc`,
+	 `ref_statistics`
+   FROM mainfield
+</select>
+</mapper>

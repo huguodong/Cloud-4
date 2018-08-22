@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_bar_hight"
+                android:background="@color/orange"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/back"
+                    android:onClick="finish"
+                    android:layout_width="@dimen/title_bar_left_button_width"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/back_white" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/settings_web"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/large_text" />
+
+                <Button
+                    android:id="@+id/register"
+                    android:layout_width="@dimen/title_bar_right_button_width"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:text="@string/register_button"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/standard_text"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/loadProgress"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:progressDrawable="@drawable/all_blue_progress"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:progress="50"
+                android:max="100" />
+
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

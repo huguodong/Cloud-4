@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<project projectName="clouddbservice_devicemonitor" baseURL="http://127.0.0.1:8080">
+		<!-- 人流量服务及3D导航服务状态数据云端存储功能接口，保存数据到mongodb -->
+		<RequestUrl requestMapping="/specialdevicelog/transDataToSpecialDevice" id="transDataToSpecialDevice"/>
+	</project>
+	
+	<project projectName="clouddbservice_statistics" baseURL="http://127.0.0.1:8080">
+		<!-- 人流量业务数据存储接口，保存数据到mysql -->
+		<RequestUrl requestMapping="/rllCount/saveRllCountData" id="saveRllCountData"/>
+	</project>
+	<project projectName="clouddbservice_devicemonitor" baseURL="http://127.0.0.1:8080">
+		<!--操作日志接口，保存到mongodb -->
+		<RequestUrl requestMapping="/transLog/dealOperationLog" id="dealOperationLog"/>
+		<!--操作日志接口，保存到mongodb -->
+		<RequestUrl requestMapping="/transLog/dealTransData" id="dealTransData"/>
+	</project>
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/interfaceRequest/addRequest" id="addRequest"/>
+	</project>
+	
+</RequestUrlList>

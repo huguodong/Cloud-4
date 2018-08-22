@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="thirdPartyService">
+
+	<select id="queryThirdPartyServiceByParams" parameterType="map" resultType="com.ssitcloud.devmgmt.entity.ThirdPartyServiceEntity">
+		SELECT service_idx,app_key,service_name,service_desc,library_idx,request_ip,access_times,isDisable,operate_time FROM third_party_service
+		<where>
+			<if test="service_idx != null and service_idx != '' or service_idx == 0">
+				AND service_idx = #{service_idx}
+			</if>
+			<if test="app_key != null and app_key != ''">
+				AND app_key = #{app_key}
+			</if>
+			<if test="service_name != null and service_name != ''">
+				AND service_name = #{service_name}
+			</if>
+			<if test="library_idx != null and library_idx != '' or library_idx==0">
+				AND library_idx = #{library_idx}
+			</if>
+			<if test="isDisable != null and isDisable != '' or isDisable == 0">
+				AND isDisable = #{isDisable}
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryThirdPartyServiceByPage" parameterType="com.ssitcloud.entity.page.ThirdPartyServicePageEntity" resultType="com.ssitcloud.entity.page.ThirdPartyServicePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT service_idx,app_key,service_name,service_desc,library_idx,request_ip,access_times,isDisable,operate_time FROM third_party_service
+		<where>
+			<if test="app_key != null and app_key != ''">
+				AND app_key = #{app_key}
+			</if>
+			<if test="service_name != null and service_name != ''">
+				AND service_name LIKE concat('%','${service_name}','%')
+			</if>
+			<if test="library_idx != null and library_idx != '' or library_idx==0">
+				AND library_idx = #{library_idx}
+			</if>
+			<if test="isDisable != null and isDisable != '' or isDisable == 0">
+				AND isDisable = #{isDisable}
+			</if>		
+		</where>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<delete id="deleteThirdPartyService" parameterType="int">
+		DELETE FROM third_party_service WHERE service_idx in
+		<foreach item="service_idx" collection="array" open="(" separator="," close=")">
+           #{service_idx}
+        </foreach>
+	</delete>
+	
+	<insert id="addThirdPartyService" parameterType="com.ssitcloud.devmgmt.entity.ThirdPartyServiceEntity" useGeneratedKeys="true" keyProperty="service_idx">
+		<selectKey keyProperty='service_idx' resultType='int' order='AFTER'  >  
+	        select LAST_INSERT_ID() AS service_idx;  
+	    </selectKey>  
+		INSERT INTO third_party_service(
+			app_key,
+			service_name,
+			service_desc,
+			library_idx,
+			request_ip,
+			access_times,
+			operate_time
+		)VALUES(
+			#{app_key},
+			#{service_name},
+			#{service_desc},
+			#{library_idx},
+			#{request_ip},
+			#{access_times},
+			#{operate_time}
+		)
+	</insert>
+	
+	<update id="editThirdPartyService" parameterType="com.ssitcloud.devmgmt.entity.ThirdPartyServiceEntity">
+		UPDATE third_party_service
+		<set>
+			<if test="app_key !=null and app_key !=''">
+				`app_key` = #{app_key},
+			</if>
+			<if test="service_name !=null and service_name !=''">
+				`service_name` = #{service_name},
+			</if>
+			<if test="service_desc !=null and service_desc !=''">
+				`service_desc` = #{service_desc},
+			</if>
+			<if test="request_ip !=null and request_ip !=''">
+				`request_ip` = #{request_ip},
+			</if>
+			<if test="access_times !=null and access_times !='' or access_times==0">
+				`access_times` = #{access_times},
+			</if>
+			<if test="isDisable !=null and isDisable !='' or isDisable==0">
+				`isDisable` = #{isDisable},
+			</if>
+			<if test="operate_time !=null">
+				`operate_time` = #{operate_time},
+			</if>
+		</set>
+		 WHERE service_idx = #{service_idx}
+	</update>
+	
+</mapper>

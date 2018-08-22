@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="bookinput">
+
+<insert id="insertBookInput" parameterType="com.ssitcloud.dblib.entity.BookInputEntity"
+ useGeneratedKeys="true" keyProperty="bookinput_idx">
+	INSERT INTO bookinput (
+	  `bookitem_idx`,
+	  `inputway`,
+	  `inputdevice_idx`,
+	  `inputdatetime`,
+	  `inputno`
+	) 
+	VALUES (
+		#{bookitem_idx},	
+		#{inputway},	
+		#{inputdevice_idx},	
+		#{inputdatetime},	
+		#{inputno}
+	)
+</insert>
+
+<delete id="deleteBookInput" parameterType="com.ssitcloud.dblib.entity.BookInputEntity">
+	DELETE FROM bookinput WHERE `bookinput_idx` = #{bookinput_idx} 
+</delete>
+
+<update id="updateBookInput" parameterType="com.ssitcloud.dblib.entity.BookInputEntity">
+	UPDATE bookinput 
+	
+	
+	<set>
+		<if test="bookitem_idx != null ">
+		  `bookitem_idx` = #{bookitem_idx},
+		</if>
+		<if test="inputway !=null ">
+		  `inputway` = #{inputway},
+		</if>
+		<if test="inputdevice_idx !=null ">
+		  `inputdevice_idx` = #{inputdevice_idx},
+		</if>
+		<if test="inputdatetime !=null ">
+		  `inputdatetime` = #{inputdatetime},
+		</if>
+		<if test="inputno !=null ">
+		  `inputno` = #{inputno},
+		</if>
+	</set>
+	<where>
+		`bookinput_idx` = #{bookinput_idx}
+	</where>
+</update>
+
+<select id="queryBookInput" resultType="com.ssitcloud.dblib.entity.BookInputEntity">
+	SELECT * FROM bookinput WHERE `bookinput_idx` = #{bookinput_idx}
+</select>
+
+<select id="queryBookInputList" resultType="com.ssitcloud.dblib.entity.BookInputEntity">
+	SELECT * FROM bookinput 
+</select>
+
+<select id="queryBookInputListByPage" resultType="com.ssitcloud.dblib.entity.page.BookInputPageEntity">
+	<if test="whetherPaging==true">
+		<include refid="paging.head"/>
+	</if>
+	
+	SELECT * FROM bookinput
+	
+	<if test="whetherPaging==true">
+		<include refid="paging.tail"/>
+	</if>
+</select>
+
+
+</mapper>

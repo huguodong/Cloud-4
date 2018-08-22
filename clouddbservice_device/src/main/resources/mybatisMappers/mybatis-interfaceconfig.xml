@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="json">
+<resultMap type="com.ssitcloud.devmgmt.entity.DataEntity" id="DataEntityRM">
+	<id property="id" column="ID"/>
+	<result property="data" column="DATA"/>
+	<result property="type" column="TYPE"/>
+</resultMap>
+<select id="jsonData"  parameterType="java.util.HashMap" resultMap="DataEntityRM">
+	select 
+		v.`id`,v.`operation`
+	from
+		device_view_config_set d
+	left join
+		view_config v
+	on 
+	    d.`view_config_id` = v.`id`
+	where
+		<!-- d.`device_type` = #{deviceType}
+	and -->
+		d.`library_idx` = #{libId}
+</select>
+<insert id="saveData" parameterType="com.ssitcloud.devmgmt.entity.ConfigDataEntity" useGeneratedKeys="true" keyProperty="id">
+	INSERT INTO `config_data` (
+		`libId`,
+		`deviceIdx`,
+		`operation`,
+		`createtime`,
+		`operator`,
+		`operator_type`
+	) VALUES(
+		#{libId},
+		#{deviceIdx},
+		#{operation},
+		#{createtime},
+		#{operator},
+		#{operator_type}
+	) 
+</insert>
+<update id="udpateData" parameterType="com.ssitcloud.devmgmt.entity.ConfigDataEntity">
+	UPDATE config_data c
+	SET 
+		`operation` = #{operation},
+		`createtime` = #{createtime},
+		`operator_type` = #{operator_type} 
+	<where>
+		c.`libId` = #{libId}
+		and 
+		<!-- <if test="deviceIdx !='null'">
+				
+		c.`deviceIdx` = #{deviceIdx} -->
+	<choose>
+	    <when test="deviceIdx !=null and deviceIdx != ''">
+	         c.`deviceIdx` = #{deviceIdx}
+	    </when>
+	    <otherwise>
+	        c.`deviceIdx` is null
+	    </otherwise>
+	</choose>
+	</where>
+</update>
+<select id="getInitData" parameterType="java.util.Map" resultType="java.lang.String">
+	select 
+		operation
+	from
+		config_data c
+	<where>
+		<if test="libId !=null and libId != ''">
+			c.`libId` = #{libId}
+		</if>
+		<if test="deviceIdx !=null and deviceIdx != ''">
+			and c.`deviceIdx` = #{deviceIdx}
+		</if>
+		
+		<if test="deviceIdx ==null">
+			and c.`deviceIdx` is null
+		</if>
+		
+    </where>	
+</select>
+<select id="getAllConfigData" parameterType="java.util.HashMap" resultType="com.ssitcloud.devmgmt.entity.ConfigDataEntity">
+	select 
+		libId,deviceIdx,operation,createtime,operator,operator_type
+	from
+		config_data c
+	where
+			c.`libId` = #{libId}
+		and
+			and c.`deviceIdx` = #{deviceIdx}	
+</select>
+<select id="queryExsit" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+	select 
+		count(*)
+	from
+		config_data c
+	<where>
+		c.`libId` = #{lib_id}
+		and 
+		<!-- <if test="deviceIdx !='null'">
+				
+		c.`deviceIdx` = #{deviceIdx} -->
+	<choose>
+	    <when test="deviceIdx !=null">
+	         c.`deviceIdx` = #{deviceIdx}
+	    </when>
+	    <otherwise>
+	        c.`deviceIdx` is null
+	    </otherwise>
+	</choose>
+	</where>
+</select>
+<select id="queryLibExsit" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+	select 
+		count(*)
+	from
+		config_data c
+	<where>
+		 	<!-- <if test="libId !=null and libId != ''">
+				c.`libId` = #{libId}
+			</if> -->
+				and `deviceIdx` = #{deviceIdx}	
+				<!-- and `deviceType` = #{deviceType} -->	
+	</where> 
+</select>
+<select id="queryDevice"  parameterType="java.util.Map" resultType="com.ssitcloud.devmgmt.entity.QueryDevice">
+	select 
+		device_idx,library_idx,device_model_idx,device_name
+	from
+		device
+	<where>
+		 	<!-- <if test="library_idx !=null and library_idx  != ''">
+				`library_idx` = #{library_idx}
+			</if> -->
+			<if test="device_id !=null and device_id  != ''">
+				and `device_id` = #{device_id}
+			</if>
+	</where>
+</select>
+<select id="getDevTypeData" parameterType="java.lang.Integer" resultType="com.ssitcloud.devmgmt.entity.DeviceType">
+	select 
+		library_idx,device_model_idx,device_type,device_type_desc
+	from 
+		device d
+	inner join 
+		metadata_devicetype m
+	on 
+		d.device_model_idx = m.meta_devicetype_idx
+	and d.`library_idx` = #{library_idx}
+	GROUP BY device_type,device_type_desc
+</select>
+
+	<select id="selectConfigDataByDevIdAndLibIdx" parameterType="Map"  resultType="com.ssitcloud.devmgmt.entity.ConfigDataEntityF">
+		SELECT id,operation FROM config_data 
+		<where>
+			<if test="deviceIdx !=null and deviceIdx !='' ">
+				AND `deviceIdx`=(SELECT DISTINCT d.`device_idx` FROM device d WHERE d.`device_id`=#{deviceIdx})
+			</if>
+			<if test="deviceIdx ==null">
+				AND `deviceIdx` is null
+			</if>
+			<if test="deviceIdx =='' ">
+				AND `deviceIdx` =''
+			</if>
+			<if test="libId !=null and libId !='' ">
+				and `libId` = #{libId}
+			</if>
+		</where>
+		limit 1;
+	</select>
+	
+	<select id="selectDeviceIdxByLibId" parameterType="Map" resultType="com.ssitcloud.devmgmt.entity.ConfigDataEntity">
+		select deviceIdx from config_data where 1=1 AND `deviceIdx` is not null
+		<if test="libId !=null and libId !='' ">
+				and `libId` = #{libId}
+		</if>
+	</select>
+	
+	<select id="selectAllViewConfig" resultType="com.ssitcloud.devmgmt.entity.DataEntity">
+		SELECT * FROM view_config
+		where 1=1
+	</select>
+
+</mapper>

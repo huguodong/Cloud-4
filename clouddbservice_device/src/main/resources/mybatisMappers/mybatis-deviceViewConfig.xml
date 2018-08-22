@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="deviceViewConfig">
+	<resultMap type="com.ssitcloud.devmgmt.entity.DeviceViewDataEntity" id="dataEntity">
+	<id property="id" column="ID"/>
+	<result property="operation" column="OPERATION"/>
+	</resultMap>
+	<select id="queryDeviceViewConfig"  parameterType="Map" resultMap="dataEntity">
+		select id,operation from view_config where 1=1 
+		
+		<if test="id != null and id != ''">
+			and id =#{id}
+		</if>
+		<if test="fieldset_label != '' and fieldset_label != null ">
+		
+			and data like concat('%','${fieldset_label}','%')
+		</if>
+		
+		<if test="fieldset != null and fieldset != ''">
+			and data like concat('%','${fieldset}','%')
+		</if>
+	</select>
+	
+	<delete id="deleteConfigViewConfigSet" parameterType="Map">
+		delete from device_view_config_set where 1=1
+		<if test="fieldset_label != '' and fieldset_label != null">
+			and content like concat('%','${fieldset_label}','%')
+		</if>
+		<if test="id != null and id != ''">
+			and id = ${id}
+		</if>
+		<if test="library_idx != null and library_idx != ''">
+			and library_idx =#{library_idx}
+		</if>
+	</delete>
+	
+	<insert id="insertDeviceViewConfigSet" parameterType="com.ssitcloud.devmgmt.entity.DeviceViewConfigSet"
+	useGeneratedKeys="true" keyProperty="id">
+		insert into device_view_config_set(view_config_id,library_idx,content,device_type
+		,description,operator_idx,operate_time) 
+		values(#{view_config_id},#{library_idx},#{content},#{device_type},
+		#{description},#{operator_idx},#{operate_time})
+	</insert>
+	
+	<select id="queryDeviceViewConfigSet" parameterType="Map" resultType="com.ssitcloud.devmgmt.entity.DeviceViewConfigSet">
+		select * from device_view_config_set where 1=1
+		<if test="library_idx != null and library_idx != ''">
+			and library_idx = #{library_idx}
+		</if>
+	</select>
+	
+</mapper>

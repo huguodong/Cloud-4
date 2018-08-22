@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="deviceAcsConfig">
+	<insert id="insertOne" parameterType="List">
+		 insert into device_selfcheck_protocol_config
+		 (
+			 protocol_idx,
+			 device_tpl_type,
+			 library_idx,
+			 protocol_type,
+			 protocol_library_idx,
+			 protocol_reqrule,
+			 protocol_resprule,
+			 protocol_description,
+			 operator_idx,
+			 createtime,
+			 updatetime,
+		 )
+		 values
+		 (
+		 	#{protocol_idx},
+		 	#{device_tpl_type},
+		 	#{library_idx},
+		 	#{protocol_type},
+		 	#{protocol_library_idx},
+		 	#{protocol_reqrule},
+		 	#{protocol_resprule},
+		 	#{protocol_description},
+		 	#{operator_idx},
+		 	#{createtime},
+		 	#{updatetime}
+		 )
+	</insert>
+	<select id="selectPage" parameterType="com.ssitcloud.entity.ProtocolConfigTemplateEntity" resultType="com.ssitcloud.entity.ProtocolConfigTemplateEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"></include>
+		</if>
+		SELECT 
+		pct.`protocol_tpl_idx`,
+		pct.`library_idx`,
+		pct.`protocol_tpl_desc`,
+		pct.`protocol_type`,
+		pct.`version_stamp`,
+		GROUP_CONCAT(mp.`protocol_field_name`) AS protocol_field_names,
+		MAX(dspc.`updatetime`) AS updatetime
+		 FROM protocol_config_template pct
+		 LEFT JOIN device_selfcheck_protocol_config dspc ON pct.`protocol_tpl_idx`=dspc.`protocol_idx`
+		 LEFT JOIN metadata_protocol mp ON mp.`protocol_field_idx`=dspc.`protocol_library_idx`
+		GROUP BY pct.`protocol_tpl_idx`
+		HAVING 1=1
+		<if test="protocol_type!=null">
+			and protocol_type=#{protocol_type}
+		</if>
+		<if test="library_idx!=null and library_idx_arr==null">
+			and library_idx=#{library_idx}
+		</if>
+		<if test="library_idx_arr!=null">
+			and library_idx in 
+			<foreach item="item" open="(" close=")" separator="," collection="library_idx_arr" >
+				#{item}
+			</foreach>
+		</if>
+		<if test="protocol_tpl_desc!=null">
+			and protocol_tpl_desc like concat('%','${protocol_tpl_desc}','%')
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"></include>
+		</if>
+	</select>
+	<select id="selectMetadataProtocol" parameterType="com.ssitcloud.entity.MetadataProtocolEntity" resultType="com.ssitcloud.entity.MetadataProtocolEntity">
+		SELECT * FROM metadata_protocol
+		WHERE 1=1
+		<if test="protocol_show!=null">
+			and protocol_show=#{protocol_show}
+		</if>
+		<if test="protocol_field_name!=null">
+			and protocol_field_name=#{protocol_field_name}
+		</if>
+		<if test="protocol_field_desc!=null">
+			and protocol_field_desc=#{protocol_field_desc}
+		</if>
+		order by protocol_field_sort asc;
+	</select>
+	<select id="queryProtocolConfigByTplIdxEX1" parameterType="com.ssitcloud.entity.ACSProtocolEntity" resultType="com.ssitcloud.entity.ACSProtocolEntity">
+		select * from device_selfcheck_protocol_config
+		where 1=1
+		 and protocol_idx=#{protocol_idx}
+	</select>
+	<delete id="deleteByIdx">
+		delete from device_selfcheck_protocol_config where protocol_idx=#{protocol_idx}
+	</delete>
+	<insert id="addProtocolConfigEx1Batch" parameterType="List">
+		insert into device_selfcheck_protocol_config
+		(
+			protocol_idx,
+			device_tpl_type,
+			library_idx,
+			protocol_type,
+			protocol_library_idx,
+			protocol_reqrule,
+			protocol_resprule,
+			protocol_description,
+			operator_idx,
+			createtime,
+			updatetime
+		)
+		values
+	    <foreach collection="list" item="item" index="index" separator="," > 
+	    (
+	    	#{item.protocol_idx},
+			#{item.device_tpl_type},
+			#{item.library_idx},
+			#{item.protocol_type},
+			#{item.protocol_library_idx},
+			#{item.protocol_reqrule},
+			#{item.protocol_resprule},
+			#{item.protocol_description},
+			#{item.operator_idx},
+			NOW(),
+			NOW()
+		)
+	    </foreach> 
+	</insert>
+	<select id="queryProtocolConfigTemplateExactly" parameterType="com.ssitcloud.entity.ProtocolConfigTemplateEntity" resultType="com.ssitcloud.entity.ProtocolConfigTemplateEntity">
+		select * from  protocol_config_template
+		where 1=1
+		<if test="protocol_type!=null">
+			and protocol_type=#{protocol_type}
+		</if>
+		<if test="protocol_tpl_desc!=null">
+			and protocol_tpl_desc=#{protocol_tpl_desc}
+		</if>
+		<if test="library_idx!=null">
+			and library_idx=#{library_idx}
+		</if>
+		<if test="protocol_tpl_idx!=null">
+			and protocol_tpl_idx=#{protocol_tpl_idx}
+		</if>
+	
+	</select>
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="http://www.example.org/RequestURLConfSchema">
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/hearbeat/saveData" id="HEARBEAT_URL" />
+	</project>
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl id="restoreDataByLibraryIdxState" requestMapping="/bakup/restoreDataByLibraryIdx"></RequestUrl>
+		<RequestUrl id="getAllDeviceByLibidx" requestMapping="/clouddbservice_device/device/getAllDeviceByLibidx"></RequestUrl>
+	</project>
+</RequestUrlList>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nodeType">
+
+	<insert id="addNodeType" parameterType="com.ssitcloud.node.entity.NodeTypeEntity" useGeneratedKeys="true" keyProperty="node_type_idx">
+		INSERT INTO `node_type` (
+			`node_type_id`,
+			`node_type_name`
+		) VALUES (
+			#{node_type_id},
+			#{node_type_name}
+		)
+	</insert>
+	
+	<delete id = "deleteNodeTypeById" parameterType = "java.util.List">  
+	    <![CDATA[  
+	       DELETE FROM `node_type` WHERE `node_type_idx` in
+	    ]]>  
+	    <foreach collection="list" item = "node_type_idx" open="(" separator="," close=")">
+	   		#{node_type_idx}
+	    </foreach>  
+	</delete> 
+
+	<select id="queryNodeTypeByPage" resultType="com.ssitcloud.node.entity.NodeTypeEntity">
+		SELECT `node_type_idx`,`node_type_id`,`node_type_name` FROM `node_type`
+	</select>
+
+	<select id="queryNodeTypeByParam" parameterType="com.ssitcloud.node.entity.page.NodeTypePageEntity" resultType="com.ssitcloud.node.entity.page.NodeTypePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT * FROM `node_type`
+		<where>
+			<if test="node_type_idx != null and node_type_idx != 0">
+				AND `node_type_idx` = #{node_type_idx}
+			</if>
+			<if test="node_type_id != null and node_type_id != ''">
+				AND `node_type_id` LIKE CONCAT('%', #{node_type_id}, '%')
+			</if>
+			<if test="node_type_name != null and node_type_name != ''">
+				AND `node_type_name` LIKE CONCAT('%', #{node_type_name}, '%')
+			</if>
+		</where>
+		ORDER BY `node_type_idx`
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+
+	<select id="queryNodeTypeById" resultType="com.ssitcloud.node.entity.NodeTypeEntity">
+		SELECT * FROM `node_type`
+		<where>
+			<choose>
+				<when test="_parameter!= null">
+					AND `node_type_idx` = #{node_type_idx}
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+	<update id="updateNodeType" parameterType="com.ssitcloud.node.entity.NodeTypeEntity">
+		UPDATE `node_type`
+		<set>
+			<if test="node_type_id !=null ">
+			`node_type_id` = #{node_type_id},
+			</if>
+			<if test="node_type_name !=null ">
+			`node_type_name` = #{node_type_name},
+			</if>
+		</set>
+		WHERE `node_type_idx` = #{node_type_idx}
+	</update>
+
+</mapper>

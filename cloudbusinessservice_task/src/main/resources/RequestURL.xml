@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+	<!--  project_name约定唯一-->
+		<project projectName="cloudbusinessservice_device" baseURL="http://127.0.0.1:8080">
+		<!-- 查询权限 -->
+<!-- 		<RequestUrl requestMapping="/cloudbusinessservice_device/permission/SelPermissionbyOperIdx" id="SelPermissionByOperIdx"/> -->
+	</project>
+	
+	<!-- 连接clouddbservice_device -->
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/clouddbservice_device/timedTask/addTimedTask" id="addTimedTask"/>
+		<RequestUrl requestMapping="/clouddbservice_device/timedTask/deleteTimedTask" id="deleteTimedTask"/>
+		<RequestUrl requestMapping="/clouddbservice_device/timedTask/updateTimedTask" id="updateTimedTask"/>
+		<RequestUrl requestMapping="/clouddbservice_device/timedTask/selectTimedTask" id="selectOneTimedTask"/>
+		<RequestUrl requestMapping="/clouddbservice_device/timedTask/selectTimedTasks" id="selectTimedTasks"/>
+		
+		<RequestUrl requestMapping="/clouddbservice_device/timedTaskTrigger/deleteTimedTaskTrigger" id="deleteTimedTaskTrigger"/>
+		<RequestUrl requestMapping="/clouddbservice_device/timedTaskTrigger/selectTimedTaskTriggers" id="selectTimedTaskTriggers"/>
+		
+		<RequestUrl requestMapping="/clouddbservice_device/device/SelectDevice" id="selectDevice"/>
+		<!-- 统计查询的子类型相关 -->
+		<RequestUrl requestMapping="/clouddbservice_device/bookLocation/selectBookLocations" id="selectBookLocations"/>
+		<RequestUrl requestMapping="/clouddbservice_device/bookCirtype/selectBookCirtypes" id="selectBookCirtypes"/>
+		<RequestUrl requestMapping="/clouddbservice_device/bookMediatype/selectBookMediatypes" id="selectBookMediatypes"/>
+		<RequestUrl requestMapping="/clouddbservice_device/readertype/selectByLibIdx" id="selectReadertype"/>
+		
+	</project>
+	
+	<!-- 连接clouddbservice_statistics -->
+	<project projectName="clouddbservice_statistics" baseURL="http://127.0.0.1:8080">
+		<!-- 流通统计相关 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/cirday/insertCirculationDayData" id="addLoanLogDay"/>
+		<RequestUrl requestMapping="/clouddbservice_statistics/cirweek/insertCirculationWeekData" id="addLoanLogWeek"/>
+		<RequestUrl requestMapping="/clouddbservice_statistics/cirmonth/insertCirculationMonthData" id="addLoanLogMonth"/>
+		<RequestUrl requestMapping="/clouddbservice_statistics/ciryear/insertCirculationYearData" id="addLoanLogYear"/>
+		<!-- 财经统计相关 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/fineday/insertFineDayData" id="addFinLogDay"/>
+		<RequestUrl requestMapping="/clouddbservice_statistics/fineWeekData/addFineWeekData" id="addFinLogWeek"/>
+		<RequestUrl requestMapping="/clouddbservice_statistics/finemonth/insertFineMonthData" id="addFinLogMonth"/>
+		<RequestUrl requestMapping="/clouddbservice_statistics/fineYearData/addFineYearData" id="addFinLogYear"/>
+		<!-- 办证统计相关 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/newCardDayData/addNewCardDayData" id="addNewCardDayData"/>
+		<RequestUrl requestMapping="/clouddbservice_statistics/newCardWeekData/addNewCardWeekData" id="addNewCardWeekData"/>
+		<RequestUrl requestMapping="/clouddbservice_statistics/newCardMonthData/addNewCardMonthData" id="addNewCardMonthData"/>
+		<RequestUrl requestMapping="/clouddbservice_statistics/newCardYearData/addNewCardYearData" id="addNewCardYearData"/>
+		<!-- 22大类和操作结果 -->
+		<RequestUrl requestMapping="/clouddbservice_statistics/stattype/queryStaticsTypeList" id="selectStaticsType" /> 
+	</project>
+	
+	<!-- 连接clouddbservice_authentication -->
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/clouddbservice_authentication/library/selLibraryByIdxOrId" id="selLibraryByIdxOrId"/>
+	</project>
+	
+	<!-- 对于链接mongodb的操作直接连数据层devicemonitor -->
+	<project projectName="clouddbservice_devicemonitor" baseURL="http://127.0.0.1:8080">
+		<!--获取机器状态 -->
+<!-- 		<RequestUrl id="sayhello" requestMapping="/clouddbservice_devicemonitor/devicelog/selectDeviceState"/> -->
+		<RequestUrl requestMapping="/clouddbservice_devicemonitor/loanlog/selectLoanlog" id="selectLoanlog"/>
+		<RequestUrl requestMapping="/clouddbservice_devicemonitor/financelog/selectFinancelog" id="selectFinlog"/>
+		<RequestUrl requestMapping="/clouddbservice_devicemonitor/cardissuelog/selectCardissuelog" id="selectCardlog"/>
+	</project>
+	
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+<!-- 		<RequestUrl requestMapping="/cloudbusinessservice_node/hearbeat/saveData" id="HEARBEAT_URL" /> -->
+	</project>
+	
+</RequestUrlList>

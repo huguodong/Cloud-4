@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bookshelfinfo">
+	
+	<insert id="add" parameterType="com.ssitcloud.dblib.entity.BookShelfInfoEntity">
+		INSERT INTO `bookshelfinfo` (
+			`lib_id`,
+			`shelf_id`,
+			`info_type`,
+			`info_value`,
+			`updatetime`
+		) VALUES (
+			#{lib_id},
+			#{shelf_id},
+			#{info_type},
+			#{info_value},
+			NOW()
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="com.ssitcloud.dblib.entity.BookShelfInfoEntity">
+			DELETE FROM `bookshelfinfo` WHERE `lib_id` = #{lib_id} AND `shelf_id` = #{shelf_id}
+	  
+	</delete>
+	
+	<select id="select" resultType="com.ssitcloud.dblib.entity.BookShelfInfoEntity">
+		SELECT * FROM `bookshelfinfo`
+	</select>
+
+	<select id="selectById" parameterType="com.ssitcloud.dblib.entity.BookShelfInfoEntity" resultType="com.ssitcloud.dblib.entity.BookShelfInfoEntity">
+		SELECT * FROM `bookshelfinfo` where `lib_id` = #{lib_id} AND `shelf_id` = #{shelf_id}
+	</select>
+	
+	<update id="update" parameterType="com.ssitcloud.dblib.entity.BookShelfInfoEntity">
+		UPDATE `bookshelfinfo` SET 
+			`info_value` = #{info_value},
+			`updatetime` = NOW()
+			WHERE `lib_id` = #{lib_id} AND `shelf_id` = #{shelf_id} AND `info_type` = #{info_type}
+	</update>
+	
+</mapper>

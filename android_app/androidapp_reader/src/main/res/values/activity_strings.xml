@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--common-->
+    <string name="local_money">元</string>
+    <string name="unlogin_message">请先登录</string>
+    <string name="lib_not_support">图书馆暂时无法提供此服务</string>
+    <!--register string -->
+    <string name="register_title">注册账号</string>
+    <string name="register_username">用户名</string>
+    <string name="register_username_tip">请输入登录账号</string>
+    <string name="register_name">读者姓名</string>
+    <string name="register_name_tip">请输入您的姓名</string>
+    <string name="register_sex">性别</string>
+    <string name="register_sex_boy">男</string>
+    <string name="register_sex_girl">女</string>
+    <string name="register_idcard">身份证号</string>
+    <string name="register_idcard_tip">请输入身份证号</string>
+    <string name="register_birthday">生日</string>
+    <string name="register_pwd">密码</string>
+    <string name="register_pwd_tip">请输入密码</string>
+    <string name="register_pwd_repeat">确认密码</string>
+    <string name="register_pwd_repeat_tip">请再次输入密码</string>
+    <string name="register_mobile">手机号</string>
+    <string name="register_mobile_tip">请输入手机号</string>
+    <string name="register_mail">邮箱</string>
+    <string name="register_mail_tip">请输入邮箱</string>
+    <string name="register_vcode">验证码</string>
+    <string name="register_vcode_tip">请输入验证码</string>
+    <string name="register_button">提交</string>
+    <!--register run tip -->
+    <string name="register_network_error">连接服务器失败</string>
+    <string name="register_mail_repeat">邮箱重复</string>
+    <string name="register_mobile_repeat">手机号重复</string>
+    <string name="register_idcard_repeat">身份证号重复</string>
+    <string name="register_user_repeat">用户名重复</string>
+    <string name="register_pwd_length">密码长度需要大于</string>
+    <string name="register_mail_code_invalid">验证码已经过期</string>
+    <string name="register_mail_code_error">验证码错误</string>
+    <string name="register_success">注册成功</string>
+
+    <string name="register_check_loginname">用户名需要字母开头且长度大于5</string>
+    <string name="register_check_loginname_tip2">用户名中不允许@ . 等字符</string>
+    <string name="register_check_pwd">请输入密码</string>
+    <string name="register_check_pwd2">密码不相同</string>
+    <string name="register_check_name">请输入姓名</string>
+    <string name="register_check_mail">请输入正确的邮箱</string>
+    <string name="register_check_mobile">请输入正确的手机号</string>
+    <string name="register_check_idcard">请输入正确的身份证号</string>
+
+    <!--login string-->
+    <string name="login_user_tip">用户名/手机号/邮箱/身份证号</string>
+    <string name="login_pwd_tip">读者密码</string>
+    <string name="login_button">登录</string>
+    <string name="login_forget_pwd">忘记密码</string>
+    <string name="login_register">注册账号</string>
+    <string name="login_company_name">深圳市海恒智能有限公司</string>
+
+    <string name="login_user_tip2">请输入正确的用户名/手机号/邮箱/身份证号</string>
+    <string name="login_pwd_tip2">请输入密码</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_user_check_user">请检查用户名/手机号/邮箱/身份证号</string>
+    <string name="login_user_check_pwd">请检查密码</string>
+    <string name="login_network_fail">连接服务器失败</string>
+    <string name="login_user_lock">账户被锁定</string>
+    <string name="login_user_pwd_error">密码错误次数过多</string>
+
+    <!-- 我的读者卡 -->
+    <string name="mycard_title">我的读者证</string>
+    <string name="mycard_empty_1">你尚未绑定读者证</string>
+    <string name="mycard_empty_2">请绑定</string>
+
+    <!--读者卡信息-->
+    <string name="reader_card_name">读者证</string>
+    <string name="reader_card_name_english">READER\'S CARD</string>
+
+    <!-- 绑定卡 -->
+    <string name="empty_library_name">暂无</string>
+    <string name="bind_card_title">绑定读者证</string>
+    <string name="bind_card_submit">完成</string>
+    <string name="bind_card_tip1">读者证信息</string>
+    <string name="bind_card_library">图书馆名称</string>
+    <string name="bind_card_library_tip">请选择</string>
+    <string name="bind_card_card_no">读者证号码</string>
+    <string name="bind_card_card_no_tip">请输入读者证号码</string>
+    <string name="bind_card_card_pwd">读者证密码</string>
+    <string name="bind_card_card_pwd_tip">请输入读者证密码</string>
+    <!--输入提示-->
+    <string name="bind_card_library_tip1">请选择图书馆</string>
+    <string name="bind_card_card_no_tip1">请输入读者证号码</string>
+    <string name="bind_card_card_pwd_tip1">请输入密码</string>
+    <!--提示-->
+    <string name="bind_card_success">绑定成功</string>
+    <string name="bind_card_unlogin">请先登录</string>
+    <string name="bind_card_network_error">网络错误</string>
+    <string name="bind_card_card_invalid">卡无效</string>
+    <string name="bind_card_card_already_bind">请先从其他账号解绑此卡或求助图书馆馆员</string>
+    <string name="bind_card_pwd_error">卡密码错误</string>
+
+    <!--读者信息-->
+    <string name="reader_info_reader_card_tip">证号 %s</string>
+    <string name="reader_info_can_borrow_tip">可借阅数</string>
+    <string name="reader_info_advance_charge_tip">预付款</string>
+    <string name="reader_info_my_deposit_tip">我的押金</string>
+    <string name="reader_info_my_arrears_tip">我的欠款</string>
+    <string name="reader_info_my_card_tip">我的读者证</string>
+    <string name="reader_info_my_card_tip2">已绑定/解绑/添加</string>
+    <string name="reader_info_ubbind_my_card_tip2">尚未绑定读者证</string>
+    <string name="reader_info_my_borrow_tip">我的借阅</string>
+    <string name="reader_info_personal_setting_tip">个人设置</string>
+    <string name="reader_info_unBind_cardno_tip">请绑定读者证</string>
+    <string name="reader_info_unknow_cardno_tip">暂无</string>
+    <string name="reader_info_unknow_library_tip">暂无</string>
+    <!--主界面-->
+    <string name="main_view_renew">图书续借</string>
+    <string name="main_view_renew_count">已经借阅%s本</string>
+
+    <!-- 续借 -->
+    <string name="book_renew_unknow">未知</string>
+    <string name="book_renew_no">暂无</string>
+    <string name="book_renew_title">图书续借</string>
+    <string name="book_renew_count_borrow">最大可借数</string>
+    <string name="book_renew_future_borrow">近7天待还</string>
+    <string name="book_renew_can_borrow">剩余可借数</string>
+
+    <string name="book_renew_code_1">请先绑定卡</string>
+    <string name="book_renew_code_0_1">请先登录</string>
+    <string name="book_renew_code_0_2">网络异常，请稍后再试试</string>
+    <string name="book_renew_code_0_3">连接图书馆失败或卡失效了，请稍后再试试</string>
+    <!--续借子视图-->
+    <string name="sub_book_renew_button">续借</string>
+    <string name="sub_book_can_borrow_date">剩余可借阅：%s</string>
+    <string name="sub_book_can_borrow_unit">天</string>
+    <string name="sub_book_loan_date">借阅时间：%s</string>
+    <string name="sub_book_return_date">还书日期：%s</string>
+    <string name="sub_book_barcode">图书条码：%s</string>
+    <!--续借视图的续借视图，没写错-->
+    <string name="book_renew_renew_tip">续借</string>
+    <string name="book_renew_renew_submit">立即续借</string>
+    <string name="book_renew_renew_success">续借成功</string>
+    <string name="book_renew_renew_fail">续借失败，原因：%s</string>
+    <string name="book_renew_renew_fail_1">卡失效了</string>
+    <string name="book_renew_renew_fail_network_error">网络连接失败</string>
+    <!--个人设置-->
+    <string name="settings_title">个人设置</string>
+    <string name="settings_logout">退出登录</string>
+    <string name="settings_return_remind">还书提醒</string>
+    <string name="settings_message_push">消息推送</string>
+    <string name="settings_modify_info">修改个人信息</string>
+    <string name="settings_change_mail">修改邮箱</string>
+    <string name="settings_change_pwd">修改密码</string>
+    <string name="settings_web">修改手机号 / 身份证号 / 邮箱</string>
+    <string name="settings_feedback">意见反馈</string>
+</resources>

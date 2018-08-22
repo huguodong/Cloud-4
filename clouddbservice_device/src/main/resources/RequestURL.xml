@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="http://www.example.org/RequestURLConfSchema">
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/hearbeat/saveData" id="HEARBEAT_URL" />
+		<RequestUrl requestMapping="/acsConfig/uploadAcsConfig" id="uploadAcsConfig" />
+	</project>
+	
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<!-- 還原 數 邏輯，獲 放生變話的IDX -->
+		<RequestUrl id="GetChangedIDXByIdxNameAndLibraryInfo" requestMapping="/bakup/GetChangedIDXByIdxNameAndLibraryInfo"></RequestUrl>
+	</project>
+	
+	<project projectName="cloudbusinessservice_datasyn" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/device/downloadConfig" id="downloadConfig" />
+		<RequestUrl requestMapping="/issue2device/send" id="send" />
+	</project>
+</RequestUrlList>

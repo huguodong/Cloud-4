@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reldevicegroup">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.RelDeviceGroupEntity"
+		useGeneratedKeys="true" keyProperty="rel_device_idx">
+		INSERT INTO rel_device_group
+		(device_group_idx, device_idx, library_idx)
+		VALUES
+		(#{device_group_idx},#{device_idx},#{library_idx})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.RelDeviceGroupEntity">
+		UPDATE rel_device_group
+		<set>
+			<if test="device_group_idx !=null and device_group_idx !=''">
+				device_group_idx = #{device_group_idx},
+			</if>
+			<if test="device_idx !=null and device_idx !=''">
+				device_idx = #{device_idx},
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				library_idx = #{library_idx}
+			</if>
+		</set>
+		WHERE rel_device_idx = #{rel_device_idx}
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.RelDeviceGroupEntity">
+		DELETE FROM rel_device_group
+		WHERE rel_device_idx = #{rel_device_idx}
+	</delete>
+	<select id="selectByidx" parameterType="com.ssitcloud.entity.RelDeviceGroupEntity"
+		resultType="com.ssitcloud.entity.RelDeviceGroupEntity">
+		SELECT * FROM rel_device_group
+		<where>
+			<if test="rel_device_idx !=null and rel_device_idx !=''">
+				and rel_device_idx = #{rel_device_idx}
+			</if>
+			<if test="device_group_idx !=null and device_group_idx !=''">
+				and device_group_idx = #{device_group_idx}
+			</if>
+			<if test="device_idx !=null and device_idx !=''">
+				and device_idx = #{device_idx}
+			</if>
+			<if test="library_idx !=null and library_idx !=''">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectAll" resultType="com.ssitcloud.entity.RelDeviceGroupEntity">
+		SELECT * FROM rel_device_group
+	</select>
+	<delete id="deleteByDeviceIdx" parameterType="Integer">
+		DELETE FROM rel_device_group
+		WHERE device_idx = #{value}
+	</delete>
+	<delete id="deleteByDeviceIdxs" >
+		DELETE FROM rel_device_group
+		WHERE device_idx IN
+		<foreach collection="deviceList" item="deviceIdx" open="(" close=")" separator=",">
+			#{deviceIdx}
+		</foreach>
+	</delete>
+	<delete id="deleteByLibIdx" parameterType="com.ssitcloud.entity.RelDeviceGroupEntity">
+		DELETE FROM rel_device_group
+		WHERE library_idx = #{library_idx}
+	</delete>
+	
+</mapper>

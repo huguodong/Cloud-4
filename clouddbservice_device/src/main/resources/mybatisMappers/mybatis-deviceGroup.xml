@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devicegroup">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.DeviceGroupEntity"
+		useGeneratedKeys="true" keyProperty="device_group_idx">
+		INSERT INTO device_group
+		(library_idx, device_group_id,device_group_name,device_group_desc)
+		VALUES
+		(#{library_idx},#{device_group_id},#{device_group_name},#{device_group_desc})
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.DeviceGroupEntity">
+		UPDATE device_group
+		<set>
+			<if test="device_group_desc">
+				device_group_desc = #{device_group_desc},
+			</if>
+			<if test="device_group_name !=null and device_group_name !='' ">
+				device_group_name = #{device_group_name},
+			</if>
+			<if test="library_idx !=null and library_idx !='' ">
+				library_idx = #{library_idx},
+			</if>
+			<if test="device_group_id !=null and device_group_id !='' ">
+				device_group_id = #{device_group_id},
+			</if>
+			version_stamp = version_stamp+1
+		</set>
+		WHERE device_group_idx = #{device_group_idx} 
+		<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+	</if>
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.DeviceGroupEntity">
+		DELETE FROM device_group
+		WHERE device_group_idx = #{device_group_idx}
+		
+	</delete>
+
+	<select id="selectByidx" parameterType="com.ssitcloud.entity.DeviceGroupEntity"
+		resultType="com.ssitcloud.entity.DeviceGroupEntity">
+		SELECT device_group_idx, device_group_desc,device_group_name,device_group_id,library_idx,version_stamp
+		FROM device_group
+		<where>
+			<if test="device_group_idx != null and device_group_idx !='' ">
+				and device_group_idx = #{device_group_idx}
+			</if>
+			<if test="device_group_desc != null and device_group_desc !='' ">
+				and device_group_desc = #{device_group_desc}
+			</if>
+			<if test="device_group_name != null and device_group_name !='' ">
+				and device_group_name = #{device_group_name}
+			</if>
+			<if test="device_group_id != null and device_group_id !='' ">
+				and (device_group_id LIKE CONCAT('%','${device_group_id}','%' )
+				or device_group_name LIKE CONCAT('%','${device_group_id}','%' ))
+			</if>
+			<if test="library_idx != null and library_idx !='' ">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+		ORDER BY device_group_idx
+	</select>
+	
+	<select id="count" parameterType="com.ssitcloud.entity.DeviceGroupEntity"
+		resultType="int">
+		SELECT COUNT(device_group_idx) FROM device_group
+		<where>
+			<if test="device_group_idx != null and device_group_idx !='' ">
+				and device_group_idx = #{device_group_idx}
+			</if>
+			<if test="device_group_desc != null and device_group_desc !='' ">
+				and device_group_desc = #{device_group_desc}
+			</if>
+			<if test="device_group_name != null and device_group_name !='' ">
+				and device_group_name = #{device_group_name}
+			</if>
+			<if test="device_group_id != null and device_group_id !='' ">
+				and (device_group_id LIKE CONCAT('%','${device_group_id}','%' )
+				or device_group_name LIKE CONCAT('%','${device_group_id}','%' ))
+			</if>
+			<if test="library_idx != null and library_idx !='' ">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+	<select id="selectgroupBylib_idx" parameterType="int" resultType="com.ssitcloud.entity.DeviceGroupEntity">
+		SELECT *
+		FROM device_group
+		WHERE library_idx = #{library_idx}
+	</select>
+	<select id="selectgroupBylib_idxs" resultType="com.ssitcloud.entity.DeviceGroupEntity">
+		SELECT *
+		FROM device_group
+		WHERE library_idx in 
+		<foreach collection="list" item="val" open="(" close=")" separator=",">
+			#{val}
+		</foreach>
+	</select>
+	<!-- 规定一个设备只能属于一个设备分组 -->
+	<select id="selectGroupByDeviceIdx" parameterType="int" resultType="Map">
+		SELECT * FROM device_group dg 
+		INNER JOIN rel_device_group  rdg ON dg.`device_group_idx`=rdg.`device_group_idx`
+		WHERE rdg.`device_idx`=#{device_idx}
+		LIMIT 1
+	</select>
+	<select id="selectByDeviceGroupIdx" parameterType="com.ssitcloud.entity.DeviceGroupEntity" resultType="com.ssitcloud.entity.DeviceGroupEntity">
+		SELECT * FROM device_group
+		WHERE device_group_idx=#{device_group_idx}
+		LIMIT 1
+	</select>
+	<select id="selectgroup" resultType="com.ssitcloud.entity.DeviceGroupEntity">
+		SELECT *
+		FROM device_group
+	</select>
+<!-- 	<select id="selectgroupAll" resultType="com.ssitcloud.entity.DeviceGroupEntity">
+		SELECT * FROM device_group
+	</select> -->
+	<select id="selectgroupBylibIdxAndDeviceGroupId" parameterType="com.ssitcloud.entity.DeviceGroupEntity" resultType="com.ssitcloud.entity.DeviceGroupEntity">
+		SELECT *
+		FROM device_group
+		WHERE library_idx = #{library_idx}
+		AND device_group_id=#{device_group_id}
+	</select>
+</mapper>

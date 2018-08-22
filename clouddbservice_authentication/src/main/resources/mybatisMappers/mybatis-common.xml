@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="common">
+
+	<select id="select" parameterType="Map" resultType="Map">
+		select * from ${tableName} 
+		where library_idx=${library_idx}
+	</select>
+	<select id="selectCount" resultType="Integer" parameterType="Map">
+		select count(*) from ${tableName}
+		where library_idx=${library_idx}
+	</select>
+	<select id="selectByLibrary_idx" resultType="Integer" parameterType="Map">
+		select * from ${tableName}
+		where library_idx=${library_idx}
+	</select>
+	<select id="selectCountByOperatorLibIdx" resultType="Integer" parameterType="Map">
+		SELECT COUNT(*) FROM 
+		${tableName} WHERE 
+		operator_idx IN 
+		(SELECT o.operator_idx FROM operator o WHERE o.library_idx=#{library_idx})
+	</select>
+	<select id="selectByOperatorLibIdx" parameterType="Map" resultType="Map">
+		SELECT * FROM 
+		${tableName} WHERE 
+		operator_idx IN 
+		(SELECT o.operator_idx FROM operator o WHERE o.library_idx=#{library_idx})
+	</select>
+	<select id="selectOperatorInfoByLibraryIdx" parameterType="Map" resultType="Map">
+		SELECT * FROM operator_info oi WHERE oi.`operator_idx` 
+		IN 
+		(
+			SELECT o.`operator_idx` FROM operator o WHERE o.library_idx=#{library_idx}
+		)
+	</select>
+	
+	<select id="selectLibraryServiceTemplateByLibraryIdx" parameterType="Map" resultType="Map">
+		SELECT * FROM library_service_template lst 
+		WHERE  lst.`lib_service_tpl_id` 
+		IN 
+		(SELECT  l.`lib_service_tpl_id` FROM library l WHERE l.`library_idx`=#{library_idx})
+	</select>
+	
+	<select id="selectMetadataInfotypeLibraryIdx" parameterType="Map" resultType="Map">
+		SELECT mi.`infotype_idx`,mi.`info_type`,mi.`info_type_desc` FROM metadata_infotype mi 
+		INNER JOIN operator_info oi ON oi.`infotype_idx`=mi.`infotype_idx`
+		INNER JOIN operator o ON o.`operator_idx`=oi.`operator_idx`
+		WHERE o.`library_idx`=#{library_idx}
+	</select>
+	<select id="selectPassWordHistoryByLibraryIdx" parameterType="Map" resultType="Map">
+		SELECT ph.`modifyTime`,ph.`operator_idx`,ph.`password`,ph.`password_idx` 
+		FROM password_history ph INNER JOIN operator o ON ph.`operator_idx`=o.`operator_idx`
+		WHERE o.`library_idx`=#{library_idx}
+	</select>
+	<select id="selectIpWhiteByLibraryIdx" parameterType="Map" resultType="Map">
+		SELECT iw.`ipaddr`,iw.`operator_idx` FROM ip_white iw 
+		INNER JOIN operator o ON o.`operator_idx`=iw.`operator_idx`
+		WHERE o.`library_idx`=#{library_idx}
+	</select>
+	<select id="selectSoxTemplateByLibraryIdx" parameterType="Map" resultType="Map">
+		SELECT st.* FROM sox_template st WHERE st.`sox_tpl_id` 
+		IN (SELECT o.`sox_tpl_id` FROM operator o WHERE o.`library_idx`=#{library_idx})
+	</select>
+	<select id="getColumsByTable" parameterType="Map" resultType="Map">
+		SHOW COLUMNS FROM ssitcloud_authentication.${tableName}
+	</select>
+	<insert id="insertBySql" parameterType="String">
+		${value}
+	</insert>
+	<delete id="deleteTableByLibIdx" parameterType="Map">
+		delete from ${tableName} where library_idx=#{library_idx}
+	</delete>
+	<delete id="deletePasswordHistoryByLibIdx" parameterType="Map">
+		delete from password_history where operator_idx in 
+		(select operator_idx from operator where library_idx=#{library_idx})
+	</delete>
+	<delete id="deleteIpWhiteByLibIdx" parameterType="Map">
+		delete from ip_white where operator_idx in 
+		(select operator_idx from operator where library_idx=#{library_idx})
+	</delete>
+	<delete id="deleteOperatorInfoByLibIdx" parameterType="Map">
+		delete from operator_info where operator_idx in
+		(select operator_idx from operator where library_idx=#{library_idx})
+	</delete>
+    <select id="selectBySQL" parameterType="Map" resultType="Map">
+        ${value}
+    </select>
+</mapper>

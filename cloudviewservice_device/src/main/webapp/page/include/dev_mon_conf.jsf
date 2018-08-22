@@ -1,0 +1,241 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<%--
+	设备监控配置 编辑 显示页面 lbh 2016年5月18日14:13:56
+--%>
+<div class="form-dialog-fix w-900">
+	<input name="device_mon_tpl_idx" type="text" hidden="hidden"/>
+	<div class="shade"></div>
+	<div class="form-dialog">
+		<div class="title">
+			<span class="char">新增配置</span>
+			<input type="reset" value="取消" class="g-cancel2 g-btn-gray">
+			<input type="submit" name="saveOrUpd" placeholder="" class="g-submit2 g-btn-green" value="保存">
+		</div>
+		<div class="left-tab" id="monitor-left-tab">
+			<ul>
+			    <li class="basic-info hide">模板基本信息</li>
+			  <%--   <c:forEach items="${metadataLogicObjects}" var="metadataLogicObject">
+						<li data-id="${metadataLogicObject.meta_log_obj_idx}">${metadataLogicObject.logic_obj_desc}</li>
+			   </c:forEach> --%>
+			</ul>
+		</div>
+		<div class="right-form">
+			<div class="right-content hide" id="device_mon_tpl_idx">
+				 <div class="form-wrap">
+				 	<div class="item">
+				 		<ul>
+				 			<li>
+								<div class="left">设备类型</div>
+								<div class="right">
+									<div class="g-select">
+										<select class="dialog-device-type">
+											<option value="-1">请选择</option>
+											<option value=""></option>
+										</select>
+										<span class="arr-icon"></span>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="left">监控模板ID</div>
+								<div class="right">
+									<input type="text" name="device_mon_tpl_id" id="" class="g-input" placeholder="请输入" />
+									<span class="error-msg">模板ID不能为空</span>
+								</div>
+							</li>
+							<li>
+								<div class="left">监控模板名称</div>
+								<div class="right">
+									<input type="text" name="device_mon_tpl_desc" id="" class="g-input" placeholder="请输入" />
+									<span class="error-msg">模板名称不能为空</span>
+								</div>
+							</li>
+						</ul>
+				 	</div>
+				 		
+				 </div>
+			</div>
+			<%--	
+				<div class="right-content">...</div>
+				<div class="right-content">...</div>
+			 --%>
+			 <c:forEach items="${metadataLogicObjects}" var="metadataLogicObject">
+					<div class="right-content" logicObjName="${metadataLogicObject.logic_obj}" id="${metadataLogicObject.meta_log_obj_idx}">
+						 <div class="form-wrap">
+						 	<c:choose>
+						 	<%--24小时自助借还--%>
+						 	<c:when test="${metadataLogicObject.logic_obj eq 'PlcSSL'}">
+						 		<c:forEach items="${plcLogicObjs}" var="plcLogicObj">
+						 			<ul plcLogicObjIdx="${plcLogicObj.plc_logic_obj_idx}">
+						 				<li>
+											<div class="segmentation">
+												<div class="t">${plcLogicObj.plc_logic_obj_desc}</div>
+											</div>
+										</li>
+										<c:if test="${fn:startsWith(plcLogicObj.plc_logic_obj,'Drawer')}">
+											<li>
+												<div class="left">报警限额</div>
+												<div class="right">
+													<input type="text" name="threshold" id="" class="g-input" placeholder="请输入"  />
+													<div class="tips">注：即超过多少本时报警</div>
+													<span class="error-msg">不能为空且只能填写整数</span>
+												</div>
+											</li>
+										</c:if>
+										<li>
+											<div class="left">启动</div>
+											<div class="right level">
+												<span class="alert btn active">报警</span>
+												<span class="error btn">失效</span>
+											</div>
+										</li>
+										<li>
+											<div class="left">颜色</div>
+												<div class="right">
+													<div class="g-select">
+													<select class="colorSelect"></select>
+													<span class="arr-icon"></span>
+												</div>
+											</div>
+										</li>
+						 			</ul>
+						 		</c:forEach>
+						 	</c:when>
+						 <%-- 	分拣机 --%>
+						 	<c:when test="${metadataLogicObject.logic_obj eq 'PlcSorter'}">
+							 		<c:forEach items="${plcLogicObjs}" var="plcLogicObj">
+							 			<c:if test="${fn:contains(plcSorter,plcLogicObj.plc_logic_obj)}">
+							 			 <ul plcLogicObjIdx="${plcLogicObj.plc_logic_obj_idx}">
+							 				<li>
+												<div class="segmentation">
+													<div class="t">${plcLogicObj.plc_logic_obj_desc}</div>
+												</div>
+											</li>
+											<li>
+											<div class="left">启动</div>
+											<div class="right level">
+												<span class="alert btn active">报警</span>
+												<span class="error btn">失效</span>
+											</div>
+										</li>
+										<li>
+											<div class="left">颜色</div>
+												<div class="right">
+													<div class="g-select">
+													<select class="colorSelect"></select>
+													<span class="arr-icon"></span>
+												</div>
+											</div>
+										</li>
+										</ul>
+							 		</c:if>
+							 	</c:forEach>
+						 	</c:when>
+						 <%-- 	还书机 --%>
+						 	<c:when test="${metadataLogicObject.logic_obj eq 'PlcReturn'}">
+							 		<c:forEach items="${plcLogicObjs}" var="plcLogicObj">
+							 			<c:if test="${fn:contains(plcReturn,plcLogicObj.plc_logic_obj)}">
+							 			 <ul plcLogicObjIdx="${plcLogicObj.plc_logic_obj_idx}">	
+							 				<li>
+												<div class="segmentation">
+													<div class="t">${plcLogicObj.plc_logic_obj_desc}</div>
+												</div>
+											</li>
+											<li>
+											<div class="left">启动</div>
+											<div class="right level">
+												<span class="alert btn active">报警</span>
+												<span class="error btn">失效</span>
+											</div>
+										</li>
+										<li>
+											<div class="left">颜色</div>
+												<div class="right">
+													<div class="g-select">
+													<select class="colorSelect"></select>
+													<span class="arr-icon"></span>
+												</div>
+											</div>
+										 </li>
+										</ul>
+							 			</c:if>
+							 		</c:forEach>
+						 	</c:when>
+						<%-- 	其他 --%>
+						 	<c:otherwise>
+						 	 <ul>
+								 <li>
+									<div class="segmentation">
+										<div class="t">${metadataLogicObject.logic_obj_desc}</div>
+									</div>
+								</li>
+								 <c:if test="${metadataLogicObject.logic_obj eq 'CardDispenser'}">
+									<li>
+										<div class="left">报警限额</div>
+										<div class="right">
+											<input type="text" name="threshold" id="" class="g-input" placeholder="请输入"  />
+											<div class="tips">注：即剩余多少张卡片时报警</div>
+											<span class="error-msg">不能为空且只能填写整数</span>
+										</div>
+									</li>
+								</c:if>
+								<c:if test="${metadataLogicObject.logic_obj eq 'CashAcceptor'}">
+									<li>
+										<div class="left">纸币数量</div>
+										<div class="right">
+											<input type="text"  name="threshold" id="threshold-rmb-num" class="g-input" placeholder="请输入"  />
+											<div class="tips">注：即超过多少张钱的时候报警</div>
+											<span class="error-msg">不能为空且只能填写整数</span>
+										</div>
+									</li>
+								</c:if>
+								<li>
+									<div class="left">启动</div>
+									<div class="right level">
+										<span class="alert btn active">报警</span>
+										<span class="error btn">失效</span>
+									</div>
+								</li>
+								<li>
+									<div class="left">颜色</div>
+										<div class="right">
+											<div class="g-select">
+											<select class="colorSelect"></select>
+											<span class="arr-icon"></span>
+										</div>
+									</div>
+								</li>
+						 	</ul>
+						 	</c:otherwise>
+						 	</c:choose>
+						</div>
+					</div>
+			</c:forEach>
+			<%--超时设置--%>
+			<div class="right-content" logicObjName="time_out" id="time_out">
+				 <div class="form-wrap">
+				 	<div class="item">
+				 		<ul>
+				 			<li>
+								<div class="segmentation">
+									<div class="t">设备与云平台通信超时时间设置</div>
+								</div>
+							</li>
+							<li>
+								<div class="left">超时限额</div>
+								<div class="right">
+									<input type="text" name="threshold" id="" class="g-input" placeholder="请输入"  />
+									<div class="tips">注：单位秒</div>
+									<span class="error-msg">不能为空且只能填写整数</span>
+								</div>
+							</li>
+						</ul>
+				 	</div>
+				 </div>
+			</div>
+		</div>
+	</div>
+</div>

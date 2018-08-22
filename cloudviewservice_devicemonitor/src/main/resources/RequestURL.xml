@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+	<!--  project_name约定唯一-->
+	<project projectName="cloudbusinessservice_device" baseURL="http://127.0.0.1:8080">
+		    <!-- 获取机器状态-->
+<!-- 		<RequestUrl id="selectDeviceState" requestMapping="/cloudbusinessservice_device/devicestate/selectDeviceState"/>
+ -->		<!-- 获取机器书架状态信息-->
+<!-- 		<RequestUrl id="selectBookrackState" requestMapping="/cloudbusinessservice_device/devicestate/selectBookrackState"/>
+ -->		<!-- 获取箱子状态信息 -->
+<!-- 		<RequestUrl id="selectBinState" requestMapping="/cloudbusinessservice_device/devicestate/selectBinState"/>
+ -->		<!-- 获取外设SSL设备信息 -->
+<!-- 		<RequestUrl id="selectDeviceExtState" requestMapping="/cloudbusinessservice_device/devicestate/selectDeviceExtState"/>	
+ -->		<!-- 获取设备功能状态 -->
+<!-- 		<RequestUrl id="selectSoftState" requestMapping="/cloudbusinessservice_device/devicestate/selectSoftState"/>
+ -->		<!-- 获取数据库名 -->
+<!-- 		<RequestUrl id="getMongodbNames" requestMapping="/cloudbusinessservice_device/devicestate/getMongodbNames" />
+ -->		
+		<!-- 表：device_config -->
+		<RequestUrl id="AddNewDeviceConfig" requestMapping="/cloudbusinessservice_device/devconf/AddNewDeviceConfig"/>
+		<RequestUrl id="UpdDeviceConfig" requestMapping="/cloudbusinessservice_device/devconf/UpdDeviceConfig"/>
+		<RequestUrl id="DelDeviceConfig" requestMapping="/cloudbusinessservice_device/devconf/DelDeviceConfig"/>
+		<RequestUrl id="SelDeviceConfig" requestMapping="/cloudbusinessservice_device/devconf/SelDeviceConfig"/>
+		<!-- 表device -->
+		<RequestUrl id="AddRegisterInfo" requestMapping="/cloudbusinessservice_device/device/AddRegisterInfo"/>
+		<RequestUrl id="AddNewDevice" requestMapping="/cloudbusinessservice_device/device/AddNewDevice"/>
+		<RequestUrl id="DeleteDevice" requestMapping="/cloudbusinessservice_device/device/DeleteDevice"/>
+		<RequestUrl id="SelectInfo" requestMapping="/cloudbusinessservice_device/device/SelectInfo"/>
+		<RequestUrl id="queryDeviceByParam" requestMapping="/cloudbusinessservice_device/device/queryDeviceByParam"/>
+		<RequestUrl id="queryServiceDeviceByParam" requestMapping="/cloudbusinessservice_device/device/queryServiceDeviceByParam"/>
+		
+				
+		<!-- 表device_group -->
+		<RequestUrl id="AddDeviceGroup" requestMapping="/cloudbusinessservice_device/devicegroup/AddDeviceGroup"/>
+		<RequestUrl id="UpdDeviceGroup" requestMapping="/cloudbusinessservice_device/devicegroup/UpdDeviceGroup"/>
+		<RequestUrl id="SelectDeviceGroup" requestMapping="/cloudbusinessservice_device/devicegroup/SelectDeviceGroup"/>
+		
+	</project>
+	
+	<!-- 验证 -->
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/clouddbservice_authentication/operator/loginCheck" id="loginCheck"/>
+		<!-- 系统日志信息 -->
+		<RequestUrl id="AddOperationLog" requestMapping="/clouddbservice_authentication/systemlog/AddOperationLog"/>
+		<!--获取所有的不是slave的馆和其一级子馆 -->
+		<RequestUrl id="queryAllMasterLibAndSlaveLib" requestMapping="/clouddbservice_authentication/library/queryAllMasterLibAndSlaveLib"/>
+		<RequestUrl id="getLibIdAndLibIdx" requestMapping="/clouddbservice_authentication/library/getLibIdAndLibIdx"/>
+		
+	</project>
+	
+	<project projectName="cloudbusinessservice_authentication" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/cloudbusinessservice_authentication/library/selLibraryByIdxOrId" id="SelectLibrary"/>
+		<!-- 通过父馆的IDX查询下属馆 -->
+		<RequestUrl requestMapping="/cloudbusinessservice_authentication/library/querySlaveLibraryByMasterIdx" id="querySlaveLibraryByMasterIdx"/>
+	
+		<RequestUrl requestMapping="/cloudbusinessservice_authentication/operator/selOperatorByOperIdOrIdx" id="selOperatorByOperIdOrIdx"/>
+		<!-- 通过idxs 获取 用户名字 -->
+		<RequestUrl requestMapping="/cloudbusinessservice_authentication/operator/queryOperatorNameByoperIdxArr" id="queryOperatorNameByoperIdxArr"/>
+		
+		<!-- 图书馆信息描述元数据 -->
+		<RequestUrl requestMapping="/cloudbusinessservice_authentication/metadata/selMetadataInfotype" id="selMetadataInfotype"/>
+		<RequestUrl requestMapping="/cloudbusinessservice_authentication/metadata/selLibInfotype" id="selLibInfotype"/>
+		
+		<!-- 查询图书馆的信息 -->
+		<RequestUrl requestMapping="/cloudbusinessservice_authentication/library/querylibInfoByCurUser" id="querylibInfoByCurUser"/>
+	</project>
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+		<!-- 查询图书馆所有设备信息 -->
+		<RequestUrl requestMapping="/clouddbservice_device/device/SelectDevice" id="SelectDevicesInfo"/>
+		<RequestUrl requestMapping="/clouddbservice_device/device/selectDeviceCountByLibraryIdx" id="selectDeviceCountByLibraryIdx"/>
+		<RequestUrl requestMapping="/clouddbservice_device/deviceService/selectCountDeviceService" id="selectCountDeviceService"/>
+		<RequestUrl requestMapping="/clouddbservice_device/runconf/SelFunctionByDeviceIdx"	id="SelFunctionByDeviceIdx" />
+		<!-- 云平台管理员获取所有权限 -->
+		<RequestUrl id="SelPermissionBySsitCloudAdmin" 	requestMapping="/clouddbservice_device/metaopercmd/SelPermissionBySsitCloudAdmin"/>
+		<!-- 复合查询  登陆者所拥有权限 -->
+		<RequestUrl id="SelPermissionByOperIdx"			requestMapping="/clouddbservice_device/metaopercmd/SelUserCmdsByIdx"/>
+		<RequestUrl id="UpdPatchInfo" 					requestMapping="/clouddbservice_device/patchinfo/UpdPatchInfo" />
+		<RequestUrl id="SelectPatchInfo"				requestMapping="/clouddbservice_device/patchinfo/SelPatchInfo"/>
+		<RequestUrl id="DeletePatchInfo" 				requestMapping="/clouddbservice_device/patchinfo/DelPatchInfo"/>
+		<RequestUrl id="AddPatchInfo" 					requestMapping="/clouddbservice_device/patchinfo/AddPatchInfo"/>
+		<RequestUrl id="updOperGroup" 					requestMapping="/clouddbservice_device/operatorgroup/UpdOperGroup"/>
+		<!-- 用户分组管理 带参数分页查询 -->
+		<RequestUrl id="queryOperGroupByparam" 			requestMapping="/clouddbservice_device/operatorgroup/queryOperGroupByparam"/>
+		<RequestUrl id="delOperGroup" 					requestMapping="/clouddbservice_device/operatorgroup/delOperGroup"/>
+		<!-- 新增分组 -->
+		<RequestUrl id="addOperGroup" 					requestMapping="/clouddbservice_device/operatorgroup/addOperGroup"/>
+		<!-- 获取监控颜色 -->
+		<RequestUrl id="GetCurrentDevColorSet" 			requestMapping="/clouddbservice_device/monconf/GetCurrentDevColorSet"/>
+		<RequestUrl id="SelMetadataOrder" 				requestMapping="/clouddbservice_device/metaorder/SelMetadataOrder"/>
+		<RequestUrl id="SelectMetaOperCmd" 				requestMapping="/clouddbservice_device/metaopercmd/SelectMetaOperCmd"/>
+		<RequestUrl id="SelectMetadataLogicObj" 		requestMapping="/clouddbservice_device/metalogicobj/SelectMetadataLogicObj"/>
+		<RequestUrl id="SelectMetaDeviceType" 			requestMapping="/clouddbservice_device/metadevicetype/SelectMetaDeviceType"/>
+		<RequestUrl id="selAllDeviceTypeGroupByType" 	requestMapping="/clouddbservice_device/metadevicetype/selAllDeviceTypeGroupByType"/>
+		<!-- 设备监控使用 -->
+		<RequestUrl id="GetDevExtModel" 				requestMapping="/clouddbservice_device/extconf/GetDevExtModel"></RequestUrl>
+		<RequestUrl id="SelectGroup" 					requestMapping="/clouddbservice_device/devicegroup/SelectGroup"/>
+		<RequestUrl id="SelectGroupByParam" 			requestMapping="/clouddbservice_device/devicegroup/SelectGroupByParam"/>
+		<RequestUrl id="DeleteDeviceGroup" 				requestMapping="/clouddbservice_device/devicegroup/DeleteDeviceGroup"/>
+		<RequestUrl id="UpdDevice" 						requestMapping="/clouddbservice_device/device/UpdDevice"/>
+		<RequestUrl id="SelectDeviceByPage" 			requestMapping="/clouddbservice_device/device/SelectDeviceByPage"/>
+		<RequestUrl id="SelectDevice" 				    requestMapping="/clouddbservice_device/device/SelectDeviceMgmt"/>
+		<!-- 获取图书馆地理坐标信息 -->
+		<RequestUrl id="GetLibPosition" 				requestMapping="/clouddbservice_device/device/getLibPosition"/>
+		<!-- 获取设备的地理坐标信息 -->
+		<RequestUrl id="GetDevicePosition" 				requestMapping="/clouddbservice_device/device/getDevicePosition"/>
+		<!-- 获取设备部件监控状态错误码 -->
+		<RequestUrl id="queryDevStatusCode" 			requestMapping="/clouddbservice_device/device/queryDevStatusCode"/>
+	</project>	
+	<project projectName="cloudbusinessservice_datasyn" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/cloudbusinessservice_datasyn/device/recevieOrder" id="recevieOrder"/>
+		<RequestUrl requestMapping="/cloudbusinessservice_datasyn/device/queryDeviceLog" id="queryDeviceLog"/>
+		<RequestUrl requestMapping="/cloudbusinessservice_datasyn/device/queryControlResult" id="queryControlResult"/>
+		<!-- 下载日志请求 -->
+		<RequestUrl requestMapping="/cloudbusinessservice_datasyn/device/downloadRunLogOperation" id="downloadRunLogOperation"/>	
+		<!-- 获取设备的最后心跳时间 -->
+		<RequestUrl id="GetLastHeatBeatTime" requestMapping="/cloudbusinessservice_datasyn/device/GetLastHeatBeatTime"></RequestUrl>
+	
+		<RequestUrl id="QueryContainerInfo" requestMapping="/cloudbusinessservice_datasyn/sync/QueryContainerInfo"/>
+	
+	</project>
+	
+	<!-- 对于链接mongodb的操作直接连数据层devicemonitor -->
+	<project projectName="clouddbservice_devicemonitor" baseURL="http://127.0.0.1:8080">
+		<!--获取机器状态 -->
+		<RequestUrl id="selectDeviceState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectDeviceState"/>
+		<!-- 书架信息 -->
+		<RequestUrl id="selectBookrackState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectBookrackState"/>
+		<!-- 箱子信息 -->
+		<RequestUrl id="selectBinState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectBinState"/>
+		<!--  外设信息 SSL信息-->
+		<RequestUrl id="selectDeviceExtState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectDeviceExtState"/>
+		<!--  获取功能状态信息-->
+		<RequestUrl id="selectSoftState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectSoftState"/>
+		<!-- 查询所有设备的设备状态 -->
+		<RequestUrl id="queryDeviceIdByState" requestMapping="/clouddbservice_devicemonitor/devicelog/queryDeviceIdByState"/>
+		<!-- 获取数据库名 IP-->
+		<RequestUrl id="getMongodbNames" requestMapping="/clouddbservice_devicemonitor/devicelog/getMongodbNames"/>
+		<!-- 获取数据库名（设备ID）对应 实例 信息 mongoInstance -->
+		<RequestUrl id="getDBInstanceByDBName" requestMapping="/clouddbservice_devicemonitor/devicelog/getDBInstanceByDBName"/>
+	</project>
+	
+	<project projectName="cloudbusinessservice_statistics" baseURL="http://127.0.0.1:8080">
+		<!-- 查询业务数据，居于ES数据 -->
+		<RequestUrl id="QueryBizData" requestMapping="/cloudbusinessservice_statistics/esquery/queryBizData"/>
+		<!-- 基础统计项 -->
+		<RequestUrl id="CountCardissueLog" requestMapping="/cloudbusinessservice_statistics/mainPage/countCardissueLog"/>
+		<RequestUrl id="CountLoanLog" requestMapping="/cloudbusinessservice_statistics/mainPage/countLoanLog"/>
+		<RequestUrl id="CountFinanceLog" requestMapping="/cloudbusinessservice_statistics/mainPage/countFinanceLog"/>
+		<RequestUrl id="CountVisitorLog" requestMapping="/cloudbusinessservice_statistics/mainPage/countVisitorLog"/>
+		<RequestUrl id="countDatas" requestMapping="/cloudbusinessservice_statistics/mainPage/countDatas"/>
+	</project>
+	
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/cloudbusinessservice_node/hearbeat/saveData" id="HEARBEAT_URL" />
+	</project>
+	
+	<project projectName="clouddbservice_libraryinfo" baseURL="http://127.0.0.1:8080">
+		<!-- 查询图书馆的馆藏数 -->
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/navigation/queryBookItemTotal" id="queryBookItemTotal" />
+		<!-- 查询图书馆的层架标数 -->
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/navigation/queryBookShelfLayerTotal" id="queryBookShelfLayerTotal" />
+		<!-- 查询图书馆的书架数 -->
+		<RequestUrl requestMapping="/clouddbservice_libraryinfo/navigation/queryBookShelfTotal" id="queryBookShelfTotal" />
+	</project>
+</RequestUrlList>

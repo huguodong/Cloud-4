@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rel_statistics_group">
+
+	<insert id="insertRelStatisticsGroup" parameterType="com.ssitcloud.entity.RelStatisticsGroupEntity" useGeneratedKeys="true" keyProperty="rel_statistics_idx">
+		insert into rel_statistics_group
+		(		
+            statistics_group_idx,statistics_idx
+		)
+		values
+		(
+             #{statistics_group_idx},#{statistics_idx}
+		)
+	</insert>
+	
+	<update id="updateRelStatisticsGroup" parameterType="com.ssitcloud.entity.RelStatisticsGroupEntity">
+		update rel_statistics_group
+		<set>
+			<!-- <if test="reader_idx!=null">
+				reader_idx=#{reader_idx},
+			</if> -->
+			<if test="statistics_group_idx!=null">
+				statistics_group_idx=#{statistics_group_idx},
+			</if>
+			<if test="statistics_idx!=null">
+				statistics_idx=#{statistics_idx},
+			</if>
+		</set>
+		   WHERE 1=1 
+	   <if test="rel_statistics_idx!=null">
+			and rel_statistics_idx=#{rel_statistics_idx}
+		</if>
+	</update>
+	
+     <delete id="deleteRelStatisticsGroup" parameterType="com.ssitcloud.entity.RelStatisticsGroupEntity">
+		delete from rel_statistics_group 
+		where 1=1
+		 <if test="rel_statistics_idx!=null and rel_statistics_idx!=''">
+			AND rel_statistics_idx=#{rel_statistics_idx}
+		</if>
+		 <if test="statistics_group_idx!=null and statistics_group_idx!=''">
+			AND statistics_group_idx=#{statistics_group_idx}
+		</if>
+	</delete>
+	
+	<select id="selectRelStatisticsGroup" parameterType="com.ssitcloud.entity.RelStatisticsGroupEntity" resultType="com.ssitcloud.entity.RelStatisticsGroupEntity">
+		SELECT rel_statistics_idx,statistics_group_idx,statistics_idx FROM rel_statistics_group 
+	    where 1=1
+		<if test="rel_statistics_idx!=null">
+			AND rel_statistics_idx=#{rel_statistics_idx}
+		</if>
+	</select>
+	<select id="selectRelStatisticsGroups" parameterType="com.ssitcloud.entity.RelStatisticsGroupEntity" resultType="com.ssitcloud.entity.RelStatisticsGroupEntity">
+		SELECT rel_statistics_idx,statistics_group_idx,statistics_idx FROM rel_statistics_group 
+	    where 1=1
+	    <if test="statistics_group_idx!=null and statistics_group_idx!=''">
+			AND statistics_group_idx=#{statistics_group_idx}
+		</if>
+	</select>
+	
+	
+	
+</mapper>

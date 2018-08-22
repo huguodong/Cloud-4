@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="region">
+
+	<select id="selRegionByRegionIdx" parameterType="com.ssitcloud.entity.RegionEntity" resultType="com.ssitcloud.entity.RegionEntity">
+		SELECT * FROM region 
+	    where 1=1 
+		<if test="regi_idx != null">
+			AND regi_idx=#{regi_idx}
+		</if>
+	</select>
+	
+	<select id="selRegionsByRegionIdxs" resultType="com.ssitcloud.entity.RegionEntity">
+		SELECT * FROM region 
+	    where 1=1 
+		<if test="regionIdxs != null and regionIdxs.size() > 0">
+			AND regi_idx in
+		        <foreach collection="regionIdxs" index="index" item="regionIdx" open="(" separator="," close=")">
+		                #{regionIdx}       
+		        </foreach>
+		</if>
+	</select>
+	
+	<select id="selRegionsByRegionCode" parameterType="com.ssitcloud.entity.RegionEntity" resultType="com.ssitcloud.entity.RegionEntity">
+		SELECT * FROM region 
+	    where 1=1 
+		<if test="regi_code != null and regi_code != '' ">
+			AND regi_code LIKE '${regi_code}%' 
+		</if>
+	</select>
+	
+	<!--regi_code长度为0时，查出所有省；长度为4时查出所有市，长度为6时查出所有区  -->
+	<select id="selProCityAreaByRegionCode" resultType="com.ssitcloud.entity.RegionEntity">
+		SELECT * FROM region 
+		where 1=1
+		<if test="regi_code == null or regi_code =='' ">
+			AND length(regi_code)=4
+		</if>
+		<if test="regi_code != null and regi_code.length() == 4">
+			AND regi_code LIKE '${regi_code}%' AND length(regi_code)=6
+		</if>
+		<if test="regi_code != null and regi_code.length() == 6">
+			AND regi_code LIKE '${regi_code}%'
+		</if>
+		
+	</select>
+	
+	<select id="selRegionsForNormal" resultType="com.ssitcloud.entity.RegionEntity">
+		SELECT * FROM region 
+	    where 1=1 
+	    <if test="cCode != null and cCode != '' ">
+			AND regi_code LIKE '${cCode}%' 
+		</if>
+		<if test="pCode != null and pCode != '' ">
+			OR regi_code =#{pCode} 
+		</if>
+	</select>
+	<!-- 根据地区码列表查询地区 -->
+	<select id="selRegions" resultType="com.ssitcloud.entity.RegionEntity"
+		parameterType="java.util.List">
+		select * from region
+		where region.regi_code in 
+		<foreach collection="list" item="code" open="(" close=")" separator=",">
+			#{code}
+		</foreach>
+	</select>
+    <!-- 根据馆IDX查询所有设备的地区分布 -->
+    <select id="selRegionsByLibidx" parameterType="java.util.List" resultType="com.ssitcloud.entity.RegionEntity">
+        SELECT
+        *
+        FROM
+        region
+        WHERE
+        regi_idx IN (
+        SELECT
+        region_idx
+        FROM
+        device_extend_info
+        WHERE
+        device_idx IN (
+        SELECT
+        device_idx
+        FROM
+        device
+        WHERE
+        library_idx IN
+        <foreach collection="list" item="idx" open="(" close=")" separator=",">
+            #{idx}
+        </foreach>
+        )
+        )
+    </select>
+    <!-- 根据设备IDX查询设备所在地区 -->
+    <select id="selRegionCodeByDeviceidx" parameterType="java.util.Map" resultType="com.ssitcloud.entity.RegionEntity">
+        SELECT
+            *
+        FROM
+            region
+        <where>
+        	<if test="deviceIdx != null">
+				and regi_idx = (select region_idx from device_extend_info where device_idx = #{deviceIdx}) 
+			</if>
+        </where>
+            
+    </select>
+    
+    
+    <select id="queryAllRegion" resultType="com.ssitcloud.entity.RegionEntity">
+    	select * from region 
+    </select>
+</mapper>

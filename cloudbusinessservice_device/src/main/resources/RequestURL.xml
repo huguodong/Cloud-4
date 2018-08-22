@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RequestUrlList 
+xmlns="http://www.example.org/RequestURLConfSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+	<!--  project_name约定唯一-->
+	<project projectName="clouddbservice_device" baseURL="http://127.0.0.1:8080">
+	    <!-- 表RelOperatorStatisticsGroup -->
+		<RequestUrl id="addRelOperatorStatisticsGroup" requestMapping="/clouddbservice_device/relOperatorStatisticsGroup/addRelOperatorStatisticsGroup"/>
+		<RequestUrl id="delRelOperatorStatisticsGroup" requestMapping="/clouddbservice_device/relOperatorStatisticsGroup/deleteRelOperatorStatisticsGroup"/>
+		<RequestUrl id="updRelOperatorStatisticsGroup" requestMapping="/clouddbservice_device/relOperatorStatisticsGroup/updateRelOperatorStatisticsGroup"/>
+		<RequestUrl id="queryOneRelOperatorStatisticsGroup" requestMapping="/clouddbservice_device/relOperatorStatisticsGroup/selectRelOperatorStatisticsGroup"/>
+		<RequestUrl id="queryRelOperatorStatisticsGroups" requestMapping="/clouddbservice_device/relOperatorStatisticsGroup/selectRelOperatorStatisticsGroups"/>
+		<!-- 统计查询模板StatisticsConfigEntity -->
+		<RequestUrl id="insertStatisticsConfig" requestMapping="/clouddbservice_device/statisticsConfig/addStatisticsConfig"/>
+		<RequestUrl id="updateStatisticsConfig" requestMapping="/clouddbservice_device/statisticsConfig/updateStatisticsConfig"/>
+		<RequestUrl id="deleteStatisticsConfig" requestMapping="/clouddbservice_device/statisticsConfig/deleteStatisticsConfig"/>
+		<RequestUrl id="selectStatisticsConfig" requestMapping="/clouddbservice_device/statisticsConfig/selectStatisticsConfig"/>
+		<RequestUrl id="selectStatisticsConfigs" requestMapping="/clouddbservice_device/statisticsConfig/selectStatisticsConfigs"/>
+		
+		<!-- 统计查询模板配置StatisticsTemplateEntity -->
+		<RequestUrl id="insertStatisticsTemplate" requestMapping="/clouddbservice_device/statisticsTemplate/addStatisticsTemplate"/>
+		<RequestUrl id="updateStatisticsTemplate" requestMapping="/clouddbservice_device/statisticsTemplate/updateStatisticsTemplate"/>
+		<RequestUrl id="deleteStatisticsTemplate" requestMapping="/clouddbservice_device/statisticsTemplate/deleteStatisticsTemplate"/>
+		<RequestUrl id="selectStatisticsTemplate" requestMapping="/clouddbservice_device/statisticsTemplate/selectStatisticsTemplate"/>
+	
+		<!-- 还原备份相关 -->
+		<RequestUrl requestMapping="/clouddbservice_device/bakup/getLastLibBakUpTime" id="getLastLibBakUpTime"></RequestUrl>
+		<RequestUrl requestMapping="/clouddbservice_device/bakup/deleteLibBakup" id="deleteLibBakup"></RequestUrl>
+		<RequestUrl requestMapping="/clouddbservice_device/bakup/checkBakUpFileIfExsit" id="checkBakUpFileIfExsit"></RequestUrl>
+		<RequestUrl requestMapping="/clouddbservice_device/bakup/queryLibraryDbBakByparamExt" id="queryLibraryDbBakByparamExt"></RequestUrl>
+		<RequestUrl requestMapping="/clouddbservice_device/bakup/bakupBasicListSsit" id="bakupBasicListSsit"></RequestUrl>
+		<RequestUrl requestMapping="/clouddbservice_device/bakup/restoreDataByLibraryIdx" id="restoreDataByLibraryIdx"></RequestUrl>
+		<RequestUrl requestMapping="/clouddbservice_device/bakup/getTplIdxByLibraryIdx" id="getTplIdxByLibraryIdx"/>
+		<RequestUrl requestMapping="/clouddbservice_device/bakup/insertBakDataInfo" id="insertBakDataInfo"/>
+		<RequestUrl requestMapping="/clouddbservice_device/bakup/queryBakDataInfo" id="queryBakDataInfo"/>
+		<RequestUrl requestMapping="/clouddbservice_device/bakup/bakupOnlyByLiraryIdx" id="bakupOnlyByLiraryIdx"/>
+		<RequestUrl requestMapping="/clouddbservice_device/bakup/bakupBySpecalTableDevice" id="bakupBySpecalTableDevice"/>
+		
+		<!-- 表：table_change_tri -->
+		<RequestUrl requestMapping="/clouddbservice_device/tablechange/SelTableChangeTri" id="SelTableChangeTri"/>
+		<RequestUrl requestMapping="/clouddbservice_device/tablechange/SelTableChangeTriPatchInfo" id="SelTableChangeTriPatchInfo"/>
+		<!-- 通过idx 更新requestTIme -->
+		<RequestUrl requestMapping="/clouddbservice_device/tablechange/setRequestTimeByTriIdxs" id="setRequestTimeByTriIdxs"/>
+		<RequestUrl requestMapping="/clouddbservice_device/tablechange/updateRequestTimeByTriTableName" id="updateRequestTimeByTriTableName"/>
+		
+		<!-- 查询表StatisticsGroupTemplate -->
+		<RequestUrl requestMapping="/clouddbservice_device/statisticsGroupTemplate/selectStatisticsGroupTemplate" id="findStatisticsGroupTemplateServiceById"/>
+		<RequestUrl requestMapping="/clouddbservice_device/statisticsGroupTemplate/selectStatisticsGroupTemplates" id="findStatisticsGroupTemplateServiceAll"/>
+		
+		<!-- 表：device_config -->
+		<RequestUrl id="AddNewDeviceConfig" requestMapping="/clouddbservice_device/devconf/AddNewDeviceConfig"/>
+		<RequestUrl id="UpdDeviceConfig" requestMapping="/clouddbservice_device/devconf/UpdDeviceConfig"/>
+		<RequestUrl id="DelDeviceConfig" requestMapping="/clouddbservice_device/devconf/DelDeviceConfig"/>
+		<RequestUrl id="SelDeviceConfig" requestMapping="/clouddbservice_device/devconf/SelDeviceConfig"/>
+		<RequestUrl id="SelDeviceConfigByLibIdxAndDevId" requestMapping="/clouddbservice_device/devconf/SelDeviceConfigByLibIdxAndDevId"/>
+		<RequestUrl id="uploadcfgSyn" requestMapping="/clouddbservice_device/devconf/uploadcfgSyn"/>
+		<RequestUrl id="downloadCfgSync" requestMapping="/clouddbservice_device/devconf/downloadCfgSync"/>
+		<RequestUrl id="queryDeviceConfigByDeviceIdx" requestMapping="/clouddbservice_device/devconf/queryDeviceConfigByDeviceIdx"/>
+		<RequestUrl id="queryDeviceConfigNewAndOldByDeviceIdx" requestMapping="/clouddbservice_device/devconf/queryDeviceConfigNewAndOldByDeviceIdx"/>
+		<!-- 表device -->
+		
+		<RequestUrl id="AddRegisterInfo" requestMapping="/clouddbservice_device/device/AddRegisterInfo"/>
+		<RequestUrl id="AddNewDevice" requestMapping="/clouddbservice_device/device/AddNewDevice"/>
+		<RequestUrl id="UpdDevice" requestMapping="/clouddbservice_device/device/UpdDevice"/>
+		<RequestUrl id="DeleteDevice" requestMapping="/clouddbservice_device/device/DeleteDevice"/>
+		<RequestUrl id="SelectDevice" requestMapping="/clouddbservice_device/device/SelectDevice"/>
+		<RequestUrl id="SelectDeviceByPage" requestMapping="/clouddbservice_device/device/SelectDeviceByPage"/>
+		
+		<RequestUrl id="QueryDevIdxByDevId" requestMapping="/clouddbservice_device/device/QueryDevIdxByDevId" />
+		<RequestUrl id="queryDeviceIdbyLibIdx" requestMapping="/clouddbservice_device/device/queryDeviceIdbyLibIdx"></RequestUrl>
+		<RequestUrl id="SelectDeviceMgmt" requestMapping="/clouddbservice_device/device/SelectDeviceMgmt"/>
+		<RequestUrl id="DeleteDeviceMgmt" requestMapping="/clouddbservice_device/device/DeleteDeviceMgmt"/>
+		<RequestUrl id="UpdDeviceMgmtPage" requestMapping="/clouddbservice_device/device/UpdDeviceMgmtPage"/>
+		<RequestUrl id="UpdHyDeviceMgmtPage" requestMapping="/clouddbservice_device/device/UpdHyDeviceMgmtPage"/>
+		<RequestUrl id="checkAllConfigDataByDevIdx" requestMapping="/clouddbservice_device/device/checkAllConfigDataByDevIdx"/>
+		<!-- 查询设备 带参数查询-->
+		<RequestUrl id="queryDeviceByParam" requestMapping="/clouddbservice_device/device/queryDeviceByParam"/>
+		<!-- 查询服务设备 带参数查询-->
+		<RequestUrl id="queryServiceDeviceByParam" requestMapping="/clouddbservice_device/device/queryServiceDeviceByParam"/>
+		<!-- 判断id或者idx的设备是否存在-->
+		<RequestUrl id="isExistDeviceWithIdOrIdx" requestMapping="/clouddbservice_device/device/isExistDeviceWithIdOrIdx"/>
+		<!-- 根据传过来的设备id数组，查询设备库有中有多少设备-->
+		<RequestUrl id="selDeviceCountByIds" requestMapping="/clouddbservice_device/device/selDeviceCountByIds"/>
+		<!-- 查询某个图书馆的设备分页信息 -->
+		<RequestUrl id="getLibraryDevicesByPage" requestMapping="/clouddbservice_device/device/getLibraryDevicesByPage"/>
+		<!-- 发送请求到设备库，将旧馆设备转移到新馆， 并且删除相关设备与设备组的关联 -->
+		<RequestUrl id="devTransferToLibrary" requestMapping="/clouddbservice_device/device/devTransferToLibrary"/>
+		
+		
+		<!-- 检查系统中是否有deviceCode的设备 -->
+		<RequestUrl id="hasDeviceCode" requestMapping="/clouddbservice_device/device/hasDeviceCode"/>
+		<!--  根据设备号查询设备信息，如果有这个设备，返回设备的设备类型 -->
+		<RequestUrl id="queryDeviceByDeviceCode" requestMapping="/clouddbservice_device/device/queryDeviceByDeviceCode"/>
+		<!-- 设备注册 -->
+		<RequestUrl id="deviceRegister" requestMapping="/clouddbservice_device/device/deviceRegister"/>
+		<!-- 海洋设备注册 -->
+		<RequestUrl id="hydeviceRegister" requestMapping="/clouddbservice_device/device/hydeviceRegister"/>
+		<RequestUrl id="compareMonitorConfig" requestMapping="/clouddbservice_device/device/compareMonitorConfig"/>
+		
+		<!-- 表device_dbsync_template -->
+		<RequestUrl id="AddNewDeviceDbsyncTemp" requestMapping="/clouddbservice_device/dbsynconf/AddNewDeviceDbsyncTemp"/>
+		<RequestUrl id="UpdDeviceDbsyncTemp" requestMapping="/clouddbservice_device/dbsynconf/UpdDeviceDbsyncTemp"/>
+		<RequestUrl id="DelDeviceDbsyncTemp" requestMapping="/clouddbservice_device/dbsynconf/DelDeviceDbsyncTemp"/>
+		<RequestUrl id="SelDeviceDbsyncTemp" requestMapping="/clouddbservice_device/dbsynconf/SelDeviceDbsyncTemp"/>
+		
+		<RequestUrl id="AddNewDbsyncTemp" requestMapping="/clouddbservice_device/dbsynconf/AddNewDbsyncTemp"/>
+		<RequestUrl id="UpdDbsyncTemp" requestMapping="/clouddbservice_device/dbsynconf/UpdDbsyncTemp"/>
+		<RequestUrl id="DelDbsyncTemp" requestMapping="/clouddbservice_device/dbsynconf/DelDbsyncTemp"/>
+		<RequestUrl id="SelDbsyncTemp" requestMapping="/clouddbservice_device/dbsynconf/SelDbsyncTemp"/>
+		<!-- 获取所有数据同步配置模板 -->
+		<RequestUrl id="SelAllDBSyncTempList" requestMapping="/clouddbservice_device/dbsynconf/SelAllDBSyncTempList"/>
+		
+		
+		<!-- 表device_dbsync_config -->
+		<RequestUrl id="AddNewDeviceDbsync" requestMapping="/clouddbservice_device/dbsynconf/AddNewDeviceDbsync"/>
+		<RequestUrl id="AddDbsyncConfig" requestMapping="/clouddbservice_device/dbsynconf/AddDbsyncAndUpdDevCfg"/>
+		
+		<RequestUrl id="UpdDevDbsyncList" requestMapping="/clouddbservice_device/dbsynconf/UpdDevDbsyncList"/>
+		<RequestUrl id="DelDevDbsyncList" requestMapping="/clouddbservice_device/dbsynconf/DelDevDbsyncList"/>
+		
+		<RequestUrl id="UpdDeviceDbsync" requestMapping="/clouddbservice_device/dbsynconf/UpdDeviceDbsync"/>
+		<RequestUrl id="DelDeviceDbsync" requestMapping="/clouddbservice_device/dbsynconf/DelDeviceDbsync"/>
+		<RequestUrl id="SelDeviceDbsync" requestMapping="/clouddbservice_device/dbsynconf/SelDeviceDbsync"/>
+		<RequestUrl id="SelDeviceDbsyncBytype" requestMapping="/clouddbservice_device/dbsynconf/SelDeviceDbsyncBytype"/>
+		
+		<!-- 表device_ext_template -->
+		<RequestUrl id="AddNewDeviceExtTemp" requestMapping="/clouddbservice_device/extconf/AddNewDeviceExtTemp"/>
+		<RequestUrl id="UpdDeviceExtTemp" requestMapping="/clouddbservice_device/extconf/UpdDeviceExtTemp"/>
+		<RequestUrl id="DelDeviceExtTemp" requestMapping="/clouddbservice_device/extconf/DelDeviceExtTemp"/>
+		<RequestUrl id="SelDeviceExtTemp" requestMapping="/clouddbservice_device/extconf/SelDeviceExtTemp"/>
+		<!-- 表device_ext_config -->
+		<RequestUrl id="AddNewDeviceExtConfig" requestMapping="/clouddbservice_device/extconf/AddNewDeviceExtConfig"/>
+		<RequestUrl id="UpdDeviceExtConfig" requestMapping="/clouddbservice_device/extconf/UpdDeviceExtConfig"/>
+		<RequestUrl id="DelDeviceExtConfig" requestMapping="/clouddbservice_device/extconf/DelDeviceExtConfig"/>
+		<RequestUrl id="SelDeviceExtConfig" requestMapping="/clouddbservice_device/extconf/SelDeviceExtConfig"/>
+		
+		<RequestUrl id="DelAndAddExtConfig" requestMapping="/clouddbservice_device/extconf/DelAndAddExtConfig"/>
+		<RequestUrl id="SelDevExtData" requestMapping="/clouddbservice_device/extconf/SelDevExtData"/>
+		<!-- 设备监控使用 -->
+		<RequestUrl id="GetDevExtModel" requestMapping="/clouddbservice_device/extconf/GetDevExtModel"></RequestUrl>
+		<!-- 获取所有的硬件与逻辑配置模板 -->
+		<RequestUrl id="SelAllExtTempList" requestMapping="/clouddbservice_device/extconf/SelAllExtTempList"/>
+		<!-- 获取所有的logic_obj和ext_model的元数据  -->
+		<RequestUrl id="selAllExtModelAndLogicObj" requestMapping="/clouddbservice_device/extconf/selAllExtModelAndLogicObj"/>
+		<!-- 根据条件获取ext的list分页，page pagesize ，devicetype，keyword  -->
+		<RequestUrl id="SelExtTempListByParam" requestMapping="/clouddbservice_device/extconf/SelExtTempListByParam"/>
+		<!-- 新增硬件与逻辑模板配置 -->
+		<RequestUrl id="addExtTemp" requestMapping="/clouddbservice_device/extconf/addExtTemp"/>
+		<!-- 更新硬件与逻辑模板配置  -->
+		<RequestUrl id="updateExtTemp" requestMapping="/clouddbservice_device/extconf/updateExtTemp"/>
+		<!-- 删除硬件与逻辑模板配置  -->
+		<RequestUrl id="delExtTemp" requestMapping="/clouddbservice_device/extconf/delExtTemp"/>
+		<!-- 批量删除硬件与逻辑模板配置  -->
+		<RequestUrl id="delMultiExtTemp" requestMapping="/clouddbservice_device/extconf/delMultiExtTemp"/>
+		
+		<!-- 运行模板配置 -->
+		<RequestUrl id="SelRunTempListByParam" requestMapping="/clouddbservice_device/runconf/SelRunTempListByParam"/>
+		<!-- 新增运行模板配置 -->
+		<RequestUrl id="addRunTemp" requestMapping="/clouddbservice_device/runconf/addRunTemp"/>
+		<!-- 更新运行模板模板配置  -->
+		<RequestUrl id="updateRunTemp" requestMapping="/clouddbservice_device/runconf/updateRunTemp"/>
+		<!-- 删除运行模板模板配置  -->
+		<RequestUrl id="delRunTemp" requestMapping="/clouddbservice_device/runconf/delRunTemp"/>
+		<!-- 批量删除运行模板模板配置  -->
+		<RequestUrl id="delMultiRunTemp" requestMapping="/clouddbservice_device/runconf/delMultiRunTemp"/>
+		<!-- 根据 设备IDX查询 设备端的功能 -->
+		<RequestUrl id="SelFunctionByDeviceIdx" requestMapping="/clouddbservice_device/runconf/SelFunctionByDeviceIdx"></RequestUrl>
+		
+		
+		<!-- 表metadata_ext_model -->
+		<RequestUrl id="AddNewMetadataExtModel" requestMapping="/clouddbservice_device/extconf/AddNewMetadataExtModel"/>
+		<RequestUrl id="UpdMetadataExtModel" requestMapping="/clouddbservice_device/extconf/UpdMetadataExtModel"/>
+		<RequestUrl id="DelMetadataExtModel" requestMapping="/clouddbservice_device/extconf/DelMetadataExtModel"/>
+		<RequestUrl id="SelMetadataExtModel" requestMapping="/clouddbservice_device/extconf/SelMetadataExtModel"/>
+		<!-- 表device_group -->
+		<RequestUrl id="AddDeviceGroup" requestMapping="/clouddbservice_device/devicegroup/AddDeviceGroup"/>
+		<RequestUrl id="UpdDeviceGroup" requestMapping="/clouddbservice_device/devicegroup/UpdDeviceGroup"/>
+		<RequestUrl id="DeleteDeviceGroup" requestMapping="/clouddbservice_device/devicegroup/DeleteDeviceGroup"/>
+		<RequestUrl id="SelectDeviceGroup" requestMapping="/clouddbservice_device/devicegroup/SelectDeviceGroup"/>
+		<RequestUrl id="SelectGroup" requestMapping="/clouddbservice_device/devicegroup/SelectGroup"/>
+		<RequestUrl id="SelectGroupByParam" requestMapping="/clouddbservice_device/devicegroup/SelectGroupByParam"/>
+		<RequestUrl id="selectGroupByDeviceIdx" requestMapping="/clouddbservice_device/devicegroup/selectGroupByDeviceIdx"/>
+		<!-- 表device_log_config -->
+		<RequestUrl id="AddDeviceLogConfig" requestMapping="/clouddbservice_device/devicelogconf/AddDeviceLogConfig"/>
+		<RequestUrl id="UpdDeviceLogConfig" requestMapping="/clouddbservice_device/devicelogconf/UpdDeviceLogConfig"/>
+		<RequestUrl id="DelDeviceLogConfig" requestMapping="/clouddbservice_device/devicelogconf/DelDeviceLogConfig"/>
+		<RequestUrl id="SelectDeviceLogConfig" requestMapping="/clouddbservice_device/devicelogconf/SelectDeviceLogConfig"/>
+		<!-- 表device_monitor_template -->
+		<RequestUrl id="AddNewDeviceMonitorTemp" requestMapping="/clouddbservice_device/monconf/AddNewDeviceMonitorTemp"/>
+		<RequestUrl id="UpdDeviceMonitorTemp" requestMapping="/clouddbservice_device/monconf/UpdDeviceMonitorTemp"/>
+		<RequestUrl id="DelDeviceMonitorTemp" requestMapping="/clouddbservice_device/monconf/DelDeviceMonitorTemp"/>
+		<RequestUrl id="SelDeviceMonitorTemp" requestMapping="/clouddbservice_device/monconf/SelDeviceMonitorTemp"/>
+		<!-- 获取所有的监控配置模板 -->
+		<RequestUrl id="SelAllMonitorTempList" requestMapping="/clouddbservice_device/monconf/SelAllMonitorTempList"/>
+		<RequestUrl id="DelMonitorConfTempBatch" requestMapping="/clouddbservice_device/monconf/DelMonitorConfTempBatch"/>
+		<!-- 表device_monitor_config -->
+		<RequestUrl id="AddNewDeviceMonitorConf" requestMapping="/clouddbservice_device/monconf/AddNewDeviceMonitorConf"/>
+		<RequestUrl id="UpdDeviceMonitorConf" requestMapping="/clouddbservice_device/monconf/UpdDeviceMonitorConf"/>
+		<RequestUrl id="DelDeviceMonitorConf" requestMapping="/clouddbservice_device/monconf/DelDeviceMonitorConf"/>
+		<RequestUrl id="SelDeviceMonitorConf" requestMapping="/clouddbservice_device/monconf/SelDeviceMonitorConf"/>
+		<RequestUrl id="AddNewDeviceMonitorConfAndTemp" requestMapping="/clouddbservice_device/monconf/AddNewDeviceMonitorConfAndTemp"/>
+		<RequestUrl id="UpdNewDeviceMonitorConfAndTemp" requestMapping="/clouddbservice_device/monconf/UpdNewDeviceMonitorConfAndTemp"/>
+		<RequestUrl id="DelNewDeviceMonitorConfAndTemp" requestMapping="/clouddbservice_device/monconf/DelNewDeviceMonitorConfAndTemp"/>
+		<RequestUrl id="SelDevMonConfMetaLogObjByDeviceMonTplIdx" requestMapping="/clouddbservice_device/monconf/SelDevMonConfMetaLogObjByDeviceMonTplIdx"/>
+		<RequestUrl id="queryAlertColor" requestMapping="/clouddbservice_device/monconf/queryAlertColor"/>
+		
+		<RequestUrl id="UpdateMonitor" requestMapping="/clouddbservice_device/monconf/UpdateMonitor"/>
+		<RequestUrl id="DeleteMonitor" requestMapping="/clouddbservice_device/monconf/DeleteMonitor"/>
+		<RequestUrl id="ADDMonitor" requestMapping="/clouddbservice_device/monconf/ADDMonitor"/>
+		<RequestUrl id="GetCurrentDevColorSet" requestMapping="/clouddbservice_device/monconf/GetCurrentDevColorSet"/>
+		
+		<!-- plc_logic_obj -->
+		<RequestUrl id="SelPlcLogicObjectEntity" requestMapping="/clouddbservice_device/plclogicobj/SelPlcLogicObjectEntity"/>
+		
+		
+		<!--机器监控 带参数 分页 查询 -->
+		<RequestUrl id="queryDeviceMonitorByParam" requestMapping="/clouddbservice_device/monconf/queryDeviceMonitorByParam"/>
+		
+		<!-- 表device_run_template -->
+		<RequestUrl id="AddNewDeviceRunTemp" requestMapping="/clouddbservice_device/runconf/AddNewDeviceRunTemp"/>
+		<RequestUrl id="UpdDeviceRunTemp" requestMapping="/clouddbservice_device/runconf/UpdDeviceRunTemp"/>
+		<RequestUrl id="DelDeviceRunTemp" requestMapping="/clouddbservice_device/runconf/DelDeviceRunTemp"/>
+		<RequestUrl id="SelDeviceRunTemp" requestMapping="/clouddbservice_device/runconf/SelDeviceRunTemp"/>
+		
+	
+		<!-- 表device_run_config -->
+		<RequestUrl id="AddNewDeviceRunConf" requestMapping="/clouddbservice_device/runconf/AddNewDeviceRunConf"/>
+		<RequestUrl id="UpdDeviceRunConf" requestMapping="/clouddbservice_device/runconf/UpdDeviceRunConf"/>
+		<RequestUrl id="SelDeviceRunConf" requestMapping="/clouddbservice_device/runconf/SelDeviceRunConf"/>
+		<RequestUrl id="DelDeviceRunConf" requestMapping="/clouddbservice_device/runconf/DelDeviceRunConf"/>
+		
+		<RequestUrl id="SelDeviceRunData" requestMapping="/clouddbservice_device/runconf/SelDeviceRunData"/>
+		<RequestUrl id="DelDeviceRunData" requestMapping="/clouddbservice_device/runconf/DelDeviceRunData"/>
+		<RequestUrl id="DelAndAddDeviceRunConf" requestMapping="/clouddbservice_device/runconf/DelAndAddDeviceRunConf"/>
+		<RequestUrl id="AddDeviceRunData" requestMapping="/clouddbservice_device/runconf/AddDeviceRunData"/>
+		
+		<!-- 表metadata_run_config -->
+		<RequestUrl id="AddNewMetadataRunConf" requestMapping="/clouddbservice_device/runconf/AddNewMetadataRunConf"/>
+		<RequestUrl id="UpdMetadataRunConf" requestMapping="/clouddbservice_device/runconf/UpdMetadataRunConf"/>
+		<RequestUrl id="SelMetadataRunConf" requestMapping="/clouddbservice_device/runconf/SelMetadataRunConf"/>
+		<RequestUrl id="DelMetadataRunConf" requestMapping="/clouddbservice_device/runconf/DelMetadataRunConf"/>
+		<!-- 获取所有运行配置模板 -->
+		<RequestUrl id="SelAllRunTempList" requestMapping="/clouddbservice_device/runconf/SelAllRunTempList"/>
+		
+		<!-- 表metadata_devicetype -->
+		<RequestUrl id="AddMetaDeviceType" requestMapping="/clouddbservice_device/metadevicetype/AddMetaDeviceType"/>
+		<RequestUrl id="UpdMetaDeviceType" requestMapping="/clouddbservice_device/metadevicetype/UpdMetaDeviceType"/>
+		<RequestUrl id="DeleteMetaDeviceType"  requestMapping="/clouddbservice_device/metadevicetype/DeleteMetaDeviceType"/>
+		<RequestUrl id="SelectMetaDeviceType" requestMapping="/clouddbservice_device/metadevicetype/SelectMetaDeviceType"/>
+		<RequestUrl id="SelAllMetadataDeviceType" requestMapping="/clouddbservice_device/metadevicetype/SelAllMetadataDeviceType"/>
+		<RequestUrl id="SelectType" requestMapping="/clouddbservice_device/metadevicetype/SelAllMetadataDeviceType"/>
+		<RequestUrl id="selAllDeviceTypeGroupByType" requestMapping="/clouddbservice_device/metadevicetype/selAllDeviceTypeGroupByType"/>
+		<RequestUrl id="queryDeviceTypeLogicObj" requestMapping="/clouddbservice_device/metadevicetype/queryDeviceTypeLogicObj"/>
+		<!-- 表metadata_logic_obj -->
+		<RequestUrl id="AddMetadataLogicObj" requestMapping="/clouddbservice_device/metalogicobj/AddMetadataLogicObj"/>
+		<RequestUrl id="UpdateMetadataLogicObj" requestMapping="/clouddbservice_device/metalogicobj/UpdateMetadataLogicObj"/>
+		<RequestUrl id="DeleteMetadataLogicObj" requestMapping="/clouddbservice_device/metalogicobj/DeleteMetadataLogicObj"/>
+		<RequestUrl id="SelectMetadataLogicObj" requestMapping="/clouddbservice_device/metalogicobj/SelectMetadataLogicObj"/>
+		<RequestUrl id="SelectMetadataDeviceDb" requestMapping="/clouddbservice_device/metadevicedb/SelectMetadataDeviceDb"/>
+		<RequestUrl id="SelectMetadataDeviceDbAndTableInfo" requestMapping="/clouddbservice_device/metadevicedb/SelectMetadataDeviceDbAndTableInfo"/>
+		<!-- 表metaopercmd -->
+		<RequestUrl id="AddMetaOperCmd" requestMapping="/clouddbservice_device/metaopercmd/AddMetaOperCmd"/>
+		<RequestUrl id="UpdMetaOperCmd" requestMapping="/clouddbservice_device/metaopercmd/UpdMetaOperCmd"/>
+		<RequestUrl id="DeleteMetaOperCmd" requestMapping="/clouddbservice_device/metaopercmd/DeleteMetaOperCmd"/>
+		<RequestUrl id="SelectMetaOperCmd" requestMapping="/clouddbservice_device/metaopercmd/SelectMetaOperCmd"/>
+		<!-- 复合查询  登陆者所拥有权限 -->
+		<RequestUrl requestMapping="/clouddbservice_device/metaopercmd/SelUserCmdsByIdx" id="SelUserCmdsByIdx"/>
+		<RequestUrl requestMapping="/clouddbservice_device/metaopercmd/SelUserCmdsByIdxAndRestriDevice" id="SelUserCmdsByIdxAndRestriDevice"/>
+		<RequestUrl requestMapping="/clouddbservice_device/metaopercmd/SelPermissionBySsitCloudAdmin" id="SelPermissionBySsitCloudAdmin"></RequestUrl>
+		
+		<!-- 查询所有的菜单 -->
+		<RequestUrl requestMapping="/clouddbservice_device/metamenu/SelMenuBySsitCloudAdmin" id="SelMenuBySsitCloudAdmin"></RequestUrl>
+		<!-- 查询根据用户权限查询其菜单 -->
+		<RequestUrl requestMapping="/clouddbservice_device/metamenu/SelMenuByOperIdx" id="SelMenuByOperIdx"></RequestUrl>
+		
+		<!-- 查询出一级权限 -->
+		<RequestUrl requestMapping="/clouddbservice_device/metaopercmd/selectCmdType" id="selectCmdType"></RequestUrl>
+		<!-- 查询出维护卡一级权限 -->
+		<RequestUrl requestMapping="/clouddbservice_device/metaopercmd/selectCardCmdType" id="selectCardCmdType"></RequestUrl>
+		<RequestUrl requestMapping="/clouddbservice_device/metaopercmd/selectDeviceOperLogCmd" id="selectDeviceOperLogCmd"></RequestUrl>
+		<!-- 带带参数分页查询 权限分组 -->
+		<RequestUrl requestMapping="/clouddbservice_device/metaopercmd/queryServgroupByparam" id="queryServgroupByparam"/>
+		
+		<!-- 表metadata_order -->
+		<RequestUrl id="AddMetadataOrder" requestMapping="/clouddbservice_device/metaorder/AddMetadataOrder"/>
+		<RequestUrl id="UpdMetadataOrder" requestMapping="/clouddbservice_device/metaorder/UpdMetadataOrder"/>
+		<RequestUrl id="DelMetadataOrder" requestMapping="/clouddbservice_device/metaorder/DelMetadataOrder"/>
+		<RequestUrl id="SelMetadataOrder" requestMapping="/clouddbservice_device/metaorder/SelMetadataOrder"/>
+		
+		<!-- 表operator_group -->
+		<RequestUrl id="AddOperGroup" requestMapping="/clouddbservice_device/operatorgroup/AddOperGroup"/>
+		<RequestUrl id="UpdOperGroup" requestMapping="/clouddbservice_device/operatorgroup/UpdOperGroup"/>
+		<RequestUrl id="DeleteOperGroup" requestMapping="/clouddbservice_device/operatorgroup/DeleteOperGroup"/>
+		<RequestUrl id="SelectOperGroup" requestMapping="/clouddbservice_device/operatorgroup/SelectOperGroup"/>
+		<RequestUrl id="queryAllServiceGroup" requestMapping="/clouddbservice_device/operatorgroup/queryAllServiceGroup"/>
+		<RequestUrl id="queryLibraryServiceGroup" requestMapping="/clouddbservice_device/operatorgroup/queryLibraryServiceGroup"/>
+		
+		
+		<!-- 邮件提醒相关操作 表email_param add by shuangjunjie 20170221 -->
+		<!-- 新增邮件 -->
+		<RequestUrl id="insertEmailParam" requestMapping="/clouddbservice_device/emailParam/addEmailParam"/>
+		<!-- 更新邮件 -->
+		<RequestUrl id="updateEmailParam" requestMapping="/clouddbservice_device/emailParam/updateEmailParam"/>
+		<!-- 删除邮件 -->
+		<RequestUrl id="deleteEmailParam" requestMapping="/clouddbservice_device/emailParam/deleteEmailParam"/>
+		<!-- 查询一条邮件 -->
+		<RequestUrl id="selectEmailParam" requestMapping="/clouddbservice_device/emailParam/selectEmailParam"/>
+		<!-- 查询多条邮件 -->
+		<RequestUrl id="selectEmailParams" requestMapping="/clouddbservice_device/emailParam/selectEmailParams"/>
+		<!-- 分页查询多条邮件记录 -->
+		<RequestUrl id="selectEmailParamByPage" requestMapping="/clouddbservice_device/emailParam/selectEmailParamByPage"/>
+		
+		<!-- 个人设置相关操作 表personal_setting add by shuangjunjie 20170223 -->
+		<!-- 新增个人设置 -->
+		<RequestUrl id="insertPersonalSetting" requestMapping="/clouddbservice_device/personalsetting/addPersonalSetting"/>
+		<!-- 修改个人设置 -->
+		<RequestUrl id="updatePersonalSetting" requestMapping="/clouddbservice_device/personalsetting/updPersonalSetting"/>
+		<!-- 删除个人设置 -->
+		<RequestUrl id="deletePersonalSetting" requestMapping="/clouddbservice_device/personalsetting/delPersonalSetting"/>
+		<!-- 查询一条个人设置 -->
+		<RequestUrl id="selectPersonalSetting" requestMapping="/clouddbservice_device/personalsetting/selPersonalSettingByIdx"/>
+		<!-- 分页查询多条个人设置记录 -->
+		<RequestUrl id="selectPersonalSettingByPage" requestMapping="/clouddbservice_device/personalsetting/selectPersonalSettingByPage"/>
+		<!-- 个人功能配置 查询模板 -->
+		<RequestUrl id="selectStatisticsTemplates" requestMapping="/clouddbservice_device/statisticsTemplate/selectStatisticsTemplates"/>
+
+        <!-- 根据登录用户获取模板 -->
+        <RequestUrl id="selectTemplateMenuByOperidx" requestMapping="/clouddbservice_device/statisticsTemplate/selectTemplateMenuByOperidx"/>
+		<!-- 根据oper_idx查询操作员 -->
+		<RequestUrl id="selOperatorByOperIdOrIdx" requestMapping="/clouddbservice_device/personalsetting/selPersonalSettingList"/>
+		
+		<!-- 统计查询模板配置StatisticsTemplateEntity分页查询 -->
+		<RequestUrl id="selectStatisticsTemplatePage" requestMapping="/clouddbservice_device/statisticsTemplate/selectStatisticsTemplatePage"/>
+		
+		<!-- 统计查询模板配置StatisticsTemplateEntity的sql查询 -->
+		<RequestUrl id="selectBySql" requestMapping="/clouddbservice_device/statisticsTemplate/selectBySql"/>
+		
+		<!-- 信息主字段表相关操作 表main_field add by shuangjunjie 20170223 -->
+		<!-- 新增信息主字段表 -->
+		<RequestUrl id="insertMainField" requestMapping="/clouddbservice_device/mainfield/addMainField"/>
+		<!-- 修改信息主字段表 -->
+		<RequestUrl id="updateMainField" requestMapping="/clouddbservice_device/mainfield/updMainField"/>
+		<!-- 删除信息主字段表 -->
+		<RequestUrl id="deleteMainField" requestMapping="/clouddbservice_device/mainfield/delMainField"/>
+		<!-- 查询一条信息主字段表 -->
+		<RequestUrl id="selectMainField" requestMapping="/clouddbservice_device/mainfield/selectMainfieldByIdx"/>
+		<!-- 查询全部信息主字段表 -->
+		<RequestUrl id="selectMainFieldList" requestMapping="/clouddbservice_device/mainfield/selectMainFieldList"/>
+		<!-- 分页查询多条信息主字段表记录 -->
+		<!-- <RequestUrl id="selectMainFieldByPage" requestMapping="/clouddbservice_device/mainfield/selectPersonalSettingByPage"/> -->
+		
+		
+		<!-- 用户分组管理 带参数分页查询 -->
+		<RequestUrl id="queryOperGroupByparam" requestMapping="/clouddbservice_device/operatorgroup/queryOperGroupByparam"/>
+		<!-- 新增分组 -->
+		<RequestUrl id="addOperGroup" requestMapping="/clouddbservice_device/operatorgroup/addOperGroup"/>
+		<!-- 删除分组 -->
+		<RequestUrl id="delOperGroup" requestMapping="/clouddbservice_device/operatorgroup/delOperGroup"/>
+		<!-- 修改组 -->
+		<RequestUrl id="updOperGroup" requestMapping="/clouddbservice_device/operatorgroup/updOperGroup"/>
+		
+		<!-- 表patch_info -->
+		<RequestUrl id="addPatchInfo" requestMapping="/clouddbservice_device/patchinfo/AddPatchInfo"/>
+		<RequestUrl id="updPatchInfo" requestMapping="/clouddbservice_device/patchinfo/UpdPatchInfo"/>
+		<RequestUrl id="delPatchInfo" requestMapping="/clouddbservice_device/patchinfo/DelPatchInfo"/>
+		<RequestUrl id="delMultiPatchInfo" requestMapping="/clouddbservice_device/patchinfo/delMultiPatchInfo"/>
+		<RequestUrl id="selPatchInfo" requestMapping="/clouddbservice_device/patchinfo/SelPatchInfo"/>
+		<RequestUrl id="askVersion" requestMapping="/clouddbservice_device/patchinfo/AskVersion"/>
+		
+		
+		<!-- 表rel_device_group -->
+		<RequestUrl id="AddRelDeviceGroup" requestMapping="/clouddbservice_device/reldevicegroup/AddRelDeviceGroup"/>
+		
+		<RequestUrl id="UpdRelDeviceGroup" requestMapping="/clouddbservice_device/reldevicegroup/UpdRelDeviceGroup"/>
+		
+		<RequestUrl id="DelRelDeviceGroup" requestMapping="/clouddbservice_device/reldevicegroup/DelRelDeviceGroup"/>
+		<RequestUrl id="SelectRelDeviceGroup" requestMapping="/clouddbservice_device/reldevicegroup/SelectRelDeviceGroup"/>
+		
+		<!-- 表rel_operator_device_group -->
+		<RequestUrl id="AddRelOperDevGroup" requestMapping="/clouddbservice_device/reloperatordevicegroup/AddRelOperDevGroup"/>
+		<RequestUrl id="UpdRelOperDevGroup" requestMapping="/clouddbservice_device/reloperatordevicegroup/UpdRelOperDevGroup"/>
+		<RequestUrl id="DeleteRelOperDevGroup" requestMapping="/clouddbservice_device/reloperatordevicegroup/DeleteRelOperDevGroup"/>
+		<RequestUrl id="SelectRelOperDevGroup" requestMapping="/clouddbservice_device/reloperatordevicegroup/SelectRelOperDevGroup"/>
+		
+		<!-- 表rel_operator_group -->
+		<RequestUrl id="AddRelOperGroup" requestMapping="/clouddbservice_device/reloperatorgroup/AddRelOperGroup"/>
+		<RequestUrl id="UpdRelOperGroup" requestMapping="/clouddbservice_device/reloperatorgroup/UpdRelOperGroup"/>
+		<RequestUrl id="DeleteRelOperGroup" requestMapping="/clouddbservice_device/reloperatorgroup/DeleteRelOperGroup"/>
+		<RequestUrl id="SelectRelOperGroup" requestMapping="/clouddbservice_device/reloperatorgroup/SelectRelOperGroup"/>
+		<!-- 根据操作员idx查询其所在的分组信息 -->
+		<RequestUrl id="queryOperatorGroupByOperIdx" requestMapping="/clouddbservice_device/reloperatorgroup/queryOperatorGroupByOperIdx"/>
+		<!-- 更新操作员的用户组信息 -->
+		<RequestUrl id="updateOperatorGroup" requestMapping="/clouddbservice_device/reloperatorgroup/updateOperatorGroup"/>
+		<RequestUrl id="deleteRelOperatorGroupByOperatorIdxs" requestMapping="/clouddbservice_device/reloperatorgroup/deleteRelOperatorGroupByOperatorIdxs"/>
+		
+		<!-- 表rel_operator_service_group -->
+		<RequestUrl id="AddRelOperServGroup" requestMapping="/clouddbservice_device/reloperatorservicegroup/AddRelOperServGroup"/>
+		<RequestUrl id="UpdRelOperServGroup" requestMapping="/clouddbservice_device/reloperatorservicegroup/UpdRelOperServGroup"/>
+		<RequestUrl id="DeleteRelOperServGroup" requestMapping="/clouddbservice_device/reloperatorservicegroup/DeleteRelOperServGroup"/>
+		<RequestUrl id="SelectRelOperServGroup" requestMapping="/clouddbservice_device/reloperatorservicegroup/SelectRelOperServGroup"/>
+		
+		<!-- 表rel_service_group -->
+		<RequestUrl id="AddRelServGroup" requestMapping="/clouddbservice_device/relservicegroup/AddRelServGroup"/>
+		<RequestUrl id="UpdRelServGroup" requestMapping="/clouddbservice_device/relservicegroup/UpdRelServGroup"/>
+		<RequestUrl id="DeleteRelServGroup" requestMapping="/clouddbservice_device/relservicegroup/DeleteRelServGroup"/>
+		<RequestUrl id="SelectRelServGroup" requestMapping="/clouddbservice_device/relservicegroup/SelectRelServGroup"/>
+		
+		<!-- 表metadata_library_selfcheck_protocol -->
+		<RequestUrl id="AddSelfCheckConf" requestMapping="/clouddbservice_device/selfcheckconf/AddSelfCheckConf"/>
+		<RequestUrl id="UpdSelfCheckConf" requestMapping="/clouddbservice_device/selfcheckconf/UpdSelfCheckConf"/>
+		<RequestUrl id="DelSelfCheckConf" requestMapping="/clouddbservice_device/selfcheckconf/DelSelfCheckConf"/>
+		<RequestUrl id="SelSelfCheckConf" requestMapping="/clouddbservice_device/selfcheckconf/SelSelfCheckConf"/>
+		<RequestUrl id="SelSelfCheckConfExactly" requestMapping="/clouddbservice_device/selfcheckconf/SelSelfCheckConfExactly"/>
+		
+		<!-- 表service_group -->
+		<RequestUrl id="AddServiceGroup" requestMapping="/clouddbservice_device/servicegroup/AddServiceGroup"/>
+		<RequestUrl id="UpdServiceGroup" requestMapping="/clouddbservice_device/servicegroup/UpdServiceGroup"/>
+		<RequestUrl id="DeleteServiceGroup" requestMapping="/clouddbservice_device/servicegroup/DeleteServiceGroup"/>
+		<RequestUrl id="SelectServiceGroup" requestMapping="/clouddbservice_device/servicegroup/SelectServiceGroup"/>
+		
+		<!-- 权限分组页面新增分组 -->
+		<RequestUrl id="addservgroup" requestMapping="/clouddbservice_device/servicegroup/addservgroup"/>
+		<!-- 删除权限分组操作 -->
+		<RequestUrl id="delservgroup" requestMapping="/clouddbservice_device/servicegroup/delservgroup"/>
+		<!-- 修改权限分组操作 -->
+		<RequestUrl id="updservgroup" requestMapping="/clouddbservice_device/servicegroup/updservgroup"/>
+		
+		<!-- 表ReaderType基本操作 -->
+		<RequestUrl id="SelectReadertype" requestMapping="/clouddbservice_device/readertype/SelectReaderType"/>
+		<RequestUrl id="UpdateReadertype" requestMapping="/clouddbservice_device/readertype/UpdReaderType"/>
+		<RequestUrl id="InsertReadertype" requestMapping="/clouddbservice_device/readertype/AddReaderType"/>
+		<RequestUrl id="DeleteReadertype" requestMapping="/clouddbservice_device/readertype/DeleteReaderType"/>
+		<RequestUrl id="SelectReadertypeByFuzzy" requestMapping="/clouddbservice_device/readertype/SelectReadertypeByFuzzy"/>
+		<!-- 查询图书馆的维护卡信息 旧-->
+<!-- 		<RequestUrl id="queryMaintenanceCard" requestMapping="/clouddbservice_device/readertype/queryMaintenanceCard"/> -->
+		<!-- 查询图书馆的维护卡信息 新-->
+		<RequestUrl id="queryMaintenanceCard" requestMapping="/clouddbservice_device/maintenance/queryMaintenanceCard"/>
+		<!-- 根据操作员的idx 查询其维护卡 -->
+		<RequestUrl id="queryOperatorMaintenanceCard" requestMapping="/clouddbservice_device/readertype/queryOperatorMaintenanceCard"/>
+		<!-- 更新操作员的维护卡信息-->
+<!-- 		<RequestUrl id="updateOperatorMaintenanceCard" requestMapping="/clouddbservice_device/readertype/updateOperatorMaintenanceCard"/> -->
+		<!-- 更新操作员的维护卡信息-->
+		<RequestUrl id="updateOperatorMaintenanceCard" requestMapping="/clouddbservice_device/maintenance/updateOperatorMaintenanceCard"/>
+		<!-- 新增维护卡信息 -->
+		<RequestUrl id="insertMaintenanceCard" requestMapping="/clouddbservice_device/maintenance/insertMaintenanceCard"/>
+		<!-- 更新维护卡信息 -->
+		<RequestUrl id="updateMaintenanceCard" requestMapping="/clouddbservice_device/maintenance/updateMaintenanceCard"/>
+		<!-- 更新维护卡信息 -->
+		<RequestUrl id="deleteMaintenanceCard" requestMapping="/clouddbservice_device/maintenance/deleteMaintenanceCard"/>
+		<!-- 查询维护卡信息 -->
+		<RequestUrl id="queryMaintenanceCardByFuzzy" requestMapping="/clouddbservice_device/maintenance/queryMaintenanceCardByFuzzy"/>
+		
+		
+		<!--ACS 配置表  -->
+		<RequestUrl id="queryAcsConfigByparam" requestMapping="/clouddbservice_device/acsconfig/queryAcsConfigByparam"/>
+		<RequestUrl id="queryAcsConfigByparamEX1" requestMapping="/clouddbservice_device/acsconfig/queryAcsConfigByparamEX1"></RequestUrl>
+		<RequestUrl id="queryAllProtocolConfig" requestMapping="/clouddbservice_device/acsconfig/queryAllProtocolConfig"/>
+		<RequestUrl id="queryMetadataProtocol" requestMapping="/clouddbservice_device/acsconfig/queryMetadataProtocol"></RequestUrl>
+		<RequestUrl id="addProtocolConfig" requestMapping="/clouddbservice_device/acsconfig/addProtocolConfig"/>
+		<RequestUrl id="addProtocolConfigEX1" requestMapping="/clouddbservice_device/acsconfig/addProtocolConfigEX1"/>
+		<RequestUrl id="delProtocolConfig" requestMapping="/clouddbservice_device/acsconfig/delProtocolConfig"/>
+		<RequestUrl id="updProtocolConfig" requestMapping="/clouddbservice_device/acsconfig/updProtocolConfig"/>
+		<RequestUrl id="updProtocolConfigEX1" requestMapping="/clouddbservice_device/acsconfig/updProtocolConfigEX1"/>
+		<RequestUrl id="queryProtocolConfigByTplIdx" requestMapping="/clouddbservice_device/acsconfig/queryProtocolConfigByTplIdx"/>
+		<RequestUrl id="queryProtocolConfigByTplIdxEX1" requestMapping="/clouddbservice_device/acsconfig/queryProtocolConfigByTplIdxEX1"></RequestUrl>
+		<RequestUrl id="delProtocolConfigTemplate" requestMapping="/clouddbservice_device/acsconfig/delProtocolConfigTemplate"/>
+		<RequestUrl id="delProtocolConfigTemplateEX1" requestMapping="/clouddbservice_device/acsconfig/delProtocolConfigTemplateEX1"/>
+		<!-- 根据图书馆idx查询图书馆的acs模板信息 -->
+		<RequestUrl id="getAscTempList" requestMapping="/clouddbservice_device/acsconfig/getAscTempList"/>
+		<!-- 获取所有的地区信息 -->
+		<RequestUrl id="queryAllRegion" requestMapping="/clouddbservice_device/region/queryAllRegion"/>
+		<!-- 获取设备的地点信息 -->
+		<RequestUrl id="queryDeviceRegion" requestMapping="/clouddbservice_device/device/queryDeviceRegion"/>
+		<!-- 获取图书馆地理坐标信息 -->
+		<RequestUrl id="getLibPosition" requestMapping="/clouddbservice_device/device/getLibPosition"/>
+		<!-- 获取图书馆地理坐标信息 -->
+		<RequestUrl id="deleteLibraryPosition" requestMapping="/clouddbservice_device/device/deleteLibraryPosition"/>
+		<!-- 获取设备的地理坐标信息 -->
+		<RequestUrl id="getDevicePosition" requestMapping="/clouddbservice_device/device/getDevicePosition"/>
+		<!-- 保存设备的地理坐标信息 -->
+		<RequestUrl id="saveDevicePosition" requestMapping="/clouddbservice_device/device/saveDevicePosition"/>		
+		<!-- 保存Ncip压缩文件更新时间到数据库 -->
+		<RequestUrl id="insertFileUploadFlag" requestMapping="/clouddbservice_device/device/insertFileUploadFlag"/>
+		<!-- 根据device_idx获取acs模板数据 -->
+		<RequestUrl id="loadAcsLogininfo" requestMapping="/clouddbservice_device/acsconfig/loadAcsLogininfo"/>
+		<RequestUrl id="queryProtocolConfigTemplate" requestMapping="/clouddbservice_device/acsconfig/queryProtocolConfigTemplate"></RequestUrl>
+		<!-- 设备显示url类型 -->
+		<RequestUrl id="display_queryAll" requestMapping="/clouddbservice_device/devicedisplay/queryAll"/>
+		<RequestUrl id="display_update" requestMapping="/clouddbservice_device/devicedisplay/update"/>
+		<RequestUrl id="display_insert" requestMapping="/clouddbservice_device/devicedisplay/insert"/>
+		<RequestUrl id="display_delete" requestMapping="/clouddbservice_device/devicedisplay/delete"/>
+		<RequestUrl id="display_findById" requestMapping="/clouddbservice_device/devicedisplay/findById"/>
+		<RequestUrl id="display_findByTypeId" requestMapping="/clouddbservice_device/devicedisplay/findByTypeId"/>
+		<RequestUrl id="display_getDeviceTypes" requestMapping="/clouddbservice_device/devicedisplay/getDeviceTypes"/>
+		<RequestUrl id="queryDeviceTypeByName" requestMapping="/clouddbservice_device/metadevicetype/queryDeviceTypeByName"/>
+		
+		<!-- 模板组相关的操作 add by huanghuang 20170220 -->
+		<!-- 新增模板组 -->
+		<RequestUrl id="addStatisticsGroup" requestMapping="/clouddbservice_device/statisticsGroup/addStatisticsGroup"/>
+		<!-- 删除模板组 -->
+		<RequestUrl id="deleteStatisticsGroup" requestMapping="/clouddbservice_device/statisticsGroup/deleteStatisticsGroup"/>
+		<!-- 更新模板组 -->
+		<RequestUrl id="updateStatisticsGroup" requestMapping="/clouddbservice_device/statisticsGroup/updateStatisticsGroup"/>
+		<!-- 查询一条模板组记录 -->
+		<RequestUrl id="selectStatisticsOneGroup" requestMapping="/clouddbservice_device/statisticsGroup/selectStatisticsOneGroup"/>
+		<!-- 查询多条模板组记录 -->
+		<RequestUrl id="selectStatisticsGroups" requestMapping="/clouddbservice_device/statisticsGroup/selectStatisticsGroups"/>
+		<!-- 分页查询多条模板组记录 -->
+		<RequestUrl id="selectStatisticsGroupByPage" requestMapping="/clouddbservice_device/statisticsGroup/selectStatisticsGroupByPage"/>
+		<!-- 查询出统计相关的数据源 -->
+		<RequestUrl id="takeDataSource" requestMapping="/clouddbservice_device/mainfield/getMainfieldCollection"/>
+		<!-- 统计查询的子类型相关 add by huanghuang 20170317 -->
+		<RequestUrl requestMapping="/clouddbservice_device/bookLocation/selectBookLocations" id="selectBookLocations"/>
+		<RequestUrl requestMapping="/clouddbservice_device/bookCirtype/selectBookCirtypes" id="selectBookCirtypes"/>
+		<RequestUrl requestMapping="/clouddbservice_device/bookMediatype/selectBookMediatypes" id="selectBookMediatypes"/>
+		<RequestUrl requestMapping="/clouddbservice_device/readertype/selectByLibIdx" id="selectReadertype"/>
+		<!-- 主函数子函数 -->
+		<RequestUrl requestMapping="/clouddbservice_device/funMaindata/selectFunMaindata" id="selectFunMaindata"/>
+		<RequestUrl requestMapping="/clouddbservice_device/funMaindata/selectFunMaindatas" id="selectFunMaindatas"/>
+		<RequestUrl requestMapping="/clouddbservice_device/funSubdata/selectFunSubdata" id="selectFunSubdata"/>
+		<RequestUrl requestMapping="/clouddbservice_device/funSubdata/selectFunSubdatas" id="selectFunSubdatas"/>
+		
+		<!-- 插入AppSettingEntity的db层接口 -->
+		<RequestUrl id="addAppSetting" requestMapping="/clouddbservice_device/appSetting/addAppSetting"/>
+		<!-- 更新AppSettingEntity的db层接口 -->
+		<RequestUrl id="updateAppSetting" requestMapping="/clouddbservice_device/appSetting/updateAppSetting"/>
+		<!-- 删除AppSettingEntity的db层接口 -->
+		<RequestUrl id="deleteAppSetting" requestMapping="/clouddbservice_device/appSetting/deleteAppSetting"/>
+		<!-- 查询 单个  AppSettingEntity的db层接口 -->
+		<RequestUrl id="selectAppSetting" requestMapping="/clouddbservice_device/appSetting/selectAppSetting"/>
+		<!-- 查询 多个  AppSettingEntity的db层接口 -->
+		<RequestUrl id="selectAppSettings" requestMapping="/clouddbservice_device/appSetting/selectAppSettings"/>
+		<!-- 查询   AppSettingEntity的db层接口 根据馆idx分组分页-->
+		<RequestUrl id="selectAppSettingByPage" requestMapping="/clouddbservice_device/appSetting/selectAppSettingByPage"/>
+		<!-- 删除AppSettingEntity的db层接口 根据馆idx -->
+		<RequestUrl id="deleteAppSettingBylib_idx" requestMapping="/clouddbservice_device/appSetting/deleteAppSettingBylibidx"/>
+		<!-- 根据用户main_menu_code查询其菜单 -->
+		<RequestUrl id="selectByCode" requestMapping="/clouddbservice_device/metamenu/selectByCode"/>
+	
+		<!-- 插入MyDocumentEntity的db层接口  -->
+		<RequestUrl id="addMyDocument" requestMapping="/clouddbservice_device/myDocument/addMyDocument" />
+		<!-- 更新MyDocumentEntity的db层接口  -->
+		<RequestUrl id="updateMyDocument" requestMapping="/clouddbservice_device/myDocument/updateMyDocument" />
+		<!-- 删除MyDocumentEntity的db层接口  -->
+		<RequestUrl id="deleteMyDocument" requestMapping="/clouddbservice_device/myDocument/deleteMyDocument" />
+		<!-- 从主键查询MyDocumentEntity的db层接口  -->
+		<RequestUrl id="selectMyDocument" requestMapping="/clouddbservice_device/myDocument/selectMyDocument" />
+		<!-- 模糊查询MyDocumentEntity的db层接口  -->
+		<RequestUrl id="selectMyDocuments" requestMapping="/clouddbservice_device/myDocument/selectMyDocuments" />
+	
+		<!-- 插入MyFeedBackEntity的db层接口  -->
+		<RequestUrl id="addFeedBack" requestMapping="/clouddbservice_device/feedback/addFeedback" />
+		<!-- 更新feedBackEntity的db层接口  -->
+		<RequestUrl id="updateFeedBack" requestMapping="/clouddbservice_device/feedback/updateFeedback" />
+		<!-- 删除feedBackEntity的db层接口  -->
+		<RequestUrl id="deleteFeedBack" requestMapping="/clouddbservice_device/feedback/deleteFeedback" />
+		<!-- 从主键查询feedBackEntity的db层接口  -->
+		<RequestUrl id="selectFeedBack" requestMapping="/clouddbservice_device/feedback/selectFeedback" />
+		<!-- 模糊查询feedBackEntity的db层接口  -->
+		<RequestUrl id="selectFeedBacks" requestMapping="/clouddbservice_device/feedback/selectFeedbacks" />
+	
+		<!-- 插入MyFeedBackReplyEntity的db层接口  -->
+		<RequestUrl id="addFeedBackReply" requestMapping="/clouddbservice_device/feedbackReply/addFeedbackReply" />
+		<!-- 更新MyFeedBackReplyEntity的db层接口  -->
+		<RequestUrl id="updateFeedBackReply" requestMapping="/clouddbservice_device/feedbackReply/updateFeedbackReply" />
+		<!-- 删除MyFeedBackReplyEntity的db层接口  -->
+		<RequestUrl id="deleteFeedBackReply" requestMapping="/clouddbservice_device/feedbackReply/deleteFeedbackReply" />
+		<!-- 从主键查询MyFeedBackReplyEntity的db层接口  -->
+		<RequestUrl id="selectFeedBackReply" requestMapping="/clouddbservice_device/feedbackReply/selectFeedbackReply" />
+		<!-- 模糊查询MyFeedBackReplyEntity的db层接口  -->
+		<RequestUrl id="selectFeedBackReplys" requestMapping="/clouddbservice_device/feedbackReply/selectFeedbackReplys" />
+		
+		<!-- 模板组相关的操作 add by huanghuang 20170428 -->
+		<!-- 新增模板组 -->
+		<RequestUrl id="increaseStatisticsGroup" requestMapping="/clouddbservice_device/statisticsGroup/increaseStatisticsGroup"/>
+		<!-- 更新模板组 -->
+		<RequestUrl id="modifyStatisticsGroup" requestMapping="/clouddbservice_device/statisticsGroup/modifyStatisticsGroup"/>
+		<!-- 删除模板组 -->
+		<RequestUrl id="removeStatisticsGroup" requestMapping="/clouddbservice_device/statisticsGroup/removeStatisticsGroup"/>
+		<!-- 分页查询模板组 -->
+		<RequestUrl id="querysGroupByPageParam" requestMapping="/clouddbservice_device/statisticsGroup/querysGroupByPageParam"/>
+		
+		<!-- 设备前端设置 -->
+		<RequestUrl id="queryDeviceViewConfig" requestMapping="/clouddbservice_device/deviceViewConfig/queryDeviceViewConfig"/>
+		<RequestUrl id="queryDeviceViewConfigSet" requestMapping="/clouddbservice_device/deviceViewConfig/queryDeviceViewConfigSet"/>
+		<RequestUrl id="insertDeviceViewConfigSet" requestMapping="/clouddbservice_device/deviceViewConfig/insertDeviceViewConfigSet"/>
+		<RequestUrl id="deleteDeviceViewConfigSet" requestMapping="/clouddbservice_device/deviceViewConfig/deleteDeviceViewConfigSet"/>
+	
+		<!-- 插入AppconnSettingEntity的db层接口 -->
+		<RequestUrl id="insertAppconnSetting" requestMapping="/clouddbservice_device/appconnSetting/addAppconnSetting"/>
+		<!-- 更新AppconnSettingEntity的db层接口 -->
+		<RequestUrl id="updateAppconnSetting" requestMapping="/clouddbservice_device/appconnSetting/updateAppconnSetting"/>
+		<!-- 删除AppconnSettingEntity的db层接口 -->
+		<RequestUrl id="deleteAppconnSetting" requestMapping="/clouddbservice_device/appconnSetting/deleteAppconnSetting"/>
+		<!-- 查询 单个  AppconnSettingEntity的db层接口 -->
+		<RequestUrl id="selectAppconnSetting" requestMapping="/clouddbservice_device/appconnSetting/selectAppconnSetting"/>
+		<!-- 查询 多个  AppconnSettingEntity的db层接口 -->
+		<RequestUrl id="selectAppconnSettingByPage" requestMapping="/clouddbservice_device/appconnSetting/selectAppconnSettingByPage"/>
+		
+		<RequestUrl id="selectSysName" requestMapping="/clouddbservice_device/appconnSetting/selectSysName"/>
+		<RequestUrl id="selectAppconnDataBySysName" requestMapping="/clouddbservice_device/appconnSetting/selectAppconnDataBySysName"/>
+
+        <RequestUrl id="selRegionsByLibidx" requestMapping="/clouddbservice_device/region/selRegionsByLibidx"/>
+	
+	    <!-- 界面配置的db层接口 -->
+		<RequestUrl id="getData" requestMapping="/clouddbservice_device/json/getData"></RequestUrl>
+		<RequestUrl id="saveData" requestMapping="/clouddbservice_device/json/saveData"></RequestUrl>
+		<RequestUrl id="getInitData" requestMapping="/clouddbservice_device/json/getInitData"></RequestUrl>
+		<RequestUrl id="getLibDevData" requestMapping="/clouddbservice_device/json/getLibDevData"></RequestUrl>
+		<RequestUrl id="getDevTypeData" requestMapping="/clouddbservice_device/json/getDevTypeData"></RequestUrl>
+
+		
+		<!-- 设备服务注册 -->
+		<RequestUrl id="deviceServiceRegister" requestMapping="/clouddbservice_device/deviceService/deviceServiceRegister"></RequestUrl>
+		
+		<RequestUrl id="queryDeviceServiceByPage" requestMapping="/clouddbservice_device/deviceService/queryDeviceServiceByPage"></RequestUrl>
+		<RequestUrl id="editDeviceServiceRegister" requestMapping="/clouddbservice_device/deviceService/editDeviceServiceRegister"></RequestUrl>
+		<RequestUrl id="queryDeviceServiceByParams" requestMapping="/clouddbservice_device/deviceService/queryDeviceServiceByParams"></RequestUrl>
+		<RequestUrl id="queryDeviceServiceRegister" requestMapping="/clouddbservice_device/deviceService/queryDeviceServiceRegister"></RequestUrl>
+		<RequestUrl id="deleteDeviceService" requestMapping="/clouddbservice_device/deviceService/deleteDeviceService"></RequestUrl>
+		<RequestUrl id="updateDeviceServiceOperateTime" requestMapping="/clouddbservice_device/deviceService/updateDeviceServiceOperateTime"></RequestUrl>
+		<!-- 特殊设备 -->
+		<RequestUrl id="addSpecialDevice" requestMapping="/clouddbservice_device/specialDevice/addSpecialDevice"></RequestUrl>
+		<RequestUrl id="querySpecialDeviceByPage" requestMapping="/clouddbservice_device/specialDevice/querySpecialDeviceByPage"></RequestUrl>
+		<RequestUrl id="querySpecialDeviceByParams" requestMapping="/clouddbservice_device/specialDevice/querySpecialDeviceByParams"></RequestUrl>
+		<RequestUrl id="editSpecialDevice" requestMapping="/clouddbservice_device/specialDevice/editSpecialDevice"></RequestUrl>
+		<RequestUrl id="deleteSpecialDevice" requestMapping="/clouddbservice_device/specialDevice/deleteSpecialDevice"></RequestUrl>
+		<!--特殊设备类型  -->
+		<RequestUrl id="querySpecialDeviceTypeByParams" requestMapping="/clouddbservice_device/specialDeviceType/querySpecialDeviceTypeByParams"/>
+		<RequestUrl id="querySpecialDeviceTypeByPage" requestMapping="/clouddbservice_device/specialDeviceType/querySpecialDeviceTypeByPage"/>
+		<RequestUrl id="addSpecialDeviceType" requestMapping="/clouddbservice_device/specialDeviceType/addSpecialDeviceType"/>
+		<RequestUrl id="deleteSpecialDeviceType" requestMapping="/clouddbservice_device/specialDeviceType/deleteSpecialDeviceType"/>
+		<RequestUrl id="editSpecialDeviceType" requestMapping="/clouddbservice_device/specialDeviceType/editSpecialDeviceType"/>
+		<!-- 服务类型 -->
+		<RequestUrl id="queryDeviceServiceTypeByParams" requestMapping="/clouddbservice_device/deviceServiceType/queryDeviceServiceTypeByParams"/>
+		<RequestUrl id="queryDeviceServiceTypeByPage" requestMapping="/clouddbservice_device/deviceServiceType/queryDeviceServiceTypeByPage"/>
+		<RequestUrl id="addDeviceServiceType" requestMapping="/clouddbservice_device/deviceServiceType/addDeviceServiceType"/>
+		<RequestUrl id="deleteDeviceServiceType" requestMapping="/clouddbservice_device/deviceServiceType/deleteDeviceServiceType"/>
+		<RequestUrl id="editDeviceServiceType" requestMapping="/clouddbservice_device/deviceServiceType/editDeviceServiceType"/>
+		
+		<!-- 保存图书馆的位置信息到数据库 -->
+		<RequestUrl id="saveLibPosition" requestMapping="/clouddbservice_device/device/saveLibPosition"></RequestUrl>
+		
+		<!-- 第三方应用 -->
+		<RequestUrl  id="queryThirdPartyService" requestMapping="/clouddbservice_device/thirdPartyService/queryThirdPartyServiceByParams"/>
+		<RequestUrl  id="deleteThirdPartyService" requestMapping="/clouddbservice_device/thirdPartyService/deleteThirdPartyService"/>
+		<RequestUrl  id="queryThirdPartyServiceByPage" requestMapping="/clouddbservice_device/thirdPartyService/queryThirdPartyServiceByPage"/>
+		<RequestUrl  id="editThirdPartyService" requestMapping="/clouddbservice_device/thirdPartyService/editThirdPartyService"/>
+		<!-- 大屏展示 -->
+		<RequestUrl id="queryDisplayInfo" requestMapping="/clouddbservice_device/thirdPartyService/queryDisplayInfo"/>
+		<RequestUrl id="deleteDisplayInfo" requestMapping="/clouddbservice_device/thirdPartyService/deleteDisplayInfo"/>
+		<RequestUrl id="queryDisplayInfoList" requestMapping="/clouddbservice_device/thirdPartyService/queryDisplayInfoList"/>
+		<RequestUrl id="editDisplayInfo" requestMapping="/clouddbservice_device/thirdPartyService/editDisplayInfo"/>
+
+		<!-- 查询导入配置数据源 -->
+		<RequestUrl id="selectConfigFieldList" requestMapping="/clouddbservice_device/configfield/selectConfigFieldList"></RequestUrl>
+		<!-- 查询出统计相关的数据源 -->
+		<RequestUrl id="takeReaderDataSource" requestMapping="/clouddbservice_device/configfield/getConfigFieldCollection"/>
+		<!-- 添加读者配置数据 -->
+		<RequestUrl id="insertConfigTemplate" requestMapping="/clouddbservice_device/configfield/addConfigTemplate"/>
+		<!-- 分页查询导入配置数据 -->
+		<RequestUrl id="selectConfigTemplatePage" requestMapping="/clouddbservice_device/configfield/selectImportTemplatePage"/>
+		<!-- 查询某个模板 -->
+		<RequestUrl id="selectImportConfig" requestMapping="/clouddbservice_device/configfield/selectImportConfig"/>
+		<!-- 更新模板 -->
+		<RequestUrl id="updateImportTemplate" requestMapping="/clouddbservice_device/configfield/updateImportTemplate"/>
+		<!-- 删除模板 -->
+		<RequestUrl id="deleteImportTemplate" requestMapping="/clouddbservice_device/configfield/deleteImportTemplate"/>
+	</project>
+	
+	
+	<project projectName="cloudbusinessservice_authentication" baseURL="http://127.0.0.1:8081">
+		<!-- bakup -->
+		<RequestUrl requestMapping="/cloudbusinessservice_authentication/bakup/restoreAuthDataByLibraryIdx" id="restoreAuthDataByLibraryIdx"/>
+		<RequestUrl requestMapping="/cloudbusinessservice_authentication/bakup/bakupOnlyByLiraryIdxSsitAuth" id="bakupOnlyByLiraryIdxSsitAuth"></RequestUrl>
+		
+		<RequestUrl id="SelectLibrary" requestMapping="/cloudbusinessservice_authentication/library/selLibraryByIdxsOrIds"/>
+		<RequestUrl id="SelectLibByFuzzy" requestMapping="/cloudbusinessservice_authentication/library/selLibraryByIdFuzzy"/>
+		<RequestUrl id="selLibraryIDByFuzzy" requestMapping="/cloudbusinessservice_authentication/library/selLibraryIDByFuzzy"></RequestUrl>
+		<!-- 添加系统日志 -->
+		<RequestUrl id="AddOperationLog" requestMapping="/cloudbusinessservice_authentication/systemlog/AddOperationLog"/>
+		<!-- 获取log_message数据 -->
+		<RequestUrl id="getOperationLogType" requestMapping="/cloudbusinessservice_authentication/systemlog/getOperationLogType"/>
+		<!-- 新增一个设备用户 -->
+		<RequestUrl id="addDevice" requestMapping="/cloudbusinessservice_authentication/operator/addDevice"/>
+		<!-- 根据id或者idx查询图书馆信息 -->
+		<RequestUrl id="selLibraryByIdxOrId" requestMapping="/cloudbusinessservice_authentication/library/selLibraryByIdxOrId"></RequestUrl>
+		
+		<RequestUrl id="queryAllMasterLibAndSlaveLib" requestMapping="/cloudbusinessservice_authentication/library/queryAllMasterLibAndSlaveLib"/>
+		<RequestUrl id="getLibIdAndLibIdx" requestMapping="/cloudbusinessservice_authentication/library/getLibIdAndLibIdx"/>
+		<RequestUrl id="querylibInfoByCurUserEXT1" requestMapping="/cloudbusinessservice_authentication/library/querylibInfoByCurUserEXT1"/>
+		<!-- 查询图书馆的模板信息，以及所有 有效的设备用户的id  -->
+		<RequestUrl id="selLibraryTempAndDeviceIds" requestMapping="/cloudbusinessservice_authentication/library/selLibraryTempAndDeviceIds"></RequestUrl>
+		<!-- 根据模板ID查询模板信息 -->
+		<RequestUrl id="selLibraryServiceTemplateByIdx" requestMapping="/cloudbusinessservice_authentication/library/selLibraryServiceTemplateByIdx"></RequestUrl>
+		
+		<!-- 用户分组管理 带参数分页查询 -->
+		<RequestUrl id="queryOperatorByParam" requestMapping="/cloudbusinessservice_authentication/operator/queryOperatorByParam"/>
+		<!-- 新增操作员信息 -->
+		<RequestUrl id="addOperator" requestMapping="/cloudbusinessservice_authentication/operator/addOperator"/>
+		<!-- 删除用户 -->
+		<RequestUrl id="delOperator" requestMapping="/cloudbusinessservice_authentication/operator/delOperator"/>
+		<!-- 删除多个用户 -->
+		<RequestUrl id="delMultiOperator" requestMapping="/cloudbusinessservice_authentication/operator/delMultiOperator"/>
+		<!-- 修改用户 -->
+		<RequestUrl id="updOperator" requestMapping="/cloudbusinessservice_authentication/operator/updOperator"/>
+		<!-- 查询用户详细信息 -->
+		<RequestUrl id="queryOperatorDetailByIdx" requestMapping="/cloudbusinessservice_authentication/operator/queryOperatorDetailByIdx"/>
+		<!-- 查询所有的操作员模板 -->
+		<RequestUrl id="queryAllSoxTemp" requestMapping="/cloudbusinessservice_authentication/operator/queryAllSoxTemp"/>
+		<!-- 根据登录用户的信息查询操作员类型信息 -->
+		<RequestUrl id="queryOperatorTypes" requestMapping="/cloudbusinessservice_authentication/operator/queryOperatorTypes"/>
+		<!-- 更新操作员信息 -->
+		<RequestUrl id="updateOperator" requestMapping="/cloudbusinessservice_authentication/operator/updateOperator"/>
+		<!-- 查询用户的所有信息项，以及可以添加的信息项 -->
+		<RequestUrl id="queryAllOperatorInfo" requestMapping="/cloudbusinessservice_authentication/operator/queryAllOperatorInfo"/>
+		<!-- 通过oper_id删除 设备用户 -->
+		<RequestUrl id="deleteDevOperatorInfoByOperIds" requestMapping="/cloudbusinessservice_authentication/operator/deleteDevOperatorInfoByOperIds"/>
+		<!-- 重置用户密码 -->
+		<RequestUrl id="resetPassword" requestMapping="/cloudbusinessservice_authentication/operator/resetPassword"/>
+		<!-- 用户修改密码 -->
+		<RequestUrl id="changePassword" requestMapping="/cloudbusinessservice_authentication/operator/changePassword"/>
+		<!-- 检查用户密码格式 -->
+		<RequestUrl id="checkPwdFormat" requestMapping="/cloudbusinessservice_authentication/operator/checkPwdFormat"/>
+		
+		<!-- 根据设备用户id 查询设备的ip -->
+		<RequestUrl id="queryDeviceIps" requestMapping="/cloudbusinessservice_authentication/operator/queryDeviceIps"/>
+		<!-- 发送请求到鉴权库，将旧馆设备转移到新馆，并且修改相关ip -->
+		<RequestUrl id="authTransferToLibrary" requestMapping="/cloudbusinessservice_authentication/operator/authTransferToLibrary"/>
+		<!-- 发送请求到鉴权库，将旧馆设备转移到新馆，并且修改相关ip -->
+		<RequestUrl id="devTransferToLibraryLog" requestMapping="/cloudbusinessservice_authentication/operator/devTransferToLibraryLog"/>
+		
+		<RequestUrl id="selOperatorByIdOrIdx" requestMapping="/cloudbusinessservice_authentication/operator/selOperatorByOperIdOrIdx"/>
+		<!-- 修改白名单ip地址 -->
+		<RequestUrl id="updIpWhite" requestMapping="/cloudbusinessservice_authentication/operator/updIpWhite"/>
+		
+		<!-- sox_template表 -->
+		<!-- 根据参数获取鉴权模板的分页信息 -->
+		<RequestUrl id="getSoxTempListByParam" requestMapping="/cloudbusinessservice_authentication/operator/getSoxTempListByParam"/>
+		<RequestUrl id="addSoxTemp" requestMapping="/cloudbusinessservice_authentication/operator/addSoxTemp"/>
+		<RequestUrl id="updateSoxTemp" requestMapping="/cloudbusinessservice_authentication/operator/updateSoxTemp"/>
+		<RequestUrl id="delSoxTemp" requestMapping="/cloudbusinessservice_authentication/operator/delSoxTemp"/>
+		<RequestUrl id="delMultiSoxTemp" requestMapping="/cloudbusinessservice_authentication/operator/delMultiSoxTemp"/>
+
+	</project>
+	
+	<project projectName="clouddbservice_devicemonitor" baseURL="http://127.0.0.1:8080">
+		<!-- 设备端上传设备状态 操作日志 接口 -->
+		<RequestUrl id="transData" requestMapping="/clouddbservice_devicemonitor/devicelog/transData"/>
+		<!-- 设备状态 正常 、报警 、失效 -->
+		<RequestUrl id="selectDeviceState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectDeviceState"/>
+		<!-- 书架信息 -->
+		<RequestUrl id="selectBookrackState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectBookrackState"/>
+		<!-- 箱子信息 -->
+		<RequestUrl id="selectBinState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectBinState"/>
+		<!--  外设信息 SSL信息-->
+		<RequestUrl id="selectDeviceExtState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectDeviceExtState"/>
+		<!--  获取功能状态信息-->
+		<RequestUrl id="selectSoftState" requestMapping="/clouddbservice_devicemonitor/devicelog/selectSoftState"/>
+		<!-- 查询所有设备的设备状态 -->
+		<RequestUrl id="queryDeviceIdByState" requestMapping="/clouddbservice_devicemonitor/devicelog/queryDeviceIdByState"/>
+		<!-- 获取数据库名 IP-->
+		<RequestUrl id="getMongodbNames" requestMapping="/clouddbservice_devicemonitor/devicelog/getMongodbNames"/>
+		<!-- 获取数据库名（设备ID）对应 实例 信息 mongoInstance -->
+		<RequestUrl id="getDBInstanceByDBName" requestMapping="/clouddbservice_devicemonitor/devicelog/getDBInstanceByDBName"/>
+		<RequestUrl id="queryMongoInstances" requestMapping="/clouddbservice_devicemonitor/mongoInstance/queryMongoInstances"></RequestUrl>
+	</project>
+	
+	
+	<project projectName="cloudbusinessservice_node" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl requestMapping="/cloudbusinessservice_node/hearbeat/saveData" id="HEARBEAT_URL" />
+	</project>
+	
+	<project projectName="clouddbservice_libraryinfo" baseURL="http://127.0.0.1:8080">
+		<!-- 心跳数据 -->
+		<RequestUrl id="importBookitem" requestMapping="/clouddbservice_libraryinfo/bookitem/importBookitem"/>
+		<RequestUrl id="queryAllBookitemAndBookInfoByCode" requestMapping="/clouddbservice_libraryinfo/bookitem/queryAllBookitemAndBookInfoByCode"/>
+		
+		<!-- 在架书管理 -->
+		<RequestUrl id="queryAllBookshelf" requestMapping="/clouddbservice_libraryinfo/bookshelf/queryAllBookshelf"/>
+		<RequestUrl id="addBookshelf" requestMapping="/clouddbservice_libraryinfo/bookshelf/addBookshelf"/>
+		<RequestUrl id="queryBookshelfById" requestMapping="/clouddbservice_libraryinfo/bookshelf/queryBookshelfById"/>
+		<RequestUrl id="updateBookshelf" requestMapping="/clouddbservice_libraryinfo/bookshelf/updateBookshelf"/>
+		<RequestUrl id="deleteBookshelf" requestMapping="/clouddbservice_libraryinfo/bookshelf/deleteBookshelf"/>
+		<RequestUrl id="updateShelfimage" requestMapping="/clouddbservice_libraryinfo/bookshelf/updateShelfimage"/>
+		<RequestUrl id="updateFloorimage" requestMapping="/clouddbservice_libraryinfo/bookshelf/updateFloorimage"/>
+		<RequestUrl id="uploadPoint" requestMapping="/clouddbservice_libraryinfo/bookshelf/uploadPoint"/>
+		<RequestUrl id="queryAllShelfGroup" requestMapping="/clouddbservice_libraryinfo/shelfGroup/queryAllShelfGroup"/>
+		<RequestUrl id="addShelfGroup" requestMapping="/clouddbservice_libraryinfo/shelfGroup/addShelfGroup"/>
+		<RequestUrl id="updateShelfGroup" requestMapping="/clouddbservice_libraryinfo/shelfGroup/updateShelfGroup"/>
+		<RequestUrl id="deleteShelfGroup" requestMapping="/clouddbservice_libraryinfo/shelfGroup/deleteShelfGroup"/>
+		<RequestUrl id="queryRelOperatorShelfGroupById" requestMapping="/clouddbservice_libraryinfo/relOperatorShelfGroup/queryRelOperatorShelfGroupById"/>
+		<RequestUrl id="queryAllBookshelflayer" requestMapping="/clouddbservice_libraryinfo/bookshelflayer/queryAllBookshelflayer"/>
+		<RequestUrl id="queryBookshelfinfoById" requestMapping="/clouddbservice_libraryinfo/bookshelfinfo/queryBookshelfinfoById"/>
+		<RequestUrl id="addBookshelflayer" requestMapping="/clouddbservice_libraryinfo/bookshelflayer/addBookshelflayer"/>
+		<RequestUrl id="updateBookshelflayer" requestMapping="/clouddbservice_libraryinfo/bookshelflayer/updateBookshelflayer"/>
+		<RequestUrl id="deleteBookshelflayer" requestMapping="/clouddbservice_libraryinfo/bookshelflayer/deleteBookshelflayer"/>
+		<RequestUrl id="exportBookshelflayer" requestMapping="/clouddbservice_libraryinfo/bookshelflayer/exportBookshelflayer"/>
+		<RequestUrl id="uploadBookshelflayer" requestMapping="/clouddbservice_libraryinfo/bookshelflayer/uploadBookshelflayer"/>
+		
+		<RequestUrl id="uploadShelfInfoExcelFile" requestMapping="/clouddbservice_libraryinfo/common/uploadShelfInfoExcel"/>
+		<RequestUrl id="uploadPointFile" requestMapping="/clouddbservice_libraryinfo/common/uploadPoint"/>
+		
+		
+		<RequestUrl id="queryAllMakeShelfRecord" requestMapping="/clouddbservice_libraryinfo/makeshelf/queryAllMakeShelfRecord"/>
+		<RequestUrl id="makeshelf" requestMapping="/clouddbservice_libraryinfo/makeshelf/makeshelf"/>
+		<RequestUrl id="deleteMakeShelfRecord" requestMapping="/clouddbservice_libraryinfo/makeshelf/deleteMakeShelfRecord"/>
+	
+		<!-- 上传文件到libraryinfo的db层进行处理 -->
+		<RequestUrl id="batchDataUpload" requestMapping="/clouddbservice_libraryinfo/batch/batchDataUpload"/>
+		
+		<!-- 人流量服务同步配置 -->
+		<RequestUrl id="addCloudDbSyncConfig" requestMapping="/clouddbservice_libraryinfo/syncconfig/addCloudDbSyncConfig"/>
+		
+		<RequestUrl id="selectCloudDbSyncConfig" requestMapping="/clouddbservice_libraryinfo/syncconfig/selectCloudDbSyncConfig"/>
+		<!-- 上传读者 -->
+		<RequestUrl id="uploadReaderCard" requestMapping="/clouddbservice_libraryinfo/readercard/uploadReaderCard"></RequestUrl>
+		<!-- 上传读者 -->
+		<RequestUrl id="uploadBiblios" requestMapping="/clouddbservice_libraryinfo/biblios/uploadBiblios"></RequestUrl>
+	</project>
+	
+	<project projectName="clouddbservice_authentication" baseURL="http://127.0.0.1:8080">
+	     <RequestUrl id="selLibraryByNameORLibId" requestMapping="/clouddbservice_authentication/library/selLibraryByNameORLibId"/>
+
+        <RequestUrl id="selectRelLibsByid" requestMapping="/clouddbservice_authentication/rellibs/selectByIdx"/>
+        <RequestUrl id="selectAutBySql" requestMapping="/clouddbservice_authentication/dynamicsql/selectBySql"/>
+	</project>
+	
+	<project projectName="cloudbusinessservice_datasyn" baseURL="http://127.0.0.1:8080">
+		<RequestUrl requestMapping="/cloudbusinessservice_datasyn/device/downloadConfig" id="downloadConfig" />
+	</project>
+</RequestUrlList>

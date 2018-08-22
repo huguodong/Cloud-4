@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nodeInterface">
+	
+	<insert id="addNodeInterface" parameterType="com.ssitcloud.node.entity.NodeInterfaceEntity" useGeneratedKeys="true" keyProperty="interface_idx">
+		INSERT INTO `interface_url_config` (
+			`interface_idx`,
+			`request_url`,
+			`request_id`,
+			`from_node`,
+			`to_node`,
+			`create_time`,
+			`update_time`,
+			`operator`
+		) VALUES (
+			#{interface_idx},
+			#{request_url},
+			#{request_id},
+			#{from_node},
+			#{to_node},
+			#{create_time},
+			#{update_time},
+			#{operator}
+		)
+	</insert>
+	
+	<update id="editNodeInterface" parameterType="com.ssitcloud.node.entity.NodeInterfaceEntity">
+		update `interface_url_config` set `request_url`=#{request_url},`request_id`=#{request_id},
+		`from_node`=#{from_node},`to_node`=#{to_node},`update_time`=#{update_time}
+		where `interface_idx`=#{interface_idx}
+	</update>
+	
+	<select id="queryNodeInterfaceByPage" parameterType="com.ssitcloud.node.entity.page.NodeInterfacePageEntity" resultType="com.ssitcloud.node.entity.page.NodeInterfacePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		
+		select * from `interface_url_config` where 1=1 
+		<if test="from_node != null and from_node != ''">
+			and from_node like CONCAT('%', #{from_node}, '%')
+		</if>
+		<if test="to_node != null and to_node != ''">
+			and to_node like CONCAT('%', #{to_node}, '%')
+		</if>
+		<if test="request_url != null and request_url != ''">
+			and request_url like CONCAT('%', #{request_url}, '%')
+		</if>
+		<if test="request_id != null and request_id != ''">
+			and request_id like CONCAT('%', #{request_id}, '%')
+		</if>
+		<if test="interface_idx != null and interface_idx != ''">
+			and interface_idx = #{interface_idx}
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<delete id="deleteNodeInterface" parameterType="map">
+		delete from `interface_url_config` where 1=1 
+		<if test="interface_idx != null and interface_idx != '' ">
+			and interface_idx = #{interface_idx}
+		</if>
+	</delete>
+	
+	<select id="queryInterfaceByNodeName" resultType="com.ssitcloud.node.entity.NodeInterfaceEntity" parameterType="map">
+		
+		select i.*,h.host_ip1 as ip,c.container_port as port,c.protocol_type as protocol from interface_url_config i  
+		left join node n on n.node_name = i.to_node left join container c 
+		on c.container_idx = n.container_idx left join host h on h.host_idx = c.host_idx
+		where n.enable = 1
+		<if test="node_name != null and node_name != ''">
+			and i.from_node = #{node_name}
+		</if>
+	</select>
+	
+	<!-- <select id="queryForwardNodes" resultType="com.ssitcloud.node.entity.NodeInterfaceEntity" parameterMap="map">
+		select distinct i.from_node,h.host_ip1 as ip,c.container_port as port,c.protocol_type as protocol from interface_url_config i  
+		left join node n on n.node_name = i.from_node left join container c 
+		on c.container_idx = n.container_idx left join host h on h.host_idx = c.host_idx
+		where i.to_node = 'clouddbservice_device' and n.enable = 1
+		<if test="to_node != null and to_node != ''">
+			and to_node = #{to_node}
+		</if>
+	</select> -->
+	
+	<select id="queryPreNodesByPage" resultType="com.ssitcloud.node.entity.page.NodeInterfacePageEntity" parameterType="com.ssitcloud.node.entity.page.NodeInterfacePageEntity" >
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		
+		select distinct i.from_node,to_node,h.host_ip1 as ip,c.container_port as port,c.save_path,c.protocol_type as protocol from interface_url_config i  
+		inner join node n on n.node_name = i.from_node inner join container c 
+		on c.container_idx = n.container_idx inner join host h on h.host_idx = c.host_idx
+		where n.enable = 1  
+		<if test="to_node != null and to_node != ''">
+			and to_node like CONCAT('%', #{to_node}, '%')
+		</if>
+		<if test="node_mode != null and node_mode != ''">
+			  and to_node like CONCAT('%', #{node_mode}, '%')
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<select id="queryPreNodes" resultType="com.ssitcloud.node.entity.NodeInterfaceEntity" parameterType="map" >
+		select distinct i.from_node,to_node,h.host_ip1 as ip,c.container_port as port,c.save_path,c.protocol_type as protocol from interface_url_config i  
+		inner join node n on n.node_name = i.from_node inner join container c 
+		on c.container_idx = n.container_idx inner join host h on h.host_idx = c.host_idx
+		where n.enable = 1  
+		<if test="to_node != null and to_node != ''">
+			and to_node like CONCAT('%', #{to_node}, '%')
+		</if>
+		<if test="node_mode != null and node_mode != ''">
+			 and to_node like CONCAT('%', #{node_mode}, '%')
+		</if>
+	</select>
+	
+</mapper>

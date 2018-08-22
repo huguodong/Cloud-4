@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="navigation">
+	<select id="queryBookItemTotal" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM `bookitem` 
+		<where>
+			<if test="library_idx !=null and library_idx !='' ">
+				and `lib_idx` = #{library_idx} 
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryBookShelfLayerTotal" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM `bookshelflayer` 
+		<where>
+			<if test="library_id !=null and library_id !='' ">
+				and `lib_id` = #{library_id} 
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryBookShelfTotal" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM `bookshelf` 
+		<where>
+			<if test="library_id !=null and library_id !=''">
+				and `lib_id` = #{library_id} 
+			</if>
+		</where>
+	</select>
+</mapper>

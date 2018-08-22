@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="metadata_infotype">
+	<select id="selectMetaDataInfoType" parameterType="com.ssitcloud.dblib.entity.MetaDataInfoTypeEntity" resultType="com.ssitcloud.dblib.entity.MetaDataInfoTypeEntity">
+		SELECT infotype_idx,info_type_desc FROM metadata_infotype 
+	    where 1=1
+		<if test="infotype_idx!=null">
+			AND infotype_idx=#{infotype_idx}
+		</if>
+		<if test="info_type_desc!=null">
+			AND info_type_desc=#{info_type_desc}
+		</if>
+	</select>
+	<select id="selectMetaDataInfoTypes" parameterType="com.ssitcloud.dblib.entity.MetaDataInfoTypeEntity" resultType="com.ssitcloud.dblib.entity.MetaDataInfoTypeEntity">
+		SELECT infotype_idx,info_type_desc FROM metadata_infotype 
+	    where 1=1
+	</select>
+</mapper>

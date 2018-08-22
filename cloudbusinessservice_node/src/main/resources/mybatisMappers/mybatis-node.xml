@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="node">
+	<!-- <typeAlias type="com.ssitcloud.nodemgmt.entity.NodeEntity" alias="NodeEntity"/> -->
+	<sql id="queryNodes">
+		SELECT n.`node_idx`,n.`node_id`,n.`node_name`,n.`node_model`,n.`node_attributes`,n.`node_type_idx`,t.`node_type_name`,n.`container_idx`,c.`container_name`,n.`library_idxs`,n.`node_relations`,n.`enable` FROM `node` n LEFT JOIN `node_type` t ON n.node_type_idx=t.node_type_idx LEFT JOIN `container` c ON n.container_idx=c.container_idx
+	</sql>
+
+	<insert id="addNode" parameterType="com.ssitcloud.node.entity.NodeEntity" useGeneratedKeys="true" keyProperty="node_idx">
+		INSERT INTO `node` (
+			`node_id`,
+			`node_name`,
+			`node_model`,
+			`node_type_idx`,
+			`node_attributes`,
+			`container_idx`,
+			`library_idxs`,
+			`node_relations`,
+			`enable`
+		) VALUES (
+			#{node_id},
+			#{node_name},
+			#{node_model},
+			#{node_type_idx},
+			#{node_attributes},
+			#{container_idx},
+			#{library_idxs},
+			#{node_relations},
+			#{enable}
+		)
+	</insert>
+	
+	<insert id="addNodeRelations" parameterType="com.ssitcloud.node.entity.NodeRelations" useGeneratedKeys="true" keyProperty="node_relations_idx">
+		INSERT INTO `node_relations` (
+			`primary_node_idx`,
+			`secondary_node_idx`
+		) VALUES (
+			#{primary_node_idx},
+			#{secondary_node_idx}
+		)
+	</insert>
+
+	<delete id="deleteNodeById" parameterType = "java.util.List">
+		<![CDATA[  
+			DELETE FROM `node` WHERE `node_idx` in
+	    ]]>  
+	    <foreach collection="list" item = "node_idx" open="(" separator="," close=")">
+	   		#{node_idx}
+	    </foreach>
+	</delete>
+
+	<select id="queryNodeByPage" resultType="com.ssitcloud.node.entity.NodeEntity">
+		SELECT * FROM `node`
+	</select>
+	
+	<select id="queryNodeByName" resultType="com.ssitcloud.node.entity.NodeEntity">
+		SELECT * FROM `node` n
+		<where>
+			<if test="_parameter!=null">
+				AND n.`node_name` = #{node_name}
+			</if>
+		</where>
+		limit 1
+	</select>
+
+	<select id="queryNodeByParam" parameterType="com.ssitcloud.node.entity.page.NodePageEntity" resultType="com.ssitcloud.node.entity.page.NodePageEntity" >
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		<include refid="queryNodes"/>
+		<where>
+			<if test="node_idx != null and node_idx != 0">
+				AND n.`node_idx` = #{node_idx}
+			</if>
+			<if test="node_id != null and node_id != ''">
+				AND n.`node_id` LIKE CONCAT('%', #{node_id}, '%')
+			</if>
+			<if test="node_name != null and node_name != ''">
+				AND n.`node_name` LIKE CONCAT('%', #{node_name}, '%')
+			</if>
+			<if test="node_model != null and node_model != ''">
+				AND n.`node_model` = #{node_model}
+			</if>
+			<if test="node_type_idx != null and node_type_idx != 0">
+				AND n.`node_type_idx` = #{node_type_idx}
+			</if>
+			<if test="node_attributes != null and node_attributes != ''">
+				AND n.`node_attributes` = #{node_attributes}
+			</if>
+			<if test="container_idx != null and container_idx != 0">
+				AND n.`container_idx` = #{container_idx}
+			</if>
+			<if test="library_idxs != null and library_idxs != ''">
+				AND n.`library_idxs` = #{library_idxs}
+			</if>
+			<if test="node_relations !=null and node_relations != ''">
+				AND `node_relations` = #{node_relations},
+			</if>
+		</where>
+		ORDER BY n.`node_idx`,n.`node_attributes`
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<select id="loadPrimaryList" resultType="com.ssitcloud.node.entity.PrimaryNodeEntity">
+		<include refid="queryNodes"/>
+		<where>
+			<if test="node_idx != null and node_idx != 0">
+				AND n.`node_idx` = #{node_idx}
+			</if>
+			<choose>
+				<when test="node_id != null and node_id != ''">
+					AND n.`node_id` LIKE CONCAT('%', #{node_id}, '%')
+				</when>
+				<otherwise>
+					AND n.`node_attributes`='primary'
+				</otherwise>
+			</choose>
+			<!-- <if test="node_id != null and node_id != ''">
+				AND n.`node_id` LIKE CONCAT('%', #{node_id}, '%')
+			</if> -->
+			<if test="node_name != null and node_name != ''">
+				AND n.`node_name` LIKE CONCAT('%', #{node_name}, '%')
+			</if>
+			<if test="node_model != null and node_model != ''">
+				AND n.`node_model` = #{node_model}
+			</if>
+			<if test="node_type_idx != null and node_type_idx != 0">
+				AND n.`node_type_idx` = #{node_type_idx}
+			</if>
+			<if test="node_attributes != null and node_attributes != ''">
+				AND n.`node_attributes` = #{node_attributes}
+			</if>
+			<if test="container_idx != null and container_idx != 0">
+				AND n.`container_idx` = #{container_idx}
+			</if>
+			<if test="library_idxs != null and library_idxs != ''">
+				AND n.`library_idxs` = #{library_idxs}
+			</if>
+			<if test="node_relations !=null and node_relations != ''">
+				AND `node_relations` = #{node_relations},
+			</if>
+		</where>
+	</select>
+	
+	<select id="loadSecondaryList" resultType="com.ssitcloud.node.entity.NodeTempEntity">
+		<![CDATA[SELECT n1.* FROM (]]>
+		<include refid="queryNodes"/>
+		<![CDATA[) n1 JOIN `node_relations` nr ON n1.`node_idx`=nr.`secondary_node_idx`]]>
+		<where>
+			<if test="_parameter!=null">
+				AND nr.`primary_node_idx` = #{node_idx}
+			</if>
+		</where>
+	</select>
+
+	<select id="queryNodeById" resultType="com.ssitcloud.node.entity.NodeEntity">
+		SELECT * FROM `node`
+		<where>
+			<choose>
+				<when test="_parameter!=null">
+					AND `node_idx` = #{node_idx}
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+	<update id="updateNode" parameterType="com.ssitcloud.node.entity.NodeEntity">
+		UPDATE `node`
+		<set>
+			<if test="node_id !=null and node_id != ''">
+			`node_id` = #{node_id},
+			</if>
+			<if test="node_name !=null and node_name != ''">
+			`node_name` = #{node_name},
+			</if>
+			<if test="node_model !=null and node_model != ''">
+			`node_model` = #{node_model},
+			</if>
+			<if test="node_type_idx !=null and node_type_idx != 0 ">
+			`node_type_idx` = #{node_type_idx},
+			</if>
+			<if test="node_attributes !=null and node_attributes != ''">
+			`node_attributes` = #{node_attributes},
+			</if>
+			<if test="container_idx !=null and container_idx != 0">
+			`container_idx` = #{container_idx},
+			</if>
+			<if test="library_idxs !=null and library_idxs != ''">
+			`library_idxs` = #{library_idxs},
+			</if>
+			<if test="node_relations !=null and node_relations != ''">
+			`node_relations` = #{node_relations},
+			</if>
+			<if test="enable == 0 or enable == 1">
+				`enable` = #{enable}
+			</if>
+		</set>
+		WHERE `node_idx` = #{node_idx}
+	</update>
+	
+	
+	<select id="queryNodeGroupByName" resultType="com.ssitcloud.node.entity.NodeEntity">
+		
+		SELECT * FROM `node` group by node_name
+	</select>
+	
+	
+	<select id="findContainerByNodeId" resultType="com.ssitcloud.node.entity.ContainerEntity">
+		SELECT DISTINCT c.`container_idx`,c.`container_id`,c.`container_name`,c.`host_idx`,c.`container_port`,c.`save_path`,c.`is_disable`,c.`protocol_type` FROM `container` c JOIN `node` n ON c.`container_idx`= n.`container_idx`
+		<where>
+			<choose>
+				<when test="_parameter!=null">
+					AND n.`node_idx` = #{node_idx}
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="findPrimary" resultType="com.ssitcloud.node.entity.NodeEntity">
+		SELECT n.* FROM `node` n RIGHT JOIN `node_relations` nr ON n.`node_idx` = nr.`secondary_node_idx` 
+		<where>
+			<if test='node_attributes == "primary" and node_idx != null'>
+				AND nr.`primary_node_idx` = #{node_idx}
+			</if>
+		</where>
+		 	LIMIT 1
+	</select>
+	
+	<select id="findSecondary" resultType="com.ssitcloud.node.entity.NodeEntity">
+		SELECT n.* FROM `node` n RIGHT JOIN `node_relations` nr ON n.`node_idx` = nr.`primary_node_idx` 
+		<where>
+			<if test='node_attributes == "secondary" and node_idx != null'>
+				AND nr.`secondary_node_idx` = #{node_idx}
+			</if>
+		</where>
+		 	LIMIT 1
+	</select>
+	
+	<select id="findAllSecondaryByPrimaryIdx" resultType="com.ssitcloud.node.entity.NodeEntity">
+		SELECT n.* FROM `node` n 
+		<where>
+			<choose>
+				<when test="_parameter!=null">
+					AND n.`node_idx` in (SELECT secondary_node_idx FROM `node` n_ RIGHT JOIN `node_relations` nr ON n_.`node_idx` = nr.`primary_node_idx` WHERE n_.node_idx = #{node_idx})
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="findForwards" resultType="com.ssitcloud.node.entity.NodeEntity">
+		SELECT * FROM `node`
+		<where>
+			<choose>
+				<when test="_parameter!=null">
+					AND FIND_IN_SET(#{node_idx},`node_relations`)
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+			AND node_attributes ='primary'
+		</where>
+	</select>
+	
+	
+	<select id="findHostByContainerId" resultType="com.ssitcloud.node.entity.HostEntity">
+		SELECT h.* FROM `host` h JOIN `container` c ON h.`host_idx`=c.`host_idx` 
+		<where>
+			<choose>
+				<when test="_parameter!=null">
+					 AND c.`container_idx` = #{container_idx}
+				</when>
+				<otherwise>
+					AND 1 = 0
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="queryNodeByParamForSSO" parameterType="java.util.Map" resultType="com.ssitcloud.node.entity.NodeEntity">
+		SELECT * FROM `node` n
+		<where>
+			<if test="node_name!=null">
+				AND n.`node_name` = #{node_name}
+			</if>
+			<if test="lib_idx!=null">
+				AND n.`library_idxs` like #{lib_idx}
+			</if>
+		</where>
+		limit 1
+	</select>
+
+</mapper>

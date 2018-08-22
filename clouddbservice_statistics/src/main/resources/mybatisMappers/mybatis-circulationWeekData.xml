@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="cirweek">
+
+<insert id="insertCirculationWeekData" parameterType="com.ssitcloud.dbstatistics.entity.CirculationWeekDataEntity"
+useGeneratedKeys="true" keyProperty="cir_idx">
+	INSERT INTO circulationweekdata(
+	     `device_idx`,
+		 `lib_idx`,
+		 `circulateCountType`,
+		 `cirsubType`,
+		 `loan_cirWeekCount`,
+		 `return_cirWeekCount`,
+		 `renew_cirWeekCount`,
+		 `circulateDate`,
+		 `createDate`,
+		 `updateDate`
+	 )VALUES(
+	    #{device_idx},
+		 #{lib_idx},
+		 #{circulateCountType},
+		 #{cirsubType},
+		 #{loan_cirWeekCount},
+		 #{return_cirWeekCount},
+		 #{renew_cirWeekCount},
+		 #{circulateDate},
+		 #{createDate},
+		 #{updateDate}
+	 )
+	
+</insert>
+
+<delete id="deleteCirculationWeekData">
+	delete from circulationweekdata where `cir_idx` = #{cir_idx}
+</delete>
+
+<update id="updateCirculationWeekData" parameterType="com.ssitcloud.dbstatistics.entity.CirculationWeekDataEntity">
+	UPDATE circulationweekdata 
+	<set>
+	  <if test="device_idx !=null and device_idx !=''">
+			`device_idx` = #{device_idx},
+		</if>
+		<if test="lib_idx !=null and lib_idx !=''">
+			`lib_idx` = #{lib_idx},
+		</if>
+		<if test="circulateCountType !=null and circulateCountType !=''">
+			`circulateCountType` = #{circulateCountType},
+		</if>
+		<if test="cirsubType !=null and cirsubType !=''">
+			`cirsubType` = #{cirsubType},
+		</if>
+		<if test="loan_cirWeekCount !=null and loan_cirWeekCount !=''">
+			`loan_cirWeekCount` = #{loan_cirWeekCount},
+		</if>
+		<if test="return_cirWeekCount !=null and return_cirWeekCount !=''">
+			`return_cirWeekCount` = #{return_cirWeekCount},
+		</if>
+		<if test="renew_cirWeekCount !=null and renew_cirWeekCount !=''">
+			`renew_cirWeekCount` = #{renew_cirWeekCount},
+		</if>
+		<if test="circulateDate !=null and circulateDate !=''">
+			`circulateDate` = #{circulateDate},
+		</if>
+		<if test="createDate !=null and createDate !=''">
+			`createDate` = #{createDate},
+		</if>
+		<if test="updateDate !=null and updateDate !=''">
+			`updateDate` = #{updateDate},
+		</if>
+	</set>
+	<where>
+		`cir_idx` = #{cir_idx}
+	</where>
+</update>
+
+<select id="queryCirculationWeekData" parameterType="com.ssitcloud.dbstatistics.entity.CirculationWeekDataEntity" resultType="com.ssitcloud.dbstatistics.entity.CirculationWeekDataEntity">
+	select * from circulationweekdata where 1=1
+	<if test="cir_idx !=null and cir_idx !=''">
+		AND `cir_idx` = #{cir_idx}
+	</if>
+	<if test="lib_idx !=null and lib_idx !=''">
+		AND `lib_idx` = #{lib_idx}
+	</if>
+	<if test="device_idx !=null and device_idx !=''">
+		AND `device_idx` = #{device_idx}
+	</if>
+	<if test="circulateCountType !=null and circulateCountType !=''">
+		AND `circulateCountType` = #{circulateCountType}
+	</if>
+	<if test="cirsubType !=null and cirsubType !=''">
+		AND `cirsubType` = #{cirsubType}
+	</if>
+	<if test="circulateDate !=null and circulateDate !=''">
+		AND `circulateDate` = #{circulateDate}
+	</if>
+</select>
+<select id="queryCirculationWeekDataList" parameterType="com.ssitcloud.dbstatistics.entity.CirculationWeekDataEntity" resultType="com.ssitcloud.dbstatistics.entity.CirculationWeekDataEntity">
+	select * from circulationweekdata 
+</select>
+
+<select id="getAllCirculationWeek" parameterType="com.ssitcloud.dbstatistics.entity.CirculationWeekDataEntity" resultType="com.ssitcloud.dbstatistics.entity.CirculationWeekDataEntity">
+	select * from circulationweekdata 
+</select>
+
+<select id="countLoanLog" parameterType="map" resultType="com.ssitcloud.statistics.entity.StatisticsLoanLogEntity">
+	SELECT 'week' type,sum(loan_cirWeekCount) loan_total,sum(return_cirWeekCount) return_total,sum(renew_cirWeekCount) renew_total,ll.`circulateDate` time from circulationweekdata ll
+	<where>
+		<if test="lib_idx != null and lib_idx.size() >0">
+				AND ll.`lib_idx` IN 
+				<foreach collection="lib_idx" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+		<if test="device_idx!=null and device_idx!='' and device_idx!=0">
+			AND ll.`device_idx`=#{device_idx}
+		</if>
+		<if test="circulateCountType!=null and circulateCountType!=''">
+			AND ll.`circulateCountType`=#{circulateCountType}
+		</if>
+		<if test="cirsubType!=null and cirsubType!=''">
+			AND ll.`cirsubType`=#{cirsubType}
+		</if>
+		<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+			AND ll.`circulateDate` BETWEEN #{startTime} AND #{endTime} 
+		</if>
+	</where>
+	 GROUP BY TIME ORDER BY TIME
+</select>
+</mapper>

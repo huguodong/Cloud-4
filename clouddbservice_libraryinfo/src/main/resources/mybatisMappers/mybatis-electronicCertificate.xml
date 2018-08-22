@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="electronicCertificate">
+	<sql id="baseCol">
+		electronic_idx,
+		lib_idx,
+		electronic_type,
+		cardno,
+		barno,
+		title,
+		fine,
+		purpose,
+		return_date,
+		control_time,
+		electronic_state
+	</sql>
+	
+	<insert id="insertElectronicCertificate" parameterType="com.ssitcloud.dblib.entity.ElectronicCertificateEntity" 
+	 useGeneratedKeys="true" keyProperty="electronic_idx">
+		insert into `electronic_certificate` 
+		(
+		lib_idx,
+		electronic_type,
+		cardno,
+		barno,
+		title,
+		fine,
+		purpose,
+		return_date,
+		control_time,
+		electronic_state
+		) 
+		VALUES 
+		(
+		#{lib_idx},
+		#{electronic_type},
+		#{cardno},
+		#{barno},
+		#{title},
+		#{fine},
+		#{purpose},
+		#{return_date},
+		#{control_time},
+		0
+		)
+	</insert>
+	
+	<select id="selectElectronicCertificate" resultType="com.ssitcloud.dblib.entity.ElectronicCertificateEntity" parameterType="com.ssitcloud.dblib.entity.ElectronicCertificateEntity">
+		select <include refid="baseCol" /> from `electronic_certificate` 
+			where electronic_idx = #{electronic_idx}
+	</select>
+	
+	<select id="selectElectronicCertificateS" resultType="com.ssitcloud.dblib.entity.ElectronicCertificateEntity" parameterType="com.ssitcloud.dblib.entity.page.ElectronicCertificatePageEntity">
+		select <include refid="baseCol" /> from `electronic_certificate` 
+			where 1=1 
+			<if test="lib_idx != null">
+				and lib_idx = #{lib_idx} 
+			</if>
+			<if test="electronic_type != null">
+				and electronic_type = #{electronic_type} 
+			</if>
+			<if test="cardno != null">
+				and cardno = #{cardno} 
+			</if>
+			<if test="barno != null">
+				and barno = #{barno} 
+			</if>
+			<!-- 排序与分页 -->
+			<if test="control_time == null">
+				order by control_time desc 
+			</if>
+			<if test="control_time != null">
+				order by control_time asc 
+			</if>
+			<if test="pageCurrent != null and pageSize != null">
+				limit #{limitIndex},#{limitOffset}
+			</if>
+	</select>
+	
+	<select id="countElectronicCertificateS" resultType="java.lang.Integer" parameterType="com.ssitcloud.dblib.entity.ElectronicCertificateEntity">
+		select count(1) from `electronic_certificate` 
+			where 1=1 
+			<if test="lib_idx != null">
+				and lib_idx = #{lib_idx} 
+			</if>
+			<if test="electronic_type != null">
+				and electronic_type = #{electronic_type} 
+			</if>
+			<if test="cardno != null">
+				and cardno = #{cardno} 
+			</if>
+			<if test="barno != null">
+				and barno = #{barno} 
+			</if> 
+	</select>
+	
+	<select id="checkSameElectronicCertificate" resultType="java.lang.Integer" 
+	parameterType="com.ssitcloud.dblib.entity.ElectronicCertificateEntity">
+		select count(1) from `electronic_certificate` 
+		<where>
+			lib_idx = #{lib_idx}
+			AND electronic_type = #{electronic_type}
+			AND cardno = #{cardno}
+			AND barno = #{barno}
+			AND title = #{title}
+			AND control_time = #{control_time}
+		</where>
+	</select>
+	
+	<select id="selectByReaderIdx" 
+		resultType="com.ssitcloud.dblib.entity.ElectronicCertificateEntity" 
+		parameterType="java.util.Map" >
+		SELECT elec.*
+		FROM
+			electronic_certificate as elec
+		JOIN 
+			readercard as rc 
+		on elec.cardno = rc.card_no and elec.lib_idx = rc.lib_idx 
+		where rc.reader_idx = #{reader_idx} 
+		<if test="control_time != null">
+			and elec.control_time &lt; #{control_time} 
+		</if>
+		<if test="electronic_state != null">
+			and electronic_state = #{electronic_state} 
+		</if>
+		<if test="order == 0">
+			order by control_time DESC 
+		</if>
+		<if test="order == 1">
+			order by control_time ASC 
+		</if>
+		<if test="limit_s != null and limit_e != null">
+			limit #{limit_s} , #{limit_e} 
+		</if>
+	</select>
+	
+	<select id="updateElectronicState" 
+	resultType="com.ssitcloud.dblib.entity.ElectronicCertificateEntity">
+		update electronic_certificate 
+			set electronic_state = #{state} 
+		where electronic_idx in 
+		<foreach collection="id_list" item="id" index="index"
+            open="(" close=")" separator=",">
+            #{id} 
+        </foreach>
+	</select>
+</mapper>

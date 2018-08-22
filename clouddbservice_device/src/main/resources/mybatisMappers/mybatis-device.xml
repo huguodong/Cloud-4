@@ -1,0 +1,979 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="device">
+
+	<insert id="insert" parameterType="com.ssitcloud.entity.DeviceEntity"
+		useGeneratedKeys="true" keyProperty="device_idx">
+		INSERT INTO device
+		(
+		device_id,library_idx, device_model_idx, device_name, device_code,
+		pid,device_desc,library_login_name,library_login_pwd,logistics_number,circule_location
+		)
+		VALUES
+		(
+		#{device_id},#{library_idx},#{device_model_idx},#{device_name},#{device_code}
+		,#{pid},#{device_desc},#{library_login_name},#{library_login_pwd},#{logistics_number},#{circule_location}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.ssitcloud.entity.DeviceEntity">
+		UPDATE device
+		<set>
+			<if test="device_model_idx !=null and device_model_idx !='' ">
+				device_model_idx = #{device_model_idx},
+			</if>
+			<if test="device_id !=null and device_id !=''">
+				device_id =#{device_id},
+			</if>
+			<if test="device_code !=null and device_code !=''">
+				device_code = #{device_code},
+			</if>
+			<if test="device_desc !=null and device_desc !=''">
+				device_desc = #{device_desc},
+			</if>
+			<if test="device_name !=null and device_name !='' ">
+				device_name = #{device_name},
+			</if>
+			<if test="library_idx !=null and library_idx !='' ">
+				library_idx = #{library_idx},
+			</if>
+			<if test="library_login_name!=null">
+				library_login_name=#{library_login_name},
+			</if>
+			<if test="library_login_pwd!=null">
+				library_login_pwd=#{library_login_pwd},
+			</if>
+			<if test="logistics_number!=null">
+				logistics_number=#{logistics_number},
+			</if>
+			<if test="circule_location!=null and circule_location!=''">
+				circule_location=#{circule_location},
+			</if>
+			version_stamp=version_stamp+1
+		</set>
+		WHERE device_idx = #{device_idx} 
+		<if test="version_stamp !=null and version_stamp !=''" >
+			AND version_stamp = #{version_stamp}
+		</if>
+	</update>
+
+	<delete id="delete" parameterType="com.ssitcloud.entity.DeviceEntity">
+		DELETE FROM device
+		WHERE
+		device_idx = #{device_idx}
+	</delete>
+	<delete id="deleteDevByLibIdx" parameterType="com.ssitcloud.entity.DeviceEntity">
+		DELETE FROM device 
+		where library_idx=#{library_idx}
+	</delete>
+
+	<select id="select" parameterType="com.ssitcloud.entity.DeviceEntity" resultType="com.ssitcloud.entity.DeviceEntity">
+		SELECT * FROM device
+		<where>
+			<if test="device_idx !=null and device_idx !='' ">
+				and device_idx = #{device_idx}
+			</if>
+			<if test="device_model_idx !=null and device_model_idx !='' ">
+				and device_model_idx = #{device_model_idx}
+			</if>
+			<if test="device_id !=null and device_id !=''">
+				and device_id = #{device_id}
+			</if>
+			<if test="device_code !=null and device_code !='' ">
+				and device_code = #{device_code}
+			</if>
+			<if test="device_desc !=null and device_desc !='' ">
+				and device_desc = #{device_desc}
+			</if>
+			<if test="device_name !=null and device_name !='' ">
+				and device_name = #{device_name}
+			</if>
+			<if test="library_idx != null">
+				and library_idx = #{library_idx}
+			</if>
+			<if test="logistics_number != null">
+				and logistics_number = #{logistics_number} 
+			</if>
+		</where>
+	</select>
+	<select id="selectSyncDevice" parameterType="com.ssitcloud.entity.sync.DeviceSyncEntity" resultType="com.ssitcloud.entity.sync.DeviceSyncEntity">
+			SELECT * FROM device
+		<where>
+			<if test="device_idx !=null and device_idx !='' ">
+				and device_idx = #{device_idx}
+			</if>
+			<if test="device_model_idx !=null and device_model_idx !='' ">
+				and device_model_idx = #{device_model_idx}
+			</if>
+			<if test="device_id !=null and device_id !=''">
+				and device_id = #{device_id}
+			</if>
+			<if test="device_code !=null and device_code !='' ">
+				and device_code = #{device_code}
+			</if>
+			<if test="device_desc !=null and device_desc !='' ">
+				and device_desc = #{device_desc}
+			</if>
+			<if test="device_name !=null and device_name !='' ">
+				and device_name = #{device_name}
+			</if>
+			<if test="library_idx !=null and library_idx !='' ">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+	</select>
+	
+	
+	<select id="selectIdx" parameterType="com.ssitcloud.entity.DeviceEntity" resultType="String">
+		SELECT device_idx from device where device_id=#{device_id}
+	</select>
+	<select id="selectIdAndIdx" resultType="com.ssitcloud.entity.DeivceIdxAndIDEntity">
+		SELECT device_id,device_idx from device
+	</select>
+	<select id="selectDeviceCode" parameterType="com.ssitcloud.entity.DeviceEntity" resultType="String">
+		SELECT device_code from device where device_id=#{device_id}
+	</select>
+	<!-- 
+	 params:{total=0, whetherPaging=true, page=1, beginIndex=0, pageSize=10, doAount=true}
+	 -->
+	<select id="selectPage" parameterType="Map" resultType="com.ssitcloud.entity.DeviceEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT * FROM device
+		<where>
+			<if test="device_idx !=null and device_idx !='' ">
+				and device_idx = #{device_idx}
+			</if>
+			<if test="device_model_idx !=null and device_model_idx !='' ">
+				and device_model_idx = #{device_model_idx}
+			</if>
+			<if test="device_id !=null and device_id !=''">
+				and device_id = #{device_id}
+			</if>
+			<if test="device_code !=null and device_code !='' ">
+				and device_code = #{device_code}
+			</if>
+			<if test="device_desc !=null and device_desc !='' ">
+				and device_desc = #{device_desc}
+			</if>
+			<if test="device_name !=null and device_name !='' ">
+				and device_name = #{device_name}
+			</if>
+			<if test="library_idx !=null and library_idx !='' ">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+		<if test="whetherPaging==false">
+			limit 50
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	<!-- selectcountbyonitorMainPage -->
+	<!-- <select id="selectCountForMonitorMainPage" parameterType="com.ssitcloud.entity.page.DevicePageEntity" resultType="com.ssitcloud.entity.page.DevicePageEntity">
+		SELECT COUNT(device_idx) as total FROM 
+		device INNER JOIN metadata_devicetype ON device.device_model_idx=metadata_devicetype.meta_devicetype_idx 
+		WHERE library_idx=#{library_idx}
+		<if test="device_id!=null and device_id!=''">
+			and device_id=#{device_id}
+		</if>
+		<if test="operator_idx_Limit!=null">
+			and device_id in(
+			SELECT DISTINCT d.`device_id` FROM 
+			rel_operator_group rog 
+			INNER JOIN rel_operator_device_group rodg ON rodg.`operator_group_idx`=rog.`operator_group_idx`
+			INNER JOIN rel_device_group rdg ON rdg.`device_group_idx`=rodg.`device_group_idx`
+			INNER JOIN device d ON d.`device_idx`=rdg.`device_idx`
+			WHERE rog.`operator_idx`=#{operator_idx_Limit}
+			)
+		</if>
+		 <if test="device_id==null or device_id==''">
+			<if test="dev_id_list!=null">
+			and device_id in
+				<foreach collection="dev_id_list" item="dev_id" open="(" separator="," close=")">
+					#{dev_id}
+				</foreach>
+			</if>
+		</if>
+		<if test="device_name!=null and device_name!=''">
+			and device_name like concat('%','${device_name}','%')
+		</if>
+		<if test="device_type!=null and device_type!=''">
+			and device_type=#{device_type}
+		</if>
+	</select>
+	selectlistbyonitorMainPage
+	<select id="selectListForMonitorMainPage" parameterType="com.ssitcloud.entity.page.DevicePageEntity" resultType="com.ssitcloud.entity.page.DevicePageEntity">
+		SELECT * from device 
+		INNER JOIN metadata_devicetype ON device.device_model_idx=metadata_devicetype.meta_devicetype_idx 
+		WHERE library_idx =#{library_idx}
+		<if test="device_id!=null and device_id!=''">
+			and device_id=#{device_id}
+		</if>
+		<if test="operator_idx_Limit!=null">
+			and device_id in(
+			SELECT DISTINCT d.`device_id` FROM 
+			rel_operator_group rog 
+			INNER JOIN rel_operator_device_group rodg ON rodg.`operator_group_idx`=rog.`operator_group_idx`
+			INNER JOIN rel_device_group rdg ON rdg.`device_group_idx`=rodg.`device_group_idx`
+			INNER JOIN device d ON d.`device_idx`=rdg.`device_idx`
+			WHERE rog.`operator_idx`=#{operator_idx_Limit}
+			)
+		</if>
+		<if test="device_id==null or device_id==''">
+			<if test="dev_id_list!=null">
+			and device_id in
+				<foreach collection="dev_id_list" item="dev_id" open="(" separator="," close=")">
+					#{dev_id}
+				</foreach>
+			</if>
+		</if> 
+		<if test="device_name!=null and device_name!=''">
+			and device_name like concat('%','${device_name}','%')
+		</if>
+		<if test="device_type!=null and device_type!=''">
+			and device_type=#{device_type}
+		</if>
+		ORDER BY library_idx LIMIT #{beginIndex},#{pageSize}
+	</select> -->
+	
+	<select id="selectListForMonitorMainPage" parameterType="com.ssitcloud.entity.page.DevicePageEntity" resultType="com.ssitcloud.entity.page.DevicePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head" />
+		</if>
+		SELECT t.*,m.device_type from device t INNER JOIN metadata_devicetype m ON t.device_model_idx=m.meta_devicetype_idx 
+		<where>
+			<if test="library_idx !=null and library_idx !='' ">
+				and t.library_idx =#{library_idx}
+			</if>
+			<if test="operator_idx_Limit!=null">
+				and t.device_id in(
+					SELECT DISTINCT d.`device_id` FROM 
+					rel_operator_group rog 
+					INNER JOIN rel_operator_device_group rodg ON rodg.`operator_group_idx`=rog.`operator_group_idx`
+					INNER JOIN rel_device_group rdg ON rdg.`device_group_idx`=rodg.`device_group_idx`
+					INNER JOIN device d ON d.`device_idx`=rdg.`device_idx`
+					WHERE rog.`operator_idx`=#{operator_idx_Limit}
+				)
+			</if>
+			<if test="device_id==null or device_id==''">
+				<if test="dev_id_list!=null">
+				and t.device_id in
+					<foreach collection="dev_id_list" item="dev_id" open="(" separator="," close=")">
+						#{dev_id}
+					</foreach>
+				</if>
+			</if> 
+			<if test="device_name!=null and device_name!=''">
+				and t.device_name like concat('%','${device_name}','%')
+			</if>
+			<if test="device_type!=null and device_type!=''">
+				and m.device_type=#{device_type}
+			</if>
+		</where>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail" />
+		</if>
+	</select>
+	
+	<select id="selectListForServiceMonitorMainPage" parameterType="com.ssitcloud.entity.ServiceDevicePageEntity" resultType="com.ssitcloud.entity.ServiceDevicePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head" />
+		</if>
+		SELECT sd.device_id,
+			   ds.service_id,
+			   ds.library_id,
+			   ds.library_idx,
+			   ds.device_model_idx,
+			   ds.service_name,
+			   concat (GROUP_CONCAT(sd.device_name),",") device_names,
+			   concat (GROUP_CONCAT(sd.device_id),",") device_ids,
+			   dst.service_type_id 
+		FROM device_service ds 
+		LEFT JOIN special_device sd ON sd.service_idx = ds.service_idx 
+		LEFT JOIN device_service_type dst ON dst.service_type_idx = ds.device_model_idx 
+		<where>
+			<if test="library_idx !=null and library_idx !='' ">
+				and ds.library_idx =#{library_idx}
+			</if>
+		</where>
+		GROUP BY ds.service_id
+		ORDER BY sd.library_idx
+		<if test="whetherPaging==true">
+			<include refid="paging.tail" />
+		</if>
+	</select>
+
+	
+	
+	<!-- 
+		需求：一个屏幕只显示一个图书馆的设备，另外一个图书馆的设备单独分另外一页 
+		机器监控页面专用，存储过程：获取分页内容
+	-->
+	<select id="selectDeivceMainPage" parameterType="com.ssitcloud.entity.page.DevicePageEntity" statementType="CALLABLE" resultType="com.ssitcloud.entity.page.DevicePageEntity">
+		CALL P_GET_DEVICE_MAIN_PAGE_GROUPBY_LIB
+		(
+		 #{device_name,mode=IN,jdbcType=VARCHAR},
+		 #{device_id,mode=IN,jdbcType=VARCHAR},
+		 #{device_type,mode=IN,jdbcType=VARCHAR},
+	     #{library_idx,mode=IN,jdbcType=INTEGER},
+	     #{operator_idx_Limit,mode=IN,jdbcType=INTEGER},	
+		 #{page,mode=IN,jdbcType=INTEGER},
+		 #{pageSize,mode=IN,jdbcType=INTEGER}
+		)
+	</select>
+	<!-- 
+		机器监控页面专用，存储过程：获取分页总数
+	 -->
+	<select id="selectDeivceMainPageNum" parameterType="com.ssitcloud.entity.page.DevicePageEntity" statementType="CALLABLE" resultType="com.ssitcloud.entity.page.DevicePageEntity">
+		CALL P_GET_DEVICE_MAIN_PAGE_NUMBERS_GROUPBY_LIB
+		(
+		 #{device_name,mode=IN,jdbcType=VARCHAR},
+		 #{device_id,mode=IN,jdbcType=VARCHAR},
+		 #{device_type,mode=IN,jdbcType=VARCHAR},
+		 #{library_idx,mode=IN,jdbcType=INTEGER},
+		 #{operator_idx_Limit,mode=IN,jdbcType=INTEGER},
+		 #{pageSize,mode=IN,jdbcType=INTEGER}
+		)
+	</select>
+	<!-- 
+		服务设备监控页面专用，存储过程：获取分页总数
+	 -->
+	<select id="selectServiceDeivceMainPageNum" parameterType="com.ssitcloud.entity.ServiceDevicePageEntity" statementType="CALLABLE" resultType="com.ssitcloud.entity.ServiceDevicePageEntity">
+		CALL P_GET_SERVICEDEVICE_MAIN_PAGE_NUMBERS_GROUPBY_LIB
+		(
+		 #{library_idx,mode=IN,jdbcType=INTEGER}
+		)
+	</select>
+	
+	<!-- 
+		需求：一个屏幕只显示一个图书馆的服务设备，另外一个图书馆的设备单独分另外一页 
+		机器监控页面专用，存储过程：获取分页内容
+	-->
+	<select id="selectServiceDeivceMainPage" parameterType="com.ssitcloud.entity.ServiceDevicePageEntity" statementType="CALLABLE" resultType="com.ssitcloud.entity.ServiceDevicePageEntity">
+		CALL P_GET_SERVICEDEVICE_MAIN_PAGE_GROUPBY_LIB
+		(
+	     #{library_idx,mode=IN,jdbcType=INTEGER},
+	     #{page,mode=IN,jdbcType=INTEGER},
+		 #{pageSize,mode=IN,jdbcType=INTEGER}
+		)
+	</select>
+	
+	<select id="selectPageDevice" parameterType="com.ssitcloud.entity.page.DevicePageEntity" resultType="com.ssitcloud.entity.page.DevicePageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+		SELECT * FROM device
+		<where>
+			<if test="device_idx !=null and device_idx !='' ">
+				and device_idx = #{device_idx}
+			</if>
+			<if test="device_model_idx !=null and device_model_idx !='' ">
+				and device_model_idx = #{device_model_idx}
+			</if>
+			<if test="device_id !=null and device_id !=''">
+				and device_id = #{device_id}
+			</if>
+			<if test="device_code !=null and device_code !='' ">
+				and device_code = #{device_code}
+			</if>
+			<if test="device_desc !=null and device_desc !='' ">
+				and device_desc = #{device_desc}
+			</if>
+			<if test="device_name !=null and device_name !='' ">
+				and device_name = #{device_name}
+			</if>
+			<if test="library_idx !=null and library_idx !='' ">
+				and library_idx = #{library_idx}
+			</if>
+		</where>
+		<if test="whetherPaging==false">
+			limit 50
+		</if>
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	<!-- 废弃 -->
+	<select id="selectdevicemgmt" parameterType="com.ssitcloud.entity.DeviceMgmtEntity"
+		resultType="com.ssitcloud.entity.DeviceMgmtEntity">
+		SELECT d.device_idx,m.device_type, 
+			d.device_id,d.device_name,dc.`device_dbsync_tpl_flg`,dc.`device_dbsync_tpl_idx`,dc.`device_ext_tpl_flg`,dc.`device_ext_tpl_idx`,
+			dc.`device_monitor_tpl_flg`,dc.`device_monitor_tpl_idx`,dc.`device_run_tpl_flg`,dc.`device_run_tpl_idx`,d.library_idx
+		FROM `device` d, `metadata_devicetype` m,`device_config` dc
+		WHERE d.`device_idx`= dc.`device_idx`
+		AND d.`library_idx`= dc.`library_idx`
+		AND d.`device_model_idx` = m.`meta_devicetype_idx`
+		<if test="library_idx !=null and library_idx!='' ">
+			AND d.library_idx=#{library_idx}
+		</if>
+		<if test="device_type !=null and device_type!='' ">
+			AND m.device_type=#{device_type}
+		</if>
+		<if test="device_id !=null and device_id !='' ">
+			AND (d.device_id LIKE CONCAT('%','${device_id}','%' )
+			OR d.device_name LIKE CONCAT('%','${device_id}','%' ))
+		</if>
+		ORDER BY m.device_type,d.device_idx
+		
+	</select>
+	<select id="count" parameterType="com.ssitcloud.entity.DeviceMgmtEntity"
+		resultType="int">
+		SELECT COUNT(d.device_idx)
+		FROM `device` d, `metadata_devicetype` m,`device_config` dc
+		WHERE d.`device_idx`= dc.`device_idx`
+		AND d.`library_idx`= dc.`library_idx`
+		AND d.`device_model_idx` = m.`meta_devicetype_idx`
+		<if test="library_idx !=null and library_idx!='' ">
+			AND d.library_idx=#{library_idx}
+		</if>
+		<if test="device_type !=null and device_type!='' ">
+			AND m.device_type=#{device_type}
+		</if>
+		<if test="device_id !=null and device_id !='' ">
+			AND (d.device_id LIKE CONCAT('%','${device_id}','%' )
+			OR d.device_name LIKE CONCAT('%','${device_id}','%' ))
+		</if>
+	</select>
+	<select id="countbymonitor" parameterType="com.ssitcloud.entity.page.DevicePageEntity"
+		resultType="int">
+		SELECT COUNT(d.device_idx)
+		FROM `device` d, `metadata_devicetype` m,`device_config` dc
+		WHERE d.`device_idx`= dc.`device_idx`
+		AND d.`library_idx`= dc.`library_idx`
+		AND d.`device_model_idx` = m.`meta_devicetype_idx`
+		<if test="library_idx !=null and library_idx!='' ">
+			AND d.library_idx=#{library_idx}
+		</if>
+		<if test="device_type !=null and device_type!='' ">
+			AND m.device_type=#{device_type}
+		</if>
+		<if test="device_name !=null and device_name !='' ">
+			AND d.device_name LIKE CONCAT('%','${device_name}','%' )
+		</if>
+		<if test="device_id !=null and device_id !='' ">
+			AND d.device_id LIKE CONCAT('%','${device_id}','%' )
+		</if>
+		<!-- 多台设备作为参数 -->
+		<if test="device_id==null or device_id==''">
+			<if test="dev_id_list!=null">
+			and device_id in
+				<foreach collection="dev_id_list" item="dev_id" open="(" separator="," close=")">
+					#{dev_id}
+				</foreach>
+			</if>
+		</if> 
+		<if test="operator_idx_Limit!=null">
+			and device_id in(
+			SELECT DISTINCT d.`device_id` FROM 
+			rel_operator_group rog 
+			INNER JOIN rel_operator_device_group rodg ON rodg.`operator_group_idx`=rog.`operator_group_idx`
+			INNER JOIN rel_device_group rdg ON rdg.`device_group_idx`=rodg.`device_group_idx`
+			INNER JOIN device d ON d.`device_idx`=rdg.`device_idx`
+			WHERE rog.`operator_idx`=#{operator_idx_Limit}
+			)
+		</if>
+	</select>
+	<select id="getGroupName" parameterType="int" resultType="com.ssitcloud.entity.DeviceMgmtEntity">
+		SELECT dg.device_group_name
+		FROM `device_group` dg,`rel_device_group` r
+		WHERE r.device_idx = #{device_idx}
+		AND r.`device_group_idx` = dg.`device_group_idx`
+	</select>
+	
+	<select id="selectdevicemgmtByGroup" parameterType="com.ssitcloud.entity.DeviceMgmtEntity"
+		resultType="com.ssitcloud.entity.DeviceMgmtEntity">
+		SELECT d.device_idx,
+ 		m.device_type,
+ 		m.device_type_desc, 
+ 		d.device_code,
+ 		dg.device_group_name,
+		d.device_id,
+		d.pid,
+		d.device_name,
+		dc.`device_dbsync_tpl_flg`,
+		dc.`device_dbsync_tpl_idx`,
+		dc.`device_ext_tpl_flg`,
+		dc.`device_ext_tpl_idx`,
+		dc.`device_monitor_tpl_flg`,
+		dc.`device_monitor_tpl_idx`,
+		dc.`device_run_tpl_flg`,
+		dc.`device_run_tpl_idx`,
+		d.library_idx,
+		d.version_stamp
+		FROM `device` d
+		LEFT JOIN `metadata_devicetype` m ON m.`meta_devicetype_idx`=d.`device_model_idx`
+		LEFT JOIN `device_config` dc ON dc.`device_idx`=d.`device_idx`
+		LEFT JOIN rel_device_group r ON  r.`device_idx`=d.`device_idx`
+		LEFT JOIN device_group dg ON dg.`device_group_idx`=r.`device_group_idx` 
+		WHERE 1=1
+		<if test="library_idx !=null and library_idx!='' ">
+			AND d.library_idx=#{library_idx}
+		</if>
+		<if test="device_type !=null and device_type!='' ">
+			AND m.device_type=#{device_type}
+		</if>
+		<if test="device_group_idx !=null ">
+			AND dg.device_group_idx=#{device_group_idx}
+		</if>
+		<if test="device_id !=null and device_id !='' ">
+			AND (d.device_id LIKE CONCAT('%','${device_id}','%' )
+			OR d.device_name LIKE CONCAT('%','${device_id}','%' ))
+		</if>
+		<if test="pid != null and pid != ''">
+			AND pid = #{pid}
+		</if>
+		ORDER BY m.device_type,d.device_idx
+	</select>
+	<select id="countByGroup" parameterType="com.ssitcloud.entity.DeviceMgmtEntity"
+		resultType="int">
+		SELECT COUNT(d.device_idx)
+		FROM `device` d
+		LEFT JOIN `metadata_devicetype` m ON m.`meta_devicetype_idx`=d.`device_model_idx`
+		LEFT JOIN `device_config` dc ON dc.`device_idx`=d.`device_idx`
+		LEFT JOIN rel_device_group r ON  r.`device_idx`=d.`device_idx`
+		LEFT JOIN device_group dg ON dg.`device_group_idx`=r.`device_group_idx` 
+		WHERE 1=1
+		<if test="library_idx !=null and library_idx!='' ">
+			AND d.library_idx=#{library_idx}
+		</if>
+		<if test="device_type !=null and device_type!='' ">
+			AND m.device_type=#{device_type}
+		</if>
+		<if test="device_group_idx !=null ">
+			AND dg.device_group_idx=#{device_group_idx}
+		</if>
+		<if test="device_id !=null and device_id !='' ">
+			AND (d.device_id LIKE CONCAT('%','${device_id}','%' )
+			OR d.device_name LIKE CONCAT('%','${device_id}','%' ))
+		</if>
+		<if test="pid != null and pid != ''">
+			and d.pid =#{pid}
+		</if>
+	</select>
+	
+	<delete id="deletedevice" parameterType="com.ssitcloud.entity.DeviceMgmtEntity">
+	DELETE FROM  device
+	WHERE `device_idx`=#{device_idx}
+	</delete>
+	<delete id="deletereldevicegroup" parameterType="com.ssitcloud.entity.DeviceMgmtEntity">
+	DELETE FROM
+	rel_device_group
+	WHERE device_idx = #{device_idx}
+	</delete>
+	<delete id="deletedeviceconfig" parameterType="com.ssitcloud.entity.DeviceMgmtEntity">
+	DELETE FROM
+	device_config
+	WHERE device_idx = #{device_idx}
+	</delete>
+	<delete id="deletedeviceconfigByLibIdx" parameterType="com.ssitcloud.entity.DeviceConfigEntity">
+	DELETE FROM
+	device_config
+	WHERE library_idx = #{library_idx}
+	</delete>
+	
+	<delete id="deleteDBSYNC" parameterType="com.ssitcloud.entity.DeviceMgmtEntity">
+	DELETE FROM
+	device_dbsync_config
+	WHERE device_dbsync_id = #{device_idx}
+	AND device_tpl_type = 1
+	</delete>
+	<delete id="deleteEXT" parameterType="com.ssitcloud.entity.DeviceMgmtEntity">
+	DELETE FROM
+	device_ext_config
+	WHERE device_ext_id = #{device_idx}
+	AND device_tpl_type = 1
+	</delete>
+	<delete id="deleteMONITOR" parameterType="com.ssitcloud.entity.DeviceMgmtEntity">
+	DELETE FROM
+	device_monitor_config
+	WHERE device_mon_tpl_idx = #{device_idx}
+	AND device_ext_type = 1
+	</delete>
+	<delete id="deleteRUN" parameterType="com.ssitcloud.entity.DeviceMgmtEntity">
+	DELETE FROM
+	device_run_config
+	WHERE device_run_id = #{device_idx}
+	AND device_tpl_type = 1
+	</delete>
+	
+	<select id="selectDevicTypeByDeviceId" parameterType="String" resultType="Integer">
+		SELECT device_model_idx FROM device d 
+		INNER JOIN metadata_devicetype md ON d.device_model_idx =md.meta_devicetype_idx
+		WHERE device_id=#{value}
+	</select>
+	
+	
+	<select id="hasDeviceCode" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM device WHERE `device_code` = #{deviceCode}
+	</select>
+	
+	<select id="queryDeviceByDeviceCode" resultType="java.util.Map">
+		SELECT 
+		  * 
+		FROM
+		  device d,
+		  metadata_devicetype md 
+		WHERE d.`device_model_idx` = md.`meta_devicetype_idx` 
+		  AND d.device_code =  #{deviceCode}
+	</select>
+	
+	
+	<select id="countDeviceByIdOrIdx" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM device WHERE 
+		<choose>
+			<when test="device_id!=null and device_id!=''">
+				device_id = #{device_id}
+			</when>
+			<when test="device_idx!=null and device_idx!=''">
+				device_idx = #{device_idx}
+			</when>
+			<otherwise>
+				1=0
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="selDeviceCountByIds" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM device WHERE device_id IN
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</select>
+	<select id="queryDeviceIdbyLibIdx" resultType="Map">
+		SELECT library_idx,GROUP_CONCAT(device_id) AS device_ids  
+		FROM device GROUP BY library_idx	
+	</select>
+	
+	<select id="getLibraryDevicesByPage" parameterType="com.ssitcloud.entity.page.DeviceMgmtPageEntity"
+		resultType="com.ssitcloud.entity.page.DeviceMgmtPageEntity">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+			SELECT d.device_idx,
+	 		m.device_type,
+	 		m.device_type_desc, 
+	 		dg.device_group_name,
+			d.device_id,
+			d.device_name,
+			d.library_idx
+			FROM `device` d
+			LEFT JOIN `metadata_devicetype` m ON m.`meta_devicetype_idx`=d.`device_model_idx`
+			LEFT JOIN rel_device_group r ON  r.`device_idx`=d.`device_idx`
+			LEFT JOIN device_group dg ON dg.`device_group_idx`=r.`device_group_idx` 
+			WHERE 1=1
+			<if test="library_idx !=null ">
+				AND d.library_idx=#{library_idx}
+			</if>
+			<if test="device_type !=null and device_type!='' ">
+				AND m.device_type=#{device_type}
+			</if>
+			<if test="device_group_idx !=null ">
+				AND dg.device_group_idx=#{device_group_idx}
+			</if>
+			<if test="device_id !=null and device_id !='' ">
+				AND (d.device_id LIKE CONCAT('%','${device_id}','%' )
+				OR d.device_name LIKE CONCAT('%','${device_id}','%' ))
+			</if>
+			ORDER BY m.device_type,d.device_idx
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<update id="updateDeviceLibrary">
+		UPDATE 
+		  device de 
+		SET
+		  de.`library_idx` = #{newLibIdx}
+		WHERE de.`device_idx` IN 
+		  <foreach collection="deviceList" item="deviceIdx" open="(" close=")" separator=",">
+			#{deviceIdx}
+		</foreach>
+	</update>
+	<select id="selectByDevTypeList" parameterType="List" resultType="com.ssitcloud.entity.DeviceEntity">
+		select * from device 
+		where device_model_idx in 
+		<foreach collection="list" open="(" close=")" separator="," item="devType">
+			#{devType}
+		</foreach>
+	
+	</select>
+	
+	<select id="selectByDevTypeNameList" parameterType="java.util.Map" resultType="com.ssitcloud.entity.DeviceEntity">
+		SELECT
+			d.*
+		FROM
+		device AS d
+		INNER JOIN 
+		metadata_devicetype AS md 
+			ON d.device_model_idx = md.meta_devicetype_idx 
+		<where>
+			<if test="devType != null">
+				<foreach collection="devType" open="(" close=")" separator=" or " item="dt">
+					md.device_type like '%${dt}%' 
+				</foreach>
+			</if>
+			<if test="device_name != null">
+				and d.device_name like '%${device_name}%' 
+			</if>
+			<if test="library_idx != null">
+				and library_idx = #{library_idx} 
+			</if>
+			<if test="regionCode != null">
+			and d.device_idx in 
+			    (
+				    select device_idx 
+				    	FROM device_extend_info 
+				    	join region 
+				    on region.regi_idx = device_extend_info.region_idx 
+				    where region.regi_code like '${regionCode}%' 
+			    )
+			</if>
+		</where>
+		<if test="limitS != null and limitE != null">
+			limit #{limitS},#{limitE}
+		</if>
+	</select>
+	
+	<select id="selectDevIdByIdx" parameterType="com.ssitcloud.entity.DeviceEntity" resultType="String">
+		SELECT d.device_id FROM `device` d WHERE 1=1
+		<if test="device_idx !=null and device_idx!='' ">
+			AND d.device_idx=#{device_idx}
+		</if>
+	</select>
+	
+	
+	<select id="getAllDeviceByLibidx"  resultType="java.util.Map">
+		SELECT 
+		  m.`device_type`,
+		  m.`device_type_desc`,
+		  m.`device_type_mark`,
+		  d.* 
+		FROM
+		  `device` d,
+		  `metadata_devicetype` m 
+		WHERE d.`device_model_idx` = m.`meta_devicetype_idx` 
+		  AND d.library_idx = #{library_idx}
+	</select>
+	
+	<select id="selDeviceById"  resultType="java.util.Map">
+		SELECT 
+		  m.`device_type`,
+		  m.`device_type_desc`,
+		  m.`device_type_mark`,
+		  d.* 
+		FROM
+		  `device` d,
+		  `metadata_devicetype` m 
+		WHERE d.`device_model_idx` = m.`meta_devicetype_idx` 
+		  AND d.device_id = #{device_id}
+	</select>
+	
+	<select id="SelectDeviceMgmtByLibraryIdxs" resultType="java.util.Map">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+			SELECT d.device_idx,
+	 		m.device_type,
+	 		m.device_type_desc, 
+	 		dg.device_group_name,
+			d.device_id,
+			d.device_name,
+			dc.`device_dbsync_tpl_flg`,
+			dc.`device_dbsync_tpl_idx`,
+			dc.`device_ext_tpl_flg`,
+			dc.`device_ext_tpl_idx`,
+			dc.`device_monitor_tpl_flg`,
+			dc.`device_monitor_tpl_idx`,
+			dc.`device_run_tpl_flg`,
+			dc.`device_run_tpl_idx`,
+			d.library_idx,
+			d.version_stamp
+			FROM `device` d
+			LEFT JOIN `metadata_devicetype` m ON m.`meta_devicetype_idx`=d.`device_model_idx`
+			LEFT JOIN `device_config` dc ON dc.`device_idx`=d.`device_idx`
+			LEFT JOIN rel_device_group r ON  r.`device_idx`=d.`device_idx`
+			LEFT JOIN device_group dg ON dg.`device_group_idx`=r.`device_group_idx` 
+			WHERE 1=1
+			<if test="libIdxs !=null and libIdxs.size() > 0 ">
+				and d.library_idx in
+		        <foreach collection="libIdxs" index="index" item="libIdx" open="(" separator="," close=")">
+		                #{libIdx}       
+		        </foreach>
+			</if>
+			<if test="device_id !=null and device_id !='' ">
+				AND (d.device_id LIKE CONCAT('%','${device_id}','%' )
+				OR d.device_name LIKE CONCAT('%','${device_id}','%' ))
+			</if>
+			<if test="region_idx !=null and region_idx != 0 ">
+				AND d.device_idx in 
+				(select dei.device_idx from device_extend_info dei where dei.region_idx = ${region_idx})
+			</if>
+			ORDER BY d.device_name
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	<!-- 根据图书馆idx查询设备idx和地区码，若没有设置地区码则地区码为null -->
+	<select id="selectDeviceRegionByLibidx" resultType="java.util.Map">
+		SELECT
+			device.device_idx,region.regi_code
+		FROM
+			device
+		LEFT JOIN device_extend_info ON device.device_idx = device_extend_info.device_idx
+		LEFT JOIN region ON device_extend_info.region_idx = region.regi_idx
+		where 1=1 
+		<if test="library_idx != null">
+			and library_idx = #{library_idx}
+		</if>
+	</select>
+	
+	<select id="queryRegionByCode" resultType="java.util.Map">
+		select * from region where regi_code = #{regi_code} limit 1
+	</select>
+	<select id="queryDeviceExtendInfoByDeviceIdx" resultType="java.util.Map">
+		select * from device_extend_info where device_idx = #{device_idx} limit 1
+	</select>
+	
+	<insert id="insertDeviceExtendInfo" parameterType="java.util.Map">
+		insert into device_extend_info(device_idx, region_idx) values (#{device_idx}, #{region_idx})
+	</insert>
+	
+	<update id="updateDeviceExtendInfoByDeviceIdx" parameterType="java.util.Map">
+		update device_extend_info set region_idx = #{region_idx} where device_idx = #{device_idx}
+	</update>
+	
+	<select id="queryRegionByDeviceIdx" resultType="java.util.Map">
+		SELECT * FROM region r, device_extend_info d  WHERE d.`region_idx` = r.`regi_idx` AND d.`device_idx` = #{device_idx} limit 1
+	</select>
+	<select id="getLibPosition" parameterType="java.util.Map" resultType="com.ssitcloud.entity.DevicePosition">
+		SELECT * FROM device_position  dp  
+		WHERE 1=1 
+			<if test="library_id != null and library_id!='' " >
+			and dp.`library_id` = #{library_id}
+			</if>
+			and dp.`device_id` is null
+	</select>
+	<select id="getDevicePosition" parameterType="java.util.Map" resultType="com.ssitcloud.entity.DevicePosition">
+		SELECT dp.*, d.device_idx device_idx,d.device_name device_name FROM device_position  dp
+		INNER JOIN device d ON dp.device_id = d.device_id
+		WHERE 1=1 
+			and concat(dp.`lib_name`,dp.`library_id`) = #{libNameAndIdx}
+		
+			and dp.`device_id` is not null
+	</select>
+	<!-- 查询设备的位置信息是否存在 -->
+	<select id="queryDeviceById" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from device_position 
+		WHERE 
+			 device_id = #{deviceId}
+	</select>
+	<select id="saveDevicePosition" parameterType="java.util.Map">
+		insert into device_position(library_id,device_id,longitude,latitude,lib_name) 
+			values (#{lib_id},#{deviceId},#{jingdu},#{weidu},#{lib_name})
+	</select>
+	<!-- 更新设备地理位置 -->
+	<update id="updateDevicePosition" parameterType="java.util.Map">
+		update device_position  set library_id = #{lib_id},device_id = #{deviceId},longitude = #{jingdu},latitude = #{weidu}, lib_name = #{lib_name}
+		where 
+			device_id = #{device_id}
+	</update>
+	<!-- 查询图书馆的位置信息是否存在 -->
+	<select id="queryLibById" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from device_position 
+		WHERE 
+			 library_id = #{lib_id}
+		and 
+			 device_id is null
+	</select>
+	<!-- 保存图书馆地理位置 -->
+	<insert id="saveLibPosition" parameterType="java.util.Map">
+		insert into device_position(library_id,longitude,latitude,lib_name) values (#{lib_id}, #{jingdu},#{weidu},#{lib_name})
+	</insert>
+	<!-- 更新图书馆地理位置 -->
+	<update id="updateLibPosition" parameterType="java.util.Map">
+		update device_position  set longitude = #{jingdu},latitude = #{weidu}, lib_name = #{lib_name}
+		where 
+			library_id = #{lib_id}
+		and 
+			device_id is null
+	</update>
+	<delete id="deleteLibraryPosition" parameterType="java.util.List">
+		DELETE FROM device_position
+		WHERE library_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+	</delete>
+	<!-- 查询文件上传更新信息是否存在 -->
+	<select id="queryFileUploadFlag" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from dev_dbsync_config 
+		WHERE 1=1
+		<if test="lib_id !=null and lib_id != '' ">  
+            AND lib_id = #{lib_id}
+        </if>  
+        <if test="lib_idx !=null and lib_idx != '' ">  
+            AND lib_idx = #{lib_idx}
+        </if>  
+        <if test="device_id != null and device_id != '' ">  
+            AND device_id = #{device_id}  
+        </if>  
+        <if test="table_name != null and table_name != '' ">  
+            AND table_name = #{table_name}  
+        </if>  
+	</select>
+	<!-- 保存文件上传更新信息 -->
+	<insert id="saveFileUploadFlag" parameterType="java.util.Map">
+		insert into `dev_dbsync_config`(db_name,table_name,lib_idx,lib_id,device_id,issync,sync_cycle,sync_field_list,sync_type,sync_state,last_sync_time,last_modify_time) 
+			values ('NONE', #{table_name},#{lib_idx},#{lib_id},#{device_id},#{issync},null,null,#{sync_type},null,null,#{last_modify_time})
+	</insert>
+	<!-- 更新文件上传更新信息 -->
+	<update id="updateFileUploadFlag" parameterType="java.util.Map">
+		update `dev_dbsync_config`  
+		<trim prefix="SET" suffixOverrides=",">
+		<if test="null != last_sync_time and '' != last_sync_time">
+           last_sync_time=#{last_sync_time},
+        </if>
+		<if test="null != last_modify_time and '' != last_modify_time">
+           last_modify_time=#{last_modify_time},
+        </if>
+        <if test="null != table_name and '' != table_name">
+           table_name=#{table_name},
+        </if>
+        </trim>
+        WHERE  1=1
+        <if test="lib_id !=null and lib_id != '' ">  
+            AND lib_id = #{lib_id}
+        </if> 
+        <if test="lib_idx !=null and lib_idx != '' ">  
+            AND lib_idx = #{lib_idx}
+        </if>   
+        <if test="device_id != null and device_id != '' ">  
+            AND device_id = #{device_id}  
+        </if>  
+        <if test="table_name != null and device_id != '' ">  
+            AND table_name = #{table_name}  
+        </if>  
+	</update>
+	<select id="selectList" parameterType="com.ssitcloud.devmgmt.entity.SyncConfigEntity" resultType="com.ssitcloud.devmgmt.entity.SyncConfigEntity">
+		SELECT * FROM `dev_dbsync_config` where last_modify_time is not null and (last_sync_time is null or last_sync_time &lt;= last_modify_time)
+	</select>
+	<select id="selectDeviceCountByLibraryIdx" parameterType="map" resultType="int">
+	
+		select count(*) from device where 1=1
+		<if test="library_idx != null and library_idx !=''">
+			and library_idx = #{library_idx}
+		</if>
+	</select>
+	<select id="queryDevStatusCode" resultType="com.ssitcloud.devmgmt.entity.DevStatusCode">
+		select * from metadata_ext_code 
+	</select>
+	
+	<select id="selectAllDevice" resultType="com.ssitcloud.entity.DeviceEntity">
+		SELECT device_idx,device_id,device_name,library_idx,device_model_idx
+		from device 
+	</select>
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="personalsetting">
+
+<insert id="addPersonalSetting" parameterType="com.ssitcloud.entity.PersonalSettingEntity" 
+ useGeneratedKeys="true" keyProperty="setting_idx">
+	INSERT INTO personal_setting (
+	 `operator_idx`,
+	 `service_idx`,
+	 `setting_url`,
+	 `setting_desc`
+	)VALUES(
+	 #{operator_idx},
+	 #{service_idx},
+	 #{setting_url},
+	 #{setting_desc}
+	)
+</insert>
+
+<delete id="delPersonalSetting" parameterType="com.ssitcloud.entity.PersonalSettingEntity">
+	DELETE FROM personal_setting WHERE `setting_idx` = #{setting_idx}
+</delete>
+
+
+<update id="updPersonalSetting" parameterType="com.ssitcloud.entity.PersonalSettingEntity">
+ UPDATE personal_setting 
+ <set>
+	`operator_idx` = #{operator_idx},
+	`service_idx` = #{service_idx},
+	`setting_url` = #{setting_url},
+	`setting_desc` = #{setting_desc},
+ </set>
+ <where>
+ 	`setting_idx` = #{setting_idx}
+ </where>
+</update>
+
+<select id="selPersonalSettingByIdx" resultType="com.ssitcloud.entity.PersonalSettingEntity">
+	SELECT * FROM personal_setting WHERE `setting_idx` = #{setting_idx}
+</select>
+
+<select id="selectPersonalSettingByPage" parameterType="com.ssitcloud.entity.page.PersonalSettingMgmtPageEntity" resultType="com.ssitcloud.entity.page.PersonalSettingMgmtPageEntity">
+	<if test="whetherPaging==true">
+		<include refid="paging.head"/>
+	</if>
+	SELECT * FROM personal_setting WHERE 1=1
+	<if test="operator_idx !=null and operator_idx !=''">
+ 		AND operator_idx = #{operator_idx}
+ 	</if>
+	<if test="setting_desc !=null and setting_desc !=''">
+ 		AND (service_idx LIKE CONCAT('%',#{setting_desc}, '%') OR setting_desc LIKE CONCAT('%',#{setting_desc}, '%'))
+ 	</if>
+	<if test="whetherPaging==true">
+		<include refid="paging.tail"/>
+	</if>
+</select>
+
+<select id="selPersonalSettingList" parameterType="com.ssitcloud.entity.PersonalSettingEntity" resultType="com.ssitcloud.entity.PersonalSettingEntity">
+	SELECT setting_idx,operator_idx,service_idx,setting_url,setting_desc FROM personal_setting
+	<where>
+		<if test="operator_idx !=null and operator_idx !='' ">
+			and `operator_idx` = #{operator_idx} 
+		</if>
+		<if test="service_idx !=null and service_idx !='' ">
+			and `service_idx` = #{service_idx} 
+		</if>
+	</where>
+</select>
+
+</mapper>

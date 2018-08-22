@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deviceRunConfig">
+
+	<!--创建模板device_run_template -->
+	<insert id="insertDevRunTemp" parameterType="com.ssitcloud.entity.DeviceRunTempEntity"
+	useGeneratedKeys="true" keyProperty="device_tpl_idx">
+		INSERT INTO
+		device_run_template
+		(
+		device_tpl_ID,device_tpl_desc,device_type
+		)
+		VALUES
+		(
+		#{device_tpl_ID},
+		#{device_tpl_desc},
+		#{device_type}
+		)
+	</insert>
+	<insert id="insertDeviceRunTempWithIdx" parameterType="com.ssitcloud.entity.DeviceRunTempEntity"
+	useGeneratedKeys="false">
+		INSERT INTO
+		device_run_template
+		(
+		device_tpl_idx,device_tpl_ID,device_tpl_desc,device_type
+		)
+		VALUES
+		(
+		#{device_tpl_idx},
+		#{device_tpl_ID},
+		#{device_tpl_desc},
+		#{device_type}
+		)
+	</insert>
+	<update id="updateDevRunTemp" parameterType="com.ssitcloud.entity.DeviceRunTempEntity">
+		UPDATE device_run_template
+		<set>
+			<if test="device_tpl_ID!=null">device_tpl_ID=#{device_tpl_ID},</if>
+			<if test="device_tpl_desc!=null">device_tpl_desc=#{device_tpl_desc},</if>
+			<if test="device_type!=null">device_type=#{device_type}</if>
+		</set>
+		WHERE device_tpl_idx=#{device_tpl_idx}
+	</update>
+	<delete id="deleteDevRunTemp" parameterType="Integer">
+		DELETE FROM
+		device_run_template
+		WHERE device_tpl_idx=#{device_tpl_idx}
+	</delete>
+	<select id="selectDevRunTemp" parameterType="com.ssitcloud.entity.DeviceRunTempEntity"
+		resultType="com.ssitcloud.entity.DeviceRunTempEntity">
+		SELECT * FROM device_run_template
+		WHERE 1=1
+		<if test="device_tpl_idx!=null">
+			AND device_tpl_idx like CONCAT('%','${device_tpl_idx}','%'
+			)
+		</if>
+		<if test="device_tpl_ID!=null">AND device_tpl_ID like CONCAT('%','${device_tpl_ID}','%' )
+		</if>
+		<if test="device_tpl_desc!=null">AND device_tpl_desc like
+			CONCAT('%','${device_tpl_desc}','%' )</if>
+		<if test="device_type!=null">AND device_type like CONCAT('%','${device_type}','%' )
+		</if>
+	</select>
+	<select id="selectDevRunTempByDeviceType" parameterType="com.ssitcloud.entity.DeviceRunTempEntity"
+		resultType="com.ssitcloud.entity.DeviceRunTempEntity">
+		SELECT * FROM device_run_template
+		WHERE 1=1
+		<if test="device_type!=null">AND device_type = ${device_type} </if>
+	</select>
+	<!-- 创建运行配置 -->
+	<insert id="insertDevRunConf" parameterType="com.ssitcloud.entity.DeviceRunConfigEntity">
+		INSERT INTO
+		device_run_config
+		(
+		device_tpl_type,
+		device_run_id,
+		library_idx,
+		run_config_idx,
+		run_conf_value,
+		updatetime
+		)
+		VALUES
+		(
+		#{device_tpl_type},#{device_run_id},#{library_idx},#{run_config_idx},#{run_conf_value},NOW()
+		)
+	</insert>
+	<select id="queryDeviceRunConfig" parameterType="com.ssitcloud.entity.DeviceRunConfigEntity"
+		resultType="com.ssitcloud.entity.DeviceRunConfigEntity">
+		SELECT * FROM device_run_config dcc
+		WHERE 1=1
+			AND dcc.`device_run_id` =#{device_run_id}
+		<if test="library_idx!=null">
+			AND dcc.`library_idx` =#{library_idx}
+		</if>
+		<if test="device_tpl_type!=null">
+			AND dcc.`device_tpl_type`=#{device_tpl_type}
+		</if>
+		<if test="run_config_idx!=null">
+			AND dcc.`run_config_idx` =#{run_config_idx}
+		</if>
+		<if test="run_conf_value!=null">
+			AND dcc.`run_conf_value` =#{run_conf_value}
+		</if>
+		<if test="updatetime!=null">
+			AND dcc.`updatetime` =#{updatetime}
+		</if>
+		
+	</select>
+	<select id="queryDeviceRunConfigAndMetadataRunConfig" parameterType="com.ssitcloud.entity.DeviceRunConfigEntity" resultType="com.ssitcloud.entity.DeviceRunConfigEntity">
+			SELECT * FROM device_run_config drc INNER JOIN metadata_run_config mrc ON drc.`run_config_idx`=mrc.`meta_run_cfg_idx`
+			WHERE 1=1
+			AND drc.`device_run_id` =#{device_run_id}
+			AND drc.`device_tpl_type`=#{device_tpl_type}
+		<if test="library_idx!=null and library_idx!=''">
+			AND drc.`library_idx` =#{library_idx}
+		</if>
+		<if test="run_config_idx!=null">
+			AND drc.`run_config_idx` =#{run_config_idx}
+		</if>
+		<if test="run_conf_value!=null">
+			AND drc.`run_conf_value` =#{run_conf_value}
+		</if>
+		<if test="updatetime!=null">
+			AND drc.`updatetime` =#{updatetime}
+		</if>
+	</select>
+	
+	<select id="queryDeviceRunConfigByDown" parameterType="com.ssitcloud.entity.DeviceRunConfigEntity" resultType="com.ssitcloud.system.entity.DeviceRunConfigRemoteEntity">
+			SELECT mrc.`run_conf_type`,dcc.`run_conf_value` 
+			FROM device_run_config dcc 
+			INNER JOIN metadata_run_config  mrc ON mrc.`meta_run_cfg_idx`=dcc.`run_config_idx` 
+			WHERE 1=1
+			AND dcc.`device_run_id` =#{device_run_id}
+		<if test="library_idx!=null and library_idx!=''">
+			AND dcc.`library_idx`=#{library_idx}
+		</if>
+		<if test="device_tpl_type!=null">
+			AND dcc.`device_tpl_type`=#{device_tpl_type}
+		</if>
+		<if test="run_config_idx!=null">
+			AND dcc.`run_config_idx` =#{run_config_idx}
+		</if>
+		<if test="run_conf_value!=null">
+			AND dcc.`run_conf_value` =#{run_conf_value}
+		</if>
+		<if test="updatetime!=null">
+			AND dcc.`updatetime` =#{updatetime}
+		</if>
+	</select>
+	<!-- device_tpl_type int(11) NOT NULL模板区分 0模板 1数据 device_run_id int(11) 
+		NOT NULL模板ID或设备ID library_idx int(11) NOT NULL馆ID run_config_idx int(11) 
+		NOT NULL设备端参数配置初始数据 run_conf_value mediumtext NOT NULL基础配置参数 updatetime timestamp 
+		NOT NULL -->
+	<update id="updateDevRunConf" parameterType="com.ssitcloud.entity.DeviceRunConfigEntity">
+		UPDATE device_run_config
+		<set>
+			<if test="device_tpl_type!=null">device_tpl_type=#{device_tpl_type},</if>
+			<if test="device_run_id!=null">device_run_id=#{device_run_id},</if>
+			<if test="library_idx!=null">library_idx=#{library_idx},</if>
+			<if test="run_config_idx!=null">run_config_idx=#{run_config_idx},</if>
+			<if test="run_conf_value!=null">run_conf_value=#{run_conf_value},</if>
+			updatetime=NOW()
+		</set>
+		WHERE 1=1
+		AND device_run_id=#{device_run_id}
+		AND library_idx=#{library_idx}
+	</update>
+	<delete id="deleteDevRunConf" parameterType="com.ssitcloud.entity.DeviceRunConfigEntity">
+		DELETE FROM
+		device_run_config
+		WHERE 1=1
+		AND device_run_id=#{device_run_id}
+		AND library_idx=#{library_idx}
+		<if test="run_config_idx!=null and run_config_idx!=''">
+			AND run_config_idx=#{run_config_idx}
+		</if>
+		AND device_tpl_type=#{device_tpl_type}
+	</delete>
+	
+	<delete id="deleteRunConfByidxAndtype" parameterType="com.ssitcloud.entity.DeviceRunConfigEntity">
+		DELETE FROM
+		device_run_config
+		WHERE 1=1
+		AND device_run_id=#{device_run_id}
+		AND device_tpl_type=#{device_tpl_type}
+	</delete>
+	
+	<!-- 创建设备运行元数据表 -->
+	<insert id="insertMetaRunConf" parameterType="com.ssitcloud.entity.MetaRunConfigEntity"
+		useGeneratedKeys="true" keyProperty="meta_run_cfg_idx">
+		INSERT INTO
+		metadata_run_config
+		(
+		run_conf_type,
+		run_conf_type_desc,
+		updatetime
+		)
+		VALUES
+		(
+		#{run_conf_type},#{run_conf_type_desc},NOW()
+		)
+	</insert>
+	
+	<!-- <select id=" selectMetaRunConf" parameterType="com.ssitcloud.entity.MetaRunConfigEntity"
+		resultType="com.ssitcloud.entity.MetaRunConfigEntity">
+		SELECT * FROM metadata_run_config dcc
+		WHERE 1=1
+		<if test="meta_run_cfg_idx !=null">
+			AND dcc.`meta_run_cfg_idx` like
+			CONCAT('%','${meta_run_cfg_idx}','%' )
+		</if>
+		<if test="run_conf_type !=null">
+			AND dcc.`run_conf_type` like
+			CONCAT('%','${run_conf_type}','%' )
+		</if>
+		<if test="run_conf_type_desc !=null">
+			AND dcc.`run_conf_type_desc` like
+			CONCAT('%','${run_conf_type_desc}','%'
+			)
+		</if>
+		<if test="updatetime !=null">
+			AND dcc.`updatetime` like
+			CONCAT('%','${updatetime}','%' )
+		</if>
+	</select> -->
+
+	<select id="queryMetaRunConf" parameterType="com.ssitcloud.entity.MetaRunConfigEntity"
+		resultType="com.ssitcloud.entity.MetaRunConfigEntity">
+		SELECT * FROM metadata_run_config
+		<where>
+			<if test="meta_run_cfg_idx !=null and meta_run_cfg_idx !=''">
+				and meta_run_cfg_idx = #{meta_run_cfg_idx}
+			</if>
+			<if test="run_conf_type !=null and run_conf_type !=''">
+				and run_conf_type = #{run_conf_type}
+			</if>
+			<if test="run_conf_type_desc !=null and run_conf_type_desc !=''">
+				and run_conf_type_desc = #{run_conf_type_desc}
+			</if>
+			<if test="updatetime !=null and updatetime !=''">
+				and updatetime = #{updatetime}
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateMetaRunConf" parameterType="com.ssitcloud.entity.MetaRunConfigEntity">
+		UPDATE metadata_run_config
+		<set>
+			<if test="run_conf_type !=null">run_conf_type=#{run_conf_type},</if>
+			<if test="run_conf_type_desc !=null">run_conf_type_desc=#{run_conf_type},</if>
+			<if test="meta_run_cfg_idx !=null or run_conf_type !=null or run_conf_type_desc!=null ">
+				updatetime=NOW()
+			</if>
+		</set>
+		WHERE meta_run_cfg_idx =#{meta_run_cfg_idx}
+
+	</update>
+	<delete id="deleteMetaRunConf" parameterType="com.ssitcloud.entity.MetaRunConfigEntity">
+		DELETE FROM
+		metadata_run_config
+		WHERE
+		meta_run_cfg_idx=#{meta_run_cfg_idx}
+	</delete>
+	
+	<update id="updDeviceRunConfByRemoteDevice" parameterType="Map">
+		UPDATE device_run_config drc
+		<set>
+			<if test="run_conf_value!=null">drc.run_conf_value=#{run_conf_value},</if>
+			<if test="updatetime!=null and updatetime!=''">drc.updatetime=#{updatetime}</if>
+			<if test="updatetime==null or updatetime==''">drc.updatetime=NOW()</if>
+		</set>
+	WHERE 1=1 
+	AND drc.`run_config_idx`=(SELECT MRC.`meta_run_cfg_idx` FROM metadata_run_config mrc WHERE mrc.`run_conf_type`=#{run_conf_type})  
+	AND drc.`device_run_id`=#{device_run_id} 
+	AND drc.`library_idx`=#{library_idx}   
+	AND drc.`device_tpl_type`=#{device_tpl_type}
+	
+	</update>
+	
+	<select id="selRunDataListByIdx" resultType="java.util.Map">
+		SELECT 
+		  drc.*,
+		  mrc.`meta_run_cfg_idx`,
+		  mrc.`run_conf_type`,
+		  mrc.`run_conf_type_desc`
+		FROM
+		  device_run_config drc,
+		  metadata_run_config mrc 
+		WHERE  drc.`run_config_idx` = mrc.`meta_run_cfg_idx` 
+		  AND device_tpl_type = '1'
+		  AND device_tpl_idx = #{device_idx}
+	</select>
+	
+	<select id="selRunDetailListByIdx" resultType="java.util.Map">
+		SELECT 
+		  drt.*,
+		  drc.*,
+		  mrc.`meta_run_cfg_idx`,
+		  mrc.`run_conf_type`,
+		  mrc.`run_conf_type_desc`
+		FROM
+		  device_run_template drt,
+		  device_run_config drc,
+		  metadata_run_config mrc 
+		WHERE drt.`device_tpl_idx` = drc.`device_run_id` 
+		  AND drc.`run_config_idx` = mrc.`meta_run_cfg_idx` 
+		  AND device_tpl_type = '0'
+		  AND device_tpl_idx = #{device_tpl_idx}
+	</select>
+	
+	<select id="selRunTempListByParam" resultType="java.util.Map">
+		<if test="whetherPaging==true">
+			<include refid="paging.head"/>
+		</if>
+			SELECT 
+			  drt.`device_tpl_idx`,
+			  drt.`device_tpl_ID`,
+			  drt.`device_tpl_desc`,
+			  drt.`device_type` ,
+			  md.`device_type_desc`
+			FROM
+			  `device_run_template` drt,
+			  `metadata_devicetype` md
+			<where>
+				drt.`device_type` = md.`meta_devicetype_idx`
+				<if test="device_tpl_ID != null and device_tpl_ID !=''">
+				AND (  drt.`device_tpl_ID` LIKE CONCAT('%','${device_tpl_ID}','%')
+					OR  drt.`device_tpl_desc` LIKE CONCAT('%','${device_tpl_desc}','%') )
+				</if>
+				<if test="device_type != null and device_type !='' and device_type != '-1' ">
+					AND drt.`device_type` = #{device_type}
+				</if>
+			</where> 
+		<if test="whetherPaging==true">
+			<include refid="paging.tail"/>
+		</if>
+	</select>
+	
+	<select id="countUsingRunTempplate" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM device_config WHERE device_run_tpl_idx = #{device_run_tpl_idx} 
+	</select>
+	
+	<select id="selectDataTypeCount" resultType="Integer" parameterType="com.ssitcloud.entity.DeviceRunConfigEntity">
+		SELECT COUNT(*) FROM device_run_config
+		where 1=1
+		and device_tpl_type=#{device_tpl_type}
+		and device_run_id=#{device_run_id}
+		and library_idx=#{library_idx}
+	</select>
+	
+	
+		<select id="countDeviceRunTempById" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM device_run_template WHERE device_tpl_ID = #{device_tpl_ID}
+		<if test="device_tpl_idx!=null">
+			AND device_tpl_idx != #{device_tpl_idx}
+		</if>
+	</select>
+	
+	<select id="countDeviceRunTempByDesc" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM device_run_template WHERE device_tpl_desc = #{device_tpl_desc}
+		<if test="device_tpl_idx!=null">
+			AND device_tpl_idx != #{device_tpl_idx}
+		</if>
+	</select>
+	
+	
+	<update id="updateDeviceRunLibrary">
+		UPDATE 
+		  device_run_config de 
+		SET
+		  de.`library_idx` = #{newLibIdx}
+		WHERE de.`device_tpl_type` = 1 
+		  AND de.`device_run_id` IN 
+		  <foreach collection="deviceList" item="deviceIdx" open="(" close=")" separator=",">
+			#{deviceIdx}
+		</foreach>
+	</update>
+	
+	<select id="selectDeviceRunModalByLibraryIdx" parameterType="Map" resultType="com.ssitcloud.entity.DeviceRunConfigEntity">
+		 SELECT * FROM device_run_config drc WHERE drc.`device_run_id` IN
+		 (
+			SELECT dc.`device_run_tpl_idx` FROM device_config dc WHERE dc.`library_idx`=#{library_idx}
+		 )
+		  AND drc.`device_tpl_type`=0;
+	</select>
+	<select id="selectDeviceRunTempModalByLibraryIdx" parameterType="Map" resultType="com.ssitcloud.entity.DeviceRunTempEntity">
+		SELECT * FROM device_run_template drt WHERE drt.`device_tpl_idx` IN 
+		(
+			SELECT dc.`device_run_tpl_idx` FROM device_config dc WHERE dc.`library_idx`=#{library_idx}
+		) 
+	</select>
+	
+</mapper>
+
+
+
