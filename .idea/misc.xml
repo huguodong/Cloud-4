@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/cloudbusinessservice_amqp" />
     <file type="web" url="file://$PROJECT_DIR$/cloudbusinessservice_authentication" />
@@ -32,44 +31,42 @@
     <file type="web" url="file://$PROJECT_DIR$/navigationservice" />
     <file type="web" url="file://$PROJECT_DIR$/orderbookmanageservice" />
     <file type="web" url="file://$PROJECT_DIR$/ssitserver_appauthenticate" />
-    <file type="web" url="file://$PROJECT_DIR$/TomcatMag" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/common/pom.xml" />
-        <option value="$PROJECT_DIR$/TomcatMag/pom.xml" />
-        <option value="$PROJECT_DIR$/mobileserver/pom.xml" />
-        <option value="$PROJECT_DIR$/navigationservice/pom.xml" />
-        <option value="$PROJECT_DIR$/clouddbservice_device/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudviewservice_node/pom.xml" />
-        <option value="$PROJECT_DIR$/orderbookmanageservice/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudviewservice_device/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudbusinessservice_amqp/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudbusinessservice_node/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudbusinessservice_task/pom.xml" />
-        <option value="$PROJECT_DIR$/clouddbservice_statistics/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudviewservice_database/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudviewservice_register/pom.xml" />
-        <option value="$PROJECT_DIR$/clouddbservice_libraryinfo/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudviewservice_graphshow/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudviewservice_jobmanage/pom.xml" />
-        <option value="$PROJECT_DIR$/ssitserver_appauthenticate/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudbusinessservice_device/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudbusinessservice_mobile/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudviewservice_navigation/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudviewservice_statistics/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudbusinessservice_datasyn/pom.xml" />
-        <option value="$PROJECT_DIR$/clouddbservice_devicemonitor/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudviewservice_nodemonitor/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudbusinessservice_database/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudbusinessservice_reminder/pom.xml" />
-        <option value="$PROJECT_DIR$/clouddbservice_authentication/pom.xml" />
         <option value="$PROJECT_DIR$/cloudviewservice_devicemonitor/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudbusinessservice_statistics/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudviewservice_graphshow_temp/pom.xml" />
-        <option value="$PROJECT_DIR$/cloudbusinessservice_nodemonitor/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudbusinessservice_mobile/pom.xml" />
+        <option value="$PROJECT_DIR$/clouddbservice_device/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudbusinessservice_device/pom.xml" />
+        <option value="$PROJECT_DIR$/ssitserver_appauthenticate/pom.xml" />
         <option value="$PROJECT_DIR$/cloudbusinessservice_authentication/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudviewservice_nodemonitor/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudviewservice_jobmanage/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudviewservice_graphshow/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudviewservice_database/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudbusinessservice_statistics/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudviewservice_register/pom.xml" />
+        <option value="$PROJECT_DIR$/clouddbservice_authentication/pom.xml" />
+        <option value="$PROJECT_DIR$/navigationservice/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudbusinessservice_reminder/pom.xml" />
+        <option value="$PROJECT_DIR$/clouddbservice_statistics/pom.xml" />
+        <option value="$PROJECT_DIR$/mobileserver/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudbusinessservice_task/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudbusinessservice_nodemonitor/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudbusinessservice_database/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudbusinessservice_node/pom.xml" />
+        <option value="$PROJECT_DIR$/clouddbservice_devicemonitor/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudbusinessservice_amqp/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudbusinessservice_datasyn/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudviewservice_device/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudviewservice_statistics/pom.xml" />
+        <option value="$PROJECT_DIR$/orderbookmanageservice/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudviewservice_graphshow_temp/pom.xml" />
+        <option value="$PROJECT_DIR$/clouddbservice_libraryinfo/pom.xml" />
+        <option value="$PROJECT_DIR$/common/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudviewservice_navigation/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudviewservice_node/pom.xml" />
       </list>
     </option>
   </component>

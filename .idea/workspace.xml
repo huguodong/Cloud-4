@@ -1,40 +1,773 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c724230c-e2a9-4788-bd70-1e39bcbe1490" name="Default" comment="" />
-    <ignored path="$PROJECT_DIR$/orderbookmanageservice/target/" />
-    <ignored path="$PROJECT_DIR$/cloudviewservice_graphshow_temp/target/" />
-    <ignored path="$PROJECT_DIR$/cloudbusinessservice_node/target/" />
-    <ignored path="$PROJECT_DIR$/common/target/" />
-    <ignored path="$PROJECT_DIR$/cloudviewservice_nodemonitor/target/" />
-    <ignored path="$PROJECT_DIR$/cloudbusinessservice_nodemonitor/target/" />
-    <ignored path="$PROJECT_DIR$/cloudbusinessservice_authentication/target/" />
-    <ignored path="$PROJECT_DIR$/cloudviewservice_jobmanage/target/" />
-    <ignored path="$PROJECT_DIR$/cloudviewservice_register/target/" />
-    <ignored path="$PROJECT_DIR$/cloudbusinessservice_reminder/target/" />
-    <ignored path="$PROJECT_DIR$/cloudviewservice_navigation/target/" />
-    <ignored path="$PROJECT_DIR$/cloudviewservice_devicemonitor/target/" />
-    <ignored path="$PROJECT_DIR$/TomcatMag/target/" />
-    <ignored path="$PROJECT_DIR$/cloudviewservice_database/target/" />
-    <ignored path="$PROJECT_DIR$/cloudviewservice_node/target/" />
-    <ignored path="$PROJECT_DIR$/cloudbusinessservice_amqp/target/" />
+    <list default="true" id="35d238c9-ae57-48cd-954d-5c8461c81844" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CloudUpgradesService/bin/upgrades/cloudupgradesservice/DirEntryHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CloudUpgradesService/bin/upgrades/cloudupgradesservice/SvnTransData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CloudUpgradesService/bin/upgrades/cloudupgradesservice/UpdateEventHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CloudUpgradesService/bin/upgrades/db/DBPoolUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CloudUpgradesService/bin/upgrades/entity/CommonData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CloudUpgradesService/bin/upgrades/entity/PatchInfoEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CloudUpgradesService/bin/upgrades/service/PatchInfoService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CloudUpgradesService/bin/upgrades/utils/FtpUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/androidTest/java/com/ssitcloud/app_operator/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/ChangePwdBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/DeviceMaintainBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/DeviceMonitorBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/FeedBackBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/ForgetPwdBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/IndexBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/LibraryBiz.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/LoginBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/MainActivityBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/MessageRemindBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/PermissionBiz.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/RegionBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/UpdateOperatorInfoBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/ChangePwdBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/DeviceMaintainBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/DeviceMonitorBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/FeedBackBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/ForgetPwdBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/IndexBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/LibraryBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/LoginBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/MainActivityBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/MessageRemindBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/PermissionBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/RegionBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/biz/impl/UpdateOperatorInfoBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/common/entity/HttpResponce.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/common/entity/ResultEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/common/utils/CheckNetWorkUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/common/utils/DisplayUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/common/utils/HttpClientUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/common/utils/JsonUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/common/utils/ObjectUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/common/utils/RequestUrlUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/common/utils/StringUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/component/ActivityManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/component/BaseActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/component/ManageActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/component/MyApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/db/DbHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/db/dao/AppSettingDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/db/dao/LoginInfoDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/db/dao/MessageRemindDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/db/entity/LoginInfoDbEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/db/entity/MessageRemindDbEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/entity/AppSettingEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/entity/LibraryEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/entity/OperatorEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/entity/RegionEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/entity/ShiftEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/presenter/ChangePwdPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/presenter/DeviceMaintainPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/presenter/DeviceMonitorPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/presenter/FeedBackPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/presenter/ForgetPwdPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/presenter/LoginPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/presenter/MainPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/presenter/MessageRemindPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/presenter/RegionPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/presenter/UpdateOperatorInfoPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/service/AppSettingIntentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/service/PermissionUpdateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/ChangePwdActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/DeviceMaintainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/DeviceMonitorActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/Dialog/MyAlertDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/FeedBackActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/ForgetPwdActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/IndexActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/ListAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/LoginActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/MessageRemindActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/PlcStateActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/RegionActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/SSLActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/SetNewPwdSuccessActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/TextView/CircleView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/UpdateOperatorInfoActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/listView/ListViewRelayout.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/spinner/SpinnerPopWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/viewInterface/ChangePwdViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/viewInterface/DeviceMaintainViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/viewInterface/DeviceMonitorViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/viewInterface/FeedBackViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/viewInterface/ForgetPwdViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/viewInterface/IndexViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/viewInterface/LoginViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/viewInterface/MainViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/viewInterface/RegionViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/viewInterface/SetNewPwdViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/java/com/ssitcloud/app_operator/view/viewInterface/UpdateOperatorInfoViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/alarm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/card_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/cash_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/device_monitor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/disable.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/empty_book_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/environment_monitor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/feedback.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/index_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/load.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/login_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/login_pwd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/login_user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/maintain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/message.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/network_error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/no_message.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/not_found.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/restart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/send_vcode_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/shelfbook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/shutdown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/start_page_img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/state_normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-hdpi/success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/alarm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/card_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/cash_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/device_monitor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/disable.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/empty_book_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/environment_monitor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/feedback.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/index_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/login_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/login_pwd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/login_user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/maintain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/message.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/network_error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/no_message.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/not_found.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/restart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/shelfbook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/shutdown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/start_page_img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/state_normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xhdpi/success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/alarm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/card_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/cash_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/device_monitor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/disable.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/empty_book_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/environment_monitor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/feedback.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/index_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/login_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/login_pwd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/login_user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/maintain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/network_error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/no_message.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/not_found.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/restart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/shelfbook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/shutdown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/start_page_img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/state_normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable-xxhdpi/success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/button_border.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/device_maintain_cancel_order_border.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/device_maintain_send_order_border.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/dialog.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/line.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/logout_border.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/progressbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/select_border.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/shape_help_category_tv_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/shape_popupwindow_list_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/textview_border.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/drawable/tips_circle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_change_pwd.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_device_bdr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_device_monitor.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_device_por.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_device_reg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_device_sch.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_device_sta.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_device_sta_c.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_device_sta_v.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_down_pull_refresh.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_dynamic_demo.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_feedback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_forget_pwd.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_hander_demo.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_index2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_index_device_monitor.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_index_empty_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_index_environment_monitor.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_index_feedback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_index_small_empty_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_items.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_main2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_message_remind.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_message_remind_items.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_plc_state.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_region.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_set_new_pwd.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_set_new_pwd_success.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_ssl.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_start_page.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/activity_update_operator_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/bookcase.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/card_box.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/cash_box.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/content_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/device_maintain.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/dialog.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/dynamic_parent.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/empty_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/line_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/money_size_amount.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/shelfbook.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/spiner_item_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/spiner_window_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/sub_network_lost.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/sub_region_tv.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/layout/wait_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/menu/menu_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/values-w820dp/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/values/activity_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/values/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/values/problem_type.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/values/request_url.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/test/java/com/ssitcloud/app_operator/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_libraryoper/src/test/java/com/ssitcloud/app_operator/common/utils/JsonUtilsTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/androidTest/java/com/ssitcloud/app_reader/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/AppSettingBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/BarcodeBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/BookBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/ConfigBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/DeviceBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/ElecBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/FavoritBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/FeedbackBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/LibraryBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/LoginBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/ReaderBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/ReaderCardBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/RegionBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/RegisterBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/SecurityBizI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/AbstractAuthBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/AppSettingBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/BarcodeBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/BookBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/ConfigBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/DeviceBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/ElecBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/FavoritBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/FeedbackBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/LibraryBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/LoginBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/ReaderBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/ReaderCardBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/RegionBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/RegisterBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/biz/impl/SecurityBizImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/BaseActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/BaseApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/entity/HttpByteResponce.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/entity/HttpResponce.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/entity/ResultEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/exception/AuthException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/exception/ExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/exception/NonExistentPublicKey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/exception/ReaderCardInvalidException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/exception/UnDecodeBarcode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/exception/UnLoginException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/ActivityManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/BarcodeUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/Base64Helper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/DisplayUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/FileUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/HttpClientUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/ImgHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/JsonUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/ObjectUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/RGBLuminanceSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/RequestUrlUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/RsaHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/SdCardUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/StringHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/common/utils/StringUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/DbHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/DbUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/dao/AppSettingDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/dao/ConfigDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/dao/ElecDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/dao/FavoritDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/dao/LoginInfoDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/dao/ReaderCardDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/entity/ConfigDbEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/entity/FavoritDbEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/entity/LoginInfoDbEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/db/entity/ReaderCardDbEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/AppElectronicEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/AppOPACEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/AppSettingEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/BibliosEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/BibliosPageEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/BindCardEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/BookUnionEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/DeviceRegionEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/FavoritEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/FeedbackEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/InReservationEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/LibraryEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/PublicKeyEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/ReaderInfoEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/ReaderInfoMenuViewEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/RegionEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/RenewEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/ReservationBookEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/ReservationEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/ReservationMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/StaticsTypeEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/entity/Tag.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/fragment/ReturnBookSetting.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/myview/BookClassifyPopupwindw.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/myview/FlowLayout.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/myview/MarqueeTextView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/myview/RefreshScrollView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/myview/SearchEditText.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/myview/SlidingMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/myview/SwitchImageButton.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/myview/TagListView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/myview/TagView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/myview/myViewInterface/SlidingMenuOpenListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/BindCardPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/BookInfoPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/BookItemPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/ChangePasswordPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/ContentViewPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/DecodeBarcodePresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/DevicePresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/DeviceRegionPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/ElectronicCertificatePresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/FavoritPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/FeedbackPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/ForgetPasswordPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/LibraryPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/LoginPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/PersonalSettingPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/ReaderAuthPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/ReaderCardDetailPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/ReaderCardListPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/ReaderInfoMenuPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/RegionPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/RegisterPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/RenewPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/presenter/ReservationPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/service/DataUpdateIntentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/service/DataUpdateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/service/NoticeComponentI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/service/NotificationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/task/AbstractSafeTask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/task/AppSettingUpdateTask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/task/ElecNoticeTask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/task/ReaderCardUpdateTask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/task/ReaderUpdateTask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/task/RenewNoticeTask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/BindCardActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/BookInfoActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/BookItemActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/BorrowBarcodeActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/ChangePasswordActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/DeviceActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/DeviceRegionActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/ElectronicCertificateActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/FavoritActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/FeedbackActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/ForgetPasswordActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/LibraryListActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/LoginActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/ModifyPersonalInfoActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/PersonalSettingActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/ReaderAuthActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/ReaderCardDetailActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/ReaderCardListActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/RegionActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/RegisterActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/RenewActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/ReservationActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/ReservationBarcodeActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/ScannerBarcodeActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/WebSettingActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/WelComeActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/BindCardViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/BookInfoViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/BookItemViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/ChangePasswordViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/ContentViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/DeviceViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/ElectronicCertificateViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/FavoritViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/ForgetPasswordViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/LibraryListViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/LoginViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/PersonalSettingViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/ReaderAuthViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/ReaderCardDetailViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/ReaderCardListViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/ReaderInfoMenuViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/RegionViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/RegisterViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/RenewViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/ReservationViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/java/com/ssitcloud/app_reader/view/viewInterface/StandardViewI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/anim/search_content_close_translate.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/anim/search_content_open_translate.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/anim/search_edittext_close_translate.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/anim/search_edittext_open_translate.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/add_orange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/add_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/all_switchbutton_close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/all_switchbutton_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/back_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/barcode.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/close_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/login_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/map.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/network_error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/reader_auth.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/renew.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/reservation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-hdpi/welcome.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/add_orange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/add_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/all_right_arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/all_search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/all_switchbutton_close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/all_switchbutton_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/all_two_barcode_orange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/back_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/barcode.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/book_seach.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/close_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/empty_library.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/forum_tag_close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/go_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/login_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/map.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/message.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/network_error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/normal_head.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/reader_auth.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/renew.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/reservation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/scan_orange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xhdpi/welcome.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/add_orange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/add_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/all_right_arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/all_search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/all_switchbutton_close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/all_switchbutton_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/all_two_barcode_orange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/back_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/barcode.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/book_seach.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/close_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/gray_barcode.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/login_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/map.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/message.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/network_error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/reader_auth.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/renew.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/reservation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable-xxhdpi/welcome.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/all_blue_progress.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/all_bottom_arrow.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/all_company_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/all_popupwindow_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/all_search_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/border_line.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/checkbox_checked.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/checkbox_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/circular_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/elec_normal_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/elec_time_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/empty_reader_card.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/forget_button_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/gay_pink.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/green_circle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/login_button_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/login_pwd_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/login_user_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/logout_button_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/normal_checkbox.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/normal_library_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/processbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/reader_card.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/reader_prefer_card.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/renew_button_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/send_vcode_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/stroke.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/sub_book_renew_view_button_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/sub_main_ligrary_name_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/sub_main_user_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/tag_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/tag_checked_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/tag_checked_pressed.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/tag_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/drawable/tag_pressed.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activiry_book_search.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_bind_card.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_book_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_book_seach_device.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_change_password.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_device_region.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_electronic_certificate.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_favorit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_feedback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_forget_password.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_library_list.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_modify_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_personal_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_reader_auth.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_reader_card_detail.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_reader_card_list.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_region.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_register.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_renew.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_reservation.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_reservation_barcode.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_scanner_barcode.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_web_setting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/activity_welcome.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_book_classify_popupwindow.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_book_renew.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_book_renew_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_book_reservation.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_elec_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_elec_time_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_empty_reader_card.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_favorit_book.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_favorit_device.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_function_book_renew.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_function_book_seach.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_function_electroin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_function_reader_auth.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_function_reservation.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_library_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_message_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_network_lost.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_reader_card.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_reader_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_refresh_success_no_data_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_refresh_success_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_refresh_tip_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_refresh_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_refreshing_tip_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_region_tv.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_return_book_setting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_tag.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_view_book_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_view_device.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_wait_empty_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/layout/sub_wait_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/values/activity_dimen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/values/activity_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/values/attr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/values/common.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/values/config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/values/request_url.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/test/java/com/ssitcloud/app_reader/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/test/java/com/ssitcloud/app_reader/TestDataBase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/androidapp_reader/src/test/java/com/ssitcloud/app_reader/common/utils/ObjectUtilsTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/ILoadingLayout.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/IPullToRefresh.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/LoadingLayoutProxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/OverscrollHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshAdapterViewBase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshBase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshExpandableListView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshGridView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshHorizontalScrollView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshListView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshScrollView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshWebView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/extras/PullToRefreshWebView2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/extras/SoundPullEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/internal/EmptyViewMethodAccessor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/internal/FlipLoadingLayout.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/internal/IndicatorLayout.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/internal/LoadingLayout.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/internal/RotateLoadingLayout.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/internal/Utils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/java/com/handmark/pulltorefresh/library/internal/ViewCompat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/anim/slide_in_from_bottom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/anim/slide_in_from_top.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/anim/slide_out_to_bottom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/anim/slide_out_to_top.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/drawable-hdpi/default_ptr_flip.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/drawable-hdpi/default_ptr_rotate.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/drawable-hdpi/indicator_arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/drawable-mdpi/default_ptr_flip.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/drawable-mdpi/default_ptr_rotate.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/drawable-mdpi/indicator_arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/drawable-xhdpi/default_ptr_flip.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/drawable-xhdpi/default_ptr_rotate.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/drawable-xhdpi/indicator_arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/drawable/indicator_bg_bottom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/drawable/indicator_bg_top.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/layout/pull_to_refresh_header_horizontal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/layout/pull_to_refresh_header_vertical.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-ar/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-cs/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-de/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-es/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-fi/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-fr/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-he/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-it/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-iw/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-ja/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-ko/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-nl/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-pl/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-pt-rBR/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-pt/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-ro/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-ru/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values-zh/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values/attrs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values/ids.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/library/src/main/res/values/pull_refresh_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android_app/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudbusinessservice_amqp/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloudbusinessservice_amqp/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudbusinessservice_authentication/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloudbusinessservice_authentication/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudbusinessservice_database/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloudbusinessservice_database/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudbusinessservice_device/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloudbusinessservice_device/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudbusinessservice_node/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloudbusinessservice_node/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudbusinessservice_nodemonitor/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloudbusinessservice_nodemonitor/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clouddbservice_statistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clouddbservice_statistics/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudviewservice_database/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloudviewservice_database/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudviewservice_devicemonitor/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloudviewservice_devicemonitor/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudviewservice_navigation/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloudviewservice_navigation/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudviewservice_node/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloudviewservice_node/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudviewservice_nodemonitor/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloudviewservice_nodemonitor/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navigationservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/navigationservice/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orderbookmanageservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/orderbookmanageservice/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssitserver_appauthenticate/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ssitserver_appauthenticate/pom.xml" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/CloudUpgradesService/bin/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_graphshow/bin/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_graphshow_temp/bin/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_jobmanage/bin/" />
+    <ignored path="$PROJECT_DIR$/mobileserver/bin/" />
+    <ignored path="$PROJECT_DIR$/sql/bin/" />
     <ignored path="$PROJECT_DIR$/clouddbservice_libraryinfo/target/" />
-    <ignored path="$PROJECT_DIR$/cloudviewservice_graphshow/target/" />
-    <ignored path="$PROJECT_DIR$/clouddbservice_statistics/target/" />
-    <ignored path="$PROJECT_DIR$/cloudbusinessservice_task/target/" />
-    <ignored path="$PROJECT_DIR$/cloudviewservice_device/target/" />
-    <ignored path="$PROJECT_DIR$/clouddbservice_authentication/target/" />
-    <ignored path="$PROJECT_DIR$/clouddbservice_devicemonitor/target/" />
-    <ignored path="$PROJECT_DIR$/cloudbusinessservice_device/target/" />
-    <ignored path="$PROJECT_DIR$/cloudbusinessservice_database/target/" />
-    <ignored path="$PROJECT_DIR$/mobileserver/target/" />
-    <ignored path="$PROJECT_DIR$/cloudbusinessservice_datasyn/target/" />
     <ignored path="$PROJECT_DIR$/cloudbusinessservice_statistics/target/" />
-    <ignored path="$PROJECT_DIR$/navigationservice/target/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_device/target/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_graphshow/target/" />
     <ignored path="$PROJECT_DIR$/cloudbusinessservice_mobile/target/" />
-    <ignored path="$PROJECT_DIR$/ssitserver_appauthenticate/target/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_devicemonitor/target/" />
     <ignored path="$PROJECT_DIR$/cloudviewservice_statistics/target/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_database/target/" />
+    <ignored path="$PROJECT_DIR$/cloudbusinessservice_datasyn/target/" />
+    <ignored path="$PROJECT_DIR$/mobileserver/target/" />
+    <ignored path="$PROJECT_DIR$/navigationservice/target/" />
+    <ignored path="$PROJECT_DIR$/cloudbusinessservice_task/target/" />
+    <ignored path="$PROJECT_DIR$/clouddbservice_devicemonitor/target/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_register/target/" />
     <ignored path="$PROJECT_DIR$/clouddbservice_device/target/" />
+    <ignored path="$PROJECT_DIR$/cloudbusinessservice_amqp/target/" />
+    <ignored path="$PROJECT_DIR$/cloudbusinessservice_nodemonitor/target/" />
+    <ignored path="$PROJECT_DIR$/common/target/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_jobmanage/target/" />
+    <ignored path="$PROJECT_DIR$/cloudbusinessservice_authentication/target/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_navigation/target/" />
+    <ignored path="$PROJECT_DIR$/ssitserver_appauthenticate/target/" />
+    <ignored path="$PROJECT_DIR$/cloudbusinessservice_node/target/" />
+    <ignored path="$PROJECT_DIR$/cloudbusinessservice_database/target/" />
+    <ignored path="$PROJECT_DIR$/cloudbusinessservice_device/target/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_graphshow_temp/target/" />
+    <ignored path="$PROJECT_DIR$/clouddbservice_statistics/target/" />
+    <ignored path="$PROJECT_DIR$/orderbookmanageservice/target/" />
+    <ignored path="$PROJECT_DIR$/cloudbusinessservice_reminder/target/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_node/target/" />
+    <ignored path="$PROJECT_DIR$/cloudviewservice_nodemonitor/target/" />
+    <ignored path="$PROJECT_DIR$/clouddbservice_authentication/target/" />
+    <ignored mask=".iml" />
+    <ignored mask=".gitignore" />
+    <ignored mask="*.iml" />
+    <ignored path=".idea/libraries/" />
+    <ignored path=".idea/artifacts/" />
+    <ignored path=".idea/modules.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +776,62 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InitSystem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cloudbusinessservice_authentication/src/main/java/com/ssitcloud/businessauth/common/interceptor/InitSystem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="23" column="23" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppConfig.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cloudbusinessservice_authentication/src/main/java/com/ssitcloud/businessauth/common/system/AppConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="17" column="11" lean-forward="true" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApplicationContextHolder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cloudbusinessservice_authentication/src/main/java/com/ssitcloud/businessauth/common/system/ApplicationContextHolder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BeanFactoryHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cloudbusinessservice_authentication/src/main/java/com/ssitcloud/businessauth/common/system/BeanFactoryHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StatisticHelper.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cloudbusinessservice_authentication/src/main/java/com/ssitcloud/businessauth/common/system/StatisticHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="35" column="24" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -54,32 +842,167 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="lookForNested" value="true" />
-      </MavenImportingSettings>
-    </option>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="100" />
-    <option name="y" value="20" />
+    <option name="x" value="453" />
+    <option name="y" value="93" />
     <option name="width" value="1400" />
     <option name="height" value="820" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_amqp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ssitcloud" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ssitcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="businessauth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ssitcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="businessauth" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ssitcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="businessauth" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="interceptor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ssitcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="businessauth" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ssitcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="businessauth" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ssitcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="businessauth" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cloudbusinessservice_authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ssitcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="businessauth" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -88,7 +1011,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="vcs.TFS" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -150,24 +1073,24 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c724230c-e2a9-4788-bd70-1e39bcbe1490" name="Default" comment="" />
-      <created>1534927712516</created>
+      <changelist id="35d238c9-ae57-48cd-954d-5c8461c81844" name="Default" comment="" />
+      <created>1535074202416</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1534927712516</updated>
-      <workItem from="1534927715727" duration="960000" />
+      <updated>1535074202416</updated>
+      <workItem from="1535074203750" duration="710000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="960000" />
+    <option name="totallyTimeSpent" value="710000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" weight="0.32962137" />
+      <window_info anchor="right" id="Maven Projects" visible="true" weight="0.22707888" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="right" id="JSON Viewer" />
       <window_info id="Capture Tool" />
@@ -183,11 +1106,11 @@
       <window_info id="Image Layers" />
       <window_info anchor="bottom" id="Java Enterprise" />
       <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32962137" />
+      <window_info active="true" anchor="bottom" id="Version Control" visible="true" weight="0.32962137" />
       <window_info anchor="bottom" id="Spring" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="right" id="Bean Validation" />
       <window_info id="Web" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" />
@@ -198,7 +1121,6 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="SVN Repositories" weight="0.32925472" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,16 +1129,56 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <ignored-roots>
-      <path value="$PROJECT_DIR$" />
-    </ignored-roots>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TomcatMag/src/main/java/com/ssit/tomcat/bean/ApplicationInfo.java">
+    <entry file="file://$PROJECT_DIR$/cloudbusinessservice_authentication/src/main/java/com/ssitcloud/businessauth/common/interceptor/GlobalInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="-385">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cloudbusinessservice_amqp/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cloudbusinessservice_authentication/src/main/java/com/ssitcloud/businessauth/common/interceptor/InitSystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="23" column="23" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cloudbusinessservice_authentication/src/main/java/com/ssitcloud/businessauth/common/system/AppConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="17" column="11" lean-forward="true" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cloudbusinessservice_authentication/src/main/java/com/ssitcloud/businessauth/common/system/ApplicationContextHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cloudbusinessservice_authentication/src/main/java/com/ssitcloud/businessauth/common/system/BeanFactoryHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cloudbusinessservice_authentication/src/main/java/com/ssitcloud/businessauth/common/system/StatisticHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="35" column="24" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="24" />
         </state>
       </provider>
     </entry>

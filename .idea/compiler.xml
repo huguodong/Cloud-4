@@ -21,7 +21,7 @@
         <module name="clouddbservice_device" />
         <module name="clouddbservice_devicemonitor" />
         <module name="clouddbservice_libraryinfo" />
-        <module name="clouddbservice_statics" />
+        <module name="clouddbservice_statistics" />
         <module name="cloudviewservice_database" />
         <module name="cloudviewservice_device" />
         <module name="cloudviewservice_devicemonitor" />
@@ -41,7 +41,38 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="tomcatMag" target="1.5" />
+      <module name="cloudbusinessservice_amqp" target="1.7" />
+      <module name="cloudbusinessservice_authentication" target="1.7" />
+      <module name="cloudbusinessservice_database" target="1.7" />
+      <module name="cloudbusinessservice_datasyn" target="1.7" />
+      <module name="cloudbusinessservice_device" target="1.7" />
+      <module name="cloudbusinessservice_mobile" target="1.7" />
+      <module name="cloudbusinessservice_node" target="1.7" />
+      <module name="cloudbusinessservice_nodemonitor" target="1.7" />
+      <module name="cloudbusinessservice_reminder" target="1.7" />
+      <module name="cloudbusinessservice_statistics" target="1.7" />
+      <module name="cloudbusinessservice_task" target="1.7" />
+      <module name="clouddbservice_authentication" target="1.7" />
+      <module name="clouddbservice_device" target="1.7" />
+      <module name="clouddbservice_devicemonitor" target="1.7" />
+      <module name="clouddbservice_libraryinfo" target="1.7" />
+      <module name="clouddbservice_statistics" target="1.7" />
+      <module name="cloudviewservice_database" target="1.7" />
+      <module name="cloudviewservice_device" target="1.7" />
+      <module name="cloudviewservice_devicemonitor" target="1.7" />
+      <module name="cloudviewservice_graphshow" target="1.7" />
+      <module name="cloudviewservice_graphshow_temp" target="1.7" />
+      <module name="cloudviewservice_jobmanage" target="1.7" />
+      <module name="cloudviewservice_navigation" target="1.7" />
+      <module name="cloudviewservice_node" target="1.7" />
+      <module name="cloudviewservice_nodemonitor" target="1.7" />
+      <module name="cloudviewservice_register" target="1.7" />
+      <module name="cloudviewservice_statistics" target="1.7" />
+      <module name="common" target="1.7" />
+      <module name="mobileserver" target="1.7" />
+      <module name="navigationservice" target="1.7" />
+      <module name="orderbookmanageservice" target="1.7" />
+      <module name="ssitserver_appauthenticate" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
